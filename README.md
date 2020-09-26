@@ -36,6 +36,7 @@ GET | /events | liste des evenements passé et a venir | Tableau d'objets _booki
 GET | /NosAdoptes | photos des animaux adoptés grace a l'association | Objet _booking_ ou false (JSON)
 GET | /contact | formulaire de contact | formulaire
 PUT | /contact | renvois du formulaire de contact | message de validation de l'envois
+GET | /conditionsAdoptions | Tarifs et conditions d'adoptions
 GET | /formulaireAdoption | formulaire pour rencontrer/ adopter un anilmal | formulaire
 PUT | /formulaireAdoption | formulaire pour rencontrer/ adopter un anilmal | message de validation de l'envois
 GET | /formulaireInfosAnimal | formulaire pour presenter l'animal à l'adoption | formulaire
