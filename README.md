@@ -39,4 +39,4 @@ PUT | /contact | renvois du formulaire de contact | message de validation de l'e
 GET | /formulaireAdoption | formulaire pour rencontrer/ adopter un anilmal | formulaire
 PUT | /formulaireAdoption | formulaire pour rencontrer/ adopter un anilmal | message de validation de l'envois
 GET | /formulaireInfosAnimal | formulaire pour presenter l'animal à l'adoption | formulaire
-PUT | /formulaireAdoption | formulaire pour presenter l'animal à l'adoption | message de validation de l'envois
+PUT | /formulaireInfosAnimal | formulaire pour presenter l'animal à l'adoption | message de validation de l'envois
