@@ -14,7 +14,7 @@ L'association fait plusieurs fois par ans des evenements pour recuperer des dons
 Nos benevoles sont en charges de :
 - Remplir de cahier entrer et sortie des animaux
 - Faire la fiche des animaux a l'aide du formulaire "infos sur l'animal" recus par la famille d'accueil ou l'ancien proprietaire.
-- Prendres rendez-vous avec les veterinaires partenaires qui ont tous des tarifs preferenciels differents
+- Prendres rendez-vous avec les veterinaires partenaires qui ont tous des tarifs préférenciels differents
 - Gerer le calendrier des rappels vaccins et sterilisations
 - Traiter les questionnaires adoptions
 - Fixer des dates de rencontres
@@ -26,14 +26,16 @@ Nos benevoles sont en charges de :
 
 méthode | chemin | description | retour
 -------- | ------ | ---------- | -------
-GET | / | Presentation de l'association et evenements à venir.
-GET | /Nos animaux | Choix du type d'animal a l'adoption (Chien, chiot , chat, chaton) dont on veux voir la liste.
-GET | /NosChiens | liste des chiens a l'adoption **actives**, chaque animal doit avoir une colonne calculée nommée _on_, un booléen qui indique si l'animal est visible a l'adoption au moment de la requête | Tableau d'objets _chiens_ (JSON)
-GET | /NosChiots | liste des chiots a l'adoption **actives**, chaque animal doit avoir une colonne calculée nommée _on_, un booléen qui indique si l'animal est visible a l'adoption au moment de la requête | Tableau d'objets _chiens_ (JSON)
-GET | /NosChats | liste des chats a l'adoption **actives**, chaque animal doit avoir une colonne calculée nommée _on_, un booléen qui indique si l'animal est visible a l'adoption au moment de la requête | Tableau d'objets _chiens_ (JSON)
-GET | /NosChatons | liste des chatons a l'adoption **actives**, chaque animal doit avoir une colonne calculée nommée _on_, un booléen qui indique si l'animal est visible a l'adoption au moment de la requête | Tableau d'objets _chiens_ (JSON)
-GET | /events | liste des evenements passé et a venir | Tableau d'objets _booking_ (JSON)
-GET | /NosAdoptes | photos des animaux adoptés grace a l'association | Objet _booking_ ou false (JSON)
+GET | / | Presentation de l'association, evenements à venir, animaux stars(à l'adoption depuis le plus longtemps*), chiffres des adoptions.
+GET | /Nos animaux | Choix du type d'animal à l'adoption (Chien, chiot , chat, chaton) dont on veux voir la liste.
+GET | /NosChiens | liste des chiens a l'adoption **actives**, chaque animal doit avoir une colonne calculée nommée _on_, un booléen qui indique si l'animal est visible a l'adoption au moment de la requête |
+GET | /NosChiots | liste des chiots a l'adoption **actives**, chaque animal doit avoir une colonne calculée nommée _on_, un booléen qui indique si l'animal est visible a l'adoption au moment de la requête | 
+GET | /NosChats | liste des chats a l'adoption **actives**, chaque animal doit avoir une colonne calculée nommée _on_, un booléen qui indique si l'animal est visible a l'adoption au moment de la requête | 
+GET | /NosChatons | liste des chatons a l'adoption **actives**, chaque animal doit avoir une colonne calculée nommée _on_, un booléen qui indique si l'animal est visible a l'adoption au moment de la requête | 
+GET | /conditions | Conditions et frais d'adoptions |
+GET | /demarches | Les démarches adoptions au seint de notre association |
+GET | /evenenements | liste des evenements passé et a venir |
+GET | /
 GET | /contact | formulaire de contact | formulaire
 PUT | /contact | renvois du formulaire de contact | message de validation de l'envois
 GET | /conditionsAdoptions | Tarifs et conditions d'adoptions
