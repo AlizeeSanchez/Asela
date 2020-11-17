@@ -1,8 +1,8 @@
 PORT=3030
-PGUSER=nomDuUser
-PGDATABASE=nomDeLaDatabase
-PGPASSWORD=password
-PG_URL=postgres://user:password@localhost/database
+PGUSER=alizee
+PGDATABASE=asela
+PGPASSWORD=godzy
+PG_URL=postgres://alizee:godzy@localhost/asela
 
 PORT=3030
 PGUSER=asela
