@@ -7,7 +7,7 @@ DROP TABLE "pet_has_host_family";
 DROP TABLE "pet_has_adoptant";
 DROP TABLE "picture_event";
 DROP TABLE "picture_pet";
-DROP TABLE "PRICE_adopt";
+DROP TABLE "price_adopt";
 DROP TABLE "condition_adopt";
 DROP TABLE "event";
 DROP TABLE "veterinary";

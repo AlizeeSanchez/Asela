@@ -1,7 +1,9 @@
-const express = require('express');
-const router = express.Router();
+const { Router } = require('express');
+const petController = require('./controllers/petController');
 
+const router = Router();
 
-
+//----------------------------------Routes animaux----------------------------
+router.get('/pets', petController.allPets)
 
 module.exports = router;

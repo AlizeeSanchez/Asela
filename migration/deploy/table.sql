@@ -13,17 +13,18 @@ CREATE TABLE "volunteer" (
 
 CREATE TABLE "pet" (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    type VARCHAR (10) NOT NULL,
-    name VARCHAR (50),
+    type VARCHAR(10) NOT NULL,
+    name VARCHAR(50),
     age TEXT,
     amity TEXT DEFAULT 'inconnu',
     sexe TEXT,
     breed TEXT,
-    ide TEXT UNIQUE,
-    sterilised VARCHAR (3) NOT NULL DEFAULT 'non',
+    ide TEXT,
+    sterilised BOOLEAN DEFAULT false,
     date_vaccine DATE,
     description TEXT,
     weight TEXT,
+    adopt BOOLEAN DEFAULT false,
     date_adopting DATE
 );
 
@@ -31,13 +32,13 @@ CREATE TABLE "host_family" (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     lastname VARCHAR (50) NOT NULL,
     firstname VARCHAR (25) NOT NULL,
-    number_phone VARCHAR(10) NOT NULL UNIQUE,
+    number_phone VARCHAR(10) NOT NULL,
     postal_code VARCHAR(5) NOT NULL,
     city TEXT NOT NULL,
     adress TEXT NOT NULL,
-    email VARCHAR (70) NOT NULL UNIQUE,
-    pet_composition TEXT NOT NULL
-
+    email VARCHAR (70) NOT NULL,
+    pet_composition TEXT NOT NULL,
+    pet_accepted TEXT NOT NULL
 );
 
 CREATE TABLE "adoptant" (
@@ -45,9 +46,9 @@ CREATE TABLE "adoptant" (
     lastname VARCHAR (50) NOT NULL,
     firstname VARCHAR (25) NOT NULL,
     postal_code VARCHAR(5) NOT NULL,
-    number_phone VARCHAR(10) NOT NULL UNIQUE,
+    number_phone VARCHAR(10) NOT NULL,
     city TEXT NOT NULL,
-    email VARCHAR (70) NOT NULL UNIQUE,
+    email VARCHAR (70) NOT NULL,
     adress TEXT NOT NULL
 
 );
@@ -68,19 +69,18 @@ CREATE TABLE "supported" (
 
 CREATE TABLE "veterinary" (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    lastname VARCHAR (50) NOT NULL,
-    firstname VARCHAR (25) NOT NULL,
-    number_phone VARCHAR(10) NOT NULL UNIQUE,
+    "name" VARCHAR (50) NOT NULL,
+    number_phone VARCHAR(10) NOT NULL,
     postal_code VARCHAR(5) NOT NULL,
     city TEXT NOT NULL,
-    email VARCHAR (70) NOT NULL UNIQUE,
+    email VARCHAR (70) NOT NULL,
     adress TEXT NOT NULL
 
 );
 
 CREATE TABLE "event" (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    title VARCHAR (50) NOT NULL,
+    title TEXT NOT NULL,
     "location" TEXT NOT NULL,
     date_event DATE NOT NULL,
     content TEXT NOT NULL,
@@ -93,10 +93,10 @@ CREATE TABLE "condition_adopt"(
     "description" TEXT NOT NULL
 );
 
-CREATE TABLE "PRICE_adopt"(
+CREATE TABLE "price_adopt"(
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    type_pet INT NOT NULL,
-    sexe_pet INT NOT NULL,
+    type_pet TEXT NOT NULL,
+    sexe_pet TEXT NOT NULL,
     price INT NOT NULL,
     caution INT
 );

@@ -3,3 +3,10 @@ PGUSER=nomDuUser
 PGDATABASE=nomDeLaDatabase
 PGPASSWORD=password
 PG_URL=postgres://user:password@localhost/database
+
+PORT=3030
+PGUSER=asela
+PGDATABASE=asela
+PGPASSWORD=asela
+PG_URL=postgres://asela:asela@localhost/asela
+

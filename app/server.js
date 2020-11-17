@@ -1,16 +1,16 @@
 require('dotenv').config();
-var cors = require('cors')
-
+const cors = require('cors')
 const express = require('express');
+const session = require('express-session');
+
 const app = express();
 const port = process.env.PORT || 3030;
 const router = require('./router');
 
 app.set('views', './app/views');
 app.set('view engine', 'ejs');
-const session = require('express-session');
-app.use(express.urlencoded({ extended: true }));
 
+app.use(express.urlencoded({ extended: true }));
 app.use(
 	session({
 		secret: 'les petits chats sont mignons',
