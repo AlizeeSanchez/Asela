@@ -19,7 +19,7 @@ const Pet = {
     //Modifier un animal
     editPet: async (pet) => {
         try{
-            const editpet = await db.query('UPDATE pet SET name = $1, age = $2, amity = $3, sexe = $4, breed = $5, ide = $6, sterilised = $7, date_vaccine = $8, description = $9, weight = $10, adopt = $11, date_adopting = $12 WHERE id = $13;', [pet.name, pet.age, pet.amity, pet.sexe, pet.breed, pet.ide, pet.sterilised, pet.date_vaccine, pet.description, pet.weight, pet.adopt, pet.dat_adoptin, pet.id])
+            const editpet = await db.query('UPDATE pet SET name = $1, age = $2, amity = $3, sexe = $4, breed = $5, ide = $6, sterilised = $7, date_vaccine = $8, description = $9, weight = $10, adopt = $11, date_adopting = $12, adoptant_id = $13, host_family_id = $14, WHERE id = $15;', [pet.name, pet.age, pet.amity, pet.sexe, pet.breed, pet.ide, pet.sterilised, pet.date_vaccine, pet.description, pet.weight, pet.adopt, pet.dat_adoptin, pet.adoptant_id, pet.host_family_id, pet.id])
             return editpet.rows;
         }
         catch(error){
@@ -39,7 +39,9 @@ const Pet = {
             console.trace(error);
         }
     },
-    
+
+    //ajouter un commentaire sur un animal
+    //supprimer un commentaire sur un animal
     
 }
 

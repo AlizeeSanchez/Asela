@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const dogController = require('./controllers/dogController');
 const catController = require('./controllers/catController');
-
+const petController = require('./controllers/petController');
 const router = Router();
 
 //----------------------------------Routes chiens----------------------------
@@ -28,5 +28,8 @@ router.patch('/catsReadyAgainToAdopt/:id', catController.catAvailableToAdopt)
 router.post('/addNewCat', catController.AddNewCatToAdopt)
 // Route pour supprimer un chat du site de l'association
 router.post('/suppCat/:id', catController.deleteCat)
+
+//----------------------------------Routes Animal----------------------------
+router.get('/pet/:id', petController.findOnePet)
 
 module.exports = router;
