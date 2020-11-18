@@ -109,6 +109,8 @@ VALUES ('Ne pas lui infliger de mauvais traitements et lui fournir l''attention 
        ('Si pour une quelconque raison vous devez vous séparer de l''animal ça serait exclusivement auprès de l’Association Sauve Et Les Animaux, vous ne pourrez ni le vendre, ni le céder. Aucun remboursement des frais d’adoption ne pourra être réclamé à l’Association.'),
        ('Si une des conditions d’adoption n’est pas respectée, l’Association Sauve Et Les Animaux peut à tout moment reprendre l’animal.');
 
+-------------------Famille d'accueil chien--------------------
 
+UPDATE pet SET host_family_id = 1 WHERE id = 7;
 
 COMMIT;

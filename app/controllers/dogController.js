@@ -35,12 +35,18 @@ const dogController = {
     },
 
     //On passe l'adoption a true quand un chien est disponible à l'adoption.
-    petAvailable: async (request, response) => {
+    petStateAdoption: async (request, response) => {
         try{
             const petId = parseInt(request.params.id);
-            const pet = await Dog.adoptIsTrue(petId);
-            if (pet) {
-                response.json(pet);
+            const pet = await Dog.findOnePet(petId);
+            console.log(pet.adopt);
+            if(pet.adopt === false){
+                const petFalse = await Dog.adoptIsTrue(petId);
+                response.json('Cet animal est disponible a l\'adoption');
+            }
+            if(pet.adopt ===true){
+                const petTrue = await Dog.adoptIsFalse(petId);
+                response.json('Cet animal n\'est pas disponible a l\'adoption');
             } else {
                 response.status(404).json(`Cet animal n'existe pas.`);
             }
@@ -51,22 +57,61 @@ const dogController = {
         }
     },
 
-    //On passe l'adoption a false quand un chien est disponible à l'adoption.
-    petAvailable: async (request, response) => {
+    //Ajouter un chien à l'adoption
+    addNewPet: async (request, response) => {
+        console.log(request.body);
         try{
-            const petId = parseInt(request.params.id);
-            const pet = await Dog.adoptIsFalse(petId);
-            if (pet) {
-                response.json(pet);
+            //Test si tous les champs sont renseignés
+            if(request.body.name && request.body.age && request.body.sexe && request.body.description){
+                
+                // On recupere toutes les données envoyées par le body
+                const pet = {
+                    type: 'chien',
+                    name: request.body.name,
+                    age: request.body.age,
+                    amity: request.body.amity,
+                    sexe: request.body.sexe,
+                    breed: request.body.breed,
+                    ide: request.body.ide,
+                    sterilised: request.body.sterilised,
+                    description: request.body.description,
+                    weight: request.body.weight
+                };
+                 //on transmet les informations de l'animal a la fonction addNewPet et on lui envois notre animal recuperer precedemment
+                 const savePet = await Dog.addNewPet(pet);
+                 response.json({savePet: pet, TEXT: 'L\'animal a bien été enregistré'});
+                 //Redirection vers la fiche de l'animal
             } else {
-                response.status(404).json(`Cet animal n'existe pas.`);
+                response.json('Vous n\'avez pas rempli tous les champs !');
             }
+            
         }
         catch(error){
             console.trace(error)
             return response.status(500).json(error.toString());
         }
+    },
+
+    //Supprimer un chien
+    suppPet: async (request, response) => {
+       try{
+          const petId = parseInt(request.params.id);
+          const pet = await Dog.findOnePet(petId);
+          console.log(pet.supp);
+          if(pet){
+              const pet = await Dog.suppPet(petId)
+              response.json('Cet animal a été supprimé avec succès.')
+
+          } else {
+            response.json('Cet animal ne peut pas etre supprimer car il n\'existe pas.');
+            }
+        }
+        catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString());
+        }  
     }
+           
 }
 
 module.exports = dogController;

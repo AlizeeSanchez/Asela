@@ -26,10 +26,22 @@ const Dog = {
         }
     },
 
+    //On recupere un chien
+    findOnePet: async (id) => {
+        try{
+            const pets = await db.query(
+                "SELECT * FROM pet WHERE id = $1;", [id]
+            );
+            return pets.rows[0];
+        }catch (error){
+            console.trace(error);
+        }
+    },
+
     //On passe l'adoption a true quand un chien est disponible à l'adoption.
     adoptIsTrue: async (id) => {
         try{
-            const editpet = await db.query('UPDATE pet SET adopt = true WHERE id = $1', [id])
+            const editpet = await db.query('UPDATE pet SET adopt = true WHERE id = $1;', [id])
             return editpet.rows;
         }
         catch(error){
@@ -41,7 +53,7 @@ const Dog = {
     //On passe l'adoption a false quand un chien est indisponible à l'adoption.
     adoptIsFalse: async (id) => {
         try{
-            const editpet = await db.query('UPDATE pet SET adopt = false WHERE id = $1', [id])
+            const editpet = await db.query('UPDATE pet SET adopt = false WHERE id = $1 ;', [id])
             return editpet.rows;
         }
         catch(error){
@@ -53,7 +65,7 @@ const Dog = {
     //Ajouter un chien a l'adoption
     addNewPet: async (pet) => {
         try{
-        const addPet = `INSERT INTO pet ("type", "name", "age", "amity", "sexe", "breed", "ide", "sterilised", "description", "weight") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id", "pet";`;
+        const addPet = `INSERT INTO pet ("type", "name", "age", "amity", "sexe", "breed", "ide", "sterilised", "description", "weight") VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *;`;
         const data = await db.query(addPet, [
             pet.type,
             pet.name,
@@ -66,20 +78,24 @@ const Dog = {
             pet.description, 
             pet.weight
         ]);
-        console.log("monconsole log add event :", event);
+        console.log("monconsole log add pet :", pet);
         return data.rows[0];
-    } catch (error) {
-        console.trace(error);
-    }
-    }
+        }   
+        catch (error) {
+            console.trace(error);
+        }
+    },
 
     //Supprimer un chien a l'adoption
-
-    //Afficher un chien
-
-    //Modifier un chien
-
-    //Rechercher un chien par son nom ou par son IDE
+    suppPet: async (pet) => {
+        try{
+        const suppPet = await db.query('DELETE FROM pet WHERE id = $1;',[pet])
+        }
+        catch (error) {
+            console.trace(error);
+        }
+        
+    }
 
 };
 

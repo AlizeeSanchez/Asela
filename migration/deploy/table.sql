@@ -11,23 +11,6 @@ CREATE TABLE "volunteer" (
     password VARCHAR(70) NOT NULL
 );
 
-CREATE TABLE "pet" (
-    id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    type VARCHAR(10) NOT NULL,
-    name VARCHAR(50),
-    age TEXT,
-    amity TEXT DEFAULT 'inconnu',
-    sexe TEXT,
-    breed TEXT,
-    ide TEXT,
-    sterilised BOOLEAN DEFAULT false,
-    date_vaccine DATE,
-    description TEXT,
-    weight TEXT,
-    adopt BOOLEAN DEFAULT false,
-    date_adopting DATE
-);
-
 CREATE TABLE "host_family" (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     lastname VARCHAR (50) NOT NULL,
@@ -50,14 +33,32 @@ CREATE TABLE "adoptant" (
     city TEXT NOT NULL,
     email VARCHAR (70) NOT NULL,
     adress TEXT NOT NULL
-
 );
 
-CREATE TABLE "supported" (
+CREATE TABLE "pet" (
+    id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    type VARCHAR(10) NOT NULL,
+    name VARCHAR(50),
+    age TEXT,
+    amity TEXT DEFAULT 'inconnu',
+    sexe TEXT,
+    breed TEXT,
+    ide TEXT,
+    sterilised BOOLEAN DEFAULT false,
+    date_vaccine DATE,
+    description TEXT,
+    weight TEXT,
+    adopt BOOLEAN DEFAULT false,
+    date_adopting DATE,
+    adoptant_id int DEFAULT NULL REFERENCES "adoptant"(id),
+    host_family_id int DEFAULT NULL REFERENCES "host_family"(id)
+);
+
+/*CREATE TABLE "supported" (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     type VARCHAR (10) NOT NULL,
     date DATE NOT NULL,
-    location TEXT NOT NULL,
+   location TEXT NOT NULL,
     assignor VARCHAR (50) NOT NULL,
     species TEXT NOT NULL,
     sexe TEXT,
@@ -65,7 +66,7 @@ CREATE TABLE "supported" (
     name VARCHAR (50),
     description TEXT NOT NULL,
     old INT NOT NULL
-);
+);*/
 
 CREATE TABLE "veterinary" (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -113,25 +114,36 @@ CREATE TABLE "picture_event"(
     event_id INT NOT NULL REFERENCES "event"(id)
 );
 
-CREATE TABLE "pet_has_adoptant"(
+CREATE TABLE "commentaires_pet"(
+    id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     -- pet has adopted
     pet_id int NOT NULL REFERENCES "pet"(id),
-    -- familly adopt
-    adoptant_id int NOT NULL REFERENCES "adoptant"(id)
+    -- commentaire 
+    commentaire TEXT NOT NULL
 );
 
-CREATE TABLE "pet_has_host_family" (
-    -- pet has adopted
-    pet_id int NOT NULL REFERENCES "pet"(id),
-    -- familly adopt
-    host_family_id int NOT NULL REFERENCES "host_family"(id)
+CREATE TABLE "commentaire_host_familly" (
+    id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+     -- host familly
+    host_family_id int NOT NULL REFERENCES "host_family"(id),
+    -- commentaire
+    commentaire TEXT NOT NULL 
 );
 
-CREATE TABLE "pet_has_supported" (
+CREATE TABLE "commentaire_adoptant" (
+    id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+     -- host familly
+    adoptant_id int NOT NULL REFERENCES "adoptant"(id),
+    -- commentaire
+    commentaire TEXT NOT NULL
+);
+
+/*CREATE TABLE "pet_has_supported" (
     -- pet has adopted
     pet_id int NOT NULL REFERENCES "pet"(id),
     -- familly adopt
     supported_id int NOT NULL REFERENCES "supported"(id)
 );
+*/
 
 COMMIT;
