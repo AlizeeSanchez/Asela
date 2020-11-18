@@ -21,7 +21,9 @@ CREATE TABLE "host_family" (
     adress TEXT NOT NULL,
     email VARCHAR (70) NOT NULL,
     pet_composition TEXT NOT NULL,
-    pet_accepted TEXT NOT NULL
+    pet_accepted TEXT NOT NULL,
+    disponibility BOOLEAN DEFAULT true,
+    pet_asela TEXT
 );
 
 CREATE TABLE "adoptant" (
@@ -32,7 +34,8 @@ CREATE TABLE "adoptant" (
     number_phone VARCHAR(10) NOT NULL,
     city TEXT NOT NULL,
     email VARCHAR (70) NOT NULL,
-    adress TEXT NOT NULL
+    adress TEXT NOT NULL,
+    pet_asela TEXT
 );
 
 CREATE TABLE "pet" (

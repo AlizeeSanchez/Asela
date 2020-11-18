@@ -6,7 +6,7 @@ const Dog = {
     findPetNotAdopted: async () => {
         try{
             const pets = await db.query(
-                "SELECT * FROM pet WHERE adopt = false;"
+                "SELECT * FROM pet WHERE adopt = false AND type = 'chien';;"
             );
             return pets.rows;
         }catch (error){
@@ -18,7 +18,7 @@ const Dog = {
     findAllPetAdopt: async () => {
         try{
             const pets = await db.query(
-                "SELECT * FROM pet WHERE adopt = true;"
+                "SELECT * FROM pet WHERE adopt = true AND type = 'chien';"
             );
             return pets.rows;
         }catch (error){
