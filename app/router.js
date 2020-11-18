@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const dogController = require('./controllers/dogController');
 const catController = require('./controllers/catController');
+const hostFamilyController = require('./controllers/hostFamilyController');
 
 const router = Router();
 
@@ -17,7 +18,7 @@ router.delete('/dogs/:id', dogController.suppPet)
 //
 //----------------------------------Routes chats----------------------------
 // Route pour recensser tous les chats non adoptés
-//router.get('/cats/notAdopted', catController.allCatsNotAdopted)
+router.get('/cats/notAdopted', catController.allCatsNotAdopted)
 // Route pour recensser tous les chats adoptés
 router.get('/cats/adopted', catController.allCatsAdopted)
 // Route pour dire qu'un chat viens d'être adopté
@@ -28,5 +29,11 @@ router.patch('/catsReadyAgainToAdopt/:id', catController.catAvailableToAdopt)
 router.post('/addNewCat', catController.AddNewCatToAdopt)
 // Route pour supprimer un chat du site de l'association
 router.post('/suppCat/:id', catController.deleteCat)
+
+//----------------------------------Routes famille d'acceuil----------------------------
+// Route pour lister toute les familles d'acceuils
+router.get('/hostFamily', hostFamilyController.findAllHostFamily)
+// Route pour lister une seule famille d'acceuil via son id
+router.get('/hostFamily/:id', hostFamilyController.findOneHostFamily)
 
 module.exports = router;
