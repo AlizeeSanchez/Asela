@@ -47,5 +47,7 @@ router.post('/addCommentHostfamily/:id', hostFamilyController.commentHostFamily)
 router.patch('/editCommentHostFamily/:id', hostFamilyController.editCommentHostFamily)
 // Route pour supprimer un commentaire d'une famille d'acceuil
 router.delete('/deleteCommentHostFamily/:id', hostFamilyController.deleteCommentHostFamily)
+// Route pour attribuer un animal à une famille d'acceuil
+router.patch('/putPetToHostFamily/:id', hostFamilyController.putPetHostFamily)
 
 module.exports = router;

@@ -97,7 +97,17 @@ const HostFamily = {
             console.trace(error)
         }
     },
-    
+
+    petFamilyHost: async (hostFamily) => {
+        try{
+            const petHostFamily = await db.query(`UPDATE host_family SET pet_asela = pet_asela || $1 WHERE id = $2;`, [hostFamily.pet_asela, hostFamily.id])
+            return petHostFamily;
+        }
+        catch(error){
+            console.trace(error)
+        }
+
+    },
 }
 
 module.exports = HostFamily;

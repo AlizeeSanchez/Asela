@@ -1,4 +1,5 @@
 const HostFamily = require("../models/HostFamily");
+const Pet = require('../models/Pet')
 
 const hostFamilyController = {
     
@@ -193,6 +194,44 @@ const hostFamilyController = {
             return response.status(500).json(error.toString());
         }
     },
+
+    putPetHostFamily: async (request, response) => {
+        try {
+            const petHostFamily = [];
+            const hostFamilyId = parseInt(request.params.id);
+            const hostFamily = await HostFamily.findOneHostFamily(hostFamilyId);
+            console.log('cinquieme', hostFamily);
+            if(hostFamily) {
+                const petFamilyHost = {
+                    id: hostFamilyId,
+                    lastname: request.body.lastname,
+                    firstname: request.body.firstname,
+                    number_phone: request.body.number_phone,
+                    postal_code: request.body.postal_code,
+                    city: request.body.city,
+                    adress: request.body.adress,
+                    email: request.body.email,
+                    pet_composition: request.body.pet_composition,
+                    pet_accepted: request.body.pet_accepted,
+                    disponibility: request.body.disponibility, 
+                    pet_asela: ' '+request.body.pet_asela
+                };
+                console.log('sixieme', petFamilyHost);
+                const hostFamilyPet = await HostFamily.petFamilyHost(petFamilyHost);
+                console.log('septieme', hostFamilyPet);
+                
+                //petHostFamily.push(' ',petFamilyHost.pet_asela)
+                console.log('huitieme', petHostFamily);
+                
+                response.status(200).json({ petHostFamily, TEXT: `Votre animal à bien été affecté à la famille d\'acceuil ${hostFamilyId}`});
+            }else {
+                response.status(404).json('Cette famille d\'acceuil n\'a pas d\'animaux')
+            }
+        }catch(error){
+            console.trace(error);
+        }
+    },
+
 
 
 
