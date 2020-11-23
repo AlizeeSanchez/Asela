@@ -65,7 +65,6 @@ VALUES ('Bente', '0466622323', '30900', 'Nimes', '0', 'Bente 59 Route D Ales'),
        ('Vetalia', '0466858848', '30340', 'St Privat Des Vieux', '0', '108 Vieille Route De Salindre'),
        ('Clinique Vétérinaire des Espinaux', '0466860737', '30340', 'St Privat Des Vieux', '0', '27 Av Paul Valery'),
        ('Clinique Veterinaire de Cambajon', '0466817021', '30190', 'Sauzet', '0', '155 Ch De Font Barjarret'),
-       
        ('Clinique Animavet', '0467715029', '34400', 'Lunel', 'clinique-animavet@orange.fr', '333 Allee Du Vidourle'),
        ('Clinique du Vigan', '0467738690', '34190', 'Ganges', 'vetganges@orange.fr', '19 avenue du Vigan'),
        ('Vétérinaire Brassart', '0467875195', '34820', 'Ganges', 'vetganges@orange.fr', '28 Avenue de Montpellier'),

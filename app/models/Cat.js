@@ -40,7 +40,6 @@ const Cat = {
         catch(error){
             console.trace(error)
         }
-
     },
 
     //On passe l'adoption a false si un chat est de retour d'adoption

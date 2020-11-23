@@ -2,6 +2,8 @@ const { Router } = require('express');
 const dogController = require('./controllers/dogController');
 const catController = require('./controllers/catController');
 const petController = require('./controllers/petController');
+const conditionController = require('./controllers/conditionController');
+const priceController = require('./controllers/priceController');
 const router = Router();
 
 //----------------------------------Routes chiens----------------------------
@@ -20,7 +22,7 @@ router.delete('/dogs/:id', dogController.suppPet)
 //router.get('/cats/notAdopted', catController.allCatsNotAdopted)
 // Route pour recensser tous les chats adoptés
 router.get('/cats/adopted', catController.allCatsAdopted)
-// Route pour dire qu'un chat viens d'être adopté
+// Route pour dire qu'un chat voiens d'être adopté
 router.patch('/catsadopted/:id', catController.catNotAvailable)
 // Route pour remettre un chat à l'adoption
 router.patch('/catsReadyAgainToAdopt/:id', catController.catAvailableToAdopt)
@@ -30,6 +32,37 @@ router.post('/addNewCat', catController.AddNewCatToAdopt)
 router.post('/suppCat/:id', catController.deleteCat)
 
 //----------------------------------Routes Animal----------------------------
-router.get('/pet/:id', petController.findOnePet)
+//route pour voir la fiche d'un animal
+router.get('/pet/:id', petController.findOnePet, petController.findAllComment)
+// Mise à jour  d'un animal
+router.patch('/pet/:id', petController.editPet)
+//Rechercher un animal
+router.post('/pet/:id', petController.findresearch)
+//Poster un commentaire sous l'animal
+router.post('/pet/comment/:id', petController.addComment)
+
+//---------------------------Routes Conditions d'adoption--------------------
+//Route pour lister les conditions d'adoption
+router.get('/conditions', conditionController.findCondition)
+//Route pour voir une seule condition
+router.get('/condition/:id', conditionController.findOneCondition)
+//Route pour ajouter une condition d'adoption
+router.post('/addNewCondition', conditionController.addNewCondition)
+//Route pour modifier une condition d'adoption
+router.patch('/editCondition/:id', conditionController.editCondition)
+//Route pour supprimer une condition d'adoption
+router.delete('/suppCondition/:id', conditionController.suppCondition)
+
+//----------------------------Route Prix d'Adoption------------------------
+//Route pour lister les prix d'adoption
+router.get('/price', priceController.findPriceAdopt)
+//Route pour voir un seul prix
+router.get('/OnePrice/:id', priceController.findOnePriceAdopt)
+//Route pour ajouter un prix
+router.post('/addPrice', priceController.addNewPrice)
+//Route pour modifier un prix
+router.patch('/editPrice/:id', priceController.editPrice)
+//Route pour supprimer un prix 
+router.delete('/suppPrice/:id', priceController.suppPrice)
 
 module.exports = router;
