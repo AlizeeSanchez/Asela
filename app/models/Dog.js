@@ -94,7 +94,6 @@ const Dog = {
         catch (error) {
             console.trace(error);
         }
-        
     }
 
 };

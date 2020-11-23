@@ -24,8 +24,8 @@ const Cat = {
 
     findOneCat: async (id) => {
         try{
-            const cat = await db.query("SELECT * FROM pet WHERE type = 'chat' AND id = $1", [id]);
-            return cat.rows
+            const cat = await db.query("SELECT * FROM pet WHERE id = $1", [id]);
+            return cat.rows[0]
         }catch (error){
             console.trace(error);
         }
@@ -34,7 +34,7 @@ const Cat = {
     //On passe l'adoption a true quand un chat viens d'être adopté
     adoptCatIsTrue: async (id) => {
         try{
-            const editCat = await db.query(`UPDATE pet SET adopt = false WHERE id = $1 AND type = 'chat'`, [id])
+            const editCat = await db.query(`UPDATE pet SET adopt = true WHERE id = $1 AND type = 'chat'`, [id])
             return editCat.rows;
         }
         catch(error){

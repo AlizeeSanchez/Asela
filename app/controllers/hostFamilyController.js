@@ -236,12 +236,7 @@ const hostFamilyController = {
                     disponibility: request.body.disponibility, 
                     pet_asela: ' '+request.body.pet_asela
                 };
-                console.log('sixieme', petFamilyHost);
                 const hostFamilyPet = await HostFamily.petFamilyHost(petFamilyHost);
-                console.log('septieme', hostFamilyPet);
-                
-                //petHostFamily.push(' ',petFamilyHost.pet_asela)
-                console.log('huitieme', petHostFamily);
                 
                 response.status(200).json({ petHostFamily, TEXT: `Votre animal à bien été affecté à la famille d\'acceuil ${hostFamilyId}`});
             }else {

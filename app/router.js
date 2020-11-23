@@ -25,10 +25,8 @@ router.delete('/dogs/:id', dogController.suppPet)
 router.get('/cats/notAdopted', catController.allCatsNotAdopted)
 // Route pour recensser tous les chats adoptés
 router.get('/cats/adopted', catController.allCatsAdopted)
-// Route pour dire qu'un chat voiens d'être adopté
-router.patch('/catsadopted/:id', catController.catNotAvailable)
-// Route pour remettre un chat à l'adoption
-router.patch('/catsReadyAgainToAdopt/:id', catController.catAvailableToAdopt)
+//Route pour modifier le status d'un chat (a l'adoption ou non)
+router.patch('/cats/:id', catController.petStateAdoption)
 // Route pour ajouter un nouveau chat à l'adoption
 router.post('/addNewCat', catController.AddNewCatToAdopt)
 // Route pour supprimer un chat du site de l'association
@@ -43,8 +41,20 @@ router.patch('/pet/:id', petController.editPet)
 router.post('/pet/:id', petController.findresearch)
 //Poster un commentaire sous l'animal
 router.post('/pet/comment/:id', petController.addComment)
-//Route pour afficher les animaux décédés
+//Supprimer un commentaire sous l'animal
+router.delete('/pet/comment/:id', petController.deleteCommentPet)
+//Route pour afficher la liste des animaux décédés
 router.get('/petsdead', petController.allPetDead)
+//Route pour modifié le status d'un animal (décédé ou le ressusité si erreur)
+router.patch('/petsdead/:id', petController.declarationDead)
+//Attribué une FA a un animal
+router.patch('/affectfa/:id', petController.affectFamilyHost)
+// modifier le status de publication sur secondechance d'un animal
+router.patch('/secondechance/:id', petController.petStatePublishSC)
+// modifier le status de publication sur fb d'un animal
+router.patch('/facebook/:id', petController.petStatePublishFB)
+// modifier le status de reservation d'un animal
+router.patch('/reserve/:id', petController.petReserve)
 
 //---------------------------Routes Conditions d'adoption--------------------
 //Route pour lister les conditions d'adoption
@@ -72,9 +82,9 @@ router.delete('/suppPrice/:id', priceController.suppPrice)
 
 //----------------------------------Routes famille d'acceuil----------------------------
 // Route pour lister toute les familles d'acceuils
-router.get('/hostFamily', hostFamilyController.findAllHostFamily, hostFamilyController.findAllCommentHostFamily)
+router.get('/hostFamily', hostFamilyController.findAllHostFamily)
 // Route pour lister une seule famille d'acceuil via son id
-router.get('/hostFamily/:id', hostFamilyController.findOneHostFamily)
+router.get('/hostFamily/:id', hostFamilyController.findOneHostFamily, hostFamilyController.findAllCommentHostFamily)
 // Route pour ajouter une famille d'acceuil
 router.post('/addHostFamily', hostFamilyController.addHostFamily)
 // Route pour supprimer une famille d'acceuil

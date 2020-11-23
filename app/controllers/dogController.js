@@ -39,7 +39,7 @@ const dogController = {
         try{
             const petId = parseInt(request.params.id);
             const pet = await Dog.findOnePet(petId);
-            console.log(pet.adopt);
+            console.log(pet);
             if(pet.adopt === false){
                 const petFalse = await Dog.adoptIsTrue(petId);
                 response.json('Cet animal est disponible a l\'adoption');

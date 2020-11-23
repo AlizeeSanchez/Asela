@@ -71,11 +71,11 @@ CREATE TABLE "veterinary" (
     city TEXT NOT NULL, -- Ville du veterinaire    
     adress TEXT NOT NULL, -- adresse du veterinaire
     email VARCHAR (70), -- email du veterinaire
-    price_ide_eval BOOLEAN, -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon)
-    price_vaccine_eval BOOLEAN, -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon)
-    price_cat_eval BOOLEAN, -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon)
-    price_litledog_eval BOOLEAN, -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon)
-    price_bigdog_eval BOOLEAN -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon)
+    price_ide_eval BOOLEAN, -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon) ( SI BUG modif en TEXT)
+    price_vaccine_eval BOOLEAN, -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon) ( SI BUG modif en TEXT)
+    price_cat_eval BOOLEAN, -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon) ( SI BUG modif en TEXT)
+    price_litledog_eval BOOLEAN, -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon)( SI BUG modif en TEXT)
+    price_bigdog_eval BOOLEAN -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon)( SI BUG modif en TEXT)
 );
 
 

@@ -1,4 +1,5 @@
 const Pet = require("../models/Pet");
+const Host_family = require("../models/HostFamily");
 
 const petController = {
 
@@ -7,10 +8,13 @@ const petController = {
         try{
             const petId = parseInt(request.params.id);
             const pet = await Pet.findOnePet(petId);
+            const petHostFamilly = await Pet.findHostFamillyPet(petId);
+            const petAdoptant = await Pet.findAdoptantPet(petId);
             if (pet) {
                 //charactPet = pet;
                 response.pet = pet;
-                console.log('mon charactPet:', pet)
+                response.hostFamilly = petHostFamilly;
+                response.adoptant = petAdoptant;
                 next();
             } else {
                 response.status(404).json(`Cet animal n'existe pas.`);
@@ -20,7 +24,29 @@ const petController = {
         }
     },
 
-    //On recupere les chiens a l'adoption
+    //Afficher un commentaire
+    findAllComment: async (request, response) => {
+        try{
+        const petId = parseInt(request.params.id);
+        const comments = await Pet.findAllCommentPet(petId);
+        console.log(comments)
+            if (comments) {
+                const jason = {
+                    pet: response.pet,
+                    hostFamilly: response.hostFamilly,
+                    adoptant: response.adoptant,
+                    comments: comments
+                }
+                response.json(jason);
+            } else {
+                response.status(404).json(`Cet animal n'existe pas.`);
+            }
+        }catch(error){
+            console.trace(error);
+        }
+    },
+
+    //On recupere les ANIMAUX décédés
     allPetDead: async (request, response) => {
         try{
             const pets = await Pet.findPetDead();
@@ -36,23 +62,26 @@ const petController = {
         }
     },
 
-    //Afficher un commentaire
-    findAllComment: async (request, response) => {
+    //On déclare un animal décédé
+    declarationDead: async (request, response) => {
         try{
-        const petId = parseInt(request.params.id);
-        const comments = await Pet.findAllCommentPet(petId);
-        console.log(comments)
-            if (comments) {
-                const jason = {
-                    pet: response.pet,
-                    comments: comments
-                }
-                response.json(jason);
-            } else {
-                response.status(404).json(`Cet animal n'existe pas.`);
+            const petId = parseInt(request.params.id);
+            const pet = await Pet.findOnePet(petId);
+            console.log(pet)
+            if(pet.deceased === true){
+                const petFalse = await Pet.editDeadPetFalse(petId);
+                response.json('Cet animal a été résusité, il est de nouveau a l\'adoption');
             }
-        }catch(error){
-            console.trace(error);
+            if(pet.deceased === false){
+                const petTrue = Pet.editDeadPetTrue(petId);
+                response.status(200).json(`Cet animal à bien été enregistré comme décédé et dépublié.`);
+            } else {
+                response.status(404).json(`Cet animal numéro ${petId} n\'existe pas`);
+            }
+        }
+        catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString());
         }
     },
     
@@ -67,20 +96,18 @@ const petController = {
                 if (request.body){
                     const editPet = {
                         id: pet.id,
+                        date_supported: request.body.date_supported,
                         name: request.body.name,
                         age: request.body.age,
                         amity: request.body.amity,
                         sexe: request.body.sexe,
                         breed: request.body.breed,
+                        color: request.body.color,
                         ide: request.body.ide,
                         date_vaccine: request.body.date_vaccine,
                         sterilised: request.body.sterilised,
                         description: request.body.description,
                         weight: request.body.weight,
-                        adopt: request.body.adopt,
-                        date_adopting: request.body.date_adopting,
-                        host_family_id : request.body.host_family_id,
-                        adoptant_id: request.body.adoptant_id
                     };
                     console.log('log', editPet)
                     //on transmet les informations de l'animal à la fonction editPet
@@ -162,13 +189,120 @@ const petController = {
         }
     },
 
-    //Modifier un commentaire
-    editComment:async (request, response) => {
-        //const commentId = parseInt(request.params.id);
-        //const comment = await Pet.findOneComment(commentId);
+    deleteCommentPet: async(request, response) => {
+        try {
+            const deleteCommentPetId = parseInt(request.params.id);
+            const deleteCommentPet = await Pet.findOnePet(deleteCommentPetId); 
+            if (deleteCommentPet) {
+                await Pet.suppPetComment(deleteCommentPetId);
+                response.status(200).json('Votre commentaire de l\'animal a bien été supprimée');
+            } else {
+                response.json('ce commentaire de l\'animal n\'existe pas.');
+            }
+        } catch (error) {
+            console.trace(error)
+            return response.status(500).json(error.toString());
+        }
+    },
+
+    //assigne une famille d'accueil a un animal
+    affectFamilyHost:async (request, response) => {
+        try{
+        //recuperer l'id de l'animal
+        const petId = parseInt(request.params.id);
+         //recuperer l'animal
+        const pet = await Pet.findOnePet(petId);
+        // creer une methode qui injecte dans la colone pet.host_family_id le host_family.id selectionné ( request.body.host_family_id )
+        if(pet){
+            const famillyId = request.body.host_family_id;
+            const petToFamilly = {
+                id: pet.id,
+                host_family_id: parseInt(famillyId)
+            };
+            console.log(pet.id);
+            console.log(famillyId);
+            console.log(petToFamilly);
+            await Pet.affectFamilyHost(petToFamilly);
+            response.status(200).json(`Cet animal à bien été affecté à une FA.`);
+        } else {
+            response.status(404).json(`Cet animal n'existe pas.`);
+        }
+
+        }catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString());
+        }
+
+    },
+
+    //On puisse signaler que l'animal est publié ou non sur facebook
+    petStatePublishFB: async (request, response) => {
+        try{
+            const petId = parseInt(request.params.id);
+            const pet = await Pet.findOnePet(petId);
+            console.log(pet);
+            if(pet.facebook_publish === false){
+                const publishFacebookFalse = await Pet.publishFacebookIsTrue(petId);
+                response.json('Cet animal est bien publié sur facebook');
+            }
+            if(pet.facebook_publish === true){
+                const publishFacebookTrue = await Pet.publishFacebookIsFalse(petId);
+                response.json('Cet animal n\'est pas publié sur facebook');
+            } else {
+                response.status(404).json(`Cet animal n'existe pas.`);
+            }
+        }
+        catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString());
+        }
+    },
+
+    //Signaler qu'un animal est publié sur Seconde chance
+    petStatePublishSC: async (request, response) => {
+        try{
+            const petId = parseInt(request.params.id);
+            const pet = await Pet.findOnePet(petId);
+            console.log(pet);
+            if(pet.seconde_chance_publish === false){
+                const petFalse = await Pet.publishSecondeChanceIsTrue(petId);
+                response.json('Cet animal est publié sur seconde chance');
+            }
+            if(pet.seconde_chance_publish === true){
+                const petTrue = await Pet.publishSecondeChanceIsFalse(petId);
+                response.json('Cet animal n\'est pas publié sur seconde chance');
+            } else {
+                response.status(404).json(`Cet animal n'existe pas.`);
+            }
+        }
+        catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString());
+        }
+    },
+
+    //Signaler qu'un animal est Reservé
+    petReserve: async (request, response) => {
+        try{
+            const petId = parseInt(request.params.id);
+            const pet = await Pet.findOnePet(petId);
+            console.log(pet);
+            if(pet.reserve === false){
+                const petFalse = await Pet.reserveIsTrue(petId);
+                response.json('Cet animal est réservé par un adoptant');
+            }
+            if(pet.reserve === true){
+                const petTrue = await Pet.reserveIsFalse(petId);
+                response.json('Cet animal n\'est pas reservé');
+            } else {
+                response.status(404).json(`Cet animal n'existe pas.`);
+            }
+        }
+        catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString());
+        }
     }
-    //
-    
 
 }
 

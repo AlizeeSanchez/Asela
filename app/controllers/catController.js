@@ -2,6 +2,8 @@ const Cat = require("../models/Cat");
 
 const catController = {
 
+
+    //On liste les chats a l'adoption
     allCatsNotAdopted: async (request, response) => {
         try{
             const cats = await Cat.findCatNotAdopted();
@@ -17,6 +19,7 @@ const catController = {
         }
     },
 
+    //On liste les chats adoptésss
     allCatsAdopted: async (request, response) => {
         try{
             const cats = await Cat.findCatAdopted();
@@ -32,32 +35,21 @@ const catController = {
         }
     },
 
-     //On passe l'adoption a true quand un chat est disponible à l'adoption.
-     catNotAvailable: async (request, response) => {
+    //On passe l'adoption a true quand un chien est disponible à l'adoption.
+    petStateAdoption: async (request, response) => {
         try{
-            const catId = parseInt(request.params.id);
-            const cat = await Cat.adoptCatIsTrue(catId);
-            if (cat) {
-                response.json('Ce chat à bien étais mis dans la liste d\'adoption');
-            } else {
-                response.status(404).json(`Ce chat n'est pas disponible pour une adoption.`);
+            const petId = parseInt(request.params.id);
+            const pet = await Cat.findOneCat(petId);
+            console.log(pet.name);
+            if(pet.adopt === false){
+                const petFalse = await Cat.adoptCatIsFalse(petId);
+                response.json('Cet animal est disponible a l\'adoption');
             }
-        }
-        catch(error){
-            console.trace(error)
-            return response.status(500).json(error.toString());
-        }
-    },
-
-     //On passe l'adoption a false quand un chat est de retour à l'adoption.
-     catAvailableToAdopt: async (request, response) => {
-        try{
-            const catId = parseInt(request.params.id);
-            const cat = await Cat.adoptCatIsFalse(catId);
-            if (cat) {
-                response.json('Ce chat à étais bien enlevé de la liste d\'adoption');
+            if(pet.adopt ===true){
+                const petTrue = await Cat.adoptCatIsFalse(petId);
+                response.json('Cet animal n\'est pas disponible a l\'adoption');
             } else {
-                response.status(404).json(`Ce chat est de nouveau disponible pour une adoption.`);
+                response.status(404).json(`Cet animal n'existe pas.`);
             }
         }
         catch(error){
@@ -82,10 +74,9 @@ const catController = {
                     description: request.body.description,
                     weight: request.body.weight,
                 };
-                //on transmet les informations du membre a la fonction createMember
+                //on transmet les informations du chat à la fonction addNewCat
                 const saveCat = await Cat.addNewCat(cat);
                 response.json({ saveCat: cat , TEXT: 'Votre chat a bien été enregistrer dans la liste des adoptés'});
-                //response.json('Votre chat a bien été enregistrer dans la liste des adoptés');
 
             } else{
                     response.json('Veuillez remplir tous les champs svp');
@@ -122,6 +113,7 @@ const catController = {
         }
     },
 
+    // On veux voir la fiche d'un chat
     findOneCat: async (request, response) => {
         try{
             const catId = parseInt(request.params.id);
