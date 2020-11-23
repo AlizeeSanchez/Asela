@@ -75,7 +75,7 @@ CREATE TABLE "veterinary" (
     price_vaccine_eval TEXT, -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon)
     price_cat_eval TEXT, -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon)
     price_litledog_eval TEXT, -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon)
-    price_bigdog_eval TEXT, -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon)
+    price_bigdog_eval TEXT -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon)
 );
 
 
@@ -98,9 +98,9 @@ CREATE TABLE "price_adopt"(
     type_pet TEXT NOT NULL,
     sexe_pet TEXT NOT NULL,
     price INT NOT NULL,
-    caution INT
+    caution INT,
     race BOOLEAN DEFAULT false, -- Si on demande un supplement pour animal de race
-    race INT, -- Si true le prix de ce supplement
+    race2 INT -- Si true le prix de ce supplement
 );
 
 CREATE TABLE "picture_pet"(
@@ -164,13 +164,13 @@ CREATE TABLE "questionnaire_adopt" ( -- Questionnaire adoptant
     height_fence TEXT, -- Si avec jardin est coché : Hauteur de votre cloture
     proprietor TEXT NOT NULL, -- Choix : proprietaire / locataire
     number_adult TEXT NOT NULL, -- Choix : Nombre d'adulte vivant au domicile (choix 1,2,3,4+)
-    number_children TEXT NOT NULL,, -- Choix : Nombre d'enfant vivant au domicile (choix 0,1,2,3,4+)
+    number_children TEXT NOT NULL, -- Choix : Nombre d'enfant vivant au domicile (choix 0,1,2,3,4+)
     age_children TEXT , -- Si 1 ou plus Age des enfants
     allergy TEXT NOT NULL, -- Si un occupant de la maison devient allergique à votre animal que ferez-vous ?
     adopt_assos BOOLEAN NOT NULL, -- Avez-vous déjà adopté un animal dans une association, refuge ou SPA (Oui / non)
     adopt_assos2 TEXT, -- Si oui où?
     trust_assos BOOLEAN NOT NULL,-- Avez-vous déjà laissé un animal dans une association, refuge, SPA, autre ? (Oui / non)
-    adopt_assos2 TEXT, -- Si oui dans quelles conditions?
+    trust_assos2 TEXT, -- Si oui dans quelles conditions?
     pet_familly BOOLEAN NOT NULL, -- Avez vous un ou des animaux ? (Oui / non)
     pet_familly2 TEXT, -- Si oui : Dresser une liste des animaux présents dans le foyer en précisant le  Type/Race Âge Sexe Stérilisé/Castré vacciné?
     pet_familly_deceased TEXT, -- Dresser une liste des animaux que vous avez eu au cours de votre vie et qui sont décédé, quel sont les causes du décés?
@@ -186,7 +186,7 @@ CREATE TABLE "questionnaire_adopt" ( -- Questionnaire adoptant
     informed BOOLEAN NOT NULL, --L intégralité de votre foyer est-il averti et d 'accord avec cette adoption ? (Oui / non)
     adopt TEXT NOT NULL, -- Pour qui adoptez vous cet animal ?
     adopt2 TEXT NOT NULL,-- Pourquoi voulez-vous adopter un chat/chien ?
-    tomove TEXTNOT NULL, --Si vous décidez de déménager, que ferez-vous de votre animal ? 
+    tomove TEXT NOT NULL, --Si vous décidez de déménager, que ferez-vous de votre animal ? 
     sterilization TEXT NOT NULL,--Quelle est votre opinion sur la stérilisation et la castration ?
     forbearance BOOLEAN NOT NULL, --Votre animal aura besoin de temps pour s'adapter à votre maison. Serez vous patient et compréhensif ? (Oui / non)
     cleanliness TEXT NOT NULL, -- Si l’animal que vous adoptez n’est pas propre ou a besoin d’éducation, que ferez-vous ?
@@ -220,7 +220,7 @@ CREATE TABLE "questionnaire_adopt" ( -- Questionnaire adoptant
     status TEXT DEFAULT 'En attente' NOT NULL, -- Status du questionnaire (En attente, Refusé, Sans suite, Rencontre, Adopté)
     meet DATE, --  Si rencontre : Date de la rencontre
     refused_comment TEXT, -- si refusé : commentaire
-    general_comment TEXT, -- commentaire en tout genre
+    general_comment TEXT -- commentaire en tout genre
 );
 
 CREATE TABLE "blacklister" (
