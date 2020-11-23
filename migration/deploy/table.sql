@@ -217,10 +217,12 @@ CREATE TABLE "questionnaire_adopt" ( -- Questionnaire adoptant
     free VARCHAR (500), -- Si vous avez d'autre element dont vous souhaitez nous faire part c'est ici 
     --------------------RESERVE BENEVOLE-----------------------------
     date_sending DATE DEFAULT NOW() NOT NULL, -- Date d'envois du questionnaire
+    pet_id int REFERENCES "pet"(id), -- Lier le questionnaire avec un animal en particulier
     status TEXT DEFAULT 'En attente' NOT NULL, -- Status du questionnaire (En attente, Refusé, Sans suite, Rencontre, Adopté)
     meet DATE, --  Si rencontre : Date de la rencontre
     refused_comment TEXT, -- si refusé : commentaire
     general_comment TEXT -- commentaire en tout genre
+   
 );
 
 CREATE TABLE "blacklister" (
@@ -234,8 +236,6 @@ CREATE TABLE "blacklister" (
     adress TEXT NOT NULL,
     explication TEXT NOT NULL
 );
-
-
 
 
 COMMIT;
