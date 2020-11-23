@@ -90,8 +90,8 @@ const Cat = {
         console.trace(error);
         }
     },
+    
     //Supprimer un chat a l'adoption
-
     suppCat: async (id) => {
         try{
             const cat = await db.query(`DELETE FROM pet WHERE type = 'chat' AND id = $1;`, [id]);
@@ -101,13 +101,6 @@ const Cat = {
             console.trace(error)
         }
     },
-
-    //Afficher un chien
-
-    //Modifier un chien
-
-    //Rechercher un chien par son nom ou par son IDE
-
 };
 
 module.exports = Cat;

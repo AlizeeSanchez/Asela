@@ -4,6 +4,8 @@ const catController = require('./controllers/catController');
 const petController = require('./controllers/petController');
 const conditionController = require('./controllers/conditionController');
 const priceController = require('./controllers/priceController');
+const hostFamilyController = require('./controllers/hostFamilyController');
+
 const router = Router();
 
 //----------------------------------Routes chiens----------------------------
@@ -19,7 +21,7 @@ router.delete('/dogs/:id', dogController.suppPet)
 
 //----------------------------------Routes chats----------------------------
 // Route pour recensser tous les chats non adoptés
-//router.get('/cats/notAdopted', catController.allCatsNotAdopted)
+router.get('/cats/notAdopted', catController.allCatsNotAdopted)
 // Route pour recensser tous les chats adoptés
 router.get('/cats/adopted', catController.allCatsAdopted)
 // Route pour dire qu'un chat voiens d'être adopté
@@ -64,5 +66,24 @@ router.post('/addPrice', priceController.addNewPrice)
 router.patch('/editPrice/:id', priceController.editPrice)
 //Route pour supprimer un prix 
 router.delete('/suppPrice/:id', priceController.suppPrice)
+//----------------------------------Routes famille d'acceuil----------------------------
+// Route pour lister toute les familles d'acceuils
+router.get('/hostFamily', hostFamilyController.findAllHostFamily, hostFamilyController.findAllCommentHostFamily)
+// Route pour lister une seule famille d'acceuil via son id
+router.get('/hostFamily/:id', hostFamilyController.findOneHostFamily)
+// Route pour ajouter une famille d'acceuil
+router.post('/addHostFamily', hostFamilyController.addHostFamily)
+// Route pour supprimer une famille d'acceuil
+router.post('/suppHostFamily/:id', hostFamilyController.deleteHostFamily)
+// Route pour modifier une famille d'acceuil
+router.patch('/editHostFamily/:id', hostFamilyController.editHostFamily)
+// Route pour ajouter un commentaire à une famille d'acceuil
+router.post('/addCommentHostfamily/:id', hostFamilyController.commentHostFamily)
+// Route pour modifier un commentaire d'une famille d'acceuil
+router.patch('/editCommentHostFamily/:id', hostFamilyController.editCommentHostFamily)
+// Route pour supprimer un commentaire d'une famille d'acceuil
+router.delete('/deleteCommentHostFamily/:id', hostFamilyController.deleteCommentHostFamily)
+// Route pour attribuer un animal à une famille d'acceuil
+router.patch('/putPetToHostFamily/:id', hostFamilyController.putPetHostFamily)
 
 module.exports = router;
