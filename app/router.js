@@ -32,7 +32,7 @@ router.post('/suppCat/:id', catController.deleteCat)
 
 //----------------------------------Routes famille d'acceuil----------------------------
 // Route pour lister toute les familles d'acceuils
-router.get('/hostFamily', hostFamilyController.findAllHostFamily)
+router.get('/hostFamily', hostFamilyController.findAllHostFamily, hostFamilyController.findAllCommentHostFamily)
 // Route pour lister une seule famille d'acceuil via son id
 router.get('/hostFamily/:id', hostFamilyController.findOneHostFamily)
 // Route pour ajouter une famille d'acceuil
@@ -41,7 +41,7 @@ router.post('/addHostFamily', hostFamilyController.addHostFamily)
 router.post('/suppHostFamily/:id', hostFamilyController.deleteHostFamily)
 // Route pour modifier une famille d'acceuil
 router.patch('/editHostFamily/:id', hostFamilyController.editHostFamily)
-// Route pour commenter une famille d'acceuil
+// Route pour ajouter un commentaire à une famille d'acceuil
 router.post('/addCommentHostfamily/:id', hostFamilyController.commentHostFamily)
 // Route pour modifier un commentaire d'une famille d'acceuil
 router.patch('/editCommentHostFamily/:id', hostFamilyController.editCommentHostFamily)

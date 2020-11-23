@@ -1,15 +1,35 @@
 const HostFamily = require("../models/HostFamily");
-const Pet = require('../models/Pet')
 
 const hostFamilyController = {
     
-    findAllHostFamily: async (request, response) => {
+    findAllHostFamily: async (request, response, next) => {
         try{
             const hostFamily = await HostFamily.findAllHostFamily();
             if(hostFamily){
-                response.json(hostFamily);
+                response.hostFamily = hostFamily;
+                next();
             } else {
                 response.status(404).json(`Il n'y a aucune famille d'acceuil trouvés.`);
+            }
+        }
+        catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString());
+        }
+    },
+
+    findAllCommentHostFamily: async (request, response) => {
+        try{
+            const commentHostFamily = await HostFamily.findAllCommentHostFamily();
+            if(commentHostFamily){
+                const json = {
+                    hostFamily: response.hostFamily,
+                    comments: commentHostFamily
+                }
+                response.json(json);   
+                
+            } else {
+                response.status(404).json(`Il n'y a aucun commentaire pour cette famille d'acceuil trouvés.`);
             }
         }
         catch(error){
@@ -125,7 +145,7 @@ const hostFamilyController = {
             console.trace(error);
         }
     },
-    
+
     commentHostFamily: async (request, response) => {
         try {
             const commentHostFamilyId = parseInt(request.params.id);
@@ -135,7 +155,7 @@ const hostFamilyController = {
                     id: commentHostFamilyId,
                     commentaire: request.body.commentaire
                 };
-                const hostFamilyComment = await HostFamily.commentFamilyHost(comment);
+                const hostFamilyComment = await HostFamily.addCommentFamilyHost(comment);
                 response.status(200).json({ hostFamilyComment, TEXT: `Votre commentaire à bien été ajouter à la famille d\'acceuil ${commentHostFamilyId}`});
             }else {
                 response.status(404).json('Cette famille d\'acceuil n\'a pas de commentaire')
@@ -231,10 +251,6 @@ const hostFamilyController = {
             console.trace(error);
         }
     },
-
-
-
-
 
 }
 

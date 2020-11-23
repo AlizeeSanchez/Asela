@@ -12,6 +12,15 @@ const HostFamily = {
         }
     },
 
+    findAllCommentHostFamily: async () => {
+        try{
+            const commentHostFamily = await db.query("SELECT * FROM commentaire_host_familly;");   
+            return commentHostFamily.rows;
+        }catch (error){
+            console.trace(error);
+        }
+    },
+
     findOneHostFamily: async (id) => {
         try{
             const hostFamily = await db.query("SELECT * FROM host_family WHERE id = $1", [id]);
