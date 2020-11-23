@@ -5,6 +5,7 @@ const petController = require('./controllers/petController');
 const conditionController = require('./controllers/conditionController');
 const priceController = require('./controllers/priceController');
 const hostFamilyController = require('./controllers/hostFamilyController');
+const veterinaryController = require('./controllers/veterinaryController');
 
 const router = Router();
 
@@ -99,5 +100,24 @@ router.patch('/editCommentHostFamily/:id', hostFamilyController.editCommentHostF
 router.delete('/deleteCommentHostFamily/:id', hostFamilyController.deleteCommentHostFamily)
 // Route pour attribuer un animal à une famille d'acceuil
 router.patch('/putPetToHostFamily/:id', hostFamilyController.putPetHostFamily)
+
+//----------------------------------Routes Veterinaire----------------------------
+
+// Route pour afficher les vétérinaire par départements
+router.get('/veterinary', veterinaryController.FindVeterinaryByDpt)
+// Route pour afficher un véterinaire
+router.get('/veterinary/:id', veterinaryController.findOneVeterinary, veterinaryController.findAllPrice)
+// Route pour ajouter un veterinaire
+router.post('/addveterinary', veterinaryController.addVeterinary)
+// Route pour supprimer un veterinaire
+router.delete('/deleteVeterinary/:id', veterinaryController.deleteVeterinary)
+// Route pour modifier un vétérinaire
+router.patch('/editVeterinary/:id', veterinaryController.editVeterinary)
+// Route pour ajouter un prix d'un vétérinaire
+router.post('/addPriceVeterinary', veterinaryController.addPriceVeterinary)
+// Route pour supprimer un prix d'un vétérinaire
+router.delete('/deletePriceVeterinary/:id', veterinaryController.deletePriceVeterinary)
+// Route pour modifier un prix d'un vétérinaire
+router.patch('/editPriceVeterinary/:id', veterinaryController.editPriceVeterinary)
 
 module.exports = router;

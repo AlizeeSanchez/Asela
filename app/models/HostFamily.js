@@ -12,19 +12,19 @@ const HostFamily = {
         }
     },
 
-    findAllCommentHostFamily: async () => {
+    findOneHostFamily: async (id) => {
         try{
-            const commentHostFamily = await db.query("SELECT * FROM commentaire_host_familly;");   
-            return commentHostFamily.rows;
+            const hostFamily = await db.query("SELECT * FROM host_family WHERE id = $1", [id]);
+            return hostFamily.rows
         }catch (error){
             console.trace(error);
         }
     },
 
-    findOneHostFamily: async (id) => {
+    findAllCommentHostFamily: async () => {
         try{
-            const hostFamily = await db.query("SELECT * FROM host_family WHERE id = $1", [id]);
-            return hostFamily.rows
+            const commentHostFamily = await db.query("SELECT * FROM commentaire_host_familly;");   
+            return commentHostFamily.rows;
         }catch (error){
             console.trace(error);
         }
