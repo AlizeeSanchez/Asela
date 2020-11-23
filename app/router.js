@@ -19,6 +19,7 @@ router.patch('/dogs/:id', dogController.petStateAdoption)
 //Route pour supprimer un chien de la bdd
 router.delete('/dogs/:id', dogController.suppPet)
 
+
 //----------------------------------Routes chats----------------------------
 // Route pour recensser tous les chats non adoptés
 router.get('/cats/notAdopted', catController.allCatsNotAdopted)
@@ -42,6 +43,8 @@ router.patch('/pet/:id', petController.editPet)
 router.post('/pet/:id', petController.findresearch)
 //Poster un commentaire sous l'animal
 router.post('/pet/comment/:id', petController.addComment)
+//Route pour afficher les animaux décédés
+router.get('/petsdead', petController.allPetDead)
 
 //---------------------------Routes Conditions d'adoption--------------------
 //Route pour lister les conditions d'adoption
@@ -66,6 +69,7 @@ router.post('/addPrice', priceController.addNewPrice)
 router.patch('/editPrice/:id', priceController.editPrice)
 //Route pour supprimer un prix 
 router.delete('/suppPrice/:id', priceController.suppPrice)
+
 //----------------------------------Routes famille d'acceuil----------------------------
 // Route pour lister toute les familles d'acceuils
 router.get('/hostFamily', hostFamilyController.findAllHostFamily, hostFamilyController.findAllCommentHostFamily)

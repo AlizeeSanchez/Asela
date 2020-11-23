@@ -16,6 +16,18 @@ const Pet = {
         }
     },
 
+    //Afficher les animaux décédés
+    findPetDead: async () => {
+        try{
+            const pets = await db.query(
+                "SELECT * FROM pet WHERE deceased = true;"
+            );
+            return pets.rows;
+        }catch (error){
+            console.trace(error);
+        }
+    },
+
 
     //Modifier un animal
     editPet: async (pet) => {

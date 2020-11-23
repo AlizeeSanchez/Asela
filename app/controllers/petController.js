@@ -20,6 +20,22 @@ const petController = {
         }
     },
 
+    //On recupere les chiens a l'adoption
+    allPetDead: async (request, response) => {
+        try{
+            const pets = await Pet.findPetDead();
+            if (pets) {
+                response.json(pets);
+            } else {
+                response.status(404).json(`Il n'y a aucun animal décédé en BDD.`);
+            }
+        }
+        catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString());
+        }
+    },
+
     //Afficher un commentaire
     findAllComment: async (request, response) => {
         try{
