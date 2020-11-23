@@ -6,7 +6,19 @@ const Dog = {
     findPetNotAdopted: async () => {
         try{
             const pets = await db.query(
-                "SELECT * FROM pet WHERE adopt = false AND type = 'chien';;"
+                "SELECT * FROM pet WHERE adopt = false AND deceased = false AND type = 'chien';"
+            );
+            return pets.rows;
+        }catch (error){
+            console.trace(error);
+        }
+    },
+
+    //On recupere les chiens décédés
+    findPetDead: async () => {
+        try{
+            const pets = await db.query(
+                "SELECT * FROM pet WHERE deceased = true AND type = 'chien';"
             );
             return pets.rows;
         }catch (error){

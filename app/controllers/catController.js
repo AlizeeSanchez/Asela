@@ -17,6 +17,21 @@ const catController = {
         }
     },
 
+    allCatsDead: async (request, response) => {
+        try{
+            const cats = await Cat.findPetDead();
+            if(cats){
+                response.json(cats);
+            } else {
+                response.status(404).json(`Il n'y a aucun chat décédé en bdd.`);
+            }
+        }
+        catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString());
+        }
+    },
+
     allCatsAdopted: async (request, response) => {
         try{
             const cats = await Cat.findCatAdopted();

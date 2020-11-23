@@ -18,6 +18,23 @@ const dogController = {
         }
     },
 
+    //On recupere les chiens a l'adoption
+    allCatsDead: async (request, response) => {
+        try{
+            const pets = await Dog.findPetDead();
+            if (pets) {
+                response.json(pets);
+            } else {
+                response.status(404).json(`Il n'y a aucun animal décédé en BDD.`);
+            }
+        }
+        catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString());
+        }
+    },
+
+
     //On recupere les chiens adoptés
     allPetsAdopted: async (request, response) => {
         try{

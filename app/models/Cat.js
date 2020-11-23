@@ -5,8 +5,20 @@ const Cat = {
     //On recupere les chats a l'adoption
     findCatNotAdopted: async () => {
         try{
-            const cats = await db.query("SELECT * FROM pet WHERE adopt = false AND type = 'chat';");   
+            const cats = await db.query("SELECT * FROM pet WHERE adopt = false AND deceased = false AND type = 'chat';");   
             return cats.rows;
+        }catch (error){
+            console.trace(error);
+        }
+    },
+
+    //On recupere les chats décédés
+    findPetDead: async () => {
+        try{
+            const pets = await db.query(
+                "SELECT * FROM pet WHERE deceased = true AND type = 'chat';"
+            );
+            return pets.rows;
         }catch (error){
             console.trace(error);
         }
@@ -34,13 +46,16 @@ const Cat = {
     //On passe l'adoption a true quand un chat viens d'être adopté
     adoptCatIsTrue: async (id) => {
         try{
-            const editCat = await db.query(`UPDATE pet SET adopt = true WHERE id = $1 AND type = 'chat'`, [id])
+            const editCat = await db.query(`UPDATE pet SET adopt = false, deceased = true WHERE id = $1 AND type = 'chat'`, [id])
             return editCat.rows;
         }
         catch(error){
             console.trace(error)
         }
     },
+
+    //On passe le décé a true si l'animal est décédé, cet animal n'est donc plus a l'adoption
+
 
     //On passe l'adoption a false si un chat est de retour d'adoption
     adoptCatIsFalse: async (id) => {

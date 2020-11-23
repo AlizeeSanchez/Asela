@@ -16,7 +16,7 @@ router.post('/dogs', dogController.addNewPet)
 router.patch('/dogs/:id', dogController.petStateAdoption)
 //Route pour supprimer un chien de la bdd
 router.delete('/dogs/:id', dogController.suppPet)
-//
+
 //----------------------------------Routes chats----------------------------
 // Route pour recensser tous les chats non adoptés
 //router.get('/cats/notAdopted', catController.allCatsNotAdopted)
