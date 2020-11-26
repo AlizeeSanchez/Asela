@@ -1,4 +1,5 @@
 const Dog = require("../models/Dog");
+const Pet = require('../models/Pet');
 
 const dogController = {
 
@@ -7,7 +8,9 @@ const dogController = {
         try{
             const pets = await Dog.findPetNotAdopted();
             if (pets) {
-                response.json(pets);
+                response.render('dog', {
+                    pets
+                });
             } else {
                 response.status(404).json(`Il n'y a aucun animal à l'adoption en BDD.`);
             }
@@ -110,7 +113,7 @@ const dogController = {
             console.trace(error)
             return response.status(500).json(error.toString());
         }  
-    }
+    },
            
 }
 

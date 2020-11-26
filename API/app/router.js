@@ -13,6 +13,8 @@ const router = Router();
 
 //Route pour afficher notre back office des chiens
 router.get('/dogs', dogController.allPetsNotAdopted, dogController.allPetsAdopted)
+//Route pour afficher un chien
+router.get('/dog/:id', dogController.findOneDog)
 //Route pour ajouter un chien a l'adoption
 router.post('/dogs', dogController.addNewPet)
 //Route pour modifier le status d'un chien (a l'adoption ou non)
