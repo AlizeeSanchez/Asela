@@ -6,6 +6,7 @@ const conditionController = require('./controllers/conditionController');
 const priceController = require('./controllers/priceController');
 const hostFamilyController = require('./controllers/hostFamilyController');
 const veterinaryController = require('./controllers/veterinaryController');
+const questionnaireAdoptController = require('./controllers/questionnaireAdoptController');
 
 const router = Router();
 
@@ -119,5 +120,8 @@ router.post('/addPriceVeterinary', veterinaryController.addPriceVeterinary)
 router.delete('/deletePriceVeterinary/:id', veterinaryController.deletePriceVeterinary)
 // Route pour modifier un prix d'un vétérinaire
 router.patch('/editPriceVeterinary/:id', veterinaryController.editPriceVeterinary)
+
+//-------------------------------Route questionnaire--------------------------------
+router.get('/questionnaire', questionnaireAdoptController.responseQuest)
 
 module.exports = router;

@@ -145,11 +145,11 @@ CREATE TABLE "questionnaire_FH" ( -- Questionnaire familly host
 
 CREATE TABLE "questionnaire_adopt" ( -- Questionnaire adoptant
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    date DATE, -- Date d'entré du questionnaire
     email VARCHAR (70) NOT NULL, -- Email
     type_pet VARCHAR(10) NOT NULL, -- type d'animal 
     name_pet VARCHAR (70), -- Nom de l'animal
-    lastname_firstname VARCHAR (70) NOT NULL, -- Nom et prenom de la personne
+    lastname VARCHAR (70) NOT NULL, -- Nom de la personne
+    firstname VARCHAR (70) NOT NULL, -- Prenom de la personne
     date_birth VARCHAR (70) NOT NULL, -- 
     occupation VARCHAR (70)NOT NULL,
     lastname_firstname_spouse VARCHAR (70), -- Nom et prenom du conjoin
@@ -210,11 +210,12 @@ CREATE TABLE "questionnaire_adopt" ( -- Questionnaire adoptant
     activity2 TEXT, -- Précisez la durée de l’activité et son rythme balade en laisse et en liberté, accès jardin :
     educator BOOLEAN, --Avez-vous déjà fait appel à un/une éducateur canin ?
     educator2 TEXT, -- Si oui, précisez ses coordonnées
-    educator3 BOOLEAN, -- Sinon pensez vous faire appel à un éducateur canin ?
-    ---------complementary
+    educator3 BOOLEAN, -- Sinon pensez vous faire appel à un éducateur canin si vous avez des soucis avec l'education de votre animal ?
+    ------------------Complementary-------------------------------
     facebook_pseudo VARCHAR (70), -- pseudo facebook
     advertisement TEXT, -- Où avez-vous entendu parler de notre association ? ( Choix multiple )
     free VARCHAR (500), -- Si vous avez d'autre element dont vous souhaitez nous faire part c'est ici 
+
     --------------------RESERVE BENEVOLE-----------------------------
     date_sending DATE DEFAULT NOW() NOT NULL, -- Date d'envois du questionnaire
     pet_id int REFERENCES "pet"(id), -- Lier le questionnaire avec un animal en particulier
