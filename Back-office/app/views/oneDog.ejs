@@ -1,0 +1,76 @@
+<%- include('partials/header') %>
+
+<div class="container">
+<header class="header">
+    <h1 class="Title"><%= jason.pet.name %></h1>
+    <span class="Title-new-name-pet">Nouveau Nom: <%= jason.pet.last_name_pet %></span>
+</header>
+<main class="main-article">
+    <header class="header-article">
+        <a href="#" class="badge badge-primary">Facebook</a>
+        <a href="#" class="badge badge-warning">Seconde chance</a>
+        <a href="#" class="badge badge-info">ASELA</a>
+        <img src="#" alt="Image de présentation de l'animal">
+        <ul class="liste-caract-pet">
+            <li class="liste-pet">Age: <%= jason.pet.age %></li>
+            <li class="liste-pet">sexe: <%= jason.pet.sexe %></li>
+            <li class="liste-pet">Race: <%= jason.pet.breed %></li>
+            <li class="liste-pet">Entente: <%= jason.pet.amity %></li>
+            <li class="liste-pet">Robe: <%= jason.pet.color %></li>
+            <li class="liste-pet">Taille: <%= jason.pet.weight %></li>
+        </ul>
+        <p class="description-pet">Description: <%= jason.pet.description %></p>
+    </header>
+    <main class="main-article">
+        <article class="info-pet">
+            <main class="main-article-pet">
+                <h2 class="Title-info-pet">Informations importantes</h2>
+                <ul class="liste-info-pet">
+                    <li class="info-pet">Prise en charge: <%= jason.pet.date_supported %></li>
+                    <li class="info-pet">Identification: <%= jason.pet.ide %></li>
+                    <li class="info-pet">Stérilisation: <%= jason.pet.sterilised %></li>
+                    <li class="info-pet">Vacciné: <%= jason.pet.date_vaccine %></li>
+                    <li class="info-pet">Dernier vaccin: <%= jason.pet.date_vaccine %></li>
+                </ul>
+            </main>
+        </article>
+        <aside class="info-host-family">
+            <h2 class="Title-host-family">Famille d'acceuil</h2>
+            <ul class="caract-host-family">
+                <li class="liste_host-family">Nom: <%= jason.hostFamilly[0].lastname %></li>
+                <li class="liste_host-family">Prénom: <%= jason.hostFamilly[0].firstname %></li>
+                <li class="liste_host-family">Adresse: <%= jason.hostFamilly[0].adress %></li>
+                <li class="liste_host-family">Code postal: <%= jason.hostFamilly[0].postal_code %></li>
+                <li class="liste_host-family">Ville: <%= jason.hostFamilly[0].city %></li>
+                <li class="liste_host-family">Téléphone: <%= jason.hostFamilly[0].number_phone %></li>
+                <li class="liste_host-family">Email: <%= jason.hostFamilly[0].email %></li>
+            </ul>
+        </aside>
+        <aside class="info-adoptant">
+            <h2 class="Title-adoptant">Adoption</h2>
+            <% if(jason.adoptant) { %>
+            <ul class="caract-adoptant">
+                <li class="liste-adoptant">Date d'adoption: <%= jason.pet.date_adopting %></li>
+                <li class="liste-adoptant">Adoptant :</li>
+                <li class="liste-adoptant">Nom: : <%= jason.adoptant[1]%></li>
+                <li class="liste-adoptant">Prénom: <%= jason.adoptant[1] %></li>
+                <li class="liste-adoptant">Adresse: <%= jason.adoptant[1] %></li>
+                <li class="liste-adoptant">Code postal: <%= jason.adoptant[1] %></li>
+                <li class="liste-adoptant">Ville: <%= jason.adoptant[1] %></li>
+                <li class="liste-adoptant">Téléphone: <%= jason.adoptant[1] %></li>
+                <li class="liste-adoptant">Email: <%= jason.adoptant[1] %></li>
+            </ul>
+            <% } %>
+        </aside>
+        <% if(jason.comments) { %>
+        <article class="comment-article">
+            <h2 class="Title-comment">Commentaire <%= jason.comments[2] %></h2>
+            <p class="content"><%= jason.comments[2] %></p>
+        </article>
+        <% } %>
+    </main>
+    
+
+</main>
+</div>
+<script src="/js/dog.js"></script>
