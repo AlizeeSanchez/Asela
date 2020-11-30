@@ -242,6 +242,15 @@ const Pet = {
         catch(error){
             console.trace(error)
         }
+    },
+
+    findImgPet: async (id) => {
+        try {
+            const imgPet = await db.query('SELECT * FROM picture_pet WHERE pet_id = $1;', [id])
+            return imgPet.rows;
+        }catch(error) {
+            console.log(error)
+        }
     }
  
 }

@@ -11,10 +11,12 @@ const petController = {
             const pet = await Pet.findOnePet(petId);
             const petHostFamilly = await Pet.findHostFamillyPet(petId);
             const petAdoptant = await Pet.findAdoptantPet(petId);
+            const imgPet = await Pet.findImgPet(petId);
             if (pet) {
                 response.pet = pet;
                 response.hostFamilly = petHostFamilly;
                 response.adoptant = petAdoptant;
+                response.img = imgPet;
                 next();
             } else {
                 response.status(404).json(`Cet animal n'existe pas.`);
@@ -52,10 +54,15 @@ const petController = {
                     pet: response.pet,
                     hostFamilly: response.hostFamilly,
                     adoptant: response.adoptant,
-                    comments: response.comments,
+                    imgPet: response.img,
+                    comments: comments,
                     questionnaires: questionnaire
                 }
-                response.json(jason);
+                console.log(jason);
+                
+                response.render('oneDog', {
+                    jason
+                });
             } else {
                 response.status(404).json(`Cet animal n'existe pas.`);
             }

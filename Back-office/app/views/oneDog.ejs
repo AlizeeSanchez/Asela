@@ -10,7 +10,28 @@
         <a href="#" class="badge badge-primary">Facebook</a>
         <a href="#" class="badge badge-warning">Seconde chance</a>
         <a href="#" class="badge badge-info">ASELA</a>
-        <img src="#" alt="Image de présentation de l'animal">
+
+        
+        <div class="carousel">
+            <% for(pic_pet of jason.imgPet) { %>
+                <input id="image<%= pic_pet.id %>" type="radio" name="image-selector" checked="checked" />
+                <% if(pic_pet.id === 1) { %>
+                <label for="image<%= pic_pet.id  + 2 %>">View image <%= pic_pet.id +2 %></label>
+                <% } else { %>
+                <label for="image<%= pic_pet.id -1 %>">View image <%= pic_pet.id -1%></label> 
+                <% } %>  
+                <img src="/img/<%= pic_pet.title %>.jpg">
+            <% } %>
+            
+            <% if(pic_pet.id === 3) { %>
+                <label for="image<%= pic_pet.id === 1 %>">View image <%= pic_pet.id === 1 %></label>
+            <% } else { %>
+            <label for="image<%= pic_pet.id  %>">View image <%= pic_pet.id  %></label>
+            <% } %>
+
+            
+        </div>
+           
         <ul class="liste-caract-pet">
             <li class="liste-pet">Age: <%= jason.pet.age %></li>
             <li class="liste-pet">sexe: <%= jason.pet.sexe %></li>
@@ -69,8 +90,8 @@
         </article>
         <% } %>
     </main>
-    
-
 </main>
 </div>
-<script src="/js/dog.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/dog.js">
+</script>
