@@ -8,7 +8,9 @@ const catController = {
         try{
             const cats = await Cat.findCatNotAdopted();
             if(cats){
-                response.json(cats);
+                response.render('cat', {
+                    cats
+                });
             } else {
                 response.status(404).json(`Il n'y a aucun chats trouvés qui ne sont pas adoptés.`);
             }

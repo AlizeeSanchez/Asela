@@ -11,11 +11,11 @@
         <div class="bloc-article">
             <% for(let dog of pets) { %>
             <article class="article" data-article-id="<%= dog.id %>">
-                <header class="header">
+                <header class="header-pet">
                     <h2 class="subTitle"><%= dog.name %></h2>
-                    <img class="image-pet" src="" alt="Image de présentation de l'animal">
+                    <img class="image-pet" src="/img/<%= dog.name %>.jpg" alt="Image de présentation de l'animal">
                 </header>
-                <main class="main">
+                <main class="article-main-pet">
                     <ul class="content">
                         <li class="lien">Race: <%= dog.breed %></li>
                         <li class="lien">Age: <%= dog.age %></li>
@@ -23,17 +23,18 @@
                     </ul>
                 </main>
                 <footer class="Multi-button">
-                    <button type="button" class="btn btn-success">Voir</button>
+                    <button type="button" class="btn btn-success" onClick="location.href='pet/<%= dog.id %>'">Voir</button>
                     <button type="button" class="btn btn-info">Modifier</button>
                     <button type="button" class="btn btn-primary">Dépublier</button>
                     <button type="button" class="btn btn-danger">Supprimer</button>
                 </footer>
             </article>
-        
+
         <% } %>
     </div>
     </div>
 </main>
+
 <script src="/js/app.js"></script>
 <script src="/js/dog.js"></script>
 </body>

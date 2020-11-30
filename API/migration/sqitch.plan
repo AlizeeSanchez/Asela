@@ -1,6 +1,0 @@
-%syntax-version=1.0.0
-%project=asela
-%uri=https://github.com/AlizeeSanchez/Asela.git
-
-table 2020-11-16T09:52:32Z "Etudiant O'clock",,, <etudiant@teleporteur> # Add Tables
-insert_test_table 2020-11-16T10:57:54Z "Etudiant O'clock",,, <etudiant@teleporteur> # Add insert test in table
