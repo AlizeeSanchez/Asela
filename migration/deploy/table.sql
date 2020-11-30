@@ -199,7 +199,7 @@ CREATE TABLE "questionnaire_adopt" ( -- Questionnaire adoptant
     declawing BOOLEAN, -- Planifiez-vous faire dégriffer votre chat ?
     -----------------Question CHIEN---------------------
     race_pet VARCHAR (70), -- Race de l'animal
-    petstatus TEXT, -- Recherchez vous un animal : De compagnie, Pour vous même, Pour le travail,Pour garder la maison, Pour garder le terrain
+    petstatus TEXT, -- Recherchez vous un animal : De compagnie, Pour vous même, pour la chasse ,Pour le travail,Pour garder la maison, Pour garder le terrain.
     responsability TEXT, -- Qui, parmi les occupants de votre maison, aura les responsabilités suivantes : Education et balades.
     education2 TEXT, --Quelle méthode utiliserez vous l’éduquer et pour qu’il obéisse? Donnez des exemples.
     cage BOOLEAN, -- Avez-vous déjà utilisé une cage pour mettre fin à un comportement destructeur?
@@ -219,7 +219,7 @@ CREATE TABLE "questionnaire_adopt" ( -- Questionnaire adoptant
     --------------------RESERVE BENEVOLE-----------------------------
     date_sending DATE DEFAULT NOW() NOT NULL, -- Date d'envois du questionnaire
     pet_id int REFERENCES "pet"(id), -- Lier le questionnaire avec un animal en particulier
-    status TEXT DEFAULT 'En attente' NOT NULL, -- Status du questionnaire (En attente, Refusé, Sans suite, Rencontre, Adopté)
+    status TEXT DEFAULT 'En attente' NOT NULL, -- Status du questionnaire (En attente, Traité, Refusé, Sans suite, Rencontre, Adopté)
     meet DATE, --  Si rencontre : Date de la rencontre
     refused_comment TEXT, -- si refusé : commentaire
     general_comment TEXT -- commentaire en tout genre

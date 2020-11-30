@@ -6,7 +6,18 @@ const QuestionnaireAdopt = {
     //route pour check dans les questionnaires
     findAllQuestAdopt: async () => {
         try {
-            const questAdopt = await db.query('SELECT * FROM questionnaire_adopt');
+            const questAdopt = await db.query('SELECT questionnaire_adopt.id, questionnaire_adopt.status, questionnaire_adopt.email, questionnaire_adopt.number_phone FROM questionnaire_adopt');
+            return questAdopt.rows;
+        }
+        catch(error){
+            console.trace(error)
+        }
+    },
+
+    //route pour check un questionnaire
+    findOneQuestAdopt: async (id) => {
+        try {
+            const questAdopt = await db.query('SELECT * FROM questionnaire_adopt WHERE id = $1', [id]);
             return questAdopt.rows;
         }
         catch(error){
@@ -16,7 +27,7 @@ const QuestionnaireAdopt = {
 
     correspondenceQuest: async (questionnaire) => {
         try {
-            const questionnaireCorresp = await db.query('SELECT questionnaire_adopt.email, questionnaire_adopt.number_phone, questionnaire_adopt.date_sending ,questionnaire_adopt.type_pet, questionnaire_adopt.name_pet FROM questionnaire_adopt WHERE email = $1 OR number_phone = $2', [questionnaire.email, questionnaire.number_phone]);
+            const questionnaireCorresp = await db.query('SELECT questionnaire_adopt.id, questionnaire_adopt.email, questionnaire_adopt.number_phone, questionnaire_adopt.date_sending ,questionnaire_adopt.type_pet, questionnaire_adopt.name_pet FROM questionnaire_adopt WHERE email = $1 OR number_phone = $2', [questionnaire.email, questionnaire.number_phone]);
             return questionnaireCorresp.rows[0];
         }
         catch(error){
@@ -99,14 +110,134 @@ const QuestionnaireAdopt = {
             questionnaire.advertisement,
             questionnaire.free
         ]);
-        console.log("monconsole log de mon foutu questionnaire a ralonge :", questionnaire);
         return data.rows[0];
         }   
         catch (error) {
             console.trace(error);
         }
-    }
+    },
 
+    //1. MISE A JOUR : je veux entré toutes les questions concernant les chiens dans ma table et general_comment et remetre a NULL pet_id, meet, refused_comment + mettre date_sending a now()
+    updateCatToDog: async (questionnaire) => {
+        try{
+            const catToDog = await db.query(`UPDATE questionnaire_adopt SET type_pet = 'chien', name_pet = $1, race_pet = $2, petstatus = $3, responsability = $4, education2 = $5, cage = $6, cage2 = $7, absent = $8, present = $9, activity = $10, activity2 = $11, educator = $12, educator2 = $13, educator3 = $14, pet_id = NULL, refused_comment = NULL, date_sending = NOW() WHERE id = $15;`, [questionnaire.name_pet, questionnaire.race_pet,questionnaire.petstatus, questionnaire.responsability, questionnaire.education2, questionnaire.cage, questionnaire.cage2, questionnaire.absent, questionnaire.present, questionnaire.activity, questionnaire.activity2, questionnaire.educator, questionnaire.educator2, questionnaire.educator3, questionnaire.id]);
+            return catToDog;
+            
+        }
+        catch(error){
+            console.trace(error)
+        }
+    },
+    
+    //1. MISE A JOUR : je veux entré toutes les questions concernant les chats dans ma table et general_comment et remetre a NULL pet_id, meet, refused_comment + mettre date_sending a now()
+    updateDogToCat: async (questionnaire) => {
+        try{
+            const DogToCat = await db.query(`UPDATE questionnaire_adopt SET type_pet = 'chat', name_pet = $1, declawing = $2, pet_id = NULL, refused_comment = NULL, date_sending = NOW() WHERE id = $3;`, [questionnaire.name_pet, questionnaire.declawing, questionnaire.id]);
+            return DogToCat;
+        }
+        catch(error){
+            console.trace(error)
+        }
+    },
+
+    updateSame: async (questionnaire) => {
+        try{
+            const Same = await db.query(`UPDATE questionnaire_adopt SET name_pet = $1, pet_id = NULL, refused_comment = NULL, date_sending = NOW() WHERE id = $2;`, [questionnaire.name_pet, questionnaire.id]);
+            console.log(Same);
+            return Same;
+        }
+        catch(error){
+            console.trace(error)
+        }
+    },
+
+    //Supprimer 
+    suppQuest: async (quest) => {
+        try{
+        const suppQuest = await db.query('DELETE FROM questionnaire_adopt WHERE id = $1;',[quest])
+        }
+        catch (error) {
+            console.trace(error);
+        }
+        
+    },
+
+    // Commenter un questionnaire
+    updateQuest: async (quest) => {
+        try{
+            const upPet = await db.query(`UPDATE questionnaire_adopt SET pet_id = $1, status = $2, meet = $3, refused_comment = $4, general_comment = $5 WHERE id = $6`, [quest.pet_id, quest.status, quest.meet, quest.refused_comment, quest.general_comment, quest.id]);
+            console.log(quest.pet_id, quest.status, quest.meet, quest.refused_comment, quest.general_comment, quest.id);
+            return upPet;
+            
+        }catch(error){
+            console.trace(error);
+        }
+    },
+    
+    //afficher un questionnaire par son pet_id
+    findOneQuestAdoptByPetID: async (pet_id) => {
+        try {
+            const questAdoptPetId = await db.query('SELECT * FROM questionnaire_adopt WHERE pet_id = $1', [pet_id]);
+            return questAdoptPetId.rows;
+        }
+        catch(error){
+            console.trace(error)
+        }
+    },
+
+    //Afficher les questionnaires "En attentes"
+    findAllQuestAdoptWaiting: async () => {
+        try {
+            const questAdoptWaiting = await db.query(`SELECT * FROM questionnaire_adopt WHERE status = 'En attente'`);           
+            return questAdoptWaiting.rows;
+        }
+        catch(error){
+            console.trace(error)
+        }
+    },
+    
+    //Afficher les questionnaires Refusé
+    findAllQuestAdoptRefused: async () => {
+        try {
+            const questAdoptRefused = await db.query(`SELECT * FROM questionnaire_adopt WHERE status = 'Refusé'`);
+            return questAdoptRefused.rows;
+        }
+        catch(error){
+            console.trace(error)
+        }
+    },
+
+    //Sans suite
+    findAllQuestAdoptAbandonned: async () => {
+        try {
+            const questAdoptAbandonned = await db.query(`SELECT * FROM questionnaire_adopt WHERE status = 'Sans suite'`);
+            return questAdoptAbandonned.rows;
+        }
+        catch(error){
+            console.trace(error)
+        }
+    },
+   
+    //Passer les données d'un questionnairez adoption à "adoptant", on passe aussi le chien a "adopté = true" et on donne l'id de l'adoptant a l'animal
+    passQuestToAdoptant: async (quest) => {
+        try{
+            const addAdoptant = await db.query(`INSERT INTO adoptant (lastname, firstname, number_phone, postal_code, city, adress, email) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`,[quest[0].lastname, quest[0].firstname, quest[0].number_phone, quest[0].postal_code, quest[0].city, quest[0].adress, quest[0].email]);
+            return addAdoptant.rows;
+        }catch(error){
+            console.trace(error)
+        }
+    },
+    
+    //Passer les données d'un questionnaire adoption a "blacklister"
+    putOneQuestToBlacklist: async (quest) => {
+        try {
+            const questAdoptant = await db.query(`INSERT INTO blacklister (lastname, firstname, postal_code, number_phone, city, email, adress, explication) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *;`, [quest.lastname, quest.firstname, quest.postal_code, quest.number_phone, quest.city, quest.email, quest.adress, quest.explication]);
+            return questAdoptant.rows;
+        }catch(error){
+            console.trace(error)
+        }
+    }
+    
 }
 
 module.exports = QuestionnaireAdopt;

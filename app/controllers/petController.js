@@ -1,5 +1,6 @@
 const Pet = require("../models/Pet");
 const Host_family = require("../models/HostFamily");
+const QuestionnaireAdopt = require("../models/QuestionnaireAdopt");
 
 const petController = {
 
@@ -11,7 +12,6 @@ const petController = {
             const petHostFamilly = await Pet.findHostFamillyPet(petId);
             const petAdoptant = await Pet.findAdoptantPet(petId);
             if (pet) {
-                //charactPet = pet;
                 response.pet = pet;
                 response.hostFamilly = petHostFamilly;
                 response.adoptant = petAdoptant;
@@ -24,18 +24,36 @@ const petController = {
         }
     },
 
-    //Afficher un commentaire
-    findAllComment: async (request, response) => {
+    //Afficher tout les commentaires
+    findAllComment: async (request, response, next) => {
         try{
         const petId = parseInt(request.params.id);
         const comments = await Pet.findAllCommentPet(petId);
         console.log(comments)
             if (comments) {
+                response.comments = comments;
+                next();
+            } else {
+                response.status(404).json(`Cet animal n'existe pas.`);
+            }
+        }catch(error){
+            console.trace(error);
+        }
+    },
+
+    //Afficher tout les questionnaires de l'animal
+    findAllQuestAdoptForOnePet: async (request, response) => {
+        try{
+        const PetId = parseInt(request.params.id);
+        const questionnaire = await QuestionnaireAdopt.findOneQuestAdoptByPetID(PetId);
+        console.log(questionnaire)
+            if (questionnaire) {
                 const jason = {
                     pet: response.pet,
                     hostFamilly: response.hostFamilly,
                     adoptant: response.adoptant,
-                    comments: comments
+                    comments: response.comments,
+                    questionnaires: questionnaire
                 }
                 response.json(jason);
             } else {
@@ -84,6 +102,7 @@ const petController = {
             return response.status(500).json(error.toString());
         }
     },
+    
     
     //Modifier un animal
     editPet: async (request, response) => {

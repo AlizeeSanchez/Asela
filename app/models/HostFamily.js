@@ -117,6 +117,18 @@ const HostFamily = {
         }
 
     },
+
+    findAllPetFamillyHost: async (id) =>{
+        try{
+            const petHostFamily = await db.query('SELECT * FROM pet WHERE host_family_id = $1', [id]);
+            console.log('JE SUIS BIEN ENTREE',petHostFamily);
+            return petHostFamily.rows;
+            
+            
+        }catch(error){
+            console.trace(error)
+        }
+    }
 }
 
 module.exports = HostFamily;

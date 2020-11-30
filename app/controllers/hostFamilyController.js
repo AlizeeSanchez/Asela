@@ -34,15 +34,38 @@ const hostFamilyController = {
         }
     },
 
+    // ca recupere les animaux de la famille d'accueil
+    findAllPetFamillyHost: async (request, response, next) => {
+        try {
+            const petId = parseInt(request.params.id);
+            const petFamillyHost = await HostFamily.findAllPetFamillyHost(petId);
+            console.log('log de petFamille', petFamillyHost);
+            
+            if(petFamillyHost){
+                response.petFamillyHost = petFamillyHost;
+                next();
+            }else {
+                response.status(404).json(`L'animal numero ${petId} n'existe pas`);
+            }
+        }catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString());
+        }
+    },
+
+
     findAllCommentHostFamily: async (request, response) => {
         try{
             const commentHostFamily = await HostFamily.findAllCommentHostFamily();
             if(commentHostFamily){
                 const json = {
                     hostFamily: response.hostFamily,
-                    comments: commentHostFamily
+                    petFamillyHost: response.petFamillyHost,
+                    comments: commentHostFamily 
                 }
-                response.json(json);   
+                response.json(json); 
+                console.log(json);
+                  
                 
             } else {
                 response.status(404).json(`Il n'y a aucun commentaire pour cette famille d'acceuil trouvés.`);

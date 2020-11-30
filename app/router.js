@@ -7,13 +7,15 @@ const priceController = require('./controllers/priceController');
 const hostFamilyController = require('./controllers/hostFamilyController');
 const veterinaryController = require('./controllers/veterinaryController');
 const questionnaireAdoptController = require('./controllers/questionnaireAdoptController');
+const adoptantController = require('./controllers/adoptantController');
 
 const router = Router();
 
 //----------------------------------Routes chiens----------------------------
 
 //Route pour afficher notre back office des chiens
-router.get('/dogs', dogController.allPetsNotAdopted, dogController.allPetsAdopted)
+router.get('/dogs', dogController.allPetsNotAdopted)
+router.get('/dogsAdopt', dogController.allPetsAdopted)
 //Route pour ajouter un chien a l'adoption
 router.post('/dogs', dogController.addNewPet)
 //Route pour modifier le status d'un chien (a l'adoption ou non)
@@ -36,7 +38,7 @@ router.post('/suppCat/:id', catController.deleteCat)
 
 //----------------------------------Routes Animal----------------------------
 //route pour voir la fiche d'un animal
-router.get('/pet/:id', petController.findOnePet, petController.findAllComment)
+router.get('/pet/:id', petController.findOnePet, petController.findAllComment, petController.findAllQuestAdoptForOnePet)
 // Mise à jour  d'un animal
 router.patch('/pet/:id', petController.editPet)
 //Rechercher un animal
@@ -86,7 +88,7 @@ router.delete('/suppPrice/:id', priceController.suppPrice)
 // Route pour lister toute les familles d'acceuils
 router.get('/hostFamily', hostFamilyController.findAllHostFamily)
 // Route pour lister une seule famille d'acceuil via son id
-router.get('/hostFamily/:id', hostFamilyController.findOneHostFamily, hostFamilyController.findAllCommentHostFamily)
+router.get('/hostFamily/:id', hostFamilyController.findOneHostFamily, hostFamilyController.findAllPetFamillyHost ,hostFamilyController.findAllCommentHostFamily)
 // Route pour ajouter une famille d'acceuil
 router.post('/addHostFamily', hostFamilyController.addHostFamily)
 // Route pour supprimer une famille d'acceuil
@@ -122,6 +124,25 @@ router.delete('/deletePriceVeterinary/:id', veterinaryController.deletePriceVete
 router.patch('/editPriceVeterinary/:id', veterinaryController.editPriceVeterinary)
 
 //-------------------------------Route questionnaire--------------------------------
-router.get('/questionnaire', questionnaireAdoptController.responseQuest)
+router.post('/questionnaire', questionnaireAdoptController.responseQuest)
+
+//-------------------------------Route questionnaire BACK OFFICE--------------------------------
+router.delete('/questionnaire/:id', questionnaireAdoptController.suppQuest)
+router.get('/questionnaire/:id', questionnaireAdoptController.findOneQuestAdopt)
+router.patch('/questionnaire/:id', questionnaireAdoptController.attributeQuest)
+router.get('/questionnaireEnAttente', questionnaireAdoptController.findAllQuestAdoptWaiting)
+router.get('/questionnaireRefuse', questionnaireAdoptController.findAllQuestAdoptRefused)
+router.get('/questionnaireAbandonne', questionnaireAdoptController.findAllQuestAdoptSsSuite)
+router.post('/questionnaireAdoptant/:id', questionnaireAdoptController.passQuestToAdoptant)
+router.post('/questionnaireAdoptantToBlacklist/:id', questionnaireAdoptController.passAdoptantToBlacklist)
+
+//-----------------------------Route Adoptant---------------------------------------------------
+router.get('/adoptants', adoptantController.findAllAdoptant)
+router.get('/adoptant/:id',  adoptantController.findOneAdoptant, adoptantController.findAllPetAdoptant, adoptantController.findAllCommentAdoptant)
+router.post('/addCommentAdoptant/:id', adoptantController.commentAdoptant)
+router.delete('/deleteCommentAdoptant/:id', adoptantController.deleteCommentAdoptant)
+
+
+
 
 module.exports = router;
