@@ -1,0 +1,171 @@
+/*/-----------------------Page chiens----------------------------------------/*/
+
+body {
+    background-color: #F4EBE4
+}
+
+.Title-image {
+    display: flex;
+    background-color: #efe3b1;
+}
+
+h1.title {
+    color: darkred;
+    font-size: 3rem;
+    margin-left: 3rem;
+    margin-top: 70px;
+
+}
+
+.container {
+    max-width: 85%;
+}
+
+nav.navbar.navbar-light.subNavBar {
+    margin-top: 3rem;
+    width: 430px;
+    margin-left: 36rem;
+}
+
+a.module {
+    text-decoration: none;
+    color: white;
+}
+
+.bloc-article {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+article.article {
+    border-radius: 36px;
+    border: solid;
+    margin-right: 3rem;
+    margin-top: 3rem;
+    padding: 1.5rem;
+    margin-left: 3rem;
+    background-color: white;
+    width: 430px;
+    height: 280px;
+}
+
+header.header {
+    margin-bottom: 20px;
+}
+
+main.main {
+    margin-bottom: 30px;
+}
+
+ul.content {
+    list-style: none;
+    margin-left: -1.5rem;
+}
+
+h2.subTitle {
+    margin-top: -0.1rem;
+}
+
+.button-dog {
+    margin-bottom: -1.2rem;
+}
+
+/*------------------------------Page profil d'un animal----------------------------------------------------*/
+
+header.header-article {
+    border: solid;
+    border-radius: 36px;
+    background-color: white;
+    padding: 1.5rem;
+    width: 1100px;
+}
+
+a.badge.badge-primary {
+    font-size: 1rem;
+}
+
+a.badge.badge-warning {
+    font-size: 1rem;
+}
+
+a.badge.badge-info {
+    font-size: 1rem;
+}
+
+ul.liste-caract-pet {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+li.liste-pet {
+    width: 335px;
+    margin-top: 20px;
+}
+
+h2.Title-info-pet {
+    margin-top: 35px;
+}
+
+ul.liste-info-pet {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    border: solid;
+    border-radius: 36px;
+    background-color: white;
+    padding: 1.5rem;
+    width: 1100px;
+}
+
+li.info-pet {
+    width: 335px;
+    margin-top: 20px;
+}
+
+h2.Title-host-family {
+    margin-top: 35px;
+}
+
+ul.caract-host-family {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    border: solid;
+    border-radius: 36px;
+    background-color: white;
+    padding: 1.5rem;
+    width: 1100px;
+}
+
+li.liste_host-family {
+    width: 335px;
+    margin-top: 20px;
+}
+
+h2.Title-adoptant {
+    margin-top: 35px;
+}
+
+ul.caract-adoptant {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    border: solid;
+    border-radius: 36px;
+    background-color: white;
+    padding: 1.5rem;
+    width: 1100px;
+}
+
+li.liste-adoptant {
+    width: 335px;
+    margin-top: 20px;
+}
+
+h2.Title-comment {
+    margin-top: 35px;
+}
+
+
+
