@@ -1,0 +1,147 @@
+<%- include('partials/header') %>
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">FA GARD</a>
+    </li>
+    <li class="nav-item">
+          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">FA HERAULT</a>
+    </li>
+    <li class="nav-item">
+          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">FA AUTRE</a>
+    </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+    
+    
+
+<!-----------------------------------------------FA GARD------------------------------------------->
+
+<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+   
+  <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">NOM DE FAMILLE</th>
+          <th scope="col">PRENOM</th>
+          <th scope="col">TELEPHONE</th>
+          <th scope="col">CODE POSTAL</th>
+          <th scope="col">VILLE</th>
+          <th scope="col">ADRESSE</th>
+          <th scope="col">EMAIL</th>
+          <th scope="col">COMPOSITION FAMILLE</th>
+          <th scope="col">ANIMAL ACCEPTE</th>
+          <th scope="col">ANIMAL ACCUEILLI</th>
+        </tr>
+      </thead>
+      <tbody>
+  
+      <% for(let hostFamilyTab of allHostFamilly.gard){ %>
+  
+        <tr>
+          <td><%= hostFamilyTab.lastname %></td>
+          <td><%= hostFamilyTab.firstname %></td>
+          <td><%= hostFamilyTab.number_phone %></td>
+          <td><%= hostFamilyTab.postal_code %></td>
+          <td><%= hostFamilyTab.city %></td>
+          <td><%= hostFamilyTab.adress %></td>
+          <td><%= hostFamilyTab.email %></td>
+          <td><%= hostFamilyTab.pet_composition %></td>
+          <td><%= hostFamilyTab.pet_accepted %>
+          <td><%= hostFamilyTab.pet_asela %></td>
+        </tr>
+  
+        <% } %>
+  
+      </tbody>
+  </table>
+</div>
+<!--------------------------------------FA HERAULT----------------------------------------------->
+<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+   
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">NOM DE FAMILLE</th>
+            <th scope="col">PRENOM</th>
+            <th scope="col">TELEPHONE</th>
+            <th scope="col">CODE POSTAL</th>
+            <th scope="col">VILLE</th>
+            <th scope="col">ADRESSE</th>
+            <th scope="col">EMAIL</th>
+            <th scope="col">COMPOSITION FAMILLE</th>
+            <th scope="col">ANIMAL ACCEPTE</th>
+            <th scope="col">ANIMAL ACCUEILLI</th>
+          </tr>
+        </thead>
+        <tbody>
+    
+        <% for(let hostFamilyTab of allHostFamilly.herault){ %>
+    
+          <tr>
+            <td><%= hostFamilyTab.lastname %></td>
+            <td><%= hostFamilyTab.firstname %></td>
+            <td><%= hostFamilyTab.number_phone %></td>
+            <td><%= hostFamilyTab.postal_code %></td>
+            <td><%= hostFamilyTab.city %></td>
+            <td><%= hostFamilyTab.adress %></td>
+            <td><%= hostFamilyTab.email %></td>
+            <td><%= hostFamilyTab.pet_composition %></td>
+            <td><%= hostFamilyTab.pet_accepted %>
+            <td><%= hostFamilyTab.pet_asela %></td>
+          </tr>
+    
+          <% } %>
+    
+        </tbody>
+    </table>
+    </div>
+
+<!--------------------------------------FA AUTRE----------------------------------------------->
+<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">NOM DE FAMILLE</th>
+            <th scope="col">PRENOM</th>
+            <th scope="col">TELEPHONE</th>
+            <th scope="col">CODE POSTAL</th>
+            <th scope="col">VILLE</th>
+            <th scope="col">ADRESSE</th>
+            <th scope="col">EMAIL</th>
+            <th scope="col">COMPOSITION FAMILLE</th>
+            <th scope="col">ANIMAL ACCEPTE</th>
+            <th scope="col">ANIMAL ACCUEILLI</th>
+          </tr>
+        </thead>
+        <tbody>
+    
+        <% for(let hostFamilyTab of allHostFamilly.autre){ %>
+    
+          <tr>
+            <td><%= hostFamilyTab.lastname %></td>
+            <td><%= hostFamilyTab.firstname %></td>
+            <td><%= hostFamilyTab.number_phone %></td>
+            <td><%= hostFamilyTab.postal_code %></td>
+            <td><%= hostFamilyTab.city %></td>
+            <td><%= hostFamilyTab.adress %></td>
+            <td><%= hostFamilyTab.email %></td>
+            <td><%= hostFamilyTab.pet_composition %></td>
+            <td><%= hostFamilyTab.pet_accepted %>
+            <td><%= hostFamilyTab.pet_asela %></td>
+          </tr>
+    
+          <% } %>
+    
+        </tbody>
+    </table>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/js/app.js"></script>
+<script src="/js/hostfamily.js"></script>
+</body>

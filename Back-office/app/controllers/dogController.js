@@ -3,15 +3,14 @@ const Dog = require("../models/Dog");
 const dogController = {
 
     //On recupere les chiens a l'adoption
-    allPetsNotAdopted: async (request, response) => {
+    allPetsNotAdopted: async (request, response, next) => {
         try{
             const pets = await Dog.findPetNotAdopted();
             if (pets) {
-                response.render('dog', {
-                    pets
-                });
+                response.pets = pets;
+                next();
             } else {
-                response.status(404).json(`Il n'y a aucun animal à l'adoption en BDD.`);
+                 response.status(404).json(`Il n'y a aucun animal à l'adoption en BDD.`);
             }
         }
         catch(error){
@@ -21,11 +20,12 @@ const dogController = {
     },
 
     //On recupere les chiens adoptés
-    allPetsAdopted: async (request, response) => {
+    allPetsAdopted: async (request, response, next) => {
         try{
-            const pets = await Dog.findAllPetAdopt();
-            if (pets) {
-                response.json(pets);
+            const petsAdopt = await Dog.findAllPetAdopt();
+            if (petsAdopt) {
+                response.petsAdopt = petsAdopt;
+                next();
             } else {
                 response.status(404).json(`Il n'y a aucun animal qui a été adopté en bdd.`);
             }
@@ -36,8 +36,32 @@ const dogController = {
         }
     },
 
+    allPetsDeceaded: async (request, response) => {
+        try{
+            const petsDead = await Dog.findAllPetDeceaded();  
+            if (petsDead) {
+                const jason = {
+                    pets: response.pets,
+                    petsAdopt: response.petsAdopt,
+                    petsDead
+                }
+                console.log(response.petsAdopt);
+                response.render('dog', {
+                    jason
+                });
+            } else {
+                response.status(404).json(`Il n'y a aucun chien qui a été adopté en bdd.`);
+            }
+        }
+        catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString());
+        }
+    },
+
+
     //On passe l'adoption a true quand un chien est disponible à l'adoption.
-    petStateAdoption: async (request, response) => {
+    petStateSitePublish: async (request, response) => {
         try{
             const petId = parseInt(request.params.id);
             const pet = await Dog.findOnePet(petId);
@@ -61,23 +85,25 @@ const dogController = {
 
     //Ajouter un chien à l'adoption
     addNewPet: async (request, response) => {
-        console.log(request.body);
         try{
+            //console.log('Je suis dans mon controller et je recois:', request.body);
             //Test si tous les champs sont renseignés
-            if(request.body.name && request.body.age && request.body.sexe && request.body.description){
+            if(request.body.eventName && request.body.eventAge && request.body.eventSexe && request.body.eventDescription){
                 
                 // On recupere toutes les données envoyées par le body
                 const pet = {
                     type: 'chien',
-                    name: request.body.name,
-                    age: request.body.age,
-                    amity: request.body.amity,
-                    sexe: request.body.sexe,
-                    breed: request.body.breed,
-                    ide: request.body.ide,
-                    sterilised: request.body.sterilised,
-                    description: request.body.description,
-                    weight: request.body.weight
+                    name: request.body.eventName,
+                    age: request.body.eventAge,
+                    sexe: request.body.eventSexe,
+                    breed: request.body.eventRace,
+                    amity: request.body.eventAmity,
+                    color: request.body.eventColor,
+                    weight: request.body.eventWeight,
+                    ide: request.body.eventIde,
+                    sterilised: request.body.eventSterilised,
+                    date_vaccine: request.body.eventVaccineDate,
+                    description: request.body.eventDescription,    
                 };
                  //on transmet les informations de l'animal a la fonction addNewPet et on lui envois notre animal recuperer precedemment
                  const savePet = await Dog.addNewPet(pet);
@@ -99,7 +125,7 @@ const dogController = {
        try{
           const petId = parseInt(request.params.id);
           const pet = await Dog.findOnePet(petId);
-          console.log(pet.supp);
+          console.log(pet);
           if(pet){
               const pet = await Dog.suppPet(petId)
               response.json('Cet animal a été supprimé avec succès.')

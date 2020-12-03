@@ -52,15 +52,16 @@ CREATE TABLE "pet" (
     date_vaccine DATE, --date du dernier vaccin
     description TEXT, --description de l'animal
     weight TEXT, --taille de l'animal
-    host_family_id int DEFAULT NULL REFERENCES "host_family"(id), --Id de la famille d'accueil
+    host_family_id int DEFAULT NULL REFERENCES "host_family"(id) ON DELETE SET NULL, --Id de la famille d'accueil
     adopt BOOLEAN DEFAULT false, -- Si l'animal est adopté
     date_adopting DATE DEFAULT NULL , --Date de l'adoption
-    adoptant_id int DEFAULT NULL REFERENCES "adoptant"(id), -- id de l'adoptant
+    adoptant_id int DEFAULT NULL REFERENCES "adoptant"(id) ON DELETE SET NULL, -- id de l'adoptant
     last_name_pet VARCHAR(50), -- Nom de l'animal donné par l'adoptant (si changement)
     facebook_publish BOOLEAN DEFAULT false,--Publié sur facebook
     seconde_chance_publish BOOLEAN DEFAULT false,--Publié sur seconde chance
     reserve BOOLEAN DEFAULT false,--Reservé
-    deceased BOOLEAN DEFAULT false --Si l'animal est décédé
+    deceased BOOLEAN DEFAULT false, --Si l'animal est décédé
+    site_publish BOOLEAN DEFAULT TRUE -- Si un animal est publié ou non sur le site
 );
 
 CREATE TABLE "veterinary" (
@@ -106,36 +107,36 @@ CREATE TABLE "price_adopt"(
 CREATE TABLE "picture_pet"(
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     title VARCHAR (50) NOT NULL,
-    pet_id INT NOT NULL REFERENCES "pet"(id)
+    pet_id INT NOT NULL REFERENCES "pet"(id) ON DELETE CASCADE
 );
 
 CREATE TABLE "picture_event"(
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     title TEXT NOT NULL,
-    event_id INT NOT NULL REFERENCES "event"(id)
+    event_id INT NOT NULL REFERENCES "event"(id) ON DELETE CASCADE
 );
 
 CREATE TABLE "commentaire_pet"( -- Commentaire au sujet d'un animal
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    pet_id int NOT NULL REFERENCES "pet"(id),
+    pet_id int NOT NULL REFERENCES "pet"(id) ON DELETE CASCADE,
     commentaire TEXT NOT NULL
 );
 
 CREATE TABLE "commentaire_host_familly" (-- Commentaire au sujet d'une famille d'accueil
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    host_family_id int NOT NULL REFERENCES "host_family"(id),
+    host_family_id int NOT NULL REFERENCES "host_family"(id) ON DELETE CASCADE,
     commentaire TEXT NOT NULL 
 );
 
 CREATE TABLE "commentaire_adoptant" ( --Commentaire au sujet d'un adoptant
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    adoptant_id int NOT NULL REFERENCES "adoptant"(id),
+    adoptant_id int NOT NULL REFERENCES "adoptant"(id) ON DELETE CASCADE,
     commentaire TEXT NOT NULL
 );
 
 CREATE TABLE "price_veterinary" (-- Prix et arrangement avec veterinaire
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    veterinary_id int NOT NULL REFERENCES "veterinary"(id),
+    veterinary_id int REFERENCES "veterinary"(id) ON DELETE CASCADE,
     price TEXT NOT NULL
 );
 
@@ -217,7 +218,7 @@ CREATE TABLE "questionnaire_adopt" ( -- Questionnaire adoptant
     free VARCHAR (500), -- Si vous avez d'autre element dont vous souhaitez nous faire part c'est ici 
     --------------------RESERVE BENEVOLE-----------------------------
     date_sending DATE DEFAULT NOW() NOT NULL, -- Date d'envois du questionnaire
-    pet_id int REFERENCES "pet"(id), -- Lier le questionnaire avec un animal en particulier
+    pet_id int REFERENCES "pet"(id) ON DELETE SET NULL, -- Lier le questionnaire avec un animal en particulier
     status TEXT DEFAULT 'En attente' NOT NULL, -- Status du questionnaire (En attente, Refusé, Sans suite, Rencontre, Adopté)
     meet DATE, --  Si rencontre : Date de la rencontre
     refused_comment TEXT, -- si refusé : commentaire

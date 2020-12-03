@@ -5,7 +5,7 @@ const Cat = {
     //On recupere les chats a l'adoption
     findCatNotAdopted: async () => {
         try{
-            const cats = await db.query("SELECT * FROM pet WHERE adopt = false AND deceased = false AND type = 'chat';");   
+            const cats = await db.query("SELECT * FROM pet WHERE adopt = false AND deceased = false AND type = 'chat' ORDER BY id;");   
             return cats.rows;
         }catch (error){
             console.trace(error);
@@ -15,7 +15,7 @@ const Cat = {
     //On recupere les chats adoptés
     findCatAdopted: async () => {
         try{
-            const cats = await db.query("SELECT * FROM pet WHERE adopt = true AND type = 'chat';");
+            const cats = await db.query("SELECT * FROM pet WHERE adopt = true AND type = 'chat' ORDER BY id;");
             return cats.rows;
         }catch (error){
             console.trace(error);
@@ -24,7 +24,7 @@ const Cat = {
 
     findOneCat: async (id) => {
         try{
-            const cat = await db.query("SELECT * FROM pet WHERE id = $1", [id]);
+            const cat = await db.query("SELECT * FROM pet WHERE id = $1 ORDER BY id;", [id]);
             return cat.rows[0]
         }catch (error){
             console.trace(error);
@@ -34,7 +34,7 @@ const Cat = {
     //On passe l'adoption a true quand un chat viens d'être adopté
     adoptCatIsTrue: async (id) => {
         try{
-            const editCat = await db.query(`UPDATE pet SET adopt = true WHERE id = $1 AND type = 'chat'`, [id])
+            const editCat = await db.query(`UPDATE pet SET adopt = true WHERE id = $1 AND type = 'chat';`, [id])
             return editCat.rows;
         }
         catch(error){
@@ -46,7 +46,7 @@ const Cat = {
     //On passe l'adoption a false si un chat est de retour d'adoption
     adoptCatIsFalse: async (id) => {
         try{
-            const editCat = await db.query(`UPDATE pet SET adopt = false WHERE id = $1 AND type = 'chat'`, [id])
+            const editCat = await db.query(`UPDATE pet SET adopt = false WHERE id = $1 AND type = 'chat';`, [id])
             return editCat.rows;
         }
         catch(error){
@@ -87,6 +87,18 @@ const Cat = {
             console.trace(error)
         }
     },
+
+    findAllCatDeceaded: async () => {
+        try{
+            const pets = await db.query(
+                "SELECT * FROM pet WHERE deceased = true AND type = 'chat' ORDER BY id;"
+            );
+            return pets.rows;
+        }catch (error){
+            console.trace(error);
+        }
+    },
+
 };
 
 module.exports = Cat;

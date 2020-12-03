@@ -2,6 +2,36 @@ const db = require("../database");
 
 const HostFamily = {
 
+    //On recupere les fa par departement du Gard
+    findHostFamilyByDpt30: async () => {
+        try{
+            const hostFamily30 = await db.query("SELECT * FROM host_family WHERE postal_code ~* '3[0][0-9]{3}';");   
+            return hostFamily30.rows
+        }catch (error){
+            console.trace(error);
+        }
+    },
+
+    //On recupere les fa par departement de l'herault
+    findHostFamilyByDpt34: async () => {
+        try{
+            const hostFamily34 = await db.query("SELECT * FROM host_family WHERE postal_code ~* '3[4][0-9]{3}';");   
+            return hostFamily34.rows;
+        }catch (error){
+            console.trace(error);
+        }
+    },
+
+    //On recupere les fa par departement du vaucluse
+    findHostFamilyByDptAutre: async () => {
+        try{
+            const hostFamilyAutre = await db.query("SELECT * FROM host_family WHERE postal_code ~* '[0][1-9][0-9]{3}|[1-2][0-9][0-9]{3}|[3][1-3][0-9]{3}|[3][5-9][0-9]{3}|[4-9][0-9][0-9]{3}';");   
+            return hostFamilyAutre.rows;
+        }catch (error){
+            console.trace(error);
+        }
+    },
+
     //On recupere les familles d'acceuils
     findAllHostFamily: async () => {
         try{

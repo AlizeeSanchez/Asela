@@ -7,7 +7,7 @@ const Condition = {
     findCondition: async () => {
         try{
             const condition = await db.query(
-                "SELECT * FROM condition_adopt;"
+                "SELECT * FROM condition_adopt ORDER BY id;"
          );
             return condition.rows;
         }catch (error){
@@ -19,7 +19,7 @@ const Condition = {
     findOneCondition: async (id) => {
         try{
             const condition = await db.query(
-                "SELECT * FROM condition_adopt WHERE id = $1;", [id]
+                "SELECT * FROM condition_adopt WHERE id = $1 ORDER BY id;", [id]
             );
             console.log(condition);
             return condition.rows[0];

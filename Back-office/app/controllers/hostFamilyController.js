@@ -1,71 +1,45 @@
 const HostFamily = require("../models/HostFamily");
 
 const hostFamilyController = {
-    
-    findAllHostFamily: async (request, response) => {
+
+    //On trie par dpt les familles d'acceuil
+
+    findHostFamilyByDpt: async (request, response, next) => {
         try{
             const hostFamily = await HostFamily.findAllHostFamily();
+            const hostFamilyGard = await HostFamily.findHostFamilyByDpt30();
+            const hostFamilyHerault = await HostFamily.findHostFamilyByDpt34();
+            const hostFamilyAutre = await HostFamily.findHostFamilyByDptAutre();
+
             if(hostFamily){
-                response.json(hostFamily);
-                
-            } else {
-                response.status(404).json(`Il n'y a aucune famille d'acceuil trouvés.`);
+                    response.hostFamilyGard = hostFamilyGard;
+                    response.hostFamilyHerault = hostFamilyHerault;
+                    response.hostFamilyAutre = hostFamilyAutre;            
+                    next();
             }
-        }
-        catch(error){
-            console.trace(error)
-            return response.status(500).json(error.toString());
-        }
-    },
 
-    findOneHostFamily: async (request, response, next) => {
-        try{
-            const hostFamilyId = parseInt(request.params.id);
-            const hostFamily = await HostFamily.findOneHostFamily(hostFamilyId);
-            if(hostFamily){
-                response.hostFamily = hostFamily;
-                next();
-            }else {
-                response.status(404).json(`la famille d'acceuil numéro ${catId} n'existe pas`)
-            }
-        }catch(error){
-            console.trace(error)
-            return response.status(500).json(error.toString());
-        }
-    },
-
-    // ca recupere les animaux de la famille d'accueil
-    findAllPetFamillyHost: async (request, response, next) => {
-        try {
-            const petId = parseInt(request.params.id);
-            const petFamillyHost = await HostFamily.findAllPetFamillyHost(petId);
-            console.log('log de petFamille', petFamillyHost);
-            
-            if(petFamillyHost){
-                response.petFamillyHost = petFamillyHost;
-                next();
-            }else {
-                response.status(404).json(`L'animal numero ${petId} n'existe pas`);
-            }
-        }catch(error){
-            console.trace(error)
-            return response.status(500).json(error.toString());
-        }
-    },
-
+            else {
+                 response.status(404).json('Il n\'y a aucune famille d\'acceuil dans ces departements')
+             }
+        }catch (error){
+            console.trace(error);
+        } 
+    }, 
 
     findAllCommentHostFamily: async (request, response) => {
         try{
             const commentHostFamily = await HostFamily.findAllCommentHostFamily();
             if(commentHostFamily){
-                const json = {
-                    hostFamily: response.hostFamily,
-                    petFamillyHost: response.petFamillyHost,
+                const allHostFamilly = {
+                    gard: response.hostFamilyGard,
+                    herault: response.hostFamilyHerault,
+                    autre: response.hostFamilyAutre,
                     comments: commentHostFamily 
                 }
-                response.json(json); 
-                console.log(json);
-                  
+                response.render('hostFamily',{
+                    allHostFamilly
+                });
+                console.log(allHostFamilly);      
                 
             } else {
                 response.status(404).json(`Il n'y a aucun commentaire pour cette famille d'acceuil trouvés.`);

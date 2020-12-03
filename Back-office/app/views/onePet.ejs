@@ -1,0 +1,178 @@
+<%- include('partials/header') %>
+
+<div class="container">
+<main class="main-article">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="Title"><%= jason.pet.name %>
+                <%if(jason.pet.adopt === true){%>
+                    <span class="Title-new-name-pet"> (<%= jason.pet.last_name_pet %>)</span>
+                </h1>
+                <%}%> 
+        </div>
+
+        <div class="card-body">
+            <div class="mybuttons">
+                <a href="#" class="badge badge-primary">Facebook</a>
+                <a href="#" class="badge badge-warning">Seconde chance</a>
+                <a href="#" class="badge badge-info">ASELA</a>
+            </div>
+            <div class="row">
+
+                <div class="col-sm-8"> 
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="information-pet">
+                                        <h5>Race:</h5>
+                                        <p><%= jason.pet.breed %></p>
+                                    </div>
+                                    <div class="information-pet">
+                                        <h5>Age:</h5>
+                                        <p><%= jason.pet.age %></p>
+                                    </div>
+                                    <div class="information-pet">
+                                        <h5>Ententes:</h5>
+                                        <p><%= jason.pet.amity %></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="information-pet">
+                                        <h5>Sexe:</h5>
+                                        <p><%= jason.pet.sexe %></p>
+                                    </div>
+                                    <div class="information-pet">
+                                        <h5>Robe:</h5>
+                                        <p><%= jason.pet.color %></p>
+                                    </div>
+                                    <div class="information-pet">
+                                        <h5>Taille:</h5>
+                                        <p><%= jason.pet.weight %></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <h5>Description:</h5>
+                                    <p><%# jason.pet.description %>Santo est une grosse boule de poil débordante d'amour, il aime serrer ses pattes autour de la taille de son humain pour le caliner, il est un peu brusque de par sa grande taille mais il est vraiment adorable ! Avec ses congénères il ne semble pas agressif, déjà confronté plusieurs fois à d'autres chiens, notamment lors d'une balade où deux chiens sont venus à sa rencontre, il n'a pas levé une babine, au contraire il a remué la queue et s'est présenté gentiment à eux lors de la séance reniflement. Il côtoie d'autres chiens au quotidien au travers de son enclos, pareil pour les chats. Il aura besoin d'un jardin ou de balade régulière pour se dépenser.</p>
+                                </div>
+                            </div>
+                        </div>               
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="card">
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100" src="/img/Santo.jpg" alt="First slide">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="/img/Hashtag.jpg" alt="Second slide">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="/img/Nouba.jpg" alt="Third slide">
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            Featured
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            Featured
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    -------------------------------------------Ancien-------------------------------------------
+
+    <main class="main-article">
+        <article class="info-pet">
+            <main class="main-article-pet">
+                <h2 class="Title-info-pet">Informations importantes</h2>
+                <ul class="liste-info-pet">
+                    <li class="info-pet">Prise en charge: <%= jason.pet.date_supported %></li>
+                    <li class="info-pet">Identification: <%= jason.pet.ide %></li>
+                    <li class="info-pet">Stérilisation: <%= jason.pet.sterilised %></li>
+                    <li class="info-pet">Vacciné: <%= jason.pet.date_vaccine %></li>
+                    <li class="info-pet">Dernier vaccin: <%= jason.pet.date_vaccine %></li>
+                </ul>
+            </main>
+        </article>
+        <aside class="info-host-family">
+            <h2 class="Title-host-family">Famille d'acceuil</h2>
+            <ul class="caract-host-family">
+                <li class="liste_host-family">Nom: <%# jason.hostFamilly[0].lastname %></li>
+                <li class="liste_host-family">Prénom: <%# jason.hostFamilly[0].firstname %></li>
+                <li class="liste_host-family">Adresse: <%# jason.hostFamilly[0].adress %></li>
+                <li class="liste_host-family">Code postal: <%# jason.hostFamilly[0].postal_code %></li>
+                <li class="liste_host-family">Ville: <%# jason.hostFamilly[0].city %></li>
+                <li class="liste_host-family">Téléphone: <%# jason.hostFamilly[0].number_phone %></li>
+                <li class="liste_host-family">Email: <%# jason.hostFamilly[0].email %></li>
+            </ul>
+        </aside>
+        <aside class="info-adoptant">
+            <h2 class="Title-adoptant">Adoption</h2>
+            <% if(jason.adoptant) { %>
+            <ul class="caract-adoptant">
+                <li class="liste-adoptant">Date d'adoption: <%= jason.pet.date_adopting %></li>
+                <li class="liste-adoptant">Adoptant :</li>
+                <li class="liste-adoptant">Nom: : <%= jason.adoptant[1]%></li>
+                <li class="liste-adoptant">Prénom: <%= jason.adoptant[1] %></li>
+                <li class="liste-adoptant">Adresse: <%= jason.adoptant[1] %></li>
+                <li class="liste-adoptant">Code postal: <%= jason.adoptant[1] %></li>
+                <li class="liste-adoptant">Ville: <%= jason.adoptant[1] %></li>
+                <li class="liste-adoptant">Téléphone: <%= jason.adoptant[1] %></li>
+                <li class="liste-adoptant">Email: <%= jason.adoptant[1] %></li>
+            </ul>
+            <% } %>
+        </aside>
+        <% if(jason.comments) { %>
+        <article class="comment-article">
+            <h2 class="Title-comment">Commentaire <%= jason.comments[2] %></h2>
+            <p class="content"><%= jason.comments[2] %></p>
+        </article>
+        <% } %>
+
+        <% if(jason.questionnaire) { %>
+            <article class="comment-article">
+                <h2 class="Title-comment">questionnaire <%= jason.questionnaire[2] %></h2>
+                <p class="content"><%= jason.questionnaire[2] %></p>
+            </article>
+        <% } %>
+
+    </main>
+</main>
+</div>
+<script src="/js/app.js"></script>
+<script src="/js/dog.js">
+</script>

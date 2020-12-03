@@ -91,7 +91,7 @@ const Pet = {
     //Modifier un animal
     editPet: async (pet) => {
         try{
-            const editpet = await db.query(`UPDATE pet SET date_supported = $1, name = $2, age = $3, amity = $4, sexe = $5, breed = $6, color = $7, ide = $8, sterilised = $9, date_vaccine = $10, description = $11, weight = $12, WHERE id = $13;`, [pet.date_supported, pet.name, pet.age, pet.amity, pet.sexe, pet.breed, pet.color, pet.ide, pet.sterilised, pet.date_vaccine, pet.description, pet.weight, pet.id]);
+            const editpet = await db.query(`UPDATE pet SET date_supported = $1, name = $2, age = $3, amity = $4, sexe = $5, breed = $6, color = $7, ide = $8, sterilised = $9, date_vaccine = $10, description = $11, weight = $12 WHERE id = $13;`, [pet.date_supported, pet.name, pet.age, pet.amity, pet.sexe, pet.breed, pet.color, pet.ide, pet.sterilised, pet.date_vaccine, pet.description, pet.weight, pet.id]);
             return editpet;
         }
         catch(error){
@@ -220,6 +220,29 @@ const Pet = {
             console.trace(error)
         }
 
+    },
+
+    //On passe l'animal à publié sur FB si true 
+    publishSiteIsTrue: async (id) => {
+        try{
+            const publishpet = await db.query('UPDATE pet SET site_publish = true WHERE id = $1;', [id])
+            return publishpet.rows;
+        }
+        catch(error){
+            console.trace(error)
+        }
+
+    },
+
+    //On passe l'animal à non publié sur FB si false
+    publishSiteIsFalse: async (id) => {
+        try{
+            const publishpet = await db.query('UPDATE pet SET site_publish = false WHERE id = $1 ;', [id])
+            return publishpet.rows;
+        }
+        catch(error){
+            console.trace(error)
+        }
     },
 
     //Signaler qu'un animal est reservé

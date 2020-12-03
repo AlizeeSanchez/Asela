@@ -22,8 +22,7 @@ const veterinaryController = {
              }
         }catch (error){
             console.trace(error);
-        }
-        
+        } 
     }, 
     
     addVeterinary: async (request, response) => {

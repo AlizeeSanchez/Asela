@@ -48,19 +48,16 @@ const petController = {
         try{
         const PetId = parseInt(request.params.id);
         const questionnaire = await QuestionnaireAdopt.findOneQuestAdoptByPetID(PetId);
-        console.log(questionnaire)
             if (questionnaire) {
                 const jason = {
                     pet: response.pet,
                     hostFamilly: response.hostFamilly,
                     adoptant: response.adoptant,
                     imgPet: response.img,
-                    comments: comments,
-                    questionnaires: questionnaire
+                    comments: response.comments,
+                    questionnaire
                 }
-                console.log(jason);
-                
-                response.render('oneDog', {
+                response.render('onePet', {
                     jason
                 });
             } else {
@@ -115,30 +112,36 @@ const petController = {
     editPet: async (request, response) => {
         try {
             const petId = parseInt(request.params.id);
-            const pet = await Pet.findOnePet(petId);
+            //console.log('premier', petId);
             
+            const pet = await Pet.findOnePet(petId);
+            //console.log('second', pet);
             if (pet){
-                console.log('mon body', request.body)
+                console.log('mon body qui arrive dans mon controller:', pet.id,request.body);
                 if (request.body){
                     const editPet = {
                         id: pet.id,
-                        date_supported: request.body.date_supported,
-                        name: request.body.name,
-                        age: request.body.age,
-                        amity: request.body.amity,
-                        sexe: request.body.sexe,
-                        breed: request.body.breed,
-                        color: request.body.color,
-                        ide: request.body.ide,
-                        date_vaccine: request.body.date_vaccine,
-                        sterilised: request.body.sterilised,
-                        description: request.body.description,
-                        weight: request.body.weight,
+                        date_supported: request.body.eventDate_supported,
+                        name: request.body.eventName,
+                        age: request.body.eventAge,
+                        amity: request.body.eventAmity,
+                        sexe: request.body.eventSexe,
+                        breed: request.body.eventBreed,
+                        color: request.body.eventColor,
+                        ide: request.body.eventIde,
+                        date_vaccine: request.body.eventDate_vaccine,
+                        sterilised: request.body.eventSterilised,
+                        description: request.body.eventDescription,
+                        weight: request.body.eventWeight,
                     };
-                    console.log('log', editPet)
+                    editPet.date_supported === Date.parse(editPet.date_supported, 'D M YYYY');
+                    editPet.date_vaccine === Date.parse(editPet.date_vaccine, 'D M YYYY');
+                    console.log('troisieme', editPet)
                     //on transmet les informations de l'animal à la fonction editPet
                     await Pet.editPet(editPet);
                     response.status(200).json({editPet});
+                    //console.log('quatrieme apres l\'await', editPet);
+                    
                 } else {
                     response.status(404).json('Il n\' y a rien à modifier');
                 }
@@ -297,6 +300,28 @@ const petController = {
             if(pet.seconde_chance_publish === true){
                 const petTrue = await Pet.publishSecondeChanceIsFalse(petId);
                 response.json('Cet animal n\'est pas publié sur seconde chance');
+            } else {
+                response.status(404).json(`Cet animal n'existe pas.`);
+            }
+        }
+        catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString());
+        }
+    },
+
+    //On passe l'adoption a true quand un chien est disponible à l'adoption.
+    petSitePublish: async (request, response) => {
+        try{
+            const petId = parseInt(request.params.id);
+            const pet = await Pet.findOnePet(petId);
+            if(pet.site_publish === false){
+                const petFalse = await Pet.publishSiteIsTrue(petId);
+                response.json({petFalse, TEXT:'Cet animal est disponible a l\'adoption'});
+            }
+            else if(pet.site_publish === true){
+                const petTrue = await Pet.publishSiteIsFalse(petId);
+                response.json({petTrue, TEXT:'Cet animal n\'est pas disponible a l\'adoption'});
             } else {
                 response.status(404).json(`Cet animal n'existe pas.`);
             }

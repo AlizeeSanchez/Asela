@@ -3,16 +3,15 @@ const Cat = require("../models/Cat");
 const catController = {
 
 
-    //On liste les chats a l'adoption
-    allCatsNotAdopted: async (request, response) => {
+    //On recupere les chiens a l'adoption
+    allPetsNotAdopted: async (request, response, next) => {
         try{
-            const cats = await Cat.findCatNotAdopted();
-            if(cats){
-                response.render('cat', {
-                    cats
-                });
+            const pets = await Cat.findCatNotAdopted();
+            if (pets) {
+                response.pets = pets;
+                next();
             } else {
-                response.status(404).json(`Il n'y a aucun chats trouvés qui ne sont pas adoptés.`);
+                 response.status(404).json(`Il n'y a aucun animal à l'adoption en BDD.`);
             }
         }
         catch(error){
@@ -21,14 +20,38 @@ const catController = {
         }
     },
 
-    //On liste les chats adoptésss
-    allCatsAdopted: async (request, response) => {
+    //On recupere les chiens adoptés
+    allPetsAdopted: async (request, response, next) => {
         try{
-            const cats = await Cat.findCatAdopted();
-            if (cats) {
-                response.json(cats);
+            const petsAdopt = await Cat.findCatAdopted();
+            if (petsAdopt) {
+                response.petsAdopt = petsAdopt;
+                next();
             } else {
-                response.status(404).json(`Il n'y a aucun chats trouvés qui sont adoptés.`);
+                response.status(404).json(`Il n'y a aucun animal qui a été adopté en bdd.`);
+            }
+        }
+        catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString());
+        }
+    },
+
+    allPetsDeceaded: async (request, response) => {
+        try{
+            const petsDead = await Cat.findAllCatDeceaded();  
+            if (petsDead) {
+                const jason = {
+                    pets: response.pets,
+                    petsAdopt: response.petsAdopt,
+                    petsDead
+                }
+                console.log(response.petsAdopt);
+                response.render('cat', {
+                    jason
+                });
+            } else {
+                response.status(404).json(`Il n'y a aucun chat qui a été adopté en bdd.`);
             }
         }
         catch(error){

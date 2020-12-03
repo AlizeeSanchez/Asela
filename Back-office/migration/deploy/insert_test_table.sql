@@ -25,6 +25,9 @@ VALUES ('Le Boudouil', 'Sophie', 'O687388358', '30230', 'Bouillargues', '1300 Ch
        ('Soutoul', 'Anna', '0784515210', '34170', 'Castelnau Le Lez', '4 imp puits de cours', 'anna.sout@outlook.fr', 'Chats et chiens','Chiens et chats'),
        ('Roger', 'Gabriel', '0675953598', '34000', 'Montpellier', '130 av de palavas', 'gabriel395@hotmail.fr', '2 Chats','Chien');
 
+---------------------ADOPTANTS--------------------------------
+INSERT INTO "adoptant" ("lastname", "firstname", "number_phone", "postal_code", "city", "adress", "email")
+VALUES ('Sanchez', 'Alizée', '0781025042', '34170', 'Castelanu Le Lez', '18 rue des genets', 'alizee.sanchez0882@hotmail.fr');
 
 ------------------- ANIMAUX -----------------------
 
@@ -112,6 +115,5 @@ VALUES ('Ne pas lui infliger de mauvais traitements et lui fournir l''attention 
 
 -------------------Famille d'accueil chien--------------------
 
-UPDATE pet SET host_family_id = 1 WHERE id = 7;
 
 COMMIT;
