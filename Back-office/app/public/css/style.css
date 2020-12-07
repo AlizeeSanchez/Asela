@@ -1,3 +1,4 @@
+
 /*-----------------------Nav de choix----------------------------------------*/
 
 .nav-tabs {
@@ -164,6 +165,27 @@ footer.Multi-button {
     border-radius: .25rem;
 }
     
+/*---------------------------Page profil Animal NEW --------------------------------*/
+
+.information-pet {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-header {
+    font-weight: bold;
+}
+
+h6 {
+    font-weight: bold;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+
 /*---------------------------Page profil Animal --------------------------------*/
 .row {
     place-content: center;
@@ -270,7 +292,7 @@ h2.Title-comment {
     position: relative;
     max-width: 20vw;
     align-self: center;
-    margin-top: 1rem;
+    margin: 1rem 0;
 }
   /*-------------------------------------Modal--------------------------------------*/
 
@@ -278,4 +300,43 @@ h2.Title-comment {
     display: none;
 }
 
-  
+/*----------------------------------------Tableaux ---------------------------------------*/
+
+/*thead {
+    table-layout: fixed;    Same layout for all cells
+    
+}
+
+tbody tr {
+    table-layout: fixed;    Same layout for all cells
+   
+}
+ 
+thead {
+    display: table;
+    table-layout:fixed;
+}
+
+tbody {
+    display: block;
+    height: 50em;
+    overflow-y: scroll;
+}
+tbody tr {
+    display: table;
+    table-layout:fixed;
+}
+th, td {
+
+    border: 1px solid;
+    width: calc(15vw - 1rem);
+}*/
+
+.tableFixHead { overflow-y: auto; height: 100vh; }
+
+/* Just common table stuff. */
+table  { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 16px; }
+th     { background:#eee; }
+
+

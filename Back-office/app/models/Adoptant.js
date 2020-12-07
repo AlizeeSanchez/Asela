@@ -6,7 +6,7 @@ const AdoptantModels = {
     //route pour check dans les questionnaires
     findAllAdoptant: async () => {
         try {
-            const adoptants = await db.query('SELECT * FROM adoptant ORDER BY id');
+            const adoptants = await db.query('SELECT adoptant.id, adoptant.lastname, adoptant.firstname, adoptant.postal_code, adoptant.city, adoptant.email, adoptant.adress, pet.name  FROM adoptant JOIN pet ON adoptant.id = pet.adoptant_id ORDER BY pet.name');
             return adoptants.rows;
         }
         catch(error){

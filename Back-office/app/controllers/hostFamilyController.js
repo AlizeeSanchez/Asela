@@ -4,7 +4,7 @@ const hostFamilyController = {
 
     //On trie par dpt les familles d'acceuil
 
-    findHostFamilyByDpt: async (request, response, next) => {
+    findHostFamilyByDpt: async (request, response) => {
         try{
             const hostFamily = await HostFamily.findAllHostFamily();
             const hostFamilyGard = await HostFamily.findHostFamilyByDpt30();
@@ -12,10 +12,15 @@ const hostFamilyController = {
             const hostFamilyAutre = await HostFamily.findHostFamilyByDptAutre();
 
             if(hostFamily){
-                    response.hostFamilyGard = hostFamilyGard;
-                    response.hostFamilyHerault = hostFamilyHerault;
-                    response.hostFamilyAutre = hostFamilyAutre;            
-                    next();
+                const allHostFamilly = {
+                    gard: hostFamilyGard,
+                    herault: hostFamilyHerault,
+                    autre: hostFamilyAutre,
+                }
+                response.render('hostFamily',{
+                    allHostFamilly
+                });
+                console.log(allHostFamilly);  
             }
 
             else {

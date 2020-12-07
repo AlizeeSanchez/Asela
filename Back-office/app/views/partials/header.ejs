@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+
     <title>Asela</title>
     
 </head>
@@ -15,31 +16,41 @@
     <header class="header">
             <img class="logo" src="/img/1.home.png" alt="Logo de l'association">
         <nav class="navbar navbar-light" style="background-color: #476170;">
-            <a class="module" href="">Notifications</a>
-            <span class="nav-separation">|</span>
-            <a class="module" href="/v1/dogs">Chiens</a>
-            <span class="nav-separation">|</span>
-            <a class="module" href="/v1/cats">Chats</a>
-            <span class="nav-separation">|</span>
-            <a class="module" href="">Planning</a>
-            <span class="nav-separation">|</span>
-            <a class="module" href="">Formulaires</a>
-            <span class="nav-separation">|</span>
-            <a class="module" href="/v1/hostFamily">Familles d'acceuils</a>
-            <span class="nav-separation">|</span>
-            <a class="module" href="">Adoptant</a>
-            <span class="nav-separation">|</span>
-            <a class="module" href="">Bénévoles</a>
-            <span class="nav-separation">|</span>
-            <a class="module" href="">Vétérinaires</a>
-            <span class="nav-separation">|</span>
-            <a class="module" href="">Evènements</a>
-            <span class="nav-separation">|</span>
-            <a class="module" href="">Liste rouge</a>
-            <span class="nav-separation">|</span>            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
-              </form>
+                     <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         Reglages
+                     </a>
+                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                         <a class="dropdown-item" href="#">Conditions</a>
+                         <a class="dropdown-item" href="#">Tarifs</a>
+                         <div class="dropdown-divider"></div>
+                         <a class="dropdown-item" href="#">Benevoles</a>
+                       </div>
+                    <span class="nav-separation">|</span>  
+                    <a class="module" href="">Notifications</a>
+                    <span class="nav-separation">|</span>
+                    <a class="module" href="/v1/dogs">Chiens</a>
+                    <span class="nav-separation">|</span>
+                    <a class="module" href="/v1/cats">Chats</a>
+                    <span class="nav-separation">|</span>
+                    <a class="module" href="">Planning</a>
+                    <span class="nav-separation">|</span>
+                    <a class="module" href="">Formulaires</a>
+                    <span class="nav-separation">|</span>
+                    <a class="module" href="/v1/hostFamily">Familles d'accueil</a>
+                    <span class="nav-separation">|</span>
+                    <a class="module" href="/v1/adoptants">Adoptant</a>
+                    <span class="nav-separation">|</span>
+                    <a class="module" href="/v1/veterinary">Vétérinaires</a>
+                    <span class="nav-separation">|</span>
+                    <a class="module" href="">Evènements</a>
+                    <span class="nav-separation">|</span>
+                    <a class="module" href="">Liste rouge</a>            
+                    <span class="nav-separation">|</span>          
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+                    </form>
+
         </nav>
     </header>
 

@@ -1,0 +1,178 @@
+<%- include('partials/header') %>
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">ADOPTANTS</a>
+  </li>
+
+<li class="nav-item">
+<button class="nav-link" type="button" class="btn btn-secondary" id="btn-createHostFamily" data-toggle="modal" data-target="#AddAdoptantModal">AJOUTER UN ADOPTANT</button>
+</li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+
+<!------------------------ADOPTANTS TABLEAU-------------------------->
+
+
+
+
+<div class="alert alert-warning" role="alert">
+  Il faudra trier par ordre alphabétique
+</div>
+
+<div class="table table-striped table-bordered table-responsive" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">PRENOM</th>
+            <th scope="col">NOM DE FAMILLE</th>
+            <th scope="col">TELEPHONE</th>
+            <th scope="col">CODE POSTAL</th>
+            <th scope="col">VILLE</th>
+            <th scope="col">ADRESSE</th>
+            <th scope="col">EMAIL</th>
+            <th scope="col">ANIMAL ADOPTE</th>
+            <th scope="col">SUPP/EDIT</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+            <% for(let adoptantTab of adoptant){ %>
+              <% console.log(adoptantTab) %> 
+
+            <td><%= adoptantTab.firstname %></td>
+            <td><%= adoptantTab.lastname %></td>
+            <td><%= adoptantTab.number_phone %></td>
+            <td><%= adoptantTab.postal_code %></td>
+            <td><%= adoptantTab.city %></td>
+            <td><%= adoptantTab.adress %></td>
+            <td><%= adoptantTab.email %></td>
+            <td><%= adoptantTab.name %></td>
+            <td><button type="button" class="btn btn-outline-primary">
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"></path>
+              </svg>
+              </button>
+              <button type="button" class="btn btn-outline-primary">
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 0 0-5.86 2.929 2.929 0 0 0 0 5.858z"></path>
+              </svg>
+              </button>
+            </td>
+            </tr>
+
+            <% } %>
+
+        </tbody>
+    </table>
+    
+</div>
+
+<!-------------------------------MODAL AJOUTER ADOPTANT-----------------------------> 
+<div class="modal fade" id="AddAdoptantModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter un Adoptant</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST">
+          <header class="modal-card-head">
+          <div class="alert alert-warning" role="alert">
+            Attention certaines données sont directement connectées au site web, attention à l'orthographe!
+            </div>
+            <button class="delete close" type="button" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Prénom</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addFirstname">
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Nom</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addLastname">
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Numéro de Téléphone</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addNumberPhone">
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Code postal</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addPostalCode">
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Ville</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addCity">
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Adresse</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addAdress">
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Email</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addEmail">
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Animal Adopté</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addPetAdopted">
+              </div>
+            </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/js/app.js"></script>
+<script src="/js/adoptants.js"></script>
+</body>

@@ -2,12 +2,13 @@ const Adoptant = require("../models/Adoptant");
 
     const adoptantController = {
 
-        findAllAdoptant: async (request, response) => {
+        findAllAdoptant: async (request, response, next) => {
             try{
-                const adoptant = await Adoptant.findAllAdoptant();
+                const adoptant = await Adoptant.findAllAdoptant(); 
                 if(adoptant){
-                    response.json(adoptant);
-                    
+                    response.render('adoptants', {
+                        adoptant
+                    });
                 } else {
                     response.status(404).json(`Il n'y a aucun adoptant trouvés.`);
                 }
@@ -17,7 +18,27 @@ const Adoptant = require("../models/Adoptant");
                 return response.status(500).json(error.toString());
             }
         },
-    
+        
+        // ca recupere les animaux de l'adoptant (next) (pet.adoptant_id = id de l'adoptant)
+        findAllPetAdoptant: async (request, response) => {
+        
+            try {
+                const petId = parseInt(request.params.id);
+                const petAdoptant = await Adoptant.findAllPetToAdoptant(petId);
+                if(petAdoptant){
+
+                    response.render('adoptants', {
+                        jason
+                    });
+                }else {
+                    response.status(404).json(`L'adoptant numéro ${petId} n'existe pas`);
+                }
+            }catch(error){
+                console.trace(error)
+                return response.status(500).json(error.toString());
+            }
+        },
+
         findOneAdoptant: async (request, response, next) => {
             try{
                 const adoptantId = parseInt(request.params.id);
@@ -31,27 +52,6 @@ const Adoptant = require("../models/Adoptant");
                     next();
                 }else {
                     response.status(404).json(`L'adoptant numéro ${adoptantId} n'existe pas`);
-                }
-            }catch(error){
-                console.trace(error)
-                return response.status(500).json(error.toString());
-            }
-        },
-
-        // ca recupere les animaux de l'adoptant (next) (pet.adoptant_id = id de l'adoptant)
-        findAllPetAdoptant: async (request, response, next) => {
-            try {
-                const petId = parseInt(request.params.id);
-                console.log('troisieme', petId);
-                
-                const petAdoptant = await Adoptant.findAllPetToAdoptant(petId);
-                console.log('quatrieme', petAdoptant);
-                
-                if(petAdoptant){
-                    response.petAdoptant = petAdoptant;
-                    next();
-                }else {
-                    response.status(404).json(`L'adoptant numéro ${petId} n'existe pas`);
                 }
             }catch(error){
                 console.trace(error)

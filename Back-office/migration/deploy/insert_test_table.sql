@@ -13,11 +13,11 @@ VALUES ('Le Boudouil', 'Sophie', 'O687388358', '30230', 'Bouillargues', '1300 Ch
        ('Couillet', 'Rachelle', '0666708152', '30660', 'Gallargues le Montueux', 'Chemin de Veidran', 'rachele.c@hotmail.fr', '0', 'Chiens/Chiots'),
        ('Coesen', 'Ornella', '0680000144', '30260', 'Quissac', '63 Rue du Four de Veidran', 'portmannornella@gmail.com', '0', 'Chiens'),
        ('0', 'Severine', '0', '30380', 'St Christol les Ales', '280 Rue des Tilleuls', '0', '0', 'Chatons'),
-       ('0', 'Aurelia', '0789570870', '0', 'Ales', '471 Chemin des sports', '0', '0', 'Chatons'),
+       ('0', 'Aurelia', '0789570870', '30100', 'Ales', '471 Chemin des sports', '0', '0', 'Chatons'),
        ('0', 'Audrey', '0642333134', '30100', 'Ales', '414 D Avenue Dr Jean Gaubert', 'audrey.simon16@orange.fr', '0', 'Chatons'),
        ('0', 'Brigitte', '0768204153', '30260', 'Quissac', '64 Impasse des rouges gorges', 'brissal@homtail.fr', '0', 'Chatons'),
        ('Meunier Fevrier', 'Cathy', '0670257748', '30170', 'Saint Hyppolyte du Fort', '22 Route de Cros', 'cathyfevrier@neuf.fr', '0', 'Chatons'),
-       ( 'Boursier', 'Sarah', '0687614328', '30350', 'Aigremont', '6 Rue du Nord', 'christian.boursier11@orange.fr', '0', 'Chatons'),
+       ('Boursier', 'Sarah', '0687614328', '30350', 'Aigremont', '6 Rue du Nord', 'christian.boursier11@orange.fr', '0', 'Chatons'),
        ('Lopez', 'Emilie', '0658915220', '30110', 'St Cecile D Andorge','La haute levade ouest', 'elena04@outlook.fr', '0', 'Chatons'),
        ('Perez', 'Cendrine', '0615074798', '30870', 'St Come et Maruejols','48 chemin de la fontaine de robert', 'cendrineperez@hotmail.fr', '0', 'Chatons'),
        ('Savri', 'Magali', '0609988497', '30000', 'Nimes', '866 Chemin des Terres de Rouviere', 'savrimagali@gmail.com', '0', 'Chatons'),
@@ -27,30 +27,35 @@ VALUES ('Le Boudouil', 'Sophie', 'O687388358', '30230', 'Bouillargues', '1300 Ch
 
 ---------------------ADOPTANTS--------------------------------
 INSERT INTO "adoptant" ("lastname", "firstname", "number_phone", "postal_code", "city", "adress", "email")
-VALUES ('Sanchez', 'Alizée', '0781025042', '34170', 'Castelanu Le Lez', '18 rue des genets', 'alizee.sanchez0882@hotmail.fr');
+VALUES ('Sanchez', 'Alizée', '0781025042', '34170', 'Castelanau Le Lez', '18 rue des genets', 'alizee.sanchez0882@hotmail.fr');
 
-------------------- ANIMAUX -----------------------
+------------------- ANIMAUX ADOPTER-----------------------
 
-INSERT INTO pet ("type", "name", "age", "amity", "sexe", "breed", "ide", "sterilised", "description", "weight", "host_family_id") 
-VALUES ('chien', 'Royco','13/03/2020','Ok chiens et chats', 'Mâle', 'X Beagle', '250268743488611', 'true', 'description', 'Moyenne taille','19'),
-       ('chien', 'Rex',' 01/01/2017','Ok chiens et chats', 'Mâle', 'Border collie x berger groenendael', '250268723102192', 'true', 'description', 'Grande taille','19'),
-       ('chien', 'Nouba','06/10/2017','Ok chiens et chats', 'Mâle', 'X Berger', '250269811395817', 'true','description', 'Très grand gabarit','20'),
-       ('chien', 'Santo','20/01/16','Inconnus mais ne semble pas agressif', 'Mâle', 'X Beauceron et Doberman', '250269606628846', 'true', 'description', 'Très grand gabarit','19'),
-       ('chien', 'Hashtag','25/06/2017','Chiens femelle Ok Mâle a tester - Chats a tester', 'Mâle', 'x Labrador', '250269500740253', 'true', 'description', 'Moyen gabarit','19'),
-       ('chien', 'Pipo', '01/10/2018','Ok chiens et chats', 'Mâle', ' X Griffon', 'false', 'true', 'description', 'Moyen gabarit','19'),
-       ('chien', 'Bianca', '04/04/2018','Ok chiens et chats', 'Femelle', 'x Griffon', '250268732448608', 'true', 'description', 'Moyen gabarit','1'),
-       ('chien', 'Ice Tea', '16/08/2013','Ok chiens et chats', 'Mâle', 'Cane Corso', 'false', 'true', 'description', 'Très grand gabarit', NULL),
-       ('chien', 'Jocky', '01/09/2011','Ok chiens et chats', 'Mâle', 'Border collie x berger groenendael', '250268743500214', 'true', 'description', 'Petit gabarit', NULL),
-       ('chien', 'Bebidou', '29/04/2014','Ok chiens et chats', 'Femelle', 'Cane Corso', 'false', 'true', 'description', 'Très grand gabarit', NULL);
+INSERT INTO pet ("type", "name", "age", "amity", "sexe", "breed", "ide", "sterilised", "description", "weight", "adopt") 
+VALUES ('chien', 'Roy','13/01/2020','Ok chiens et chats', 'Mâle', 'X Malinois', '250268743403434', 'true', 'description', 'Moyenne taille','true');
 
-INSERT INTO pet ("type", "name", "age", "amity", "sexe", "breed", "ide", "sterilised", "description", "weight", "host_family_id")
+------------------- ANIMAUX A L ADOPTION-----------------------
+
+INSERT INTO pet ("type", "name", "age", "amity", "sexe", "breed", "ide", "sterilised", "description", "weight") 
+VALUES ('chien', 'Royco','13/03/2020','Ok chiens et chats', 'Mâle', 'X Beagle', '250268743488611', 'true', 'description', 'Moyenne taille'),
+       ('chien', 'Rex',' 01/01/2017','Ok chiens et chats', 'Mâle', 'Border collie x berger groenendael', '250268723102192', 'true', 'description', 'Grande taille'),
+       ('chien', 'Nouba','06/10/2017','Ok chiens et chats', 'Mâle', 'X Berger', '250269811395817', 'true','description', 'Très grand gabarit'),
+       ('chien', 'Santo','20/01/16','Inconnus mais ne semble pas agressif', 'Mâle', 'X Beauceron et Doberman', '250269606628846', 'true', 'description', 'Très grand gabarit'),
+       ('chien', 'Hashtag','25/06/2017','Chiens femelle Ok Mâle a tester - Chats a tester', 'Mâle', 'x Labrador', '250269500740253', 'true', 'description', 'Moyen gabarit'),
+       ('chien', 'Pipo', '01/10/2018','Ok chiens et chats', 'Mâle', ' X Griffon', 'false', 'true', 'description', 'Moyen gabarit'),
+       ('chien', 'Bianca', '04/04/2018','Ok chiens et chats', 'Femelle', 'x Griffon', '250268732448608', 'true', 'description', 'Moyen gabarit'),
+       ('chien', 'Ice Tea', '16/08/2013','Ok chiens et chats', 'Mâle', 'Cane Corso', 'false', 'true', 'description', 'Très grand gabarit'),
+       ('chien', 'Jocky', '01/09/2011','Ok chiens et chats', 'Mâle', 'Border collie x berger groenendael', '250268743500214', 'true', 'description', 'Petit gabarit'),
+       ('chien', 'Bebidou', '29/04/2014','Ok chiens et chats', 'Femelle', 'Cane Corso', 'false', 'true', 'description', 'Très grand gabarit');
+
+INSERT INTO pet ("type", "name", "age", "amity", "sexe", "breed", "ide", "sterilised", "description", "weight")
 VALUES
-       ('chat', 'Joséphine', '01/01/2017','Pas ok chats adultes', 'Femelle', 'Europeen', '243UUJ', 'true', 'description', '0', '19'),
-       ('chat', 'Naya', '18/04/17','Ok chats', 'Femelle', 'Europeen', '228LDU', 'true', 'description', '0','19'),
-       ('chat', 'Noisette', '02/07/2020','Ok chats', 'Femelle', 'Europeen', '279YZT', 'true', 'description', '0','19'),
-       ('chat', 'Onix', '15/04/18','Ok chats', 'Femelle', 'Europeen', '261FDG', 'true', 'description', '0','19'),
-       ('chat', 'Noa', '15/05/17','Ok chats et chiens', 'Mâle', 'Europeen', '222JMV', 'true', 'description', '0','19'),
-       ('chat', 'Myrtille', '01/01/2018','Ok chats', 'Femelle', 'Europeen', '261BUL', 'true', 'description', '0','19');
+       ('chat', 'Joséphine', '01/01/2017','Pas ok chats adultes', 'Femelle', 'Europeen', '243UUJ', 'true', 'description', '0'),
+       ('chat', 'Naya', '18/04/17','Ok chats', 'Femelle', 'Europeen', '228LDU', 'true', 'description', '0'),
+       ('chat', 'Noisette', '02/07/2020','Ok chats', 'Femelle', 'Europeen', '279YZT', 'true', 'description', '0'),
+       ('chat', 'Onix', '15/04/18','Ok chats', 'Femelle', 'Europeen', '261FDG', 'true', 'description', '0'),
+       ('chat', 'Noa', '15/05/17','Ok chats et chiens', 'Mâle', 'Europeen', '222JMV', 'true', 'description', '0'),
+       ('chat', 'Myrtille', '01/01/2018','Ok chats', 'Femelle', 'Europeen', '261BUL', 'true', 'description', '0');
 
 
 ------------------VETERINAIRES-----------------------
@@ -63,7 +68,7 @@ VALUES ('Bente', '0466622323', '30900', 'Nimes', '0', 'Bente 59 Route D Ales'),
        ('Clinique du Gardon', '0466372457', '30210', 'Remoulins', '0', 'Avenue Geoffrey Perret'),
        ('Clinique de Pierrelatte', '0475040003', '26700', 'Pierrelatte', '0', 'Avenue Delattre de Tassigny'),
        ('Cabinet de La Ceze', '0466799270', '30200', 'Bagnols sur Ceze', 'contact@ceterinairedelaceze.com', 'Chemin de la Font des Chiens'),
-       ('Clinique des Cévennes', '0', '30500', 'St Ambroix', 'stambroix@notreveto.fr', '5 fb du Paradis'),
+       ('Clinique des Cévennes', '0466241091', '30500', 'St Ambroix', 'stambroix@notreveto.fr', '5 fb du Paradis'),
        ('Clinique de la Porte d Or', '0466390914', '30130', 'Pont-Saint-Esprit', '0', '492 Chemin Columbia'),
        ('Clinique du Le Pontet', '0490310074', '84130', 'Le Pontet', '0', '27 Ruelle Du Perigord'),
        ('Cabinet La Cigale', '0466776740', '30170', 'Saint-Hippolyte-du-Fort', '0', 'St Hyppo Place Enfants de Troupe'),
@@ -73,7 +78,11 @@ VALUES ('Bente', '0466622323', '30900', 'Nimes', '0', 'Bente 59 Route D Ales'),
        ('Clinique Animavet', '0467715029', '34400', 'Lunel', 'clinique-animavet@orange.fr', '333 Allee Du Vidourle'),
        ('Clinique du Vigan', '0467738690', '34190', 'Ganges', 'vetganges@orange.fr', '19 avenue du Vigan'),
        ('Vétérinaire Brassart', '0467875195', '34820', 'Ganges', 'vetganges@orange.fr', '28 Avenue de Montpellier'),
-       ('Clinique Veterinaire de Baillargues', '0467738690', '34670', 'Baillargues', 'vetganges@orange.fr', 'Imp Charles Fournier');
+       ('Clinique Veterinaire de Baillargues', '0467738690', '34670', 'Baillargues', 'vetganges@orange.fr', 'Imp Charles Fournier'),
+       ('Clinique de aiguelongue', '0467796597', '34090', 'Montpellier', 'contact@aiguelongue.fr', '662 Avenue de la Justice de Castelnau'),
+       ('Clinique les romarins', '0467453258', '34740', 'Vendargues', '', '6 B Placette de la Calypso 34740 '),
+       ('Clinique de aubagne','0442183030','13681','Aubagne','','13 Cab Vét La Calypso Les Fillols Est'),
+       ('Clinique de l etang','0467519665','34140','Meze','c.grandjean2@wanadoo.fr','25 chemin de l etang');
 
 ------------------- EVENEMENTS -----------------------
 INSERT INTO "event" ("title", "location", "date_event", "content", "picture") 

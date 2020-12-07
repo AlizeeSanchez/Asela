@@ -6,14 +6,13 @@ const questionnaireAdoptController = {
     //Répondre à un questionnaire
     responseQuest: async (request, response) => {
         try{
-            if(request.body.email && request.body.type_pet && request.body.lastname && request.body.firstname && request.body.date_birth && request.body.occupation && request.body.number_phone && request.body.postal_code && request.body.city && request.body.adress){
+            if(request.body.email && request.body.type_pet && request.body.lastname_firstname && request.body.date_birth && request.body.occupation && request.body.number_phone && request.body.postal_code && request.body.city && request.body.adress){
                 //On recupere les données envoyées par le body
                 questionnaire = {
                     email: request.body.email,
                     type_pet: request.body.type_pet,
                     name_pet: request.body.name_pet,
-                    lastname: request.body.lastname,
-                    firstname: request.body.firstname,
+                    lastname_firstname: request.body.lastname_firstname,
                     date_birth: request.body.date_birth,
                     occupation: request.body.occupation,
                     lastname_firstname_spouse: request.body.lastname_firstname_spouse,

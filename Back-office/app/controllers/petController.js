@@ -31,7 +31,6 @@ const petController = {
         try{
         const petId = parseInt(request.params.id);
         const comments = await Pet.findAllCommentPet(petId);
-        console.log(comments)
             if (comments) {
                 response.comments = comments;
                 next();
@@ -57,6 +56,8 @@ const petController = {
                     comments: response.comments,
                     questionnaire
                 }
+                //console.log(jason);
+                
                 response.render('onePet', {
                     jason
                 });
@@ -89,7 +90,6 @@ const petController = {
         try{
             const petId = parseInt(request.params.id);
             const pet = await Pet.findOnePet(petId);
-            console.log(pet)
             if(pet.deceased === true){
                 const petFalse = await Pet.editDeadPetFalse(petId);
                 response.json('Cet animal a été résusité, il est de nouveau a l\'adoption');
@@ -112,12 +112,9 @@ const petController = {
     editPet: async (request, response) => {
         try {
             const petId = parseInt(request.params.id);
-            //console.log('premier', petId);
-            
             const pet = await Pet.findOnePet(petId);
-            //console.log('second', pet);
+            
             if (pet){
-                console.log('mon body qui arrive dans mon controller:', pet.id,request.body);
                 if (request.body){
                     const editPet = {
                         id: pet.id,
@@ -134,13 +131,21 @@ const petController = {
                         description: request.body.eventDescription,
                         weight: request.body.eventWeight,
                     };
+                    if(editPet.Date_supported){
                     editPet.date_supported === Date.parse(editPet.date_supported, 'D M YYYY');
-                    editPet.date_vaccine === Date.parse(editPet.date_vaccine, 'D M YYYY');
-                    console.log('troisieme', editPet)
+                    } else {
+                        editPet.date_supported  
+                    }
+                    if(editPet.date_vaccine){
+                        editPet.date_vaccine === Date.parse(editPet.date_vaccine, 'D M YYYY');
+                    } else {
+                        editPet.date_supported  
+                    }
+
                     //on transmet les informations de l'animal à la fonction editPet
                     await Pet.editPet(editPet);
                     response.status(200).json({editPet});
-                    //console.log('quatrieme apres l\'await', editPet);
+                    
                     
                 } else {
                     response.status(404).json('Il n\' y a rien à modifier');
@@ -248,9 +253,6 @@ const petController = {
                 id: pet.id,
                 host_family_id: parseInt(famillyId)
             };
-            console.log(pet.id);
-            console.log(famillyId);
-            console.log(petToFamilly);
             await Pet.affectFamilyHost(petToFamilly);
             response.status(200).json(`Cet animal à bien été affecté à une FA.`);
         } else {
@@ -269,7 +271,6 @@ const petController = {
         try{
             const petId = parseInt(request.params.id);
             const pet = await Pet.findOnePet(petId);
-            console.log(pet);
             if(pet.facebook_publish === false){
                 const publishFacebookFalse = await Pet.publishFacebookIsTrue(petId);
                 response.json('Cet animal est bien publié sur facebook');
@@ -292,7 +293,7 @@ const petController = {
         try{
             const petId = parseInt(request.params.id);
             const pet = await Pet.findOnePet(petId);
-            console.log(pet);
+
             if(pet.seconde_chance_publish === false){
                 const petFalse = await Pet.publishSecondeChanceIsTrue(petId);
                 response.json('Cet animal est publié sur seconde chance');
@@ -337,7 +338,6 @@ const petController = {
         try{
             const petId = parseInt(request.params.id);
             const pet = await Pet.findOnePet(petId);
-            console.log(pet);
             if(pet.reserve === false){
                 const petFalse = await Pet.reserveIsTrue(petId);
                 response.json('Cet animal est réservé par un adoptant');

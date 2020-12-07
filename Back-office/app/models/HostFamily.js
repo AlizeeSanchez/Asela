@@ -5,7 +5,7 @@ const HostFamily = {
     //On recupere les fa par departement du Gard
     findHostFamilyByDpt30: async () => {
         try{
-            const hostFamily30 = await db.query("SELECT * FROM host_family WHERE postal_code ~* '3[0][0-9]{3}';");   
+            const hostFamily30 = await db.query("SELECT * FROM host_family WHERE postal_code ~* '3[0][0-9]{3}' ORDER by firstname;");   
             return hostFamily30.rows
         }catch (error){
             console.trace(error);

@@ -11,6 +11,9 @@
 				<li class="nav-item">
 				  	<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Nos décédés</a>
 				</li>
+				<li class="nav-item">
+					<button class="nav-link" type="button" class="btn btn-secondary" id="btn-createDog" data-toggle="modal" data-target="#AddDogModal">Ajouter un chien</button>
+				</li>
 			</ul>
 			
 			<div class="tab-content" id="myTabContent">
@@ -19,7 +22,6 @@
 
 <!--------------------------------------------Partie a l'adoption--------------------------------------->		
 <main class="main1">
-	<button type="button" class="btn btn-secondary" id="btn-createDog" data-toggle="modal" data-target="#AddDogModal">Ajouter un chien </button>
 
     <div class="container">
 		
@@ -29,7 +31,7 @@
         		        <header class="header-pet">
 							<h2 class="subTitle"><strong><%= dog.name %></strong></h2>
         		            <img class="image-pet" src="/img/<%= dog.name %>.jpg" alt="Image de présentation de l'animal">
-        		        </header>
+						</header>
         		        <main class="article-main-pet">
         		            <ul class="content">
 								<li class="lien"><strong>Race</strong>: <%= dog.breed %></li>
@@ -351,7 +353,7 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text">Prise en charge</span>
 										</div>
-										<input class="form-control" type="date" value="<%= dog.date_supported %>" id="editDate_supportedDog">
+										<input class="form-control" type="date" value="<%= dog.date_supported%>" id="editDate_supportedDog">
 									</div>
 								</div>
 							
@@ -380,7 +382,7 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text">Dernier vaccin</span>
 										</div>
-										<input class="form-control" type="date" value="<%= dog.date_vaccine %>" aria-describedby="inputGroup-sizing-default" id="editDate_vaccineDog">
+										<input class="form-control" type="date" value="<%= dog.date_vaccine%>" aria-describedby="inputGroup-sizing-default" id="editDate_vaccineDog">
 									</div>
 								</div>
 							
@@ -398,7 +400,7 @@
 					</div>
 					    <div class="modal-footer">
 					    	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					        <button type="button" class="btn btn-primary saveChangeDog">Save changes</button>
+					        <button type="button" class="btn btn-primary saveChange">Save changes</button>
 					    </div>
 					</div>
 				</div>
@@ -531,7 +533,7 @@
 						<option>Choisir* </option>
 						<option>Mâle</option>
 						<option>Femelle</option>
-						</SELECT>
+				  </select>
 				</div>
 				
 			  </div>
@@ -735,7 +737,7 @@
 					<option>Shih Tzu</option>
 					<option>Smous des Pays-Bas</option>
 					<option>Spitz Allemand</option>
-					<option>Spitz Japonais</option>
+					<option>Spitz Japonais</option>btn-createDog
 					<option>Springer Anglais</option>
 					<option>Staffordshire Bull Terrier</option>
 					<option>Sussex-Spaniel</option>

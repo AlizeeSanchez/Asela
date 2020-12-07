@@ -1,0 +1,145 @@
+<!-------------------------------------------- Modale Modification chien --------------------------------------->
+
+<div class="modal fade" id="editModalDog" tabindex="-1" role="dialog" aria-labelledby="Editer-un-chien" aria-hidden="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" data-article-id="<%= jason.pet.id %>">
+      <div class="modal-header">
+        <h5 class="modal-title" id="Editer-un-chien">Modifier <%= jason.pet.name %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST">
+          <header class="modal-card-head">
+              <div class="alert alert-warning" role="alert">
+                Attention certaines données sont directement connectées au site web, attention à l'orthographe!
+                </div>
+                <button class="delete close" type="button" aria-label="close"></button>
+            <button class="delete close" type="button" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+                  <div class="field">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Nom</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default" value="<%= jason.pet.name %>" aria-describedby="inputGroup-sizing-default" id="editNameDog">
+                </div>
+            </div>
+            <div class="field">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Age</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default" value="<%= jason.pet.age %>" aria-describedby="inputGroup-sizing-default" id="editAgeDog">
+                </div>
+            </div>
+          
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Sexe</label>
+          </div>
+          <select class="custom-select" id="editSexeDog">
+                            <option selected>Choisir*</option>
+                            <option value="Mâle">Mâle</option>
+                            <option value="Femelle">Femelle</option>
+                    </select>
+        </div>
+      
+              <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Race</label>
+          </div>
+        <select class="custom-select" id="editBreedDog">
+          <input type="text" class="form-control" aria-label="Default" value="<%= jason.pet.breed %>" aria-describedby="inputGroup-sizing-default" id="editeditBreedDog">
+        </select>
+      </div>
+    
+            <div class="field">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Entente</span>
+          </div>
+            <input type="text" class="form-control" aria-label="Default" value="<%= jason.pet.amity %>" aria-describedby="inputGroup-sizing-default" id="editAmityDog">
+        </div>
+      </div>
+    
+            <div class="field">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Robe</span>
+          </div>
+            <input type="text" class="form-control" aria-label="Default" value="<%= jason.pet.color %>" aria-describedby="inputGroup-sizing-default" id="editColorDog">
+          </div>
+      </div>
+    
+            <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Taille</label>
+        </div>
+        <select class="custom-select" id="editWeightDog">
+          <option>Choisir*</option>
+          <option>Petit Gabarit</option>
+          <option>Moyen Gabarit</option>
+          <option>Grand Gabarit</option>
+          <option>Très Grand Gabarit</option>
+        </select>
+      </div>
+    
+            <div class="field">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Prise en charge</span>
+          </div>
+          <input class="form-control" type="date" value="<%= jason.pet.date_supported%>" id="editDate_supportedDog">
+        </div>
+      </div>
+    
+            <div class="field">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Identification</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Default" value="<%= jason.pet.ide %>" aria-describedby="inputGroup-sizing-default" id="editIdeDog">
+          </div>
+      </div>
+    
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Stérilisé</label>
+        </div>
+        <select class="custom-select" id="editSterilisedDog">
+          <option selected>Choisir*</option>
+          <option value="true">Oui</option>
+          <option value="false">Non</option>
+        </select>
+      </div>
+    
+            <div class="field">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Dernier vaccin</span>
+          </div>
+          <input class="form-control" type="date" value="<%= jason.pet.date_vaccine%>" aria-describedby="inputGroup-sizing-default" id="editDate_vaccineDog">
+        </div>
+      </div>
+    
+      <div class="nofield" id="nofild">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Description</span>
+          </div>
+          <textarea class="form-control" aria-label="With textarea" id="editDescriptionDog"></textarea>
+          </div>
+      </div>
+    
+    </section>
+  </form>
+</div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary saveChange">Save changes</button>
+    </div>
+</div>
+</div>

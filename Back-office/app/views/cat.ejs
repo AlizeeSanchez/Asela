@@ -11,6 +11,9 @@
 				<li class="nav-item">
 				  	<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Nos décédés</a>
 				</li>
+				<li class="nav-item">
+					<button class="nav-link" type="button" class="btn btn-secondary" id="btn-createCat" data-toggle="modal" data-target="#AddCatModal">Ajouter un chat </button>
+			  </li>
 			</ul>
 			
 			<div class="tab-content" id="myTabContent">
@@ -19,7 +22,7 @@
 
 <!--------------------------------------------Partie a l'adoption--------------------------------------->		
 <main class="main1">
-	<button type="button" class="btn btn-secondary" id="btn-createCat" data-toggle="modal" data-target="#AddCatModal">Ajouter un chat </button>
+	
 
     <div class="container">
 		
@@ -39,7 +42,7 @@
         		        </main>
         		        <footer class="Multi-button">
         		            <button type="button" class="btn btn-success catSee" onClick="location.href='pet/<%= cat.id %>'">Voir</button>
-        		            <button type="button" class="btn btn-info catEdit" data-toggle="modal" data-target="#editModal<%= cat.id %>">Modifier</button>
+        		            <button type="button" class="btn btn-info cat" data-toggle="modal" data-target="#editModal<%= cat.id %>">Modifier</button>
         		            <% if (cat.site_publish === true) { %>
         		            <button type="button" class="btn btn-primary publishSiteCat">Dépublier</button>
         		            <% } else { %>
@@ -177,7 +180,7 @@
 					</div>
 					    <div class="modal-footer">
 					    	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					        <button type="button" class="btn btn-primary saveChangeCat">Save changes</button>
+					        <button type="button" class="btn btn-primary saveChange">Save changes</button>
 					    </div>
 					</div>
 				</div>
@@ -261,7 +264,7 @@
 
 <!--------------------------------------------Modale AJOUT chat--------------------------------------->
 
-<div class="modal fade" id="AddDogModal" tabindex="-1" role="dialog" aria-labelledby="Ajouter-un-chien" aria-hidden="false">
+<div class="modal fade" id="AddCatModal" tabindex="-1" role="dialog" aria-labelledby="Ajouter-un-chien" aria-hidden="false">
 	<div class="modal-dialog" role="document">
 	  <div class="modal-content" data-article-id="addCat">
 		<div class="modal-header">

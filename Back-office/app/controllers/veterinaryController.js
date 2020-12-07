@@ -15,7 +15,9 @@ const veterinaryController = {
                     herault: veterinaryHerault,
                     autre: veterinaryAutre
                 }
-                response.json(allveterinary);
+                response.render('veterinary', {
+                    allveterinary
+                });
             }
             else {
                  response.status(404).json('Il n\'y a aucun veterinaire dans ces departements')

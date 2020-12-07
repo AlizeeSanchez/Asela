@@ -24,6 +24,7 @@ const dog = {
             const buttonSave = event.target;
             const article = buttonSave.closest('.modal-content');
             const articleId = article.getAttribute('data-article-id');
+
             const eventDate_supported = document.getElementById('editDate_supportedDog').value;
             const eventName = document.getElementById('editNameDog').value;
             const eventAge = document.getElementById('editAgeDog').value;
@@ -52,8 +53,6 @@ const dog = {
                 eventDescription: eventDescription
             });
 
-            console.log(eventDog);
-            
             const response = await fetch(`http://localhost:3030/v1/pet/${articleId}`, {
                 method: 'PATCH',
                 body: eventDog,
@@ -141,7 +140,6 @@ const dog = {
         }catch(error) {
             console.trace(error);
         }
-
     }
 }
 

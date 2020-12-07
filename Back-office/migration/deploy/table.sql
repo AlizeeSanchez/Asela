@@ -23,7 +23,9 @@ CREATE TABLE "host_family" (
     pet_composition TEXT NOT NULL,
     pet_accepted TEXT NOT NULL,
     disponibility BOOLEAN DEFAULT true,
-    pet_asela TEXT
+    pet_complet BOOLEAN DEFAULT false,
+    pet_asela TEXT,
+    comment TEXT
 );
 
 CREATE TABLE "adoptant" (
@@ -72,12 +74,20 @@ CREATE TABLE "veterinary" (
     city TEXT NOT NULL, -- Ville du veterinaire    
     adress TEXT NOT NULL, -- adresse du veterinaire
     email VARCHAR (70), -- email du veterinaire
-    price_ide_eval BOOLEAN, -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon) ( SI BUG modif en TEXT)
-    price_vaccine_eval BOOLEAN, -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon) ( SI BUG modif en TEXT)
-    price_cat_eval BOOLEAN, -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon) ( SI BUG modif en TEXT)
-    price_litledog_eval BOOLEAN, -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon)( SI BUG modif en TEXT)
-    price_bigdog_eval BOOLEAN -- couleur permetant l'evaluation du prix associatif (rouge=pas bon - vert =bon)( SI BUG modif en TEXT)
-);
+    dog_castration int, 
+    dog_ovario_10 int, 
+    dog_ovario_10_25 int,
+    dog_ovario_25_40 int, 
+    dog_ovario_40 int,
+    dog_vaccine int,
+    dog_ide int,
+    cat_castration int,
+    cat_castration_tatouage int,
+    cat_ovario int,
+    cat_ovario_tatouage int,
+    cat_vaccine int,
+    cat_IDE int
+    );
 
 
 CREATE TABLE "event" (
@@ -122,26 +132,10 @@ CREATE TABLE "commentaire_pet"( -- Commentaire au sujet d'un animal
     commentaire TEXT NOT NULL
 );
 
-CREATE TABLE "commentaire_host_familly" (-- Commentaire au sujet d'une famille d'accueil
-    id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    host_family_id int NOT NULL REFERENCES "host_family"(id) ON DELETE CASCADE,
-    commentaire TEXT NOT NULL 
-);
-
 CREATE TABLE "commentaire_adoptant" ( --Commentaire au sujet d'un adoptant
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     adoptant_id int NOT NULL REFERENCES "adoptant"(id) ON DELETE CASCADE,
     commentaire TEXT NOT NULL
-);
-
-CREATE TABLE "price_veterinary" (-- Prix et arrangement avec veterinaire
-    id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    veterinary_id int REFERENCES "veterinary"(id) ON DELETE CASCADE,
-    price TEXT NOT NULL
-);
-
-CREATE TABLE "questionnaire_FH" ( -- Questionnaire familly host
-
 );
 
 CREATE TABLE "questionnaire_adopt" ( -- Questionnaire adoptant

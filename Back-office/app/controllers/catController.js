@@ -46,10 +46,9 @@ const catController = {
                     petsAdopt: response.petsAdopt,
                     petsDead
                 }
-                console.log(response.petsAdopt);
                 response.render('cat', {
                     jason
-                });
+                });   
             } else {
                 response.status(404).json(`Il n'y a aucun chat qui a été adopté en bdd.`);
             }

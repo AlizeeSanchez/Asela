@@ -61,6 +61,8 @@ router.patch('/reserve/:id', petController.petReserve)
 
 //---------------------------Routes Conditions d'adoption--------------------
 //Route pour lister les conditions d'adoption
+router.get('/reglage')
+//Route pour lister les conditions d'adoption
 router.get('/conditions', conditionController.findCondition)
 //Route pour voir une seule condition
 router.get('/condition/:id', conditionController.findOneCondition)
@@ -87,7 +89,7 @@ router.delete('/suppPrice/:id', priceController.suppPrice)
 // Route pour trier FA par departements
 //router.get('/hostFamily', hostFamilyController.findHostFamilyByDpt)
 // Route pour lister une seule famille d'acceuil via son id
-router.get('/hostFamily', hostFamilyController.findHostFamilyByDpt, hostFamilyController.findAllCommentHostFamily)
+router.get('/hostFamily', hostFamilyController.findHostFamilyByDpt)
 // Route pour ajouter une famille d'acceuil
 router.post('/addHostFamily', hostFamilyController.addHostFamily)
 // Route pour supprimer une famille d'acceuil
@@ -136,7 +138,7 @@ router.post('/questionnaireAdoptant/:id', questionnaireAdoptController.passQuest
 router.post('/questionnaireAdoptantToBlacklist/:id', questionnaireAdoptController.passAdoptantToBlacklist)
 
 //-----------------------------Route Adoptant---------------------------------------------------
-router.get('/adoptants', adoptantController.findAllAdoptant)
+router.get('/adoptants', adoptantController.findAllAdoptant, adoptantController.findAllPetAdoptant)
 router.get('/adoptant/:id',  adoptantController.findOneAdoptant, adoptantController.findAllPetAdoptant, adoptantController.findAllCommentAdoptant)
 router.post('/addCommentAdoptant/:id', adoptantController.commentAdoptant)
 router.delete('/deleteCommentAdoptant/:id', adoptantController.deleteCommentAdoptant)
