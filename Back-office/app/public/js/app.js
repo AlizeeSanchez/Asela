@@ -45,11 +45,25 @@ const evenement = {
        });
 
        //On cible le bouton modifier la fiche
-       const editPet = document.querySelector('#editionPetButton')
+       const editPet = document.querySelector('#editionPetButton');
        editPet.addEventListener('click', onepet.editDog);
-       console.log(onepet);
        
-    }
+       //On cible le bouton ajouter un évènement
+       const addEvent = document.querySelector('.btn-outline-primary');
+       addEvent.addEventListener('click', event.addEvent);
+       
+      // //On cible la barre de recherche
+      // const search = document.getElementById('search');
+      // search.addEventListener('keyup', app.search);
+      // console.log(search);
+    },
+
+    //search: function () {
+    //    const input = search.value;
+    //    const result = db.filter(result => result);
+    //    console.log(result);
+    //    
+    //}
 };
 // on accroche un écouteur d'évènement sur le document : quand le chargement est terminé, on lance app.init
 document.addEventListener('DOMContentLoaded', evenement.init );

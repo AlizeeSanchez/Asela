@@ -9,7 +9,6 @@ const dog = {
             const response = await fetch(`http://localhost:3030/v1/pet/${articleId}`, {
                method: 'GET',
             });
-            console.log(response);
       
         }catch(error) {
             console.trace(error);

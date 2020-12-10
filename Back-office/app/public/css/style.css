@@ -1,6 +1,9 @@
 
 /*-----------------------Nav de choix----------------------------------------*/
 
+img.logo {
+}
+
 .nav-tabs {
 
     place-content: center;
@@ -294,43 +297,6 @@ h2.Title-comment {
     align-self: center;
     margin: 1rem 0;
 }
-  /*-------------------------------------Modal--------------------------------------*/
-
-  div#editModal {
-    display: none;
-}
-
-/*----------------------------------------Tableaux ---------------------------------------*/
-
-/*thead {
-    table-layout: fixed;    Same layout for all cells
-    
-}
-
-tbody tr {
-    table-layout: fixed;    Same layout for all cells
-   
-}
- 
-thead {
-    display: table;
-    table-layout:fixed;
-}
-
-tbody {
-    display: block;
-    height: 50em;
-    overflow-y: scroll;
-}
-tbody tr {
-    display: table;
-    table-layout:fixed;
-}
-th, td {
-
-    border: 1px solid;
-    width: calc(15vw - 1rem);
-}*/
 
 .tableFixHead { overflow-y: auto; height: 100vh; }
 
@@ -339,4 +305,31 @@ table  { border-collapse: collapse; width: 100%; }
 th, td { padding: 8px 16px; }
 th     { background:#eee; }
 
+/*pour card event*/
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
 
+.title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.blockquote-footer {
+    bottom: 1rem;
+    position: absolute;
+    right: 4rem;
+}
+
+.card-body {
+position: relative;
+}
+
+.card-horizontal {
+    margin: 1rem;
+}
+
+p.card-text {
+    margin-top: 0.5rem;
+}

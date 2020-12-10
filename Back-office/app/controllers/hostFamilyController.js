@@ -6,16 +6,17 @@ const hostFamilyController = {
 
     findHostFamilyByDpt: async (request, response) => {
         try{
-            const hostFamily = await HostFamily.findAllHostFamily();
+            const hostFamilyAll = await HostFamily.findAllHostFamily();
             const hostFamilyGard = await HostFamily.findHostFamilyByDpt30();
             const hostFamilyHerault = await HostFamily.findHostFamilyByDpt34();
             const hostFamilyAutre = await HostFamily.findHostFamilyByDptAutre();
 
-            if(hostFamily){
+            if(hostFamilyAll){
                 const allHostFamilly = {
+                    all: hostFamilyAll,
                     gard: hostFamilyGard,
                     herault: hostFamilyHerault,
-                    autre: hostFamilyAutre,
+                    autre: hostFamilyAutre
                 }
                 response.render('hostFamily',{
                     allHostFamilly

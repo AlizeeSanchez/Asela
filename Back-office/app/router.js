@@ -8,6 +8,8 @@ const hostFamilyController = require('./controllers/hostFamilyController');
 const veterinaryController = require('./controllers/veterinaryController');
 const questionnaireAdoptController = require('./controllers/questionnaireAdoptController');
 const adoptantController = require('./controllers/adoptantController');
+const eventController = require('./controllers/eventController');
+const researchController = require('./controllers/researchController');
 
 const router = Router();
 
@@ -127,6 +129,13 @@ router.patch('/editPriceVeterinary/:id', veterinaryController.editPriceVeterinar
 //-------------------------------Route questionnaire--------------------------------
 router.post('/questionnaire', questionnaireAdoptController.responseQuest)
 
+//-------------------------------Route evenement--------------------------------
+// Route pour lister tous les évènements
+router.get('/events', eventController.allEvent)
+// Route pour télécharger une image de l'évènement
+//router.post('/upload', eventController.uploadevent)
+router.post('/events', eventController.addEvent, eventController.uploadevent)
+
 //-------------------------------Route questionnaire BACK OFFICE--------------------------------
 router.delete('/questionnaire/:id', questionnaireAdoptController.suppQuest)
 router.get('/questionnaire/:id', questionnaireAdoptController.findOneQuestAdopt)
@@ -142,5 +151,13 @@ router.get('/adoptants', adoptantController.findAllAdoptant, adoptantController.
 router.get('/adoptant/:id',  adoptantController.findOneAdoptant, adoptantController.findAllPetAdoptant, adoptantController.findAllCommentAdoptant)
 router.post('/addCommentAdoptant/:id', adoptantController.commentAdoptant)
 router.delete('/deleteCommentAdoptant/:id', adoptantController.deleteCommentAdoptant)
+
+//---------------------------------------Recherche-------------------------------------------------
+// ce middleware est appelé en 1 er car il prépare la liste des données que l'on as mis dans le response.locals
+router.use(researchController.loadAllSearch);
+router.get('/pet/:id', researchController.loadPet)
+router.get('/hostFamilly/:id', researchController.loadHostFamily)
+router.get('/adoptant/:id', researchController.loadAdoptant)
+router.get('/search', researchController.search)
 
 module.exports = router;

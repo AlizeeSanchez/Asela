@@ -1,5 +1,5 @@
 const Pet = require("../models/Pet");
-const Host_family = require("../models/HostFamily");
+const HostFamily = require("../models/HostFamily");
 const QuestionnaireAdopt = require("../models/QuestionnaireAdopt");
 
 const petController = {
@@ -10,11 +10,13 @@ const petController = {
             const petId = parseInt(request.params.id);
             const pet = await Pet.findOnePet(petId);
             const petHostFamilly = await Pet.findHostFamillyPet(petId);
+            const allHostFamilly = await HostFamily.findAllHostFamily();
             const petAdoptant = await Pet.findAdoptantPet(petId);
             const imgPet = await Pet.findImgPet(petId);
             if (pet) {
                 response.pet = pet;
                 response.hostFamilly = petHostFamilly;
+                response.allHostFamilly = allHostFamilly;
                 response.adoptant = petAdoptant;
                 response.img = imgPet;
                 next();
@@ -51,12 +53,13 @@ const petController = {
                 const jason = {
                     pet: response.pet,
                     hostFamilly: response.hostFamilly,
+                    allHostFamilly : response.allHostFamilly,  
                     adoptant: response.adoptant,
                     imgPet: response.img,
                     comments: response.comments,
                     questionnaire
                 }
-                //console.log(jason);
+                //console.log(jason.allHostFamilly);
                 
                 response.render('onePet', {
                     jason

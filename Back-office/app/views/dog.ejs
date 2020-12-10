@@ -30,7 +30,7 @@
         		    <article class="article" data-article-id="<%= dog.id %>">
         		        <header class="header-pet">
 							<h2 class="subTitle"><strong><%= dog.name %></strong></h2>
-        		            <img class="image-pet" src="/img/<%= dog.name %>.jpg" alt="Image de présentation de l'animal">
+        		            <img class="image-pet" src="/uploads/<%= dog.name %>.jpg" alt="Image de présentation de l'animal">
 						</header>
         		        <main class="article-main-pet">
         		            <ul class="content">
@@ -47,7 +47,7 @@
         		            <% } else { %>
         		            <button type="button" class="btn btn-primary publishSite">Publier</button>
         		            <% } %>
-		                    <button type="button" class="btn btn-light">Supprimer</button>
+		                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#suppDogModal">Supprimer</button>
 		                </footer>
 					</article>
 
@@ -804,7 +804,7 @@
 					<option>Choisir* </option>
 					<option value="true" >Oui</option>
 					<option value="false">Non</option>
-					</SELECT>
+				</select>
 				</div>
 				
 				<div class="field">
@@ -823,12 +823,34 @@
 							<textarea class="form-control" aria-label="With textarea" id="descriptionAddDog"></textarea>
 						  </div>
 					</div>
+					
 				</section>
 			</form>
 		</div>
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 		  <button type="button" class="btn btn-primary saveNewDog">Ajouter</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+
+  <!--------------------------------------------Modale Valiation Suppression animal--------------------------------------------->
+  <div class="modal" tabindex="-1" role="dialog" id="suppDogModal">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title">Suppression de l'animal</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  <p>Voulez vous vraiment supprimer l'animal?</p>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-primary">Oui</button>
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
 		</div>
 	  </div>
 	</div>
