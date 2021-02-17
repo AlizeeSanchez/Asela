@@ -1,0 +1,161 @@
+<!-------------------------------------------------MODAL MODIFIER FA GARD------------------------------------>
+<% for(let hostFamilyTab of allHostFamilly.all){ %>
+<div class="modal fade" id="EditHostFamilyModal<%= hostFamilyTab.id %>" tabindex="-1" role="dialog" aria-labelledby="Editer-une-fa" aria-hidden="false">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" data-article-id="<%= hostFamilyTab.id %>">
+        <div class="modal-header">
+          <h5 class="modal-title" id="Editer-une-fa">Modifier la FA</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="POST">
+                      <header class="modal-card-head">
+                              <div class="alert alert-warning" role="alert">
+                                  Attention certaines données sont directement connectées au site web, attention à l'orthographe!
+                                </div>
+                                <button class="delete close" type="button" aria-label="close"></button>
+                          <button class="delete close" type="button" aria-label="close"></button>
+                      </header>
+                      <section class="modal-card-body">
+                        <div class="field">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Prénom</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.firstname %>" aria-describedby="inputGroup-sizing-default" id="editFirstname">
+                            </div>
+                        </div>
+              
+                        <div class="field">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Nom</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.lastname %>" aria-describedby="inputGroup-sizing-default" id="editLastname">
+                            </div>
+                        </div>
+              
+                        <div class="field">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Numéro de Téléphone</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.number_phone %>" aria-describedby="inputGroup-sizing-default" id="editNumberPhone">
+                            </div>
+                        </div>
+              
+                        <div class="field">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Code postal</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.postal_code %>" aria-describedby="inputGroup-sizing-default" id="editPostalCode">
+                            </div>
+                        </div>
+              
+                        <div class="field">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Ville</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.city %>" aria-describedby="inputGroup-sizing-default" id="editCity">
+                            </div>
+                        </div>
+              
+                        <div class="field">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Adresse</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.adress %>" aria-describedby="inputGroup-sizing-default" id="editAdress">
+                            </div>
+                        </div>
+              
+                        <div class="field">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Email</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.email %>" aria-describedby="inputGroup-sizing-default" id="editEmail">
+                            </div>
+                        </div>
+              
+                        <div class="field">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Composition de la FA</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.pet_composition %>" aria-describedby="inputGroup-sizing-default" id="editComposition">
+                            </div>
+                        </div>
+              
+                        <div class="field">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Animaux acceptés</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.pet_accepted%>" aria-describedby="inputGroup-sizing-default" id="editAcceptedPet">
+                            </div>
+                        </div>
+              
+                        <div class="field">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Animaux accueillis</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.pet_asela %>" aria-describedby="inputGroup-sizing-default" id="editPetAsela">
+                            </div>
+                        </div>
+              
+                        <div class="field">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Disponible</span>
+                            </div>
+                            <%  if(hostFamilyTab.disponibility == true){ %>
+                            <select class="custom-select" id="editDisponibility">
+                              <option value="true" >Oui</option>
+                              <option value="false">Non</option>
+                            </select>
+                            <%} else{ %>
+                                <select class="custom-select" id="editDisponibility">
+                                    <option value="false">Non</option>
+                                    <option value="true" >Oui</option>
+                                </select>
+                            <% } %>
+                            </div>
+                        </div>             
+          </section>
+      </form>
+  </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary saveChange">Save changes</button>
+      </div>
+  </div>
+  </div>
+  </div>
+
+  <!------------------------------MODAL SUPPRIMER OUI NON GARD------------------------->   
+<div class="modal" tabindex="-1" role="dialog" id="SuppHostFamilyModal<%= hostFamilyTab.id %>">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Suppression d'une FA</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Souhaitez-vous vraiment supprimer <%= hostFamilyTab.firstname %> <%= hostFamilyTab.lastname %> des FA ?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Oui</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% } %>

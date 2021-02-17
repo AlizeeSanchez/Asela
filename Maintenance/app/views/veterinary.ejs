@@ -1,0 +1,537 @@
+<%- include('partials/header') %>
+
+<button type="button" aria-haspopup="dialog" aria-controls="AddVeterinaryModal" class="btn btn-outline-primary" data-toggle="modal" data-target="#AddVeterinaryModal">
+  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" d="M4 0h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H4z"/>
+    <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z"/>
+  </svg>
+</button>
+
+<div class="alert alert-warning" role="alert">
+    Est ce qu'on affiche les veterinaires par departement et prise en charge ou simplement par departement
+  </div>
+
+<div class="table  table-bordered table-responsive tableFixHead" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <table class="table table-hover">
+        <thead >
+          <tr>
+            <th scope="col">NOM DU CABINET</th>
+            <th scope="col">TELEPHONE</th>
+            <th scope="col">CODE POSTAL</th>
+            <th scope="col">VILLE</th>
+            <th scope="col">ADRESSE</th>
+            <th scope="col">EMAIL</th>
+            <th scope="col">PRIX CASTRATION CHIENS</th>
+            <th scope="col">PRIX STERILISATION CHIENS 10 KG</th>
+            <th scope="col">PRIX STERILISATION CHIENS 10/25 KG</th>
+            <th scope="col">PRIX STERILISATION CHIENS 25/40 KG</th>
+            <th scope="col">PRIX STERILISATION CHIENS 40 KG</th>
+            <th scope="col">PRIX VACCINATION CHIENS</th>
+            <th scope="col">PRIX IDENTIFICATION CHIENS</th>
+            <th scope="col">PRIX CASTRATION CHATS</th>
+            <th scope="col">PRIX TATOUAGE ET IDENTIFICATION CHATS PACK</th>
+            <th scope="col">PRIX STERILISATION CHATS</th>
+            <th scope="col">PRIX STERILISATION ET STERILISATION CHATS PACK</th>
+            <th scope="col">PRIX VACCINATION CHATS</th>
+            <th scope="col">PRIX IDENTIFICATION CHATS</th>
+            <th scope="col">SUPPRIMER</th>
+            <th scope="col">MODIFIER</th>
+          </tr>
+        </thead>
+        <tbody>
+    
+        <% for(let veterinaryTab of allveterinary.gard){ %>
+  
+            <% if(veterinaryTab.disponibility === true){ %>
+                <tr style="background-color: rgb(141, 214, 153)">
+            <% } else{ %>
+                <tr>
+            <% } %>
+            <td><%= veterinaryTab.name %></td>
+            <td><%= veterinaryTab.number_phone %></td>
+            <td><%= veterinaryTab.postal_code %></td>
+            <td><%= veterinaryTab.city %></td>
+            <td><%= veterinaryTab.adress %></td>
+            <td><%= veterinaryTab.email %></td>
+            <td><%= veterinaryTab.dog_castration %></td>
+            <td><%= veterinaryTab.dog_ovario_10 %>
+            <td><%= veterinaryTab.dog_ovario_10_25 %></td>
+            <td><%= veterinaryTab.dog_ovario_25_40 %></td>
+            <td><%= veterinaryTab.dog_ovario_40 %></td>
+            <td><%= veterinaryTab.dog_vaccine %></td>
+            <td><%= veterinaryTab.dog_ide %></td>
+            <td><%= veterinaryTab.cat_castration %></td>
+            <td><%= veterinaryTab.cat_castration_tatouage %></td>
+            <td><%= veterinaryTab.cat_ovario %></td>
+            <td><%= veterinaryTab.cat_ovario_tatouage %></td>
+            <td><%= veterinaryTab.cat_vaccine %></td>
+            <td><%= veterinaryTab.cat_ide %></td>
+            <td><button type="button" aria-haspopup="dialog" aria-controls="SuppVeterinaryModal" class="btn btn-outline-primary" data-toggle="modal" data-target="#SuppVeterinaryModal">
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"></path>
+              </svg>
+              </button>
+            </td>
+            <td><button type="button" aria-haspopup="dialog" aria-controls="EditVeterinaryModal" class="btn btn-outline-primary" data-toggle="modal" data-target="#EditVeterinaryModal">
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+              </svg>
+              </button>
+            </td>
+
+            </tr>
+           
+          <% } %>
+        </tbody>
+    </table>
+    
+  </div>
+
+  <!--------------------------------------Modale Ajouter un vétérinaire------------------------------------>
+ <div class="modal fade" id="AddVeterinaryModal" tabindex="-1" role="dialog" aria-labelledby="Ajout-veterinary" aria-hidden="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="Ajout-veterinary">Ajouter un vétérinaire</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST">
+          <header class="modal-card-head">
+          <div class="alert alert-warning" role="alert">
+            Attention certaines données sont directement connectées au site web, attention à l'orthographe!
+            </div>
+            <button class="delete close" type="button" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Cabinet du vétérinaire</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addName">
+              </div>
+              
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Téléphone</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addNumber_phone">
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Code Postal</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addPostal_code">
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Ville</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addCity">
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Adresse</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addAdress">
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Email</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addEmail">
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Castration chien</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addDog_castration">
+              <span class="input-group-text">€</span>
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Stérilisation chien 10 Kg</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addDog_ovario_10">
+              <span class="input-group-text">€</span>
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Stérilisation chien 10 à 25 Kg</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addDog_ovario_10_25">
+              <span class="input-group-text">€</span>
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Stérilisation chien 25 à 40 Kg</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addDog_ovario_25_40">
+              <span class="input-group-text">€</span>
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Sterilisation chien + 40 Kg</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addDog_ovario_40">
+              <span class="input-group-text">€</span>
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Vaccin chien</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addDog_vaccine">
+              <span class="input-group-text">€</span>
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"> IDE chien</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addDog_ide">
+              <span class="input-group-text">€</span>
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Castration chat</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addCat_castration">
+              <span class="input-group-text">€</span>
+              </div>
+          </div>          
+          
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Stérilisation chat</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addCat_ovario">
+              <span class="input-group-text">€</span>
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Castration + tatouage chat</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addCat_castration_tatouage">
+              <span class="input-group-text">€</span>
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Stérilisation + tatouage chat</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addCat_ovario_tatouage">
+              <span class="input-group-text">€</span>
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Vaccin chat</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addCat_vaccine">
+              <span class="input-group-text">€</span>
+              </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Identification chat</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addCat_IDE">
+              <span class="input-group-text">€</span>
+              </div>
+          </div>
+          </section>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!------------------------------MODAL SUPPRIMER OUI NON Veterinaire------------------------->   
+<div class="modal" tabindex="-1" role="dialog" id="SuppVeterinaryModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Supression d'un vétérinaire</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Souhaitez-vous vraiment supprimer ce vétérinaire ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Oui</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-------------------------------------------------MODAL MODIFIER VETERINARY------------------------------------>
+<div class="modal fade" id="EditVeterinaryModal" tabindex="-1" role="dialog" aria-labelledby="Editer-un-veterinary" aria-hidden="false">
+  <div class="modal-dialog" role="document">
+    <!--<%# for(veterinary of allVeterinary.gard) { %>-->
+    <div class="modal-content" data-article-id=""><!--<%# veterinary.id %>-->
+    <!--<%# } %>-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="Editer-un-veterinary">Modifier le vétérinaire</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST">
+                    <header class="modal-card-head">
+                            <div class="alert alert-warning" role="alert">
+                                Attention certaines données sont directement connectées au site web, attention à l'orthographe!
+                              </div>
+                              <button class="delete close" type="button" aria-label="close"></button>
+                        <button class="delete close" type="button" aria-label="close"></button>
+                    </header>
+                    <section class="modal-card-body">
+                        <div class="field">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">Nom du cabinet</span>
+                                </div>
+                                <input type="text" class="form-control" aria-label="Default" value="editTitle" aria-describedby="inputGroup-sizing-default" id="editName">
+                              </div>
+                        </div>
+                        <div class="field">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">Téléphone</span>
+                                </div>
+                                <input type="text" class="form-control" aria-label="Default" value="editLocation" aria-describedby="inputGroup-sizing-default" id="editNumber_phone">
+                              </div>
+                        </div>
+                    
+                        <div class="field">
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">Code postal</span>
+                              </div>
+                              <input type="text" class="form-control" aria-label="Default" value="editDate_event" aria-describedby="inputGroup-sizing-default" id="editPostal_code">
+                            </div>
+                      </div>
+            
+                      <div class="field">
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">Ville</span>
+                              </div>
+                              <input type="text" class="form-control" aria-label="Default" value="editContent" aria-describedby="inputGroup-sizing-default" id="editCity">
+                            </div>
+                      </div>
+
+                      <div class="field">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Adresse</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Default" value="editContent" aria-describedby="inputGroup-sizing-default" id="editAdress">
+                          </div>
+                    </div>
+
+                    <div class="field">
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">Email</span>
+                          </div>
+                          <input type="text" class="form-control" aria-label="Default" value="editContent" aria-describedby="inputGroup-sizing-default" id="editEmail">
+                        </div>
+                  </div>
+
+                  <div class="field">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Prix castration chien</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default" value="editContent" aria-describedby="inputGroup-sizing-default" id="editDog_castration">
+                      </div>
+                </div>
+
+                <div class="field">
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Prix stérilisation chien 10 Kg</span>
+                      </div>
+                      <input type="text" class="form-control" aria-label="Default" value="editContent" aria-describedby="inputGroup-sizing-default" id="editDog_ovario_10">
+                    </div>
+              </div>
+
+              <div class="field">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Prix stérilisation chien 10 à 25 Kg</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Default" value="editContent" aria-describedby="inputGroup-sizing-default" id="editDog_ovario_10_25">
+                  </div>
+            </div>
+
+            <div class="field">
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Prix stérilisation chien 25 à 40 Kg</span>
+                  </div>
+                  <input type="text" class="form-control" aria-label="Default" value="editContent" aria-describedby="inputGroup-sizing-default" id="editDog_ovario_25_40">
+                </div>
+          </div>
+
+          <div class="field">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Prix stérilisation chien 40 Kg</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default" value="editContent" aria-describedby="inputGroup-sizing-default" id="editDog_ovario_40">
+              </div>
+        </div>
+
+        <div class="field">
+          <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Prix vaccination chien</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Default" value="editContent" aria-describedby="inputGroup-sizing-default" id="editDog_vaccine">
+            </div>
+      </div>
+
+      <div class="field">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Prix identification chien</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Default" value="editContent" aria-describedby="inputGroup-sizing-default" id="editDog_ide">
+          </div>
+    </div>
+
+    <div class="field">
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Prix castration chat</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Default" value="editContent" aria-describedby="inputGroup-sizing-default" id="editCat_castration">
+        </div>
+  </div>
+
+  <div class="field">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Pack castration et identification chat</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Default" value="editContent" aria-describedby="inputGroup-sizing-default" id="editCat_castration_tatouage">
+      </div>
+</div>
+
+<div class="field">
+  <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Prix stérilisation chat</span>
+      </div>
+      <input type="text" class="form-control" aria-label="Default" value="editContent" aria-describedby="inputGroup-sizing-default" id="editCat_ovario">
+    </div>
+</div>
+
+<div class="field">
+  <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Pack stérilisation et identification</span>
+      </div>
+      <input type="text" class="form-control" aria-label="Default" value="editContent" aria-describedby="inputGroup-sizing-default" id="editCat_ovario_tatouage">
+    </div>
+</div>
+
+<div class="field">
+  <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Prix vaccination chat</span>
+      </div>
+      <input type="text" class="form-control" aria-label="Default" value="editContent" aria-describedby="inputGroup-sizing-default" id="editCat_vaccine">
+    </div>
+</div>
+
+<div class="field">
+  <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Prix identification chat</span>
+      </div>
+      <input type="text" class="form-control" aria-label="Default" value="editContent" aria-describedby="inputGroup-sizing-default" id="editCat_IDE">
+    </div>
+</div>
+        </section>
+    </form>
+</div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary saveChange">Save changes</button>
+    </div>
+</div>
+</div>
+
+</div>
+
+  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+  <script>
+    var $th = $('.tableFixHead').find('thead')
+  $('.tableFixHead').on('scroll', function() {
+    $th.css('transform', 'translateY('+ this.scrollTop +'px)');
+  });
+  </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
