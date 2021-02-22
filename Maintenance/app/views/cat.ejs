@@ -40,19 +40,69 @@
 								<li class="lien"><strong>Sexe</strong>: <%= cat.sexe %></li>
 							</ul>
         		        </main>
-        		        <footer class="Multi-button">
-        		            <button type="button" class="btn btn-success catSee" onClick="location.href='pet/<%= cat.id %>'">Voir</button>
-        		            <button type="button" class="btn btn-info cat" data-toggle="modal" data-target="#editModal<%= cat.id %>">Modifier</button>
+						<footer class="Multi-button">
+        		            <button type="button" class="btn btn-success" onClick="location.href='pet/<%= cat.id %>'">Voir</button>
+        		            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal<%= cat.id %>">Modifier</button>
         		            <% if (cat.site_publish === true) { %>
-        		            <button type="button" class="btn btn-primary publishSiteCat">Dépublier</button>
+        		            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPublish<%= cat.id %>">Dépublier</button>
         		            <% } else { %>
-        		            <button type="button" class="btn btn-primary publishSiteCat">Publier</button>
+        		            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPublish<%= cat.id %>">Publier</button>
         		            <% } %>
-		                    <button type="button" class="btn btn-light">Supprimer</button>
+		                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#suppCatModal<%= cat.id %>">Supprimer</button>
 		                </footer>
 					</article>
+					<!--------------------------------------------Modale publié / dépublié chat--------------------------------------->
+					<div class="modal fade" id="modalPublish<%= cat.id %>" tabindex="-1" role="dialog" aria-labelledby="publishModal" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+						  <div class="modal-content" data-article-id="<%= cat.id %>">
+							<div class="modal-header">
+							  <h5 class="modal-title" id="publishModal">Affichage sur le site</h5>
+							  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							  </button>
+							</div>
+							<div class="modal-body">
+							<% if (cat.site_publish === true) { %>
+							  <p>Voulez vous dépublier cet animal ?</p>
+							  <% } else { %>
+							  <p>Voulez vous publier cet animal ?</p>
+							  <% } %>
+							</div>
+							<div class="modal-footer">
+							  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+							  <% if (cat.site_publish === true) { %>
+							  <button type="button" class="btn btn-primary publishSite">Oui dépublier </button>
+							  <% } else { %>
+							  <button type="button" class="btn btn-primary publishSite">Oui publier </button>
+								<% } %>
+							</div>
+						  </div>
+						</div>
+					</div>
 
-				
+					<!--------------------------------------------Modale supprimé chat--------------------------------------->
+					<div class="modal fade" id="suppCatModal<%= cat.id %>" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+						  <div class="modal-content" data-article-id="<%= cat.id %>">
+						
+							<div class="modal-header">
+							  <h5 class="modal-title" id="deleteModal">Supprimer un chat</h5>
+							  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							  </button>
+							</div>
+							<div class="modal-body">
+							  Souhaitez vous vraiment supprimer definitivement cet animal de la base de donnée ?
+							</div>
+							<div class="modal-footer">
+							  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulé</button>
+							  <button type="button" class="btn btn-primary deleteCat">Oui</button>
+							</div>
+						  </div>
+						</div>
+					</div>
+
+
 		            <!--------------------------------------------Modale Modification chat--------------------------------------->
 					<div class="modal fade" id="editModal<%= cat.id %>" tabindex="-1" role="dialog" aria-labelledby="Editer-un-chat" aria-hidden="false">
 					  <div class="modal-dialog" role="document">
@@ -66,7 +116,7 @@
 					      <div class="modal-body">
 					        <form action="" method="POST">
 										<header class="modal-card-head">
-												<div class="alert alert-warning" role="alert">
+												<div class="alert alert-info" role="alert">
 													Attention certaines données sont directement connectées au site web, attention à l'orthographe!
 												  </div>
 												  <button class="delete close" type="button" aria-label="close"></button>
@@ -78,7 +128,7 @@
 													<div class="input-group-prepend">
 													  <span class="input-group-text">Nom</span>
 													</div>
-													<input type="text" class="form-control" aria-label="Default" value="<%= cat.name %>" aria-describedby="inputGroup-sizing-default" id="editNameCat">
+													<input type="text" class="form-control" aria-label="Default" value="<%= cat.name %>" aria-describedby="inputGroup-sizing-default" id="editNameCat<%= cat.id %>">
 												  </div>
 											</div>
 											<div class="field">
@@ -86,18 +136,26 @@
 													<div class="input-group-prepend">
 													  <span class="input-group-text">Age</span>
 													</div>
-													<input type="text" class="form-control" aria-label="Default" value="<%= cat.age %>" aria-describedby="inputGroup-sizing-default" id="editAgeCat">
+													<input type="text" class="form-control" aria-label="Default" value="<%= cat.age %>" aria-describedby="inputGroup-sizing-default" id="editAgeCat<%= cat.id %>">
 												  </div>
 											</div>
 										
-								  	<div class="input-group mb-3">
+											<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<label class="input-group-text" for="inputGroupSelect01">Sexe</label>
 										</div>
-										<select class="custom-select" id="editSexeCat">
-					                            <option selected>Choisir*</option>
-					                            <option value="Mâle">Mâle</option>
-					                            <option value="Femelle">Femelle</option>
+										<select class="custom-select" id="editSexeCat<%= cat.id %>">
+											<% if (cat.sexe === "Mâle") { %>
+												<option selected="Mâle">Mâle</option>
+												<option value="Femelle">Femelle</option>
+											<% }else if (cat.sexe === "Femelle"){ %>
+												<option selected="Femelle">Femelle</option>
+												<option value="Mâle">Mâle</option>
+											<% }else{ %>
+												<option selected>Choisir*</option>
+												<option value="Femelle">Femelle</option>
+												<option value="Mâle">Mâle</option>
+											<% }%>
 					                    </select>
 									</div>
 								
@@ -106,7 +164,7 @@
                                             <div class="input-group-prepend">
                                               <span class="input-group-text">Race</span>
                                             </div>
-                                            <input type="text" class="form-control" aria-label="Default" value="<%= cat.breed %>" aria-describedby="inputGroup-sizing-default" id="editBreedCat">
+                                            <input type="text" class="form-control" aria-label="Default" value="<%= cat.breed %>" aria-describedby="inputGroup-sizing-default" id="editBreedCat<%= cat.id %>">
                                           </div>
                                     </div>
 							
@@ -115,7 +173,7 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text">Entente</span>
 										</div>
-											<input type="text" class="form-control" aria-label="Default" value="<%= cat.amity %>" aria-describedby="inputGroup-sizing-default" id="editAmityCat">
+											<input type="text" class="form-control" aria-label="Default" value="<%= cat.amity %>" aria-describedby="inputGroup-sizing-default" id="editAmityCat<%= cat.id %>">
 									</div>
 								</div>
 							
@@ -124,17 +182,8 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text">Robe</span>
 										</div>
-											<input type="text" class="form-control" aria-label="Default" value="<%= cat.color %>" aria-describedby="inputGroup-sizing-default" id="editColorCat">
+											<input type="text" class="form-control" aria-label="Default" value="<%= cat.color %>" aria-describedby="inputGroup-sizing-default" id="editColorCat<%= cat.id %>">
 									  </div>
-								</div>
-							
-					            <div class="field">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text">Prise en charge</span>
-										</div>
-										<input class="form-control" type="date" value="<%= cat.date_supported %>" id="editDate_supportedCat">
-									</div>
 								</div>
 							
 					            <div class="field">
@@ -142,7 +191,7 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text">Identification</span>
 										</div>
-										<input type="text" class="form-control" aria-label="Default" value="<%= cat.ide %>" aria-describedby="inputGroup-sizing-default" id="editIdeCat">
+										<input type="text" class="form-control" aria-label="Default" value="<%= cat.ide %>" aria-describedby="inputGroup-sizing-default" id="editIdeCat<%= cat.id %>">
 									  </div>
 								</div>
 							
@@ -150,20 +199,19 @@
 									<div class="input-group-prepend">
 										<label class="input-group-text" for="inputGroupSelect01">Stérilisé</label>
 									</div>
-									<select class="custom-select" id="editSterilisedCat">
-										<option selected>Choisir*</option>
-										<option value="true">Oui</option>
-										<option value="false">Non</option>
+									<select class="custom-select" id="editSterilisedCat<%= cat.id %>">
+										<% if (cat.sterilised === true) { %>
+											<option value="true" selected="true">oui</option>
+											<option value="false">non</option>
+										<% } else if (cat.sterilised === false) { %>
+											<option value="true">oui</option>
+											<option value="false" selected="false">non</option>
+										<% } else { %>
+											<option selected>Choisir*</option>
+											<option value="true">oui</option>
+											<option value="false">non</option>
+										<% } %>
 									</select>
-								</div>
-							
-		            			<div class="field">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text">Dernier vaccin</span>
-										</div>
-										<input class="form-control" type="date" value="<%= cat.date_vaccine %>" aria-describedby="inputGroup-sizing-default" id="editDate_vaccineCat">
-									</div>
 								</div>
 							
 								<div class="nofield" id="nofild">
@@ -171,7 +219,7 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text">Description</span>
 										</div>
-										<textarea class="form-control" aria-label="With textarea" id="editDescriptionCat"></textarea>
+										<textarea class="form-control" aria-label="With textarea" id="editDescriptionCat<%= cat.id %>"><%= cat.description %></textarea>
 									  </div>
 								</div>
 							
@@ -180,7 +228,7 @@
 					</div>
 					    <div class="modal-footer">
 					    	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					        <button type="button" class="btn btn-primary saveChange">Save changes</button>
+					        <button type="button" class="btn btn-primary saveChangeCat">Save changes</button>
 					    </div>
 					</div>
 				</div>
@@ -277,7 +325,7 @@
 
 		  <form action="" method="POST">
 					  <header class="modal-card-head">
-						<div class="alert alert-warning" role="alert">
+						<div class="alert alert-info" role="alert">
 							Attention certaines données sont directement connectées au site web, attention à l'orthographe!
 						  </div>
 						  <button class="delete close" type="button" aria-label="close"></button>
@@ -310,9 +358,9 @@
 					<label class="input-group-text" for="inputGroupSelect01">Sexe</label>
   				</div>
 				  <select class="custom-select" id="addSexeCat">
-						<option>Choisir* </option>
-						<option>Mâle</option>
-						<option>Femelle</option>
+					<option selected>Choisir*</option>
+					<option value="Femelle">Femelle</option>
+					<option value="Mâle">Mâle</option>
 				  </select>
 				</div>
 				
@@ -357,20 +405,14 @@
 					<label class="input-group-text" for="inputGroupSelect01">Stérilisé</label>
 				</div>
 				<select class="custom-select" id="sterilisedAddCat">
-					<option>Choisir* </option>
-					<option value="true" >Oui</option>
-					<option value="false">Non</option>
+					<option selected>Choisir*</option>
+					<option value="true">oui</option>
+					<option value="false">non</option>
                 </select>
 				</div>
 				
 				<div class="field">
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-						  <span class="input-group-text">Dernier vaccin</span>
-						</div>
-						<input class="form-control" type="date" value="" aria-describedby="inputGroup-sizing-default" id="vaccineDateAddCat">
-					  </div>
-					  
+					
 					  <div class="nofield" id="nofildCat">
 						<div class="input-group">
 							<div class="input-group-prepend">
@@ -383,7 +425,7 @@
 			</form>
 		</div>
 		<div class="modal-footer">
-		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulé</button>
 		  <button type="button" class="btn btn-primary saveNewCat">Ajouter</button>
 		</div>
 	  </div>

@@ -1,6 +1,9 @@
 const Pet = require("../models/Pet");
 const HostFamily = require("../models/HostFamily");
 const QuestionnaireAdopt = require("../models/QuestionnaireAdopt");
+const multer = require('multer');
+const path = require('path');
+const storage = require('express');
 
 const petController = {
 
@@ -380,8 +383,146 @@ const petController = {
             console.trace(error)
             return response.status(500).json(error.toString());
         }
-    }
+    },
 
+    editDateVaccine: async (request, response) => {
+        try{
+            const petId = parseInt(request.params.id);
+            const pet = await Pet.findOnePet(petId);
+            //console.log('Mon controller',request.body.dateVaccine);
+            //console.log('ICI CEST ICI QUI FAUT QUEN JE REGHARDe',pet);
+            
+            if (request.body.dateVaccine) {
+                const editDate = {
+                    id: pet.id,
+                    date_vaccine: request.body.dateVaccine
+                }
+                await Pet.editVaccinePet(editDate);
+                response.status(200).json('La date du vaccin a bien été mise à jour');
+            } else {
+                response.json(`La date n'a pas pu être mise à jour`);
+            }
+        }catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString())
+        }
+    },
+
+    editDateSupported: async (request, response) => {
+        try{
+            const petId = parseInt(request.params.id);
+            const pet = await Pet.findOnePet(petId);
+            console.log('Mon controller',request.body.dateSupported);
+            
+            if (request.body.dateSupported) {
+                const editDate = {
+                    id: pet.id,
+                    date_supported: request.body.dateSupported
+                }
+                await Pet.editsupportedDate(editDate);
+                response.status(200).json('La date de la prise en charge a bien été mise à jour');
+            } else {
+                response.json(`La date n'a pas pu être mise à jour`);
+            }
+        }catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString())
+        }
+    },
+
+    putHostFamilyPet: async (request, response) => {
+        try {
+           console.log('Je suis ici');
+           
+            const petId = parseInt(request.params.id);
+            const pet = await Pet.findOnePet(petId);
+            const HF = parseInt(request.body.hostFamilyId);
+            console.log(HF);
+            
+            if(request.body.hostFamilyId) {
+                
+                const familyHostPet = {
+                    idPet: petId,
+                    idHF: HF
+                };
+                await Pet.hostFamilyPet(familyHostPet);
+                console.log('je suis loin',familyHostPet);
+                
+                response.status(200).json(`La famille d'accueil a bien été mise à jour`);
+            }else {
+                response.status(404).json('Cet animal n\'a pas de famille d\'acceuil')
+            }
+        }catch(error){
+            console.trace(error);
+        }
+    },
+
+    uploadPhotoPet: async (request, response) => {
+        try{
+            const storage = multer.diskStorage({
+                destination : path.join(__dirname, '..','public','uploads'),   
+                filename : (request, file, callback) =>{
+                    callback(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
+                }
+            });
+         
+            const upload = multer({
+                storage : storage,
+                limits : {
+                    filesize : 3000000
+                },
+                fileFilter : (request, file, callback) => {
+                    const prExt = /jpg|jpeg|png/;
+                    const checkExt = prExt.test(path.extname(file.originalname));
+                    const checkmime = prExt.test(file.mimetype);        
+                    if(checkExt && checkmime) { 
+                        callback(null, true);
+                    }else {
+                        callback('Veuillez inserez une image');
+                    }
+                }
+            }).single('petPicture');
+            
+            upload(request, response, error => {    
+            
+                if(request.file !== undefined){
+                    console.log(request.file.filename);
+                    response.send({
+                        file : request.file.filename
+                    })
+                   
+                }else{
+                    response.send({   
+                        error: 'veuillez ajouter une image'
+                    })
+                }
+                
+            })
+                
+                //if (error){
+                //    response.render('onePet', {
+                //        error : error
+                //    })  
+                //}else{
+                //    if(request.file !== undefined){
+                //        response.json(request.file)
+                //    
+                //    }else{
+                //        throw 'error'; ({
+                //            error: 'veuillez ajouter une image'
+                //        
+                            
+                       // })
+                    //}
+                //}
+        
+
+        } catch(error) {
+            console.trace(error)
+            return response.status(500).json(error.toString());
+        }
+    }
+       
 }
 
 module.exports = petController;

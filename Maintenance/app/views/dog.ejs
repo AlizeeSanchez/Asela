@@ -1,520 +1,471 @@
 <%- include('partials/header') %>
 
 <div class ="bande-top">
-			<ul class="nav nav-tabs" id="myTab" role="tablist">
-				<li class="nav-item">
-				  	<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">A l'adoption</a>
-				</li>
-				<li class="nav-item">
-				  	<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Nos adoptés</a>
-				</li>
-				<li class="nav-item">
-				  	<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Nos décédés</a>
-				</li>
-				<li class="nav-item">
-					<button class="nav-link" type="button" class="btn btn-secondary AddDog" id="btn-createDog" data-toggle="modal" data-target="#AddDogModal">Ajouter un chien</button>
-				</li>
-			</ul>
-			
-			<div class="tab-content" id="myTabContent">
-				
-				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-
-<!--------------------------------------------Partie a l'adoption--------------------------------------->		
-<main class="main1">
-
-    <div class="container">
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">A l'adoption</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Nos adoptés</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Nos décédés</a>
+		</li>
+		<li class="nav-item">
+			<button class="nav-link" type="button" class="btn btn-secondary AddDog" id="btn-createDog" data-toggle="modal" data-target="#AddDogModal">Ajouter un chien</button>
+		</li>
+	</ul>
+	
+	<div class="tab-content" id="myTabContent">
 		
-        		<div class="bloc-article">
-        		    <% for(let dog of jason.pets) { %>
-        		    <article class="article" data-article-id="<%= dog.id %>">
-        		        <header class="header-pet">
-							<h2 class="subTitle"><strong><%= dog.name %></strong></h2>
-        		            <img class="image-pet" src="/uploads/<%= dog.name %>.jpg" alt="Image de présentation de l'animal">
-						</header>
-        		        <main class="article-main-pet">
-        		            <ul class="content">
-								<li class="lien"><strong>Race</strong>: <%= dog.breed %></li>
-								<li class="lien"><strong>Age</strong>: <%= dog.age %></li>
-								<li class="lien"><strong>Sexe</strong>: <%= dog.sexe %></li>
-							</ul>
-        		        </main>
-        		        <footer class="Multi-button">
-        		            <button type="button" class="btn btn-success" onClick="location.href='pet/<%= dog.id %>'">Voir</button>
-        		            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal<%= dog.id %>">Modifier</button>
-        		            <% if (dog.site_publish === true) { %>
-        		            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPublish<%= dog.id %>">Dépublier</button>
-        		            <% } else { %>
-        		            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPublish<%= dog.id %>">Publier</button>
-        		            <% } %>
-		                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#suppDogModal<%= dog.id %>">Supprimer</button>
-		                </footer>
-					</article>
-					<!--------------------------------------------Modale publié / dépublié chien--------------------------------------->
-					<div class="modal fade" id="modalPublish<%= dog.id %>" tabindex="-1" role="dialog" aria-labelledby="publishModal" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-						  <div class="modal-content" data-article-id="<%= dog.id %>">
-							<div class="modal-header">
-							  <h5 class="modal-title" id="publishModal">Affichage sur le site</h5>
-							  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							  </button>
-							</div>
-							<div class="modal-body">
-							<% if (dog.site_publish === true) { %>
-							  <p>Voulez vous dépublier cet animal ?</p>
-							  <% } else { %>
-							  <p>Voulez vous publier cet animal ?</p>
-							  <% } %>
-							</div>
-							<div class="modal-footer">
-							  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-							  <% if (dog.site_publish === true) { %>
-							  <button type="button" class="btn btn-primary publishSite">Oui dépublier </button>
-							  <% } else { %>
-							  <button type="button" class="btn btn-primary publishSite">Oui publier </button>
-								<% } %>
-							</div>
-						  </div>
-						</div>
-					</div>
-
-					<!--------------------------------------------Modale supprimé chien--------------------------------------->
-					<div class="modal fade" id="suppDogModal<%= dog.id %>" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-						  <div class="modal-content" data-article-id="<%= dog.id %>">
-							<% console.log(dog.id);
-							 %>
-							<div class="modal-header">
-							  <h5 class="modal-title" id="deleteModal">Supprimer un chien</h5>
-							  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							  </button>
-							</div>
-							<div class="modal-body">
-							  Souhaitez vous vraiment supprimer definitivement cet animal de la base de donnée ?
-							</div>
-							<div class="modal-footer">
-							  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulé</button>
-							  <button type="button" class="btn btn-primary deleteDog">Oui</button>
-							</div>
-						  </div>
-						</div>
-					</div>
-
-		            <!--------------------------------------------Modale Modification chien--------------------------------------->
-					<div class="modal fade" id="editModal<%= dog.id %>" tabindex="-1" role="dialog" aria-labelledby="Editer-un-chien" aria-hidden="false">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content" data-article-id="<%= dog.id %>">
-					      <div class="modal-header">
-					        <h5 class="modal-title" id="Editer-un-chien">Modifier <%= dog.name %></h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body">
-					        <form action="" method="POST">
-										<header class="modal-card-head">
-												<div class="alert alert-info" role="alert">
-													Attention certaines données sont directement connectées au site web, attention à l'orthographe!
-												  </div>
-												  <button class="delete close" type="button" aria-label="close"></button>
-											<button class="delete close" type="button" aria-label="close"></button>
-										</header>
-										<section class="modal-card-body">
-					            			<div class="field">
-												<div class="input-group mb-3">
-													<div class="input-group-prepend">
-													  <span class="input-group-text editNameDog">Nom</span>
+		<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+			
+			<!--------------------------------------------Partie a l'adoption--------------------------------------->		
+			<main class="main1">
+				
+				<div class="container">
+					
+					<div class="bloc-article">
+						<% for(let dog of jason.pets) { %>
+							<article class="article" data-article-id="<%= dog.id %>">
+								<header class="header-pet">
+									<h2 class="subTitle"><strong><%= dog.name %></strong></h2>
+									<img class="image-pet" src="/uploads/<%= dog.name %>.jpg" alt="Image de présentation de l'animal">
+								</header>
+								<main class="article-main-pet">
+									<ul class="content">
+										<li class="lien"><strong>Race</strong>: <%= dog.breed %></li>
+										<li class="lien"><strong>Age</strong>: <%= dog.age %></li>
+										<li class="lien"><strong>Sexe</strong>: <%= dog.sexe %></li>
+									</ul>
+								</main>
+								<footer class="Multi-button">
+									<button type="button" class="btn btn-success" onClick="location.href='pet/<%= dog.id %>'">Voir</button>
+									<button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal<%= dog.id %>">Modifier</button>
+									<% if (dog.site_publish === true) { %>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPublish<%= dog.id %>">Dépublier</button>
+										<% } else { %>
+											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPublish<%= dog.id %>">Publier</button>
+										<% } %>
+									<button type="button" class="btn btn-light" data-toggle="modal" data-target="#suppDogModal<%= dog.id %>">Supprimer</button>
+								</footer>
+									</article>
+									<!--------------------------------------------Modale publié / dépublié chien--------------------------------------->
+									<div class="modal fade" id="modalPublish<%= dog.id %>" tabindex="-1" role="dialog" aria-labelledby="publishModal" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content" data-article-id="<%= dog.id %>">
+												<div class="modal-header">
+													<h5 class="modal-title" id="publishModal">Affichage sur le site</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<% if (dog.site_publish === true) { %>
+														<p>Voulez vous dépublier cet animal ?</p>
+														<% } else { %>
+															<p>Voulez vous publier cet animal ?</p>
+															<% } %>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+															<% if (dog.site_publish === true) { %>
+															<button type="button" class="btn btn-primary publishSite">Oui dépublier </button>
+																<% } else { %>
+																<button type="button" class="btn btn-primary publishSite">Oui publier </button>
+																	<% } %>
+															</div>
+														</div>
 													</div>
-													<input type="text" class="form-control" aria-label="Default" value="<%= dog.name %>" aria-describedby="inputGroup-sizing-default" id="editNameDog<%= dog.id %>">
-												  </div>
-											</div>
-											<div class="field">
-												<div class="input-group mb-3">
-													<div class="input-group-prepend">
-													  <span class="input-group-text">Age</span>
+												</div>
+													
+<!--------------------------------------------Modale supprimé chien--------------------------------------->
+												<div class="modal fade" id="suppDogModal<%= dog.id %>" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content" data-article-id="<%= dog.id %>">
+															<div class="modal-header">
+																<h5 class="modal-title" id="deleteModal">Supprimer un chien</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body">
+																Souhaitez vous vraiment supprimer definitivement cet animal de la base de donnée ?
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-secondary" data-dismiss="modal">Annulé</button>
+																<button type="button" class="btn btn-primary deleteDog">Oui</button>
+															</div>
+														</div>
 													</div>
-													<input type="text" class="form-control" aria-label="Default" value="<%= dog.age %>" aria-describedby="inputGroup-sizing-default" id="editAgeDog<%= dog.id %>">
-												  </div>
+												</div>
+													
+												<!--------------------------------------------Modale Modification chien--------------------------------------->
+													<div class="modal fade" id="editModal<%= dog.id %>" tabindex="-1" role="dialog" aria-labelledby="Editer-un-chien" aria-hidden="false">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content" data-article-id="<%= dog.id %>">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="Editer-un-chien">Modifier <%= dog.name %></h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<form action="" method="POST">
+																		<header class="modal-card-head">
+																			<div class="alert alert-info" role="alert">
+																				Attention certaines données sont directement connectées au site web, attention à l'orthographe!
+																			</div>
+																			<button class="delete close" type="button" aria-label="close"></button>
+																			<button class="delete close" type="button" aria-label="close"></button>
+																		</header>
+																		<section class="modal-card-body">
+																			<div class="field">
+																				<div class="input-group mb-3">
+																					<div class="input-group-prepend">
+																						<span class="input-group-text editNameDog">Nom</span>
+																					</div>
+																					<input type="text" class="form-control" aria-label="Default" value="<%= dog.name %>" aria-describedby="inputGroup-sizing-default" id="editNameDog<%= dog.id %>">
+																				</div>
+																			</div>
+																			<div class="field">
+																				<div class="input-group mb-3">
+																					<div class="input-group-prepend">
+																						<span class="input-group-text">Age</span>
+																					</div>
+																					<input type="text" class="form-control" aria-label="Default" value="<%= dog.age %>" aria-describedby="inputGroup-sizing-default" id="editAgeDog<%= dog.id %>">
+																				</div>
+																			</div>
+																			
+																			<div class="input-group mb-3">
+																				<div class="input-group-prepend">
+																					<label class="input-group-text" for="inputGroupSelect01">Sexe</label>
+																				</div>
+																				<select class="custom-select" id="editSexeDog<%= dog.id %>">
+																					<% if (dog.sexe === "Mâle") { %>
+																					<option selected="Mâle">Mâle</option>
+																					<option value="Femelle">Femelle</option>
+																					<% }else if (dog.sexe === "Femelle"){ %>
+																					<option selected="Femelle">Femelle</option>
+																					<option value="Mâle">Mâle</option>
+																					<% }else{ %>
+																					<option selected>Choisir*</option>
+																					<option value="Femelle">Femelle</option>
+																					<option value="Mâle">Mâle</option>
+																					<% }%>
+																				</select>
+																			</div>
+																						
+																			<div class="input-group mb-3">
+																				<div class="input-group-prepend">
+																					<label class="input-group-text" for="inputGroupSelect01">Race</label>
+																				</div>
+																				<input type="text" class="form-control" aria-label="Default" value="<%= dog.breed %>" aria-describedby="inputGroup-sizing-default" id="editBreedDog<%= dog.id %>">
+																							
+																			</div>
+																						
+																			<div class="field">
+																				<div class="input-group mb-3">
+																					<div class="input-group-prepend">
+																						<span class="input-group-text">Entente</span>
+																					</div>
+																					<input type="text" class="form-control" aria-label="Default" value="<%= dog.amity %>" aria-describedby="inputGroup-sizing-default" id="editAmityDog<%= dog.id %>">
+																				</div>
+																			</div>
+																						
+																			<div class="field">
+																				<div class="input-group mb-3">
+																					<div class="input-group-prepend">
+																						<span class="input-group-text">Robe</span>
+																					</div>
+																					<input type="text" class="form-control" aria-label="Default" value="<%= dog.color %>" aria-describedby="inputGroup-sizing-default" id="editColorDog<%= dog.id %>">
+																				</div>
+																			</div>
+																						
+																			<div class="input-group mb-3">
+																				<div class="input-group-prepend">
+																					<label class="input-group-text" for="inputGroupSelect01">Taille</label>
+																				</div>
+																				<select class="custom-select" id="editWeightDog<%= dog.id %>">
+																					<% if (dog.weight === "Petit Gabarit") { %>
+																					<option selected="Petit Gabarit">Petit Gabarit</option>
+																					<option value="Moyen Gabarit">Moyen Gabarit</option>
+																					<option value="Grand Gabarit">Grand Gabarit</option>
+																					<option value="Très Grand Gabarit"> Très Grand Gabarit</option>
+																					<% }else if (dog.weight === "Moyen Gabarit") { %>
+																					<option selected="Moyen Gabarit">Moyen Gabarit</option>
+																					<option value="Petit Gabarit">Petit Gabarit</option>
+																					<option value="Grand Gabarit">Grand Gabarit</option>
+																					<option value="Très Grand Gabarit"> Très Grand Gabarit</option>
+																					<% }else if (dog.weight === "Grand Gabarit") { %>
+																					<option selected="Grand Gabarit">Grand Gabarit</option>
+																					<option value="Petit Gabarit">Petit Gabarit</option>
+																					<option value="Moyen Gabarit">Moyen Gabarit</option>
+																					<option value="Très Grand Gabarit"> Très Grand Gabarit</option>
+																					<% }else if (dog.weight === "Très Grand Gabarit") { %>
+																					<option selected="Très Grand Gabarit">Très Grand Gabarit</option>
+																					<option value="Petit Gabarit">Petit Gabarit</option>
+																					<option value="Moyen Gabarit">Moyen Gabarit</option>
+																					<option value="Grand Gabarit">Grand Gabarit</option>
+																					<% }else{ %>
+																					<option selected>Choisir*</option>
+																					<option value="Petit Gabarit">Petit Gabarit</option>
+																					<option value="Moyen Gabarit">Moyen Gabarit</option>
+																					<option value="Grand Gabarit">Grand Gabarit</option>
+																					<option value="Très Grand Gabarit">Très Grand Gabarit</option>
+																					<% }%>
+																				</select>
+																			</div>
+																								
+																											
+																			<div class="field">
+																				<div class="input-group mb-3">
+																					<div class="input-group-prepend">
+																						<span class="input-group-text">Identification</span>
+																					</div>
+																					<input type="text" class="form-control" aria-label="Default" value="<%= dog.ide %>" aria-describedby="inputGroup-sizing-default" id="editIdeDog<%= dog.id %>">
+																				</div>
+																			</div>
+																											
+																			<div class="input-group mb-3">
+																				<div class="input-group-prepend">
+																					<label class="input-group-text" for="inputGroupSelect01">Stérilisé</label>
+																				</div>
+																				<select class="custom-select" id="editSterilisedDog<%= dog.id %>">
+																					<% if (dog.sterilised === true) { %>
+																						<option value="true" selected="true">oui</option>
+																						<option value="false">non</option>
+																						<% } else if (dog.sterilised === false) { %>
+																						<option value="true">oui</option>
+																						<option value="false" selected="false">non</option>
+																						<% } else { %>
+																						<option selected>Choisir*</option>
+																						<option value="true">oui</option>
+																						<option value="false">non</option>
+																						<% } %>
+																				</select>
+																			</div>
+																			<div class="nofield" id="nofild">
+																				<div class="input-group">
+																					<div class="input-group-prepend">
+																						<span class="input-group-text">Description</span>
+																					</div>
+																					
+																					<textarea class="form-control" aria-label="With textarea" id="editDescriptionDog<%= dog.id %>"><%= dog.description %></textarea>
+																				</div>
+																			</div>
+																		</section>
+																	</form>
+																</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+																	<button type="button" class="btn btn-primary saveChangeDog">Valider les modifications</button>
+																</div>
+															</div>
+														</div>
+													</div>
+													<% } %> 
+													
+												</div>
 											</div>
-										
-								  	<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<label class="input-group-text" for="inputGroupSelect01">Sexe</label>
-										</div>
-										<select class="custom-select" id="editSexeDog<%= dog.id %>">
-											<% if (dog.sexe === "Mâle") { %>
-												<option selected="Mâle">Mâle</option>
-												<option value="Femelle">Femelle</option>
-											<% }else if (dog.sexe === "Femelle"){ %>
-												<option selected="Femelle">Femelle</option>
-												<option value="Mâle">Mâle</option>
-											<% }else{ %>
-												<option selected>Choisir*</option>
-												<option value="Femelle">Femelle</option>
-												<option value="Mâle">Mâle</option>
-											<% }%>
-					                    </select>
+										</main>
+									</div>
+				<!--------------------------------------------PARTIE ADOPTES--------------------------------------->
+									
+									<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th scope="col">NOM</th>
+													<th scope="col">NOUVEAU NOM</th>
+													<th scope="col">RACE</th>
+													<th scope="col">AGE</th>
+													<th scope="col">SEXE</th>
+													<th scope="col">NOM ADOPTANT</th>
+													<th scope="col">PRENOM ADOPTANT</th>
+													<th scope="col">TELEPHONE</th>
+													<th scope="col">VILLE</th>
+													<th scope="col">CODE POSTAL</th>
+													<th scope="col">ADRESSE</th>
+												</tr>
+											</thead>
+											<tbody>
+												<% for(dogAdopted of jason.petsAdopt){ %>
+												<tr onClick="location.href='pet/<%= dogAdopted.id %>'">
+													<td><%= dogAdopted.name %></td>
+													<td><%= dogAdopted.last_name_pet %></td>
+													<td><%= dogAdopted.breed %></td>
+													<td><%= dogAdopted.age %></td>
+													<td><%= dogAdopted.sexe %></td>
+													<td><%= dogAdopted.lastname %></td>
+													<td><%= dogAdopted.firstname %></td>
+													<td><%= dogAdopted.number_phone %></td>
+													<td><%= dogAdopted.city %>
+														<td><%= dogAdopted.postal_code %></td>
+														<td><%= dogAdopted.adress %></td>
+												</tr>
+												<% } %> 
+											</tbody>
+										</table>
+									</div>
+
+						<!--------------------------------------------PARTIE Décédé--------------------------------------->
+									<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+										<table class="table table-hover">
+											<thead class="TitleTab">
+												<tr>
+													<th scope="col">Nom de l'animal</th>
+													<th scope="col">Race</th>
+													<th scope="col">Age</th>
+													<th scope="col">Sexe</th>
+												</tr>
+											</thead>
+											<tbody>
+											<% for(dogDead of jason.petsDead) { %>
+												<tr>
+													<td><%= dogDead.name %></td>
+													<td><%= dogDead.breed %></td>
+													<td><%= dogDead.age %></td>
+													<td><%= dogDead.sexe %></td>
+												</tr>	
+											<% } %>
+										</table>
 									</div>
 								
-					            	<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<label class="input-group-text" for="inputGroupSelect01">Race</label>
+							<!--------------------------------------------Modale AJOUT chien--------------------------------------->
+								<div class="modal fade" id="AddDogModal" tabindex="-1" role="dialog" aria-labelledby="Ajouter-un-chien" aria-hidden="false">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content" data-article-id="addDog">
+											<div class="modal-header">
+												<h5 class="modal-title" id="Ajouter_chien"> Creer la fiche d'un chien</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<form action="" method="POST">
+													<header class="modal-card-head">
+														<div class="alert alert-info" role="alert">
+															Attention certaines données sont directement connectées au site web, attention à l'orthographe!
+														</div>
+														<button class="delete close" type="button" aria-label="close"></button>
+													</header>
+													<section class="modal-card-body">
+														
+														<div class="field">
+															<div class="input-group mb-3">
+																<div class="input-group-prepend">
+																	<span class="input-group-text">Nom</span>
+																</div>
+																<input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addNameDog">
+															</div>
+														</div>
+														<div class="field">
+															<div class="input-group mb-3">
+																<div class="input-group-prepend">
+																	<span class="input-group-text">Age</span>
+																</div>
+																<input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addAgeDog">
+															</div>
+														</div>
+														<div class="field">
+															<div class="input-group mb-3">
+																<div class="input-group-prepend">
+																	<label class="input-group-text" for="inputGroupSelect01">Sexe</label>
+																</div>
+																<select class="custom-select" id="addSexeDog">
+																	<option selected>Choisir*</option>
+																	<option value="Femelle">Femelle</option>
+																	<option value="Mâle">Mâle</option>
+																</select>
+															</div>
+														</div>
+														
+														<div class="input-group mb-3">
+															<div class="input-group-prepend">
+																<label class="input-group-text" for="inputGroupSelect01">Race</label>
+															</div>
+															<input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addRaceDog">
+														</div>
+														
+														<div class="field">
+															<div class="input-group mb-3">
+																<div class="input-group-prepend">
+																	<span class="input-group-text">Entente</span>
+																</div>
+																<input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addAmityDog">
+															</div>
+															
+															<div class="field">
+																<div class="input-group mb-3">
+																	<div class="input-group-prepend">
+																		<span class="input-group-text">Robe</span>
+																	</div>
+																	<input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addColorDog">
+																</div>
+															</div>
+															
+															<div class="input-group mb-3">
+																<div class="input-group-prepend">
+																	<label class="input-group-text" for="inputGroupSelect01">Taille</label>
+																</div>
+																<select class="custom-select" id="addWeightDog">
+																	<option selected>Choisir*</option>
+																	<option value="Petit Gabarit">Petit Gabarit</option>
+																	<option value="Moyen Gabarit">Moyen Gabarit</option>
+																	<option value="Grand Gabarit">Grand Gabarit</option>
+																	<option value="Très Grand Gabarit">Très Grand Gabarit</option>
+																</select>
+															</div>
+															
+															<div class="field">
+																<div class="input-group mb-3">
+																	<div class="input-group-prepend">
+																		<span class="input-group-text">Identification</span>
+																	</div>
+																	<input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addIdeDog">
+																</div>
+															</div>
+															
+															<div class="input-group mb-3">
+																<div class="input-group-prepend">
+																	<label class="input-group-text" for="inputGroupSelect01">Stérilisé</label>
+																</div>
+																<select class="custom-select" id="sterilisedAddDog">
+																	<option selected>Choisir*</option>
+																	<option value="true">oui</option>
+																	<option value="false">non</option>
+																</select>
+															</div>
+															
+															<div class="field">
+																
+																<div class="nofield" id="nofild">
+																	<div class="input-group">
+																		<div class="input-group-prepend">
+																			<span class="input-group-text">Description</span>
+																		</div>
+																		<textarea class="form-control" aria-label="With textarea" id="descriptionAddDog"></textarea>
+																	</div>
+																</div>
+															</div>
+														</div>		
+													</section>
+												</form>
+											</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+											<button type="button" class="btn btn-primary saveNewDog">Ajouter le nouveau chien</button>
 										</div>
-										<input type="text" class="form-control" aria-label="Default" value="<%= dog.breed %>" aria-describedby="inputGroup-sizing-default" id="editBreedDog<%= dog.id %>">
-
-								</div>
-							
-					            <div class="field">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text">Entente</span>
-										</div>
-											<input type="text" class="form-control" aria-label="Default" value="<%= dog.amity %>" aria-describedby="inputGroup-sizing-default" id="editAmityDog<%= dog.id %>">
 									</div>
 								</div>
-							
-					            <div class="field">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text">Robe</span>
-										</div>
-											<input type="text" class="form-control" aria-label="Default" value="<%= dog.color %>" aria-describedby="inputGroup-sizing-default" id="editColorDog<%= dog.id %>">
-									  </div>
-								</div>
-							
-					            <div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<label class="input-group-text" for="inputGroupSelect01">Taille</label>
-									</div>
-									<select class="custom-select" id="editWeightDog<%= dog.id %>">
-										<% if (dog.weight === "Petit Gabarit") { %>
-											<option selected="Petit Gabarit">Petit Gabarit</option>
-											<option value="Moyen Gabarit">Moyen Gabarit</option>
-											<option value="Grand Gabarit">Grand Gabarit</option>
-											<option value="Très Grand Gabarit"> Très Grand Gabarit</option>
-										<% }else if (dog.weight === "Moyen Gabarit") { %>
-											<option selected="Moyen Gabarit">Moyen Gabarit</option>
-											<option value="Petit Gabarit">Petit Gabarit</option>
-											<option value="Grand Gabarit">Grand Gabarit</option>
-											<option value="Très Grand Gabarit"> Très Grand Gabarit</option>
-										<% }else if (dog.weight === "Grand Gabarit") { %>
-											<option selected="Grand Gabarit">Grand Gabarit</option>
-											<option value="Petit Gabarit">Petit Gabarit</option>
-											<option value="Moyen Gabarit">Moyen Gabarit</option>
-											<option value="Très Grand Gabarit"> Très Grand Gabarit</option>
-										<% }else if (dog.weight === "Très Grand Gabarit") { %>
-											<option selected="Très Grand Gabarit">Très Grand Gabarit</option>
-											<option value="Petit Gabarit">Petit Gabarit</option>
-											<option value="Moyen Gabarit">Moyen Gabarit</option>
-											<option value="Grand Gabarit">Grand Gabarit</option>
-										<% }else{ %>
-											<option selected>Choisir*</option>
-											<option value="Petit Gabarit">Petit Gabarit</option>
-											<option value="Moyen Gabarit">Moyen Gabarit</option>
-											<option value="Grand Gabarit">Grand Gabarit</option>
-											<option value="Très Grand Gabarit">Très Grand Gabarit</option>
-										<% }%>
-									</select>
-								</div>
-							
-					            <div class="field">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text">Prise en charge</span>
-										</div>
-
-										<% if (dog.date_supported) { %>
-										<input type="text" class="form-control" aria-label="Default" value="<%= dog.date_supported.toLocaleString('en-GB').substr(0, 10)%>" aria-describedby="inputGroup-sizing-default" id="editDate_supportedDog<%= dog.id %>">
-										<% }else{ %>
-											<input type="text" class="form-control editDate_supportedDog" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="editDate_supportedDog<%= dog.id %>">
-										<% }%>
-										
-									</div>
-								</div>
-							
-					            <div class="field">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text">Identification</span>
-										</div>
-										<input type="text" class="form-control" aria-label="Default" value="<%= dog.ide %>" aria-describedby="inputGroup-sizing-default" id="editIdeDog<%= dog.id %>">
-									  </div>
-								</div>
-							
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<label class="input-group-text" for="inputGroupSelect01">Stérilisé</label>
-									</div>
-									<select class="custom-select" id="editSterilisedDog<%= dog.id %>">
-										<% if (dog.sterilised === true) { %>
-											<option value="true" selected="true">oui</option>
-											<option value="false">non</option>
-										<% } else if (dog.sterilised === false) { %>
-											<option value="true">oui</option>
-											<option value="false" selected="false">non</option>
-										<% } else { %>
-											<option selected>Choisir*</option>
-											<option value="true">oui</option>
-											<option value="false">non</option>
-										<% } %>
-									</select>
-								</div>
-							
-		            			<div class="field">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text">Dernier vaccin</span>
-										</div>
-										<input type="text" class="form-control" aria-label="Default" value="<%= dog.date_vaccine.toLocaleString('en-GB').substr(0, 10)%>" aria-describedby="inputGroup-sizing-default" id="editDate_vaccineDog<%= dog.id %>">
-									</div>
-								</div>
-						
-								<div class="nofield" id="nofild">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text">Description</span>
-										</div>
-										<textarea class="form-control" aria-label="With textarea" id="editDescriptionDog<%= dog.id %>"><%= dog.description %></textarea>
-									  </div>
-								</div>
-							
-							</section>
-						</form>
-					</div>
-					    <div class="modal-footer">
-					    	<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-					        <button type="button" class="btn btn-primary saveChangeDog">Valider les modifications</button>
-					    </div>
-					</div>
-				</div>
-
-			</div>
-			<% } %> 
-			 
-		</div>
-	</div>
-</main>
-</div>
-<!--------------------------------------------PARTIE ADOPTES--------------------------------------->
-
-				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-					<table class="table table-hover">
-						<thead>
-						  <tr>
-							<th scope="col">NOM</th>
-							<th scope="col">NOUVEAU NOM</th>
-							<th scope="col">RACE</th>
-							<th scope="col">AGE</th>
-							<th scope="col">SEXE</th>
-							<th scope="col">NOM ADOPTANT</th>
-							<th scope="col">PRENOM ADOPTANT</th>
-							<th scope="col">TELEPHONE</th>
-							<th scope="col">VILLE</th>
-							<th scope="col">CODE POSTAL</th>
-							<th scope="col">ADRESSE</th>
-						  </tr>
-						</thead>
-						<tbody>
-						<% for(dogAdopted of jason.petsAdopt){ %>
-
-							<tr onClick="location.href='pet/<%= dogAdopted.id %>'">
-							<td><%= dogAdopted.name %></td>
-							<td><%= dogAdopted.last_name_pet %></td>
-							<td><%= dogAdopted.breed %></td>
-							<td><%= dogAdopted.age %></td>
-							<td><%= dogAdopted.sexe %></td>
-							<td><%= dogAdopted.lastname %></td>
-							<td><%= dogAdopted.firstname %></td>
-							<td><%= dogAdopted.number_phone %></td>
-							<td><%= dogAdopted.city %>
-							<td><%= dogAdopted.postal_code %></td>
-							<td><%= dogAdopted.adress %></td>
-						  </tr>
-
-
-						<% } %> 
-						
-						</tbody>
-					</table>
-					
-				</div>
-
-<!--------------------------------------------PARTIE Décédé--------------------------------------->
-
-<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-	
-	<table class="table table-hover">
-		<thead class="TitleTab">
-			<tr>
-				<th scope="col">Nom de l'animal</th>
-				<th scope="col">Race</th>
-				<th scope="col">Age</th>
-				<th scope="col">Sexe</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% for(dogDead of jason.petsDead) { %>
-			<tr>
-				<td><%= dogDead.name %></td>
-				<td><%= dogDead.breed %></td>
-				<td><%= dogDead.age %></td>
-				<td><%= dogDead.sexe %></td>
-			</tr>	
-			<% } %>
-	</table>
-	
-</div>
-
-<!--------------------------------------------Modale AJOUT chien--------------------------------------->
-
-<div class="modal fade" id="AddDogModal" tabindex="-1" role="dialog" aria-labelledby="Ajouter-un-chien" aria-hidden="false">
-	<div class="modal-dialog" role="document">
-	  <div class="modal-content" data-article-id="addDog">
-		<div class="modal-header">
-		  <h5 class="modal-title" id="Ajouter_chien"> Creer la fiche d'un chien</h5>
-		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		  </button>
-		</div>
-		<div class="modal-body">
-
-		  <form action="" method="POST">
-					  <header class="modal-card-head">
-						<div class="alert alert-warning" role="alert">
-							Attention certaines données sont directement connectées au site web, attention à l'orthographe!
-						  </div>
-						  <button class="delete close" type="button" aria-label="close"></button>
-					  </header>
-					  <section class="modal-card-body">
-
-						<div class="field">
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-								  <span class="input-group-text">Nom</span>
-								</div>
-								<input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addNameDog">
-							  </div>
-						</div>
-
-			  <div class="field">
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-					  <span class="input-group-text">Age</span>
-					</div>
-					<input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addAgeDog">
-				  </div>
-			
-
-			  </div>
-
-			  <div class="field">
-			  <div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<label class="input-group-text" for="inputGroupSelect01">Sexe</label>
-  				</div>
-				  <select class="custom-select" id="addSexeDog">
-						<option>Choisir* </option>
-						<option>Mâle</option>
-						<option>Femelle</option>
-				  </select>
-				</div>
-				
-			  </div>
-			  
-			  <div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<label class="input-group-text" for="inputGroupSelect01">Race</label>
-				</div>
-				<input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addRaceDog">
-					
-				</div>
-			
-				
-				<div class="field">
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-						  <span class="input-group-text">Entente</span>
-						</div>
-						<input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addAmityDog">
-					</div>
-
-			  <div class="field">
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-					  <span class="input-group-text">Robe</span>
-					</div>
-					<input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addColorDog">
-				  </div>
-            </div>
-			
-			<div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<label class="input-group-text" for="inputGroupSelect01">Taille</label>
-				</div>
-				<select class="custom-select" id="addWeightDog">
-						<option>Choisir* </option>
-						<option>Petit</option>
-						<option>Moyen</option>
-						<option>Grand</option>
-						<option>Très grand</option>
-				</select>
-			  </div>
-			  		  
-			  <div class="field">
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-					  <span class="input-group-text">Identification</span>
-					</div>
-					<input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addIdeDog">
-				  </div>
-            </div>
-			  
-			  <div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<label class="input-group-text" for="inputGroupSelect01">Stérilisé</label>
-				</div>
-				<select class="custom-select" id="sterilisedAddDog">
-					<option>Choisir* </option>
-					<option value="true" >Oui</option>
-					<option value="false">Non</option>
-				</select>
-				</div>
-				
-				<div class="field">
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-						  <span class="input-group-text">Dernier vaccin</span>
-						</div>
-						<input class="form-control" type="date" value="" aria-describedby="inputGroup-sizing-default" id="vaccineDateAddDog">
-					  </div>
-					  
-					  <div class="nofield" id="nofild">
-						<div class="input-group">
-							<div class="input-group-prepend">
-							  <span class="input-group-text">Description</span>
 							</div>
-							<textarea class="form-control" aria-label="With textarea" id="descriptionAddDog"></textarea>
-						  </div>
-					</div>
-					
-				</section>
-			</form>
-		</div>
-		<div class="modal-footer">
-		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-		  <button type="button" class="btn btn-primary saveNewDog">Ajouter le nouveau chien</button>
-		</div>
-	  </div>
-	</div>
-  </div>
-
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="/js/app.js"></script>
-<script src="/js/dog.js"></script>
-
-</body>
-
+										
+						<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+						<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+						<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+						<script src="/js/app.js"></script>
+						<script src="/js/dog.js"></script>
+										
+					</body>
+																									

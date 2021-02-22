@@ -21,7 +21,6 @@ const hostFamilyController = {
                 response.render('hostFamily',{
                     allHostFamilly
                 });
-                console.log(allHostFamilly);  
             }
 
             else {
@@ -44,8 +43,7 @@ const hostFamilyController = {
                 }
                 response.render('hostFamily',{
                     allHostFamilly
-                });
-                console.log(allHostFamilly);      
+                });    
                 
             } else {
                 response.status(404).json(`Il n'y a aucun commentaire pour cette famille d'acceuil trouvés.`);
@@ -113,26 +111,25 @@ const hostFamilyController = {
     editHostFamily: async (request, response) => {
         try {
             const hostFamilyId = request.params.id
-            console.log('premier',hostFamilyId);
-            
             const hostFamily = await HostFamily.findOneHostFamily(hostFamilyId);
-            console.log('deuxieme',hostFamily);
             
             if (hostFamily){
                 if (request.body){
+                    console.log('request.body =',request.body);
+                    
                     const editHostFamily = {
                         id: hostFamilyId,
-                        lastname: request.body.lastname,
-                        firstname: request.body.firstname,
-                        number_phone: request.body.number_phone,
-                        postal_code: request.body.postal_code,
-                        city: request.body.city,
-                        adress: request.body.adress,
-                        email: request.body.email,
-                        pet_composition: request.body.pet_composition,
-                        pet_accepted: request.body.pet_accepted,
-                        disponibility: request.body.disponibility,
-                        pet_asela: request.body.pet_asela,
+                        lastname: request.body.eventLastname,
+                        firstname: request.body.eventFirstname,
+                        number_phone: request.body.eventNumberPhone,
+                        postal_code: request.body.eventPostalCode,
+                        city: request.body.eventCity,
+                        adress: request.body.eventAdress,
+                        email: request.body.eventEmail,
+                        pet_composition: request.body.eventComposition,
+                        pet_accepted: request.body.eventAcceptedPet,
+                        disponibility: request.body.eventDisponibility,
+                        pet_asela: request.body.eventPetAsela,
                     };
                     console.log('troisieme',editHostFamily);
                     //on transmet les informations de l'animal à la fonction editPet
@@ -183,11 +180,7 @@ const hostFamilyController = {
                         id: editCommentHostFamilyId,
                         commentaire: request.body.commentaire
                     };
-                    console.log('troisieme', editComment);
-                    
                     const hostFamilyEdit = await HostFamily.editCommentHostFamily(editComment);
-                    console.log('quatrieme', hostFamilyEdit);
-                    
                     response.status(200).json({ hostFamilyEdit, TEXT: `Votre commentaire à bien été modifié sur la famille d\'acceuil numero ${editCommentHostFamilyId}` });  
                 }
                 else {
@@ -249,7 +242,7 @@ const hostFamilyController = {
         }catch(error){
             console.trace(error);
         }
-    },
+    }
 
 }
 

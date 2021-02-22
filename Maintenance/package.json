@@ -21,6 +21,7 @@
   "dependencies": {
     "boostrap": "^2.0.0",
     "bootstrap": "^3.4.1",
+    "bootstrap-toggle": "^2.2.2",
     "cors": "^2.8.5",
     "date-and-time": "^0.14.1",
     "dotenv": "^8.2.0",

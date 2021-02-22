@@ -2,6 +2,8 @@ const db = require("../database");
 
 const Event = {
 
+    
+
     //Lister les evenements
     allEvent: async () => {
         try{

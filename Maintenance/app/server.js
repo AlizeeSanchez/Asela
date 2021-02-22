@@ -2,6 +2,8 @@ require('dotenv').config();
 const cors = require('cors')
 const express = require('express');
 const session = require('express-session');
+const multer = require('multer');
+const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3030;
@@ -19,7 +21,6 @@ app.use(
 		cookie: {maxAge: 24 * 60 * 60 * 1000},
 		logged: false
 	})
-
 );
 
 const publicPath = __dirname + '/public';

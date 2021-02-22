@@ -93,7 +93,7 @@ const Pet = {
         console.log(pet);
         
         try{
-            const editpet = await db.query(`UPDATE pet SET date_supported = $1, name = $2, age = $3, amity = $4, sexe = $5, breed = $6, color = $7, ide = $8, sterilised = $9, date_vaccine = $10, description = $11, weight = $12 WHERE id = $13;`, [pet.date_supported, pet.name, pet.age, pet.amity, pet.sexe, pet.breed, pet.color, pet.ide, pet.sterilised, pet.date_vaccine, pet.description, pet.weight, pet.id]);
+            const editpet = await db.query(`UPDATE pet SET name = $1, age = $2, amity = $3, sexe = $4, breed = $5, color = $6, ide = $7, sterilised = $8, description = $9, weight = $10 WHERE id = $11;`, [pet.name, pet.age, pet.amity, pet.sexe, pet.breed, pet.color, pet.ide, pet.sterilised, pet.description, pet.weight, pet.id]);
             return editpet;
         }
         catch(error){
@@ -276,9 +276,38 @@ const Pet = {
         }catch(error) {
             console.log(error)
         }
-    }
+    },
 
- 
+    //Modifier un animal
+    editVaccinePet: async (editDate) => {
+        try{
+            const editVaccinDate = await db.query(`UPDATE pet SET date_vaccine = $1 WHERE id = $2;`, [editDate.date_vaccine, editDate.id]);
+            return editVaccinDate;
+        }
+        catch(error){
+            console.trace(error)
+        }
+    },
+
+    editsupportedDate: async (editDate) => {
+        try{
+            const editSupportedDate = await db.query(`UPDATE pet SET date_supported = $1 WHERE id = $2;`, [editDate.date_supported, editDate.id]);
+            return editSupportedDate;
+        }
+        catch(error){
+            console.trace(error)
+        }
+    },
+
+    hostFamilyPet: async (pet) => {
+        try{
+            const hostFamilyPet = await db.query(`UPDATE pet SET host_family_id = $1 WHERE id = $2;`, [pet.idHF, pet.idPet])
+            return hostFamilyPet;
+        }
+        catch(error){
+            console.trace(error)
+        }
+    }
 }
 
 module.exports = Pet;

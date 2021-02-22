@@ -10,32 +10,26 @@ const cat = {
        buttonSeeCat.addEventListener('click', cat.seeOnePet)  
    });
 
-   //On cible le bouton modifier un chat
-   const editCat = document.querySelectorAll('.cat');
-   editCat.forEach((buttonEditCat) => {
-   buttonEditCat.addEventListener('click', cat)  
-  });
+   // On cible le bouton Save change dans la modal modifier
+   const valideCat = document.querySelectorAll('.saveChangeCat');
+   valideCat.forEach((buttonValidateModify) => {
+        buttonValidateModify.addEventListener('click', cat.editCat)
+    });
   
-  
-  // On cible le bouton Save change dans la modal modifier
-  const valideCat = document.querySelector('.saveChange');
-  valideCat.addEventListener('click', cat.editCat)
-  
-
-   ///On cible le bouton dépublier/publier un chat
-  const publishCat = document.querySelectorAll('.publishSiteCat');
+   //On cible le bouton de la modal validation de dépublier/publier un chat
+  const publishCat = document.querySelectorAll('.publishSite');
   publishCat.forEach((buttonPublishCat) => {
       buttonPublishCat.addEventListener('click', cat.publishCat);
   });
   
   //On cible le bouton supprimer un chat
-  const suppCat = document.querySelectorAll('.btn-light');
+  const suppCat = document.querySelectorAll('.deleteCat');
   suppCat.forEach((buttonSuppCat) => {
       buttonSuppCat.addEventListener('click', cat.suppCat);
   });
 
   //On cible le bouton ajouter un chat
-  const addNewCat = document.querySelector('.btn-secondary');
+  const addNewCat = document.querySelector('.saveNewCat');
   addNewCat.addEventListener('click', cat.addNewCat);
 
 },
@@ -65,21 +59,17 @@ const cat = {
              const buttonSave = event.target;
              const article = buttonSave.closest('.modal-content');
              const articleId = article.getAttribute('data-article-id');
-             
-             const eventDate_supported = document.getElementById('editDate_supportedCat').value;
-             const eventName = document.getElementById('editNameCat').value;
-             const eventAge = document.getElementById('editAgeCat').value;
-             const eventSexe = document.getElementById('editSexeCat').value;
-             const eventBreed = document.getElementById('editBreedCat').value;
-             const eventAmity = document.getElementById('editAmityCat').value;
-             const eventColor = document.getElementById('editColorCat').value;
-             const eventIde = document.getElementById('editIdeCat').value;
-             const eventSterilised = document.getElementById('editSterilisedCat').value;
-             const eventDate_vaccine = document.getElementById('editDate_vaccineCat').value;
-             const eventDescription = document.getElementById('editDescriptionCat').value;
+             const eventName = document.getElementById(`editNameCat${articleId}`).value;
+             const eventAge = document.getElementById(`editAgeCat${articleId}`).value;
+             const eventSexe = document.getElementById(`editSexeCat${articleId}`).value;
+             const eventBreed = document.getElementById(`editBreedCat${articleId}`).value;
+             const eventAmity = document.getElementById(`editAmityCat${articleId}`).value;
+             const eventColor = document.getElementById(`editColorCat${articleId}`).value;
+             const eventIde = document.getElementById(`editIdeCat${articleId}`).value;
+             const eventSterilised = document.getElementById(`editSterilisedCat${articleId}`).value;
+             const eventDescription = document.getElementById(`editDescriptionCat${articleId}`).value;
  
              const eventCat = JSON.stringify({ 
-                 eventDate_supported: eventDate_supported,
                  eventName: eventName,
                  eventAge: eventAge,
                  eventSexe: eventSexe,
@@ -88,7 +78,6 @@ const cat = {
                  eventColor: eventColor,  
                  eventIde: eventIde, 
                  eventSterilised: eventSterilised, 
-                 eventDate_vaccine: eventDate_vaccine, 
                  eventDescription: eventDescription
              });
  
@@ -115,27 +104,30 @@ const cat = {
  
      publishCat: async function (event){
          const buttonClicked = event.target;
-         const articleElement = buttonClicked.closest('.article');
-         const articleId = articleElement.getAttribute('data-article-id');
+         const modalElement = buttonClicked.closest('.modal-content');
+         const modalId = modalElement.getAttribute('data-article-id');
+    
          try{
-             const response = await fetch(`http://localhost:3030/v1/site/${articleId}`, {
+             const response = await fetch(`http://localhost:3030/v1/site/${modalId}`, {
                  method: 'PATCH',
-                 body: articleId
+                 body: modalId
              });
              document.location.reload();    
          }catch(error) {
              console.trace(error);
          }
- 
      },
- 
-     suppCat: async function (event){
-        try{
+
+     suppCat: async function (event){        
         const buttonClicked = event.target;
-        const articleElement = buttonClicked.closest('.article');
-        const articleId = articleElement.getAttribute('data-article-id');
+        const articleElement = buttonClicked.closest('.modal-content');
+        const articleId = articleElement.getAttribute('data-article-id');        
+        console.log(articleId);
+        try{
+
+
         
-        const response = await fetch(`http://localhost:3030/v1/dogs/${articleId}`, {
+        const response = await fetch(`http://localhost:3030/v1/cats/${articleId}`, {
                  method: 'DELETE'
              });
              document.location.reload();
@@ -156,9 +148,8 @@ const cat = {
          const eventColor = document.getElementById('addColorCat').value;   
          const eventIde = document.getElementById('addIdeCat').value;
          const eventSterilised = document.getElementById('sterilisedAddCat').value; 
-         const eventVaccineDate = document.getElementById('vaccineDateAddCat').value;
          const eventDescription = document.getElementById('descriptionAddCat').value;
-         const event = JSON.stringify({ eventName: eventName, eventAge: eventAge, eventSexe: eventSexe, eventRace: eventRace, eventAmity: eventAmity, eventColor: eventColor, eventIde: eventIde, eventSterilised: eventSterilised, eventVaccineDate: eventVaccineDate, eventDescription: eventDescription});
+         const event = JSON.stringify({ eventName: eventName, eventAge: eventAge, eventSexe: eventSexe, eventRace: eventRace, eventAmity: eventAmity, eventColor: eventColor, eventIde: eventIde, eventSterilised: eventSterilised, eventDescription: eventDescription});
          console.log(event);
          
          const response = await fetch(`http://localhost:3030/v1/cats`, {
