@@ -290,6 +290,9 @@ ul.caract-adoptant {
 h2.Title-comment {
     margin-top: 35px;
 }
+
+
+.custom-file-label::after { content: "Charger";}
   /*-------------------------------------Carrousel--------------------------------------*/
   .carousel {
     position: relative;
@@ -332,4 +335,17 @@ position: relative;
 
 p.card-text {
     margin-top: 0.5rem;
+}
+
+ /*-------------------------------------Modal add Picture Pet--------------------------------------*/
+.custom-file {
+    height: auto !important;
+}
+/*-------------------------------------Modal profil host Familly--------------------------------------*/
+.row.gutters-sm {
+    margin: 1rem 0 0;
+}
+
+.toggle.btn {
+    min-width: 5rem !important;
 }

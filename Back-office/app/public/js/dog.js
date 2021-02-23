@@ -1,4 +1,16 @@
 const dog = {
+
+    init: function () {
+		dog.addListenerToActions();
+    },
+    
+    addListenerToActions: function () {
+    //On cible le bouton ajouter un chien
+    const addNewDog = document.querySelector('.saveNewDog');
+    addNewDog.addEventListener('click', dog.addNewDog); 
+
+    },
+
    seeOnePet: async function (event) {
         event.preventDefault();
         try {
@@ -17,28 +29,24 @@ const dog = {
 
     // Activer la modal edition
     editDog: async function (event) {
-       // On empeche le rechargement du formaulaire
+       // On empeche le rechargement du formulaire
        event.preventDefault();
        try {
             const buttonSave = event.target;
             const article = buttonSave.closest('.modal-content');
             const articleId = article.getAttribute('data-article-id');
-
-            const eventDate_supported = document.getElementById('editDate_supportedDog').value;
-            const eventName = document.getElementById('editNameDog').value;
-            const eventAge = document.getElementById('editAgeDog').value;
-            const eventSexe = document.getElementById('editSexeDog').value;
-            const eventBreed = document.getElementById('editBreedDog').value;
-            const eventAmity = document.getElementById('editAmityDog').value;
-            const eventColor = document.getElementById('editColorDog').value;
-            const eventWeight = document.getElementById('editWeightDog').value;
-            const eventIde = document.getElementById('editIdeDog').value;
-            const eventSterilised = document.getElementById('editSterilisedDog').value;
-            const eventDate_vaccine = document.getElementById('editDate_vaccineDog').value;
-            const eventDescription = document.getElementById('editDescriptionDog').value;
+            const eventName = document.getElementById(`editNameDog${articleId}`).value;
+            const eventAge = document.getElementById(`editAgeDog${articleId}`).value;
+            const eventSexe = document.getElementById(`editSexeDog${articleId}`).value;
+            const eventBreed = document.getElementById(`editBreedDog${articleId}`).value;
+            const eventAmity = document.getElementById(`editAmityDog${articleId}`).value;
+            const eventColor = document.getElementById(`editColorDog${articleId}`).value;
+            const eventWeight = document.getElementById(`editWeightDog${articleId}`).value;
+            const eventIde = document.getElementById(`editIdeDog${articleId}`).value;
+            const eventSterilised = document.getElementById(`editSterilisedDog${articleId}`).value;
+            const eventDescription = document.getElementById(`editDescriptionDog${articleId}`).value;
 
             const eventDog = JSON.stringify({ 
-                eventDate_supported: eventDate_supported,
                 eventName: eventName,
                 eventAge: eventAge,
                 eventSexe: eventSexe,
@@ -48,7 +56,6 @@ const dog = {
                 eventWeight: eventWeight, 
                 eventIde: eventIde, 
                 eventSterilised: eventSterilised, 
-                eventDate_vaccine: eventDate_vaccine, 
                 eventDescription: eventDescription
             });
 
@@ -76,6 +83,26 @@ const dog = {
 
     publishDog: async function (event){
         const buttonClicked = event.target;
+        const modalElement = buttonClicked.closest('.modal-content');
+        const modalId = modalElement.getAttribute('data-article-id');
+        
+        try{
+            console.log(modalId);
+            const response = await fetch(`http://localhost:3030/v1/site/${modalId}`, {
+                method: 'PATCH',
+                body: modalId
+            });
+            document.location.reload();
+            console.log(response);
+            
+        }catch(error) {
+            console.trace(error);
+        }
+
+    },
+
+    validatepublishDog: async function (event){
+        const buttonClicked = event.target;
         const articleElement = buttonClicked.closest('.article');
         const articleId = articleElement.getAttribute('data-article-id');
         try{
@@ -96,7 +123,7 @@ const dog = {
     suppDog: async function (event){
         try{
         const buttonClicked = event.target;
-        const articleElement = buttonClicked.closest('.article');
+        const articleElement = buttonClicked.closest('.modal-content');
         const articleId = articleElement.getAttribute('data-article-id');
         
             console.log(articleId);
@@ -109,7 +136,6 @@ const dog = {
         }catch(error) {
             console.trace(error);
         }
-
     },
 
     addNewDog: async function (event){
@@ -124,9 +150,8 @@ const dog = {
         const eventWeight = document.getElementById('addWeightDog').value;    
         const eventIde = document.getElementById('addIdeDog').value;
         const eventSterilised = document.getElementById('sterilisedAddDog').value; 
-        const eventVaccineDate = document.getElementById('vaccineDateAddDog').value;
         const eventDescription = document.getElementById('descriptionAddDog').value;
-        const event = JSON.stringify({ eventName: eventName, eventAge: eventAge, eventSexe: eventSexe, eventRace: eventRace, eventAmity: eventAmity, eventColor: eventColor, eventWeight: eventWeight, eventIde: eventIde, eventSterilised: eventSterilised, eventVaccineDate: eventVaccineDate, eventDescription: eventDescription});
+        const event = JSON.stringify({ eventName: eventName, eventAge: eventAge, eventSexe: eventSexe, eventRace: eventRace, eventAmity: eventAmity, eventColor: eventColor, eventWeight: eventWeight, eventIde: eventIde, eventSterilised: eventSterilised, eventDescription: eventDescription});
         
         const response = await fetch(`http://localhost:3030/v1/dogs`, {
             method: 'POST',
@@ -140,6 +165,9 @@ const dog = {
             console.trace(error);
         }
     }
-}
 
 
+};
+
+ // on accroche un écouteur d'évènement sur le document : quand le chargement est terminé, on lance app.init
+ document.addEventListener('DOMContentLoaded', dog.init );

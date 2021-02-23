@@ -17,6 +17,7 @@ const router = Router();
 
 //Route pour afficher notre back office des chiens
 router.get('/dogs', dogController.allPetsNotAdopted, dogController.allPetsAdopted, dogController.allPetsDeceaded)
+//
 router.get('/dogsAdopt', dogController.allPetsAdopted)
 //Route pour ajouter un chien a l'adoption
 router.post('/dogs', dogController.addNewPet)
@@ -31,15 +32,21 @@ router.get('/cats', catController.allPetsNotAdopted, catController.allPetsAdopte
 //Route pour modifier le status d'un chat (a l'adoption ou non)
 router.patch('/cats/:id', catController.petStateAdoption)
 // Route pour ajouter un nouveau chat à l'adoption
-router.post('/addNewCat', catController.AddNewCatToAdopt)
+router.post('/cats', catController.AddNewCatToAdopt)
 // Route pour supprimer un chat du site de l'association
-router.post('/suppCat/:id', catController.deleteCat)
+router.delete('/cats/:id', catController.deleteCat)
 
 //----------------------------------Routes Animal----------------------------
+//Route pour declarer qu'un animal a été adopté
+router.post('/pet/adopt/:id', petController.petSitePublish)
 //route pour voir la fiche d'un animal
 router.get('/pet/:id', petController.findOnePet, petController.findAllComment, petController.findAllQuestAdoptForOnePet)
 // Mise à jour  d'un animal
 router.patch('/pet/:id', petController.editPet)
+// Mise a jour des dates du dernier vaccin
+router.patch('/pet/datevaccine/:id', petController.editDateVaccine)
+// Mise a jour des dates de prise en charge
+router.patch('/pet/datesupported/:id', petController.editDateSupported)
 //Rechercher un animal
 router.post('/pet/:id', petController.findresearch)
 //Poster un commentaire sous l'animal
@@ -60,6 +67,10 @@ router.patch('/facebook/:id', petController.petStatePublishFB)
 router.patch('/site/:id', petController.petSitePublish)
 // modifier le status de reservation d'un animal
 router.patch('/reserve/:id', petController.petReserve)
+// Ajouter une photo a l'animal
+//router.post('/uploadpet', petController.uploadPhotoPet)
+// Route pour attribuer une famille d'acceuil à un animal
+router.patch('/putHostFamilyToPet/:id', petController.putHostFamilyPet)
 
 //---------------------------Routes Conditions d'adoption--------------------
 //Route pour lister les conditions d'adoption
@@ -107,6 +118,7 @@ router.delete('/deleteCommentHostFamily/:id', hostFamilyController.deleteComment
 // Route pour attribuer un animal à une famille d'acceuil
 router.patch('/putPetToHostFamily/:id', hostFamilyController.putPetHostFamily)
 
+
 //----------------------------------Routes Veterinaire----------------------------
 
 // Route pour afficher les vétérinaire par départements
@@ -133,8 +145,8 @@ router.post('/questionnaire', questionnaireAdoptController.responseQuest)
 // Route pour lister tous les évènements
 router.get('/events', eventController.allEvent)
 // Route pour télécharger une image de l'évènement
-//router.post('/upload', eventController.uploadevent)
-router.post('/events', eventController.addEvent, eventController.uploadevent)
+router.post('/upload', eventController.uploadevent)
+router.post('/events', eventController.uploadevent, eventController.addEvent)
 
 //-------------------------------Route questionnaire BACK OFFICE--------------------------------
 router.delete('/questionnaire/:id', questionnaireAdoptController.suppQuest)
@@ -154,10 +166,10 @@ router.delete('/deleteCommentAdoptant/:id', adoptantController.deleteCommentAdop
 
 //---------------------------------------Recherche-------------------------------------------------
 // ce middleware est appelé en 1 er car il prépare la liste des données que l'on as mis dans le response.locals
-router.use(researchController.loadAllSearch);
+//router.use(researchController.loadAllSearch);
 router.get('/pet/:id', researchController.loadPet)
 router.get('/hostFamilly/:id', researchController.loadHostFamily)
 router.get('/adoptant/:id', researchController.loadAdoptant)
-router.get('/search', researchController.search)
+//router.get('/search', researchController.search)
 
 module.exports = router;

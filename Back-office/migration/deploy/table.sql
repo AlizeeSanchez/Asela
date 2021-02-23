@@ -147,7 +147,7 @@ CREATE TABLE "questionnaire_adopt" ( -- Questionnaire adoptant
     lastname_firstname VARCHAR (70) NOT NULL, -- Nom et prenom de la personne
     date_birth VARCHAR (70) NOT NULL, -- 
     occupation VARCHAR (70)NOT NULL,
-    lastname_firstname_spouse VARCHAR (70), -- Nom et prenom du conjoin
+    lastname_firstname_spouse VARCHAR (70), -- Nom et prenom du conjoint
     date_birth_spouse VARCHAR (70), 
     occupation_spouse VARCHAR (70),
     number_phone VARCHAR(10) NOT NULL,

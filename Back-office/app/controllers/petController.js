@@ -1,6 +1,9 @@
 const Pet = require("../models/Pet");
 const HostFamily = require("../models/HostFamily");
 const QuestionnaireAdopt = require("../models/QuestionnaireAdopt");
+const multer = require('multer');
+const path = require('path');
+
 
 const petController = {
 
@@ -119,21 +122,22 @@ const petController = {
             
             if (pet){
                 if (request.body){
-                    const editPet = {
-                        id: pet.id,
-                        date_supported: request.body.eventDate_supported,
-                        name: request.body.eventName,
-                        age: request.body.eventAge,
-                        amity: request.body.eventAmity,
-                        sexe: request.body.eventSexe,
-                        breed: request.body.eventBreed,
-                        color: request.body.eventColor,
-                        ide: request.body.eventIde,
-                        date_vaccine: request.body.eventDate_vaccine,
-                        sterilised: request.body.eventSterilised,
-                        description: request.body.eventDescription,
-                        weight: request.body.eventWeight,
-                    };
+                        const editPet = {
+                            id: pet.id,
+                            date_supported: request.body.eventDate_supported,
+                            name: request.body.eventName,
+                            age: request.body.eventAge,
+                            amity: request.body.eventAmity,
+                            sexe: request.body.eventSexe,
+                            breed: request.body.eventBreed,
+                            color: request.body.eventColor,
+                            ide: request.body.eventIde,
+                            date_vaccine: request.body.eventDate_vaccine,
+                            sterilised: request.body.eventSterilised,
+                            description: request.body.eventDescription,
+                            weight: request.body.eventWeight,
+                        };
+                
                     if(editPet.Date_supported){
                     editPet.date_supported === Date.parse(editPet.date_supported, 'D M YYYY');
                     } else {
@@ -226,6 +230,7 @@ const petController = {
         }
     },
 
+    //On supprime un animal de la BDD
     deleteCommentPet: async(request, response) => {
         try {
             const deleteCommentPetId = parseInt(request.params.id);
@@ -325,7 +330,7 @@ const petController = {
             }
             else if(pet.site_publish === true){
                 const petTrue = await Pet.publishSiteIsFalse(petId);
-                response.json({petTrue, TEXT:'Cet animal n\'est pas disponible a l\'adoption'});
+                response.json({petTrue, TEXT:'Cet animal n\'est plus disponible a l\'adoption'});
             } else {
                 response.status(404).json(`Cet animal n'existe pas.`);
             }
@@ -356,8 +361,112 @@ const petController = {
             console.trace(error)
             return response.status(500).json(error.toString());
         }
-    }
+    },
 
+    //Signaler qu'un animal est adopté
+    petAdopt: async (request, response) => {
+        try{
+            const petId = parseInt(request.params.id);
+            const pet = await Pet.findOnePet(petId);
+            if(pet.reserve === false){
+                const petFalse = await Pet.reserveIsTrue(petId);
+                response.json('Cet animal est réservé par un adoptant');
+            }
+            if(pet.reserve === true){
+                const petTrue = await Pet.reserveIsFalse(petId);
+                response.json('Cet animal n\'est pas reservé');
+            } else {
+                response.status(404).json(`Cet animal n'existe pas.`);
+            }
+        }
+        catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString());
+        }
+    },
+
+    editDateVaccine: async (request, response) => {
+        try{
+            const petId = parseInt(request.params.id);
+            const pet = await Pet.findOnePet(petId);
+            //console.log('Mon controller',request.body.dateVaccine);
+            //console.log('ICI CEST ICI QUI FAUT QUEN JE REGHARDe',pet);
+            
+            if (request.body.dateVaccine) {
+                const editDate = {
+                    id: pet.id,
+                    date_vaccine: request.body.dateVaccine
+                }
+                await Pet.editVaccinePet(editDate);
+                response.status(200).json('La date du vaccin a bien été mise à jour');
+            } else {
+                response.json(`La date n'a pas pu être mise à jour`);
+            }
+        }catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString())
+        }
+    },
+
+    editDateSupported: async (request, response) => {
+        try{
+            const petId = parseInt(request.params.id);
+            const pet = await Pet.findOnePet(petId);
+            console.log('Mon controller',request.body.dateSupported);
+            
+            if (request.body.dateSupported) {
+                const editDate = {
+                    id: pet.id,
+                    date_supported: request.body.dateSupported
+                }
+                await Pet.editsupportedDate(editDate);
+                response.status(200).json('La date de la prise en charge a bien été mise à jour');
+            } else {
+                response.json(`La date n'a pas pu être mise à jour`);
+            }
+        }catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString())
+        }
+    },
+
+    putHostFamilyPet: async (request, response) => {
+        try {
+           console.log('Je suis ici');
+           
+            const petId = parseInt(request.params.id);
+            const pet = await Pet.findOnePet(petId);
+            const HF = parseInt(request.body.hostFamilyId);
+            console.log(HF);
+            
+            if(request.body.hostFamilyId) {
+                
+                const familyHostPet = {
+                    idPet: petId,
+                    idHF: HF
+                };
+                await Pet.hostFamilyPet(familyHostPet);
+                console.log('je suis loin',familyHostPet);
+                
+                response.status(200).json(`La famille d'accueil a bien été mise à jour`);
+            }else {
+                response.status(404).json('Cet animal n\'a pas de famille d\'acceuil')
+            }
+        }catch(error){
+            console.trace(error);
+        }
+    },
+
+    //uploadPhotoPet: async (request, response) => {
+    //    try{
+    //        
+    //            
+    //    } catch(error) {
+    //        console.trace(error)
+    //        return response.status(500).json(error.toString());
+    //    }
+    //}
+       
 }
 
 module.exports = petController;

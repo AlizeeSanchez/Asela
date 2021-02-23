@@ -56,7 +56,7 @@ const Cat = {
     },
 
     //Ajouter un chat a l'adoption
-    addNewCat: async (cat) => {
+    addNewCat: async (cat) => {       
         try{
             const addCat = `INSERT INTO pet ("type", "name", "age", "amity", "sexe", "breed", "ide", "sterilised", "description", "weight") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *;`;
             const data = await db.query(addCat, [
@@ -71,6 +71,8 @@ const Cat = {
                 cat.description, 
                 cat.weight
             ]); 
+            console.log('Je suis arriver en fin de requete');
+            
             return data.rows[0];
         } catch (error) {
         console.trace(error);

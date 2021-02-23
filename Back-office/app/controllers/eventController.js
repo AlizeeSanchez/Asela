@@ -12,7 +12,6 @@ const eventController = {
                 response.render('event', {
                     events
                 });
-               // console.log(events);
                 
             } else {
                  response.status(404).json(`Il n'y a aucun evenement en BDD.`);
@@ -24,43 +23,19 @@ const eventController = {
         }
     },
 
-    //Ajouter un event
-    addEvent: async (request, response, next) => {
-        try {
-            //Test si tous les champs sont renseignés 
-            if(request.body.title && request.body.location && request.body.date_event && request.body.content && request.body.picture) {
-                 const saveEvent = {
-                    title: request.body.title,
-                    location: request.body.location,
-                    date_event: request.body.date_event,
-                    content: request.body.content,
-                    picture: request.body.picture,
-                 };   
-
-                //on transmet les informations du membre a la fonction createMember
-                 await Event.addNewEvent(saveEvent);
-                response.json({ saveEvent , TEXT: 'Votre évènement a bien été enregistré'});
-                 next();
-
-            } else{
-                    response.json('Veuillez remplir tous les champs svp');
-            }   
-        } catch (error){
-            console.trace(error)
-            return response.status(500).json(error.toString());
-        } 
-    },
-    // Gestion des images enregistrer image dans upload
+     // Gestion des images enregistrer image dans upload
     
-    uploadevent: async (request, response) => {
+     uploadevent: async (request, response, next) => {
         try{
         const storage = multer.diskStorage({
-            destination : path.join(__dirname, '..','public','uploads'),
+            destination : path.join(__dirname, '..','public','uploads'),   
             filename : (request, file, callback) =>{
                 callback(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
             }
         });
-  
+        console.log(storage);
+        
+        
         const upload = multer({
             storage : storage,
             limits: {
@@ -80,25 +55,59 @@ const eventController = {
 
         }).single('event');  
 
-        upload(request, response, error =>{
-            if(error){
-                response.render('event',{
-                    events,
-                    error: error
-                })
-            }else{
-                  console.log(request.file);
-            }
+        upload(request, response, error => {    
+            
+                if(request.file !== undefined){
+                    console.log(request.file.filename);
+                    response.send({
+                        file : request.file.filename
+                    })
+                   
+                }else{
+                    response.send({   
+                        error: 'veuillez ajouter une image'
+                    })
+                    next();
+                }
+                
         })
-
+        
         }catch(error){
         console.trace(error)
         return response.status(500).json(error.toString());
         }
 
     },
+
+    //Ajouter un event
+    addEvent: async (request, response, next) => {
+        try {
+            console.log('body JE SUISS LAAAAAAAA', request.body);
+            //Test si tous les champs sont renseignés 
+            if(request.body.eventTitle && request.body.eventLocation && request.body.eventDate_event && request.body.eventContent && request.eventPicture) {
+                 const saveEvent = {
+                    title: request.body.eventTitle,
+                    location: request.body.eventLocation,
+                    date_event: request.body.eventDate_event,
+                    content: request.body.eventContent,
+                    picture: eventPicture
+                 };
+                 console.log('saveEvent ICCIICIIC AUSSI', saveEvent);
+                 
+                 
+                //on transmet les informations du membre a la fonction createMember
+                 await Event.addNewEvent(saveEvent);
+                response.redirect('/events')
+
+            } else{
+                    response.json('Veuillez remplir tous les champs svp');
+            }   
+        } catch (error){
+            console.trace(error)
+            return response.status(500).json(error.toString());
+        } 
+    }
     
-     
 }
 
 module.exports =  eventController;

@@ -45,7 +45,6 @@ const dogController = {
                     petsAdopt: response.petsAdopt,
                     petsDead
                 }
-                console.log(response.petsAdopt);
                 response.render('dog', {
                     jason
                 });
@@ -60,19 +59,18 @@ const dogController = {
     },
 
 
-    //On passe l'adoption a true quand un chien est disponible à l'adoption.
+    //On passe l'adoption a true quand un chien est disponible à l'adoption et false quand il ne l'est pas .
     petStateSitePublish: async (request, response) => {
         try{
             const petId = parseInt(request.params.id);
             const pet = await Dog.findOnePet(petId);
-            console.log(pet);
             if(pet.adopt === false){
                 const petFalse = await Dog.adoptIsTrue(petId);
                 response.json('Cet animal est disponible a l\'adoption');
             }
             if(pet.adopt ===true){
                 const petTrue = await Dog.adoptIsFalse(petId);
-                response.json('Cet animal n\'est pas disponible a l\'adoption');
+                response.json('Cet animal n\'est pas disponible à l\'adoption');
             } else {
                 response.status(404).json(`Cet animal n'existe pas.`);
             }
@@ -86,7 +84,6 @@ const dogController = {
     //Ajouter un chien à l'adoption
     addNewPet: async (request, response) => {
         try{
-            //console.log('Je suis dans mon controller et je recois:', request.body);
             //Test si tous les champs sont renseignés
             if(request.body.eventName && request.body.eventAge && request.body.eventSexe && request.body.eventDescription){
                 
@@ -105,8 +102,11 @@ const dogController = {
                     date_vaccine: request.body.eventVaccineDate,
                     description: request.body.eventDescription,    
                 };
+                
+                
                  //on transmet les informations de l'animal a la fonction addNewPet et on lui envois notre animal recuperer precedemment
                  const savePet = await Dog.addNewPet(pet);
+                 console.log(savePet);
                  response.json({savePet: pet, TEXT: 'L\'animal a bien été enregistré'});
                  //Redirection vers la fiche de l'animal
             } else {
@@ -125,7 +125,6 @@ const dogController = {
        try{
           const petId = parseInt(request.params.id);
           const pet = await Dog.findOnePet(petId);
-          console.log(pet);
           if(pet){
               const pet = await Dog.suppPet(petId)
               response.json('Cet animal a été supprimé avec succès.')

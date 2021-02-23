@@ -25,7 +25,7 @@
                         <div class="card">
                             <div class="card-horizontal">
                                 <div class="img-square-wrapper">
-                                    <img class="" src="/uploads/<%= event.picture %>.jpg" style="width: 25rem; height: 15rem; object-fit: cover;"  alt="Card image cap">
+                                    <img class="" src="/uploads/<%= event.picture %>" style="width: 25rem; height: 15rem; object-fit: cover;"  alt="Card image cap">
                                 </div>
                                 <div class="card-body">
                                     <div class="title">
@@ -120,19 +120,40 @@
                 </div>
             </div>
             
-            <form action="/v1/upload" method="post" enctype="multipart/form-data">
-                <input type="file" name="event" id="addPicture">
-                <input type="submit" value="upload">
-            </form>
-        
-            <%= typeof error !== 'undefined' ? error : '' %> 
+            
   
             </section>
           </form>
+
+          <form method="post" enctype="multipart/form-data">
+            
+            <input type="file" multiple name="petPicture[]" is="drop-files" label=" Déposer vos photo ici" class="custom-file-input" id="addPicture">
+            <input type="Submit" class="btn btn-primary" value="upload">
+
+            <div class="center">
+              <div class="form-input">
+                <label for="file-ip-1">Upload Image</label>
+                <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
+              <div class="preview">
+                <img id="file-ip-1-preview">
+                </div>
+
+
+              </div>
+            </div>
+
+        </form>
+    
+        <%= typeof error !== 'undefined' ? error : '' %> 
+
+        <% if(typeof file !== 'undefined'){ %>
+          <img src="../public/uploads/<%= file %>" style="width:80; display: block; margin: 5vh auto; object-fit: cover">
+          <% } %>
+          
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Ajouter</button>
+          <button type="button" class="btn btn-primary ValideNewEvent">Ajouter</button>
         </div>
       </div>
     </div>
@@ -239,12 +260,12 @@
 </main>
 </div>
 
-
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="/js/app.js"></script>
 <script src="/js/event.js"></script>
+<script type="module" src="//unpkg.com/@grafikart/drop-files-element"></script>
 
 
 <!--&times;-->

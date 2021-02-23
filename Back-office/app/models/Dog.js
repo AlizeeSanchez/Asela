@@ -61,17 +61,7 @@ const Dog = {
 
     },
 
-    //On passe l'adoption a false quand un chien est indisponible à l'adoption.
-    adoptIsFalse: async (id) => {
-        try{
-            const editpet = await db.query('UPDATE pet SET adopt = false WHERE id = $1 ;', [id])
-            return editpet.rows;
-        }
-        catch(error){
-            console.trace(error)
-        }
-
-    },
+    
 
     //Ajouter un chien a l'adoption
     addNewPet: async (pet) => {
@@ -91,8 +81,7 @@ const Dog = {
             pet.ide,
             pet.sterilised,
             pet.date_vaccine,
-            pet.description, 
-            
+            pet.description,    
         ]);
         return data.rows[0];
         }   
