@@ -3,27 +3,27 @@
 BEGIN;
 ------------------- FAMILLES D'ACCUEILS -----------------------
 
-INSERT INTO "host_family" ("lastname", "firstname", "number_phone", "postal_code", "city", "adress", "email", "pet_composition", "pet_accepted")
-VALUES ('Le Boudouil', 'Sophie', 'O687388358', '30230', 'Bouillargues', '1300 Chemin Mas de beaud', 'epona1@live.fr', '2 chiens', 'Chien femelle'),
-       ('Prud hame', 'Genevieve', '0665670361', '30129', 'Redessan', '3 Rue du 19 Mars 1961', 'genevieve.curty@orange.fr', 'Chiens/Chats', 'Chiens'),
-       ('Vargas Canino', 'Silvia', '0669341885', '30000', 'Nîmes', '62 Rue Alain Massot', 'silvia8nimes@yahoo.fr', '0', 'Chiens'),
-       ('Laurent', 'Marine', '0776693182', '30200', 'Codolet', '9 Place Marcel Pagnol', 'marinelaurent01@gmail.com', '1 chien', 'Chiens'),
-       ('Roux', 'Françoise', '0633785208', '30210', 'Argilliers', 'Impasse de l Arceau', 'roux.francoise30@gmail.com', '0', 'Chiens'),
-       ('Gleyze', 'Severine', '0783342291', '30500', 'St Ambroix', '663 Route de Saint Germain', 'gleyzemaelia@gmail.com', '0', 'Chiens'),
-       ('Couillet', 'Rachelle', '0666708152', '30660', 'Gallargues le Montueux', 'Chemin de Veidran', 'rachele.c@hotmail.fr', '0', 'Chiens/Chiots'),
-       ('Coesen', 'Ornella', '0680000144', '30260', 'Quissac', '63 Rue du Four de Veidran', 'portmannornella@gmail.com', '0', 'Chiens'),
-       ('0', 'Severine', '0', '30380', 'St Christol les Ales', '280 Rue des Tilleuls', '0', '0', 'Chatons'),
-       ('0', 'Aurelia', '0789570870', '30100', 'Ales', '471 Chemin des sports', '0', '0', 'Chatons'),
-       ('0', 'Audrey', '0642333134', '30100', 'Ales', '414 D Avenue Dr Jean Gaubert', 'audrey.simon16@orange.fr', '0', 'Chatons'),
-       ('0', 'Brigitte', '0768204153', '30260', 'Quissac', '64 Impasse des rouges gorges', 'brissal@homtail.fr', '0', 'Chatons'),
-       ('Meunier Fevrier', 'Cathy', '0670257748', '30170', 'Saint Hyppolyte du Fort', '22 Route de Cros', 'cathyfevrier@neuf.fr', '0', 'Chatons'),
-       ('Boursier', 'Sarah', '0687614328', '30350', 'Aigremont', '6 Rue du Nord', 'christian.boursier11@orange.fr', '0', 'Chatons'),
-       ('Lopez', 'Emilie', '0658915220', '30110', 'St Cecile D Andorge','La haute levade ouest', 'elena04@outlook.fr', '0', 'Chatons'),
-       ('Perez', 'Cendrine', '0615074798', '30870', 'St Come et Maruejols','48 chemin de la fontaine de robert', 'cendrineperez@hotmail.fr', '0', 'Chatons'),
-       ('Savri', 'Magali', '0609988497', '30000', 'Nimes', '866 Chemin des Terres de Rouviere', 'savrimagali@gmail.com', '0', 'Chatons'),
-       ('Sanchez', 'Alizée', '0781025042', '34170', 'Castelnau Le Lez', '18 rue des genets', 'alizee.sanchez0882@hotmail.fr', '6 chats un chien','Chien'),
-       ('Soutoul', 'Anna', '0784515210', '34170', 'Castelnau Le Lez', '4 imp puits de cours', 'anna.sout@outlook.fr', 'Chats et chiens','Chiens et chats'),
-       ('Roger', 'Gabriel', '0675953598', '34000', 'Montpellier', '130 av de palavas', 'gabriel395@hotmail.fr', '2 Chats','Chien');
+INSERT INTO "host_family" ("lastname", "firstname", "number_phone", "postal_code", "city", "adress", "email", "pet_composition")
+VALUES ('Le Boudouil', 'Sophie', 'O687388358', '30230', 'Bouillargues', '1300 Chemin Mas de beaud', 'epona1@live.fr', '2 chiens'),
+       ('Prud hame', 'Genevieve', '0665670361', '30129', 'Redessan', '3 Rue du 19 Mars 1961', 'genevieve.curty@orange.fr', 'Chiens/Chats'),
+       ('Vargas Canino', 'Silvia', '0669341885', '30000', 'Nîmes', '62 Rue Alain Massot', 'silvia8nimes@yahoo.fr', '0'),
+       ('Laurent', 'Marine', '0776693182', '30200', 'Codolet', '9 Place Marcel Pagnol', 'marinelaurent01@gmail.com', '1 chien'),
+       ('Roux', 'Françoise', '0633785208', '30210', 'Argilliers', 'Impasse de l Arceau', 'roux.francoise30@gmail.com', '0'),
+       ('Gleyze', 'Severine', '0783342291', '30500', 'St Ambroix', '663 Route de Saint Germain', 'gleyzemaelia@gmail.com', '0'),
+       ('Couillet', 'Rachelle', '0666708152', '30660', 'Gallargues le Montueux', 'Chemin de Veidran', 'rachele.c@hotmail.fr', '0'),
+       ('Coesen', 'Ornella', '0680000144', '30260', 'Quissac', '63 Rue du Four de Veidran', 'portmannornella@gmail.com', '0'),
+       ('0', 'Severine', '0', '30380', 'St Christol les Ales', '280 Rue des Tilleuls', '0', '0'),
+       ('0', 'Aurelia', '0789570870', '30100', 'Ales', '471 Chemin des sports', '0', '0'),
+       ('0', 'Audrey', '0642333134', '30100', 'Ales', '414 D Avenue Dr Jean Gaubert', 'audrey.simon16@orange.fr', '0'),
+       ('0', 'Brigitte', '0768204153', '30260', 'Quissac', '64 Impasse des rouges gorges', 'brissal@homtail.fr', '0'),
+       ('Meunier Fevrier', 'Cathy', '0670257748', '30170', 'Saint Hyppolyte du Fort', '22 Route de Cros', 'cathyfevrier@neuf.fr', '0'),
+       ('Boursier', 'Sarah', '0687614328', '30350', 'Aigremont', '6 Rue du Nord', 'christian.boursier11@orange.fr', '0'),
+       ('Lopez', 'Emilie', '0658915220', '30110', 'St Cecile D Andorge','La haute levade ouest', 'elena04@outlook.fr', '0'),
+       ('Perez', 'Cendrine', '0615074798', '30870', 'St Come et Maruejols','48 chemin de la fontaine de robert', 'cendrineperez@hotmail.fr', '0'),
+       ('Savri', 'Magali', '0609988497', '30000', 'Nimes', '866 Chemin des Terres de Rouviere', 'savrimagali@gmail.com', '0'),
+       ('Sanchez', 'Alizée', '0781025042', '34170', 'Castelnau Le Lez', '18 rue des genets', 'alizee.sanchez0882@hotmail.fr', '6 chats un chien'),
+       ('Soutoul', 'Anna', '0784515210', '34170', 'Castelnau Le Lez', '4 imp puits de cours', 'anna.sout@outlook.fr', 'Chats et chiens'),
+       ('Roger', 'Gabriel', '0675953598', '34000', 'Montpellier', '130 av de palavas', 'gabriel395@hotmail.fr', '2 Chats');
 
 ---------------------ADOPTANTS--------------------------------
 INSERT INTO "adoptant" ("lastname", "firstname", "number_phone", "postal_code", "city", "adress", "email")

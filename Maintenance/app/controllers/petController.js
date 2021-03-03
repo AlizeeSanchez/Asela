@@ -207,13 +207,15 @@ const petController = {
     addComment: async (request, response) => {
         const petId = parseInt(request.params.id);
         const pet = await Pet.findOnePet(petId);
+        console.log(request.body);
+        
         try{
             //Test si tous les champs sont renseignés
-            if(pet && request.body.commentaire){
+            if(pet && request.body.commentPet){
                 // On recupere toutes les données envoyées par le body
                 const petCommentary = {
                     pet_id: pet.id,
-                    commentaire: request.body.commentaire
+                    commentaire: request.body.commentPet
                 };
                  //on transmet les informations de l'animal a la fonction addNewPet et on lui envois notre animal recuperer precedemment
                  const savePet = await Pet.addNewCommentPet(petCommentary);

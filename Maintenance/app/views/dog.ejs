@@ -1,5 +1,7 @@
 <%- include('partials/header') %>
-
+<div >
+<h3 style="text-align:center;"> ASELA > Nos chiens</h3>
+</div>
 <div class ="bande-top">
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
 		<li class="nav-item">
@@ -24,13 +26,12 @@
 			<main class="main1">
 				
 				<div class="container">
-					
 					<div class="bloc-article">
 						<% for(let dog of jason.pets) { %>
 							<article class="article" data-article-id="<%= dog.id %>">
 								<header class="header-pet">
 									<h2 class="subTitle"><strong><%= dog.name %></strong></h2>
-									<img class="image-pet" src="/uploads/<%= dog.name %>.jpg" alt="Image de présentation de l'animal">
+									<img class="image-pet" src="/img/dogprofil.png" alt="Image de présentation de l'animal">
 								</header>
 								<main class="article-main-pet">
 									<ul class="content">

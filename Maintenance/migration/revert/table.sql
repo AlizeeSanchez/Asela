@@ -3,6 +3,7 @@
 BEGIN;
 
 DROP TABLE "blacklister";
+DROP TABLE "notification";
 DROP TABLE "questionnaire_adopt";
 DROP TABLE "commentaire_adoptant";
 DROP TABLE "commentaire_pet";

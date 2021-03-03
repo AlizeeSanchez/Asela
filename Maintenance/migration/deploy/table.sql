@@ -8,7 +8,8 @@ CREATE TABLE "volunteer" (
     firstname VARCHAR(25) NOT NULL,
     number VARCHAR(10) NOT NULL UNIQUE,
     mail VARCHAR(70) NOT NULL UNIQUE,
-    password VARCHAR(70) NOT NULL
+    password VARCHAR(70) NOT NULL,
+    admin BOOLEAN DEFAULT false
 );
 
 CREATE TABLE "host_family" (
@@ -19,24 +20,33 @@ CREATE TABLE "host_family" (
     postal_code VARCHAR(5) NOT NULL,
     city TEXT NOT NULL,
     adress TEXT NOT NULL,
-    email VARCHAR (70) NOT NULL,
-    pet_composition TEXT NOT NULL,
-    pet_accepted TEXT NOT NULL,
+    email VARCHAR (70),
+    pet_composition TEXT,
+    cat_accepted BOOLEAN DEFAULT true,
+    kitten_accepted BOOLEAN DEFAULT true,
+    dog_big_accepted BOOLEAN DEFAULT true,
+    dog_little_accepted BOOLEAN DEFAULT true,
+    puppy_accepted BOOLEAN DEFAULT true,
     disponibility BOOLEAN DEFAULT true,
     pet_complet BOOLEAN DEFAULT false,
     pet_asela TEXT,
-    comment TEXT
+    comment TEXT,
+    black_list BOOLEAN DEFAULT false
 );
 
 CREATE TABLE "adoptant" (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    number_id_passport TEXT,
     lastname VARCHAR (50) NOT NULL,
     firstname VARCHAR (25) NOT NULL,
     postal_code VARCHAR(5) NOT NULL,
     number_phone VARCHAR(10) NOT NULL,
+    number_phone2 VARCHAR(10),
     city TEXT NOT NULL,
     email VARCHAR (70) NOT NULL,
-    adress TEXT NOT NULL
+    adress TEXT NOT NULL,
+    type_home TEXT,
+    black_list BOOLEAN DEFAULT false
 );
 
 CREATE TABLE "pet" (
@@ -44,7 +54,7 @@ CREATE TABLE "pet" (
     date_supported DATE, -- Date de prise en charge
     type VARCHAR(10) NOT NULL, -- type d'animal
     name VARCHAR(50), -- Nom de l'animal
-    age TEXT, -- age ou date de naissance de l'animal
+    age DATE, -- age ou date de naissance de l'animal
     amity TEXT DEFAULT 'inconnu', -- ententes de l'animal
     sexe TEXT, -- sexe de l'animal
     breed TEXT, --Race de l'animal
@@ -55,7 +65,7 @@ CREATE TABLE "pet" (
     description TEXT, --description de l'animal
     weight TEXT, --taille de l'animal
     host_family_id int DEFAULT NULL REFERENCES "host_family"(id) ON DELETE SET NULL, --Id de la famille d'accueil
-    adopt BOOLEAN DEFAULT false, -- Si l'animal est adopté
+    adopt BOOLEAN DEFAULT false, -- Si l'animal est disponible à l'adoption
     date_adopting DATE DEFAULT NULL , --Date de l'adoption
     adoptant_id int DEFAULT NULL REFERENCES "adoptant"(id) ON DELETE SET NULL, -- id de l'adoptant
     last_name_pet VARCHAR(50), -- Nom de l'animal donné par l'adoptant (si changement)
@@ -87,7 +97,7 @@ CREATE TABLE "veterinary" (
     cat_ovario_tatouage int,
     cat_vaccine int,
     cat_IDE int
-    );
+);
 
 
 CREATE TABLE "event" (
@@ -129,13 +139,17 @@ CREATE TABLE "picture_event"(
 CREATE TABLE "commentaire_pet"( -- Commentaire au sujet d'un animal
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     pet_id int NOT NULL REFERENCES "pet"(id) ON DELETE CASCADE,
-    commentaire TEXT NOT NULL
+    commentaire TEXT NOT NULL,
+    date_comment date NOT NULL DEFAULT now(),
+    volunteer_author TEXT NOT NULL
 );
 
 CREATE TABLE "commentaire_adoptant" ( --Commentaire au sujet d'un adoptant
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     adoptant_id int NOT NULL REFERENCES "adoptant"(id) ON DELETE CASCADE,
-    commentaire TEXT NOT NULL
+    commentaire TEXT NOT NULL,
+    date_comment date NOT NULL DEFAULT now(),
+    volunteer_author TEXT NOT NULL
 );
 
 CREATE TABLE "questionnaire_adopt" ( -- Questionnaire adoptant
@@ -216,12 +230,26 @@ CREATE TABLE "questionnaire_adopt" ( -- Questionnaire adoptant
     status TEXT DEFAULT 'En attente' NOT NULL, -- Status du questionnaire (En attente, Refusé, Sans suite, Rencontre, Adopté)
     meet DATE, --  Si rencontre : Date de la rencontre
     refused_comment TEXT, -- si refusé : commentaire
-    general_comment TEXT -- commentaire en tout genre
-   
+    general_comment TEXT, -- commentaire en tout genre
+    volunteer_assigned TEXT NOT NULL
+
+);
+
+CREATE TABLE "notification" (    
+    id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    notification_status BOOLEAN DEFAULT false,
+    volunteer_assigned TEXT NOT NULL,
+    volunteer_author TEXT NOT NULL,
+    date_sending DATE DEFAULT NOW() NOT NULL,
+    description TEXT,
+    warning BOOLEAN DEFAULT false,
+    label TEXT,
+    date_treatment DATE
 );
 
 CREATE TABLE "blacklister" (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    number_id_passport TEXT,
     lastname VARCHAR (50) NOT NULL,
     firstname VARCHAR (25) NOT NULL,
     postal_code VARCHAR(5) NOT NULL,
@@ -229,7 +257,8 @@ CREATE TABLE "blacklister" (
     city TEXT NOT NULL,
     email VARCHAR (70) NOT NULL,
     adress TEXT NOT NULL,
-    explication TEXT NOT NULL
+    comment TEXT NOT NULL,
+    "date" date NOT NULL DEFAULT now()
 );
 
 

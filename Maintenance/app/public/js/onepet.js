@@ -19,7 +19,11 @@ const onePet = {
 
     //On cible le bouton Valider les modification d'une famille d'acceuil
     const validateHostFamily = document.querySelector('.saveHostFamily');
-    validateHostFamily.addEventListener('click', onePet.validateIdHostFamily )
+    validateHostFamily.addEventListener('click', onePet.validateIdHostFamily);
+
+    //On cible le bouton Valider un commentaire d'un animal
+    const valideCommentPet = document.querySelector('.ValideCommentPet');
+    valideCommentPet.addEventListener('click', onePet.validateCommentPet);
 
     },
 
@@ -178,7 +182,47 @@ const onePet = {
             console.log(error);
             
          }
-    } 
+    },
+
+    validateCommentPet: async function (event) {
+        event.preventDefault();
+        try {
+             const buttonSave = event.target;
+             const article = buttonSave.closest('.card-body');
+             console.log('mon article', article);
+             
+             const articleId = article.getAttribute('data-article-id');
+             console.log('id article', articleId);
+             
+             const commentPet = document.getElementById('message-text').value;
+            console.log('mon commentaire pet', commentPet);
+            
+             const dataCommentPet = JSON.stringify({
+                petId: articleId,
+                commentPet: commentPet
+             })
+             
+             const response = await fetch(`http://localhost:3030/v1/pet/comment/${articleId}`, {
+                 method: 'POST',
+                 body: dataCommentPet,
+                 headers: {
+                     'Content-type': 'application/json'
+                 }
+             });
+             
+         if (response.status === 200) {
+             //article.add();
+             document.location.reload();
+             response.json({ dataCommentPet })
+         } 
+         else {
+             response.json("Impossible d\'envoyer le commentaire")
+         }
+         }catch(error){
+            console.log(error);
+            
+         }
+    }
 };
 
 // on accroche un écouteur d'évènement sur le document : quand le chargement est terminé, on lance app.init

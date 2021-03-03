@@ -10,8 +10,18 @@ const questionnaireAdoptController = require('./controllers/questionnaireAdoptCo
 const adoptantController = require('./controllers/adoptantController');
 const eventController = require('./controllers/eventController');
 const researchController = require('./controllers/researchController');
+const userController = require('./controllers/userController');
+//Partie Joi validation des données
+const volunteerSchema = require('./schema/asela_validate');
+const { addUserValidation } = require('./services/validator');
 
 const router = Router();
+
+//---------------------------------Route LOGIN et SIGNIN----------------------------
+router.get('/login', userController.loginPage)
+router.post('/login', userController.login)
+router.get('/signin', userController.signInPage)
+router.post('/signin', addUserValidation, userController.createUser)
 
 //----------------------------------Routes chiens----------------------------
 
