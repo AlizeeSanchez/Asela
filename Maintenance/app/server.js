@@ -4,6 +4,8 @@ const express = require('express');
 const session = require('express-session');
 const multer = require('multer');
 const path = require('path');
+const bodyparser = require('body-parser');
+
 
 const app = express();
 const port = process.env.PORT || 3030;
@@ -11,6 +13,10 @@ const router = require('./router');
 
 app.set('views', './app/views');
 app.set('view engine', 'ejs');
+
+// Body-parser middleware 
+app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.json());
 
 app.use(express.urlencoded({ extended: true }));
 app.use(

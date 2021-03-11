@@ -49,7 +49,7 @@ a{
 }
 .white-panel{
     background-color: rgba(255,255, 255, 1);
-    height:500px;
+    height: auto;
     position:absolute;
     top:-50px;
     width:50%;
@@ -57,6 +57,10 @@ a{
     transition:.3s ease-in-out;
     z-index:0;
     box-shadow: 0 0 15px 9px #00000096;
+}
+
+.login-show.show-log-panel {
+    display: flow-root;
 }
 .login-reg-panel input[type="radio"]{
     position:relative;
@@ -173,4 +177,15 @@ a{
 a{
   text-decoration:none;
   color:#ac6d64;
+}
+
+@media (max-width: 640px) {
+    .login-show.show-log-panel {
+        display: contents !important;
+    }
+
+    .white-panel {
+        width: auto !important;
+        height: auto !important;
+    }
 }

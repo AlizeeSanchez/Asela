@@ -61,9 +61,7 @@ const userController = {
         try {
             console.log('mon body',request.body);
             if (request.body.userLastname && request.body.userFirstname && request.body.userNumber_phone && request.body.userEmail && request.body.userValidate_password && request.body.userPassword) {
-
-                //const result = await aselaValidate.validateAsync(request.body)
-                               
+              
                 // on crypt le mdp avec 10 tour de salage (recommanded via doc)
                 const salt = await bcrypt.genSalt(10);
                 const encryptedPswd = await bcrypt.hash(request.body.userPassword, salt);
@@ -75,33 +73,10 @@ const userController = {
                         email: request.body.userEmail,
                         password: encryptedPswd,
                     };  
-                    
                     //on transmet les informations du membre a la fonction createMember
                     const saveUser = await User.signIn(user);
-                //}
-            //Test si tous les champs ont etaient renseigné 
-            }else if(!request.body.userLastname) {
-                throw validatorBody.messages()
-                //response.json('Veuillez renseigner votre nom.');
-            }else if(!request.body.userFirstname) {
-                throw createError.BadRequest()
-                //response.json('Veuillez renseigner votre prenom.');
-            }else if (!request.body.userNumber_phone) {
-                throw createError.BadRequest()
-                //response.json('Veuillez renseigner votre numéro de téléphone.');
-            }else if (!request.body.userEmail){
-                throw createError.BadRequest()
-                //response.json('Veuillez renseigner votre email');
-            }else if (!request.body.userPassword){
-                throw createError.BadRequest()
-                //response.json('Veuillez renseigner un mot de passe');
-            }else if (!request.body.userValidate_password){
-                throw createError.BadRequest()
-                //response.json('Veuillez renseigner la confirmation de votre mot de passe');
-            }else{
-                throw createError.BadRequest()
-                //response.json('Une erreur est survenue lors du controle des valeurs des champs');
-           }
+                    response.redirect('login');
+            }
         } catch (error){
              console.trace(error);
              return response.status(500).json(error.toString());

@@ -1,45 +1,64 @@
-const user = require('../schema/asela_validate')
-
-
-//const validateQuery = (schema) => (req, res, next) => {
-//    const validatedQuery = schema.volunteerSchema(req.query);
-//
-//    if (validatedBody.error) {
-//        res.status(400).json(validatedBody.error);
-//    } else {
-//        next();
-//    }
-//};
-
-//const validateBody = (schema) => (req, res, next) => {
-//    const validatedBody = schema.validate(req.body);
-//
-//    if (validatedBody.error) {
-//        res.status(400).json(validatedBody.error);
-//
-//
-//    } else {
-//        next();
-//    }
-//};
-
-
-
-module.exports = {
-    
-    addUserValidation: async(request, response, next) => {
-        const value = await user.validate(request.body);
-        //console.log('message',message);
-        //console.log('messages',messages);
-        if (value.error){
-            response.json({
-                success: 0,
-                message: value.error.details[0].message
-            })
-        }else {
-            next();
-        }
+const validateQuery = (schema) => (req, res, next) => {
+    const validatedQuery = schema.validate(req.query);
+  
+    if (validatedQuery.error) {
+      res.status(400).json(validatedBody.error);
     }
-    //validateBody,
-    //validateQuery
-};
+    else {
+      next();
+    }
+  };
+  
+  const validateBody = (schema) => (req, res, next) => {
+    const validateBody = schema.validate(req.body);
+  
+    if (validateBody.error) {
+      console.log('coucou');
+      res.status(400).render('signin', {
+        messageError: validateBody.error.details[0].message
+      });
+      //console.log('mon erreur joi', validateBody.error.details[0].message);
+     
+    }
+    else {
+      next();
+    }
+  };
+  
+  module.exports = {
+    validateBody,
+    validateQuery,
+  };
+
+
+//const volunteerSchema = require('../schema/asela_validate');
+//
+//const validation = {
+//    addUserValidation: async(request, response, next) => {
+//        const value = await volunteerSchema.validate(request.body);
+//        if (value.error){
+//
+//            const messageError = JSON.stringify({ 
+//                error : value.error.details[0].message
+//            });
+//
+//            console.log('erreur joi:', messageError);
+//            response.locals.error = {messageError};
+//            console.log('erreur dans validator',response.locals.error);
+//
+//            if(messageError){
+//                response.render('signin', {
+//                    error: response.locals.error
+//                })
+//            }
+//
+//        }else {
+//            next();
+//        }
+//    }
+//
+//};
+//
+//module.exports = validation;
+    
+   

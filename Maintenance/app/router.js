@@ -13,7 +13,7 @@ const researchController = require('./controllers/researchController');
 const userController = require('./controllers/userController');
 //Partie Joi validation des données
 const volunteerSchema = require('./schema/asela_validate');
-const { addUserValidation } = require('./services/validator');
+const { validateBody } = require('./services/validator');
 
 const router = Router();
 
@@ -21,7 +21,8 @@ const router = Router();
 router.get('/login', userController.loginPage)
 router.post('/login', userController.login)
 router.get('/signin', userController.signInPage)
-router.post('/signin', addUserValidation, userController.createUser)
+router.post('/signin', validateBody(volunteerSchema), userController.createUser)
+router.post('/signin', userController.createUser)
 
 //----------------------------------Routes chiens----------------------------
 
