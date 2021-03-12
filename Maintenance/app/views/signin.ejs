@@ -45,20 +45,16 @@
 				    <input type="button" class="validateUser" value="S'inscrire">
           | firstname | number_phone | email | password      </form> -->
       
-            
 
                 <form name="myForm" >
-                    <% if (locals.error !== undefined) {%>
-                        
                     <div id="errorDiv"><span class="error" id="errorname"></span></div>
-                    <% } %>
                     <input type="text" required name="lastname" class="field-long" placeholder="Nom *" id="userLastname"/>
                     <input type="text" required name="firstname" class="field-long" placeholder="Prenom *" id="userFirstname">
                     <input type="text" required name="number_phone" class="field-long" placeholder="Numéro de téléphone *" id="userNumber_phone">
 				    <input type="text" required name="email" class="field-long" placeholder="Email *" id="userEmail">
                     <input type="password" required name="password" class="field-long" placeholder="Password *" id="userPassword">
                     <input type="password" required name="passwordCopie" class="field-long" placeholder="Confirmation Password *" id="userValidate_password">
-                    <input type="button" onclick="validateForm()" class="validateUser" value="S'inscrire">
+                    <input type="button" onclick="user.validateForm()" class="validateUser" value="S'inscrire">
                 </form>
             </div>
         </div>
@@ -74,46 +70,8 @@
         border: 1px solid black !important;
     }
 </style>
-<script>
-
-    function validateForm()                         
-    {  
-       console.log('test',locals.messageError); 
-        const lastname = document.forms["myForm"]["lastname"];
-        const firstname = document.forms["myForm"]["firstname"];
-        const number = document.forms["myForm"]["number_phone"];        
-        const email = document.forms["myForm"]["email"];
-        const password = document.forms["myForm"]["password"];
-        const password2 = document.forms["myForm"]["passwordCopie"];
-
-        if(!lastname.value | !firstname.value | !number.value | !email.value | !password.value | !password2.value){
-            console.log('mon erreur');
-            document.getElementById('errorname').textContent= "veuillez remplir tous les champs";
-            document.getElementById('errorDiv').style= 'color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; padding: .50rem .50rem; border: 1px solid transparent; border-radius: .25rem;';
-            return true;
-        }
-        else{
-            
-            if(locals.messageError === "la valeur du Nom de famille n'est pas valide"){
-                document.getElementById('errorname').textContent= locals.messageError; 
-                document.getElementById('errorDiv').style= 'color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; padding: .50rem .50rem; border: 1px solid transparent; border-radius: .25rem;';
-            }else{
-
-                document.getElementById('errorname').textContent="";
-            }
-
-             
-            
-            
-        }    
-    }
-
-    
-    
+<script>   
 </script>
-
-
-
 
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

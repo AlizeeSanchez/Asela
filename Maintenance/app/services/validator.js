@@ -13,12 +13,11 @@ const validateQuery = (schema) => (req, res, next) => {
     const validateBody = schema.validate(req.body);
   
     if (validateBody.error) {
-      console.log('coucou');
-      res.status(400).render('signin', {
-        messageError: validateBody.error.details[0].message
-      });
-      //console.log('mon erreur joi', validateBody.error.details[0].message);
-     
+      
+      // res.status(400).render('signin', {
+      //   messageError: validateBody.error.details[0].message
+      // });
+      res.status(400).json({messageError: validateBody.error.details[0].message})
     }
     else {
       next();

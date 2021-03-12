@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const dogController = require('./controllers/dogController');
+const dogController = require('./controllers/petController');
 const catController = require('./controllers/catController');
 const petController = require('./controllers/petController');
 const conditionController = require('./controllers/conditionController');
@@ -18,11 +18,11 @@ const { validateBody } = require('./services/validator');
 const router = Router();
 
 //---------------------------------Route LOGIN et SIGNIN----------------------------
-router.get('/login', userController.loginPage)
+router.get('/login')
 router.post('/login', userController.login)
 router.get('/signin', userController.signInPage)
 router.post('/signin', validateBody(volunteerSchema), userController.createUser)
-router.post('/signin', userController.createUser)
+
 
 //----------------------------------Routes chiens----------------------------
 
