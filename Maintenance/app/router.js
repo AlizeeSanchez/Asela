@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const dogController = require('./controllers/petController');
+const dogController = require('./controllers/dogController');
 const catController = require('./controllers/catController');
 const petController = require('./controllers/petController');
 const conditionController = require('./controllers/conditionController');
@@ -28,7 +28,7 @@ router.post('/signin', validateBody(volunteerSchema), userController.createUser)
 
 //Route pour afficher notre back office des chiens
 router.get('/dogs', dogController.allPetsNotAdopted, dogController.allPetsAdopted, dogController.allPetsDeceaded)
-//
+//Route pour afficher les chiens qui sont adoptés
 router.get('/dogsAdopt', dogController.allPetsAdopted)
 //Route pour ajouter un chien a l'adoption
 router.post('/dogs', dogController.addNewPet)
