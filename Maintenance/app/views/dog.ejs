@@ -134,7 +134,7 @@
 																					<div class="input-group-prepend">
 																						<span class="input-group-text">Age</span>
 																					</div>
-																					<input type="text" class="form-control" aria-label="Default" value="<%= dog.age %>" aria-describedby="inputGroup-sizing-default" id="editAgeDog<%= dog.id %>">
+																					<input type="text" class="form-control" aria-label="Default" value="<%= dog.age.toLocaleString('en-GB').substr(0, 10) %>" aria-describedby="inputGroup-sizing-default" id="editAgeDog<%= dog.id %>">
 																				</div>
 																			</div>
 																			

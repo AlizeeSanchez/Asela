@@ -46,7 +46,8 @@ VALUES ('chien', 'Royco','13/03/2020','Ok chiens et chats', 'Mâle', 'X Beagle',
        ('chien', 'Bianca', '04/04/2018','Ok chiens et chats', 'Femelle', 'x Griffon', '250268732448608', 'true', 'description', 'Moyen gabarit'),
        ('chien', 'Ice Tea', '16/08/2013','Ok chiens et chats', 'Mâle', 'Cane Corso', 'false', 'true', 'description', 'Très grand gabarit'),
        ('chien', 'Jocky', '01/09/2011','Ok chiens et chats', 'Mâle', 'Border collie x berger groenendael', '250268743500214', 'true', 'description', 'Petit gabarit'),
-       ('chien', 'Bebidou', '29/04/2014','Ok chiens et chats', 'Femelle', 'Cane Corso', 'false', 'true', 'description', 'Très grand gabarit');
+       ('chien', 'Bebidou', '29/04/2014','Ok chiens et chats', 'Femelle', 'Cane Corso', 'false', 'true', 'description', 'Très grand gabarit'),
+       ('chien', 'Troï', '21/04/2015','Ok chiens et chats', 'Mâle', 'Berger allemand X Bouvier bernois', 'false', 'true', 'description', 'Grand gabarit');
 
 INSERT INTO pet ("type", "name", "age", "amity", "sexe", "breed", "ide", "sterilised", "description", "weight")
 VALUES

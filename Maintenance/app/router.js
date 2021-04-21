@@ -17,8 +17,12 @@ const { validateBody } = require('./services/validator');
 
 const router = Router();
 
+
+const essaiController = require('./controllers/essaiController')
+router.get('/essai', essaiController.essai)
+
 //---------------------------------Route LOGIN et SIGNIN----------------------------
-router.get('/login')
+router.get('/login', userController.loginPage)
 router.post('/login', userController.login)
 router.get('/signin', userController.signInPage)
 router.post('/signin', validateBody(volunteerSchema), userController.createUser)
