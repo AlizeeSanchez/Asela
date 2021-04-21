@@ -1,0 +1,123 @@
+<%- include('partials/header') %>
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+        <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0">
+            </div>
+        </div>
+        <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:200%;height:200%;left:0; top:0">
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h2 class="h2" style="">Devenir famille d'accueil</h2>
+    </div>
+    
+    <img src="/img/FA.png" class="img-fluid" alt="Responsive image" style="">  
+    
+    <div class="col-md-10" style="display: inline-flex; margin: 2rem;"> 
+        
+        <div class="wow fadeInUp contact-info" data-wow-delay="0.4s">
+            <div class="section-title">
+                <h3>Vous adorez les animaux et souhaitez vous engager pour leur bien-être ?</h3>
+                <p>Nous cherchons souvent des familles pour accueillir temporairement des chiens et chats qui ont été abandonnées et/ou maltraités. <br>
+                    Tout les frais veterinaires, les accessoires, ainsi que l'alimentation/ litieres , ect ... sont fourni par l'association ! <br> 
+                    Votre mission: chouchouter le ou les protégé(s) que l'on vous a confier !</p>
+                    <p> Pour les associations, les familles d’accueil sont un véritable soutien, elles rendents possible tous les sauvetages réalisés, permettent de mieux connaitre le caractère et les besoins de l'animal avant son adoption et même parfois de parfaire son éducation.</p>
+                    <p>La durée est variable : une semaine, un mois, plusieurs mois... Au mieux jusqu'à l'adoption de celui ci et parfois en dépannage. Parfois même, certaines familles s’étant trop attachées à l’animal, décident de l’adopter.</p>
+                    <p>Vous pouvez devenir famille d'accueil pour un certains type d'animaux : chiens, chats, adulte, jeune... En fonction de vos capacités et en prenant compte de votre environnement familial et de votre préférence.</p>
+                </div> 
+            </div>
+        </div>
+        
+        <div class="col-md-10" id="form-FA" style="margin: 0 2rem; "> 
+            <h3>Formulaire pour être famille d'accueil</h3>
+            
+            <div class="alert alert-info" role="alert">
+                Nous cherchons uniquement des familles d'accueils dans l'Herault et le Gard
+            </div>
+            
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Adresse Email:</label>
+                    <input type="email" class="form-control" id="emailFA" aria-describedby="emailHelp" placeholder="exemple@mail.fr">
+                    <small id="emailHelp" style="color: rgb(96, 96, 221);">Nous ne partagerons jamais votre adresse email.</small>
+                </div> 
+                <label for="exampleInputEmail1">Nom et Prénom:</label>
+                <div class="form-group" style="display:flex;">
+                    <input type="nomFA" class="form-control" id="nomFA" placeholder="Entrer votre Nom de famille">
+                    <input type="prenomFA" class="form-control" id="prenomFA" placeholder="Entrer votre Prenom">
+                </div>
+                <label for="exampleInputEmail1">Adresse:</label>
+                <div class="form-group" style="display:flex;">
+                    <input type="codepostalFA" class="form-control" id="codepostalFA" placeholder="Entrer votre Code postal">
+                    <input type="villeFA" class="form-control" id="villeFA" placeholder="Entrer votre ville">
+                </div>
+                <div class="form-group" style="display:flex;">
+                    <input type="codepostalFA" class="form-control" id="adressFA" placeholder="Entrer votre Adresse">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Numéro de téléphone:</label>
+                    <input type="phoneFA" class="form-control" id="phoneFA" placeholder="Format : 0600000000">
+                </div>
+                
+                <div class="form-group" style="display:flex; display: inline;">
+                    <label for="exampleInputEmail1">Vous habitez:</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Maison avec jardin">
+                        <label class="form-check-label" for="inlineRadio1">Maison avec jardin</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Maison sans jardin">
+                        <label class="form-check-label" for="inlineRadio2">Maison sans jardin</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Appartement avec jardin">
+                        <label class="form-check-label" for="inlineRadio3">Appartement avec jardin</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="Appartement sans jardin">
+                        <label class="form-check-label" for="inlineRadio3">Appartement sans jardin</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Avez vous des animaux ?</label>
+                    <input type="compositionFA" class="form-control" id="compositionFA" placeholder="Si oui listez les. (Exemple : 1 chiens et 3 chats)">
+                </div>
+                <label for="exampleInputEmail1">Quels type d'animaux accepterez vous ? ( Selection multiple )</label> <br>
+                <div class="form-group" style="display:flex; display: inline;">
+                    
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="Maison avec jardin">
+                        <label class="form-check-label" for="inlineRadio1">Chien de grande taille (+20 kg)</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="Maison sans jardin">
+                        <label class="form-check-label" for="inlineRadio2">Chien de petite taille (-20kg)</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio3" value="Appartement avec jardin">
+                        <label class="form-check-label" for="inlineRadio3">Chiot(s)</label>
+                    </div> <br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio4" value="Appartement sans jardin">
+                        <label class="form-check-label" for="inlineRadio3">Chat adulte</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio4" value="Appartement sans jardin">
+                        <label class="form-check-label" for="inlineRadio3">Chatons</label>
+                    </div>
+                </div><br>
+                
+                <button type="submit" style="margin-top: 1rem;" class="btn btn-primary">Submit</button>
+                
+                
+            </form>
+        </div>
+        
+        
+    </main>
+</div>
+</div>

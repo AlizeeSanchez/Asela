@@ -1,0 +1,52 @@
+
+
+ <%- include('partials/header') %>
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+  
+    <div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+        <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0">
+            </div>
+        </div>
+        <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:200%;height:200%;left:0; top:0">
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h2 class="titlePage" >Nos chats à l'adoption</h2>
+    </div>
+    <div class="col-md-10" style="display: inline-flex; margin: 2rem;"> 
+        <p> 
+            L'Association Sauve Et Les Animaux est une association à but non lucratif de protection Animale loi 1901 dans le GARD. <br>
+            Notre but  est de venir en aide aux chiens et chats abandonnés et/ou maltraités pour leur trouver une nouvelle famille ou les placer en famille d’accueil. <br><br>
+            Nous n'avons pas de structure d'accueil comme les refuges, ce qui signifie que les familles d'accueil ont une importance primordiale pour nous aider à secourir un maximum d'animaux! <br>
+            Chaque animal pris en charge est rencontré par un vétérinaire, soigné si besoin, identifié systématiquement, castré ou stérilisé dès que l'âge nous le permet, et déparasité. <br>
+            Il sera choyé par une famille d'accueil, ce qui permet de retrouver un équilibre quand ils ont un vécu difficile et surtout cela nous permet de connaitre un maximum les petites habitudes de chaque loulou, nous pouvons donc les confier à des familles qui leur correspondent au mieux ! 
+        </p>
+    </div>
+    <div class="col-md-10" style="display: inline-flex; margin: 2rem;"> 
+        <div class="card-columns">
+        <% for(let pet of pets) { %>
+            <a href="/V1/fiche/<%= pet.id %>" style="color: black" target="_blank" >
+                <div class="card">
+                    <img src="/img/chien.png" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="mb-0 mt-0"><%= pet.name %></h4>
+                        <h6><%= pet.breed %> <br><%= pet.sexe %> né(e) le <%= pet.age.toLocaleString('en-GB').substr(0, 10) %></h6>
+                    </div>
+                </div>
+            </a>
+        <% } %>
+        </div>
+    </div>
+   
+    
+</main>
+</div>
+</div>
+
+
+</body>
+</html>

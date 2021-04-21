@@ -1,0 +1,261 @@
+body{
+    background-color: rgb(247, 246, 246);
+    color: rgb(59, 61, 66);
+    font-family: 'Roboto', sans-serif;
+}
+p{
+    font-size: 1.3rem !important;
+}
+/*-----------------------Header----------------------------------------*/
+.bg-green {
+    background-color: #61984b!important;
+}
+
+
+img.img-fluid, h2  {
+    margin-bottom: -0.3rem;
+}
+/*----------------------home page */
+.section{
+    margin-bottom: 2rem;
+}
+
+.flip-card-front {
+    background-image: url(https://www.notretemps.com/images/articles/refonte/chien-chaleur3.jpg);
+}
+
+  
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  }
+  
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .flip-card-front-1, .flip-card-front-2, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  .flip-card-front-1 {
+    background-image: url(https://www.notretemps.com/images/articles/refonte/chien-chaleur3.jpg);
+    background-position: center;
+    background-size: cover;
+  }
+  .flip-card-front-2 {
+    background-image: url(https://www.biofan.com/blog/wp-content/uploads/2019/06/photo-1545293944-e852415538eb.jpeg);
+    background-position: center;
+    background-size: cover;
+  }
+  
+  .flip-card-back {
+    background-color: #61984b7a;
+    color: white;
+    transform: rotateY(180deg);
+    padding: 2rem;
+  }
+
+  .card-title {
+    font-size: 2rem;  
+  }
+
+  .card-info {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+
+
+.section-menu {
+    color: var(--body-color);
+    border-radius: var(--border-radius);
+    background-color: rgba(255,255,255,1);
+    border: var(--border-width) solid rgba(207,205,201,1);
+    overflow: hidden;
+    margin: 0.5rem;
+    padding: 1rem;
+    border: 1px solid rgb(183, 183, 182);
+    border-radius: 0.2rem;
+    background-color: white !important;
+}
+
+.widget {
+    color: rgb(59, 61, 66);
+    border-radius: 0.2rem;
+    background-color: rgba(255,255,255,1);
+    border: 1px solid rgba(0,0,0,.125);
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.widget-title {
+    padding: 1rem 1rem 0 1rem;
+}
+
+.widget-content {
+    margin: 1rem 0.5rem 1rem 0.5rem;
+}
+
+.widget-title span {
+    border-bottom: solid #61984b;
+    background-color: white;
+    font-size: 1.2rem;
+}
+
+
+a.nav-link.active, a.nav-link {
+    color: rgb(59, 61, 66);
+}
+
+.list-group-item {
+    padding: 0 !important;
+}
+
+/*-----------BODY--------*/
+h2{
+    font-family: Arial,Helvetica,sans-serif;
+    text-decoration: underline;
+    font-size: 1.7rem !important;
+}
+
+.img-fluid {
+    width: 100%;
+    height: auto;
+}
+
+.heading-p{
+    font-size: 1.6rem;
+    margin: 1rem 0;
+}
+
+.important{
+    text-decoration: underline;
+}
+
+.muted-text{
+    font-style: italic;
+}
+
+
+
+@media (min-width: 640px) {
+
+    p{
+        text-align: justify;
+    }
+
+    .flip-card {
+        margin: 0 5rem;
+        background-color: transparent;
+        width: 400px;
+        height: 300px;
+        perspective: 1000px;  
+    }
+    
+    nav.col-md-2.d-none.d-md-block.bg-light.sidebar {
+        position: fixed;
+        height: 93%;
+        background: fixed;
+        margin: 1rem;
+        
+        border: 1px solid #dfdfdf;
+        border-radius: 0.1rem;
+        padding: 0.5rem;
+    }
+    
+    .card-columns {
+        margin: 0 15%;
+    }
+
+    /*--Event ----- */
+    .card-horizontal {
+        display: flex;
+    }
+
+    img.img-event {
+        width: 25rem;
+        height: 15rem;
+        object-fit: cover;
+    }
+
+    /*--allPet ----- */
+    div#paragraph {
+        display: inline-flex;
+        margin: 2rem;
+    }
+
+}
+
+
+@media (max-width: 640px) {
+    div#paragraph {
+        display: inline-flex;
+        margin-top: 2rem;
+    }
+
+    .flip-card {
+        margin-bottom: 5rem;
+        background-color: transparent;
+        perspective: 1000px;  
+        height: 300px !important;
+    }
+
+    .flip-card-front-1, .flip-card-front-2, .flip-card-back {   
+        height: 300px !important;
+    }
+
+}
+
+
+@media (max-device-width:768px) and (orientation: landscape) {
+    html {
+     -webkit-text-size-adjust: 100%;
+     -ms-text-size-adjust: 100%;
+    }
+    .flip-card {
+        margin-right: 5rem;
+    }
+}
+
+.profile-header {
+    transform: translateY(5rem);
+}
+
+.profilSize{
+    font-size: 1.5rem !important;
+}
+
+.commentSize{
+    font-size: 1.2rem !important;
+}
+
+.mr-auto, .mx-auto {
+    margin-right: 0 !important;
+}
+
+.capitalize{
+    text-transform: capitalize;
+}
+
+.space{
+    margin-right: 2rem;
+}
+
+.profil-banner{
+    background-size: cover;
+    background-position: center;
+}

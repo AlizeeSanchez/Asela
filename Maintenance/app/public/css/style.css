@@ -888,3 +888,9 @@ body {
   background-color: #a06ade;
   color: white;
 }
+
+.btn-outline-purple {
+  color: #ffffff;
+  border-color: #7f19d6;
+  background-color: #a06ade;
+}

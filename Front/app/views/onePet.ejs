@@ -1,0 +1,96 @@
+<%- include('partials/header') %>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h2 class="titlePage" >Fiche descriptive de <%= json.pet[0].name %></h2>
+</div>
+<div class="row py-5 px-4">
+    <div class="col-xl-8 col-md-3 col-sm-3 mx-auto">
+        <!-- Profile widget -->
+        <div class="bg-white shadow rounded overflow-hidden">
+            <div class="px-4 pt-0 pb-4 bg-dark profil-banner" style="background-image: url(/img/profil-banner.png)">
+                <div class="media align-items-end profile-header">
+                    <div class="profile mr-3"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/European_Groenendael_male.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail"></div>
+                    <div class="media-body mb-5 text-dark">
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-light p-4 d-flex justify-content-end text-center">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block profilSize capitalize"><%= json.pet[0].name %></h5>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="py-4 px-4">
+                <div class="py-4">
+                    <h5 class="mb-3 profilSize">Informations</h5>
+                    <div class="p-4 bg-light rounded shadow-sm">
+                        <p class="font-italic mb-0 capitalize"> <span class="font-weight-bold space"> Nom: </span><%= json.pet[0].name %> </p>
+                        <p class="font-italic mb-0 capitalize"> <span class="font-weight-bold space"> Sexe: </span><%= json.pet[0].sexe %> </p>
+                        <p class="font-italic mb-0 capitalize"> <span class="font-weight-bold space"> Race: </span><%= json.pet[0].breed %> </p>
+                        <p class="font-italic mb-0"> <span class="font-weight-bold space"> Né(e) le: </span><%= json.pet[0].age.toLocaleString('en-GB').substr(0, 10) %> </p>
+                        <p class="font-italic mb-0 capitalize"> <span class="font-weight-bold space"> Ententes: </span><%= json.pet[0].amity %> </p>
+                    </div>
+                </div>
+                <div class="py-4">
+                    <h5 class="mb-3 profilSize">Description</h5>
+                    <div class="p-4 bg-light rounded shadow-sm">
+                        <p class="font-italic mb-0"><%= json.pet[0].description %> </p>
+                        <ul class="list-inline small text-muted mt-3 mb-0">
+                            <li class="list-inline-item commentSize"><i class="fa fa-comment-o mr-2"></i>
+                                Pour tout autres questions nous contacter par email:   
+                            </li>
+                            <li class="list-inline-item commentSize"><i class="fa fa-heart-o mr-2"></i>asela.sauve@outlook.fr</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="mb-0 profilSize">Photos</h5>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mb-2 pr-lg-1"><img src="https://www.mouss-le-chien.com/medias/album/chien-groenendael-qui-court-sur-l-herbe.jpg" alt="" class="img-fluid rounded shadow-sm"></div>
+                    <div class="col-lg-6 mb-2 pl-lg-1"><img src="https://i.pinimg.com/474x/a2/f3/52/a2f352d21c9b25673ccb69aa6733007f.jpg" alt="" class="img-fluid rounded shadow-sm"></div>
+                    <div class="col-lg-6 pr-lg-1 mb-2"><img src="https://jardinage.lemonde.fr/images/dossiers/2019-06/berger-belge-groenendael-2-073930.jpg" alt="" class="img-fluid rounded shadow-sm"></div>
+                    <div class="col-lg-6 pl-lg-1 mb-2"><img src="https://www.racedechien.info/uploads/thumbs/282x282-crop/dog/731/berger-belge-groenendael-13603.jpg" alt="" class="img-fluid rounded shadow-sm"></div>
+                    <div class="col-lg-6 pl-lg-1 mb-2"><img src="https://d1syos9fsbz8ei.cloudfront.net/Images/amp/BlogImages/chien-noir-neige_11287.jpg" alt="" class="img-fluid rounded shadow-sm"></div>
+                </div>
+                
+            </div>
+        </div><!-- End profile widget -->
+
+    </div>
+    <div class="col-xl-3 col-md-3 col-sm-10 mx-auto">
+        <div class="py-4 px-4">
+            <div class="py-4">
+                 <div class="p-4 bg-white rounded shadow-sm">
+                    <p class="mb-0"> Adopter un animal est une démarche sérieuse et responsable. Elle implique tous les membres d'une famille et s'inscrit dans le temps. Un animal est un être vivant qui mérite du temps, de l'attention et de l'amour. </p>
+                </div>
+            </div>
+            <div class="py-4">
+                <div class="p-4 bg-white rounded shadow-sm">
+                    <p class="font-italic mb-0"> <span class="font-weight-bold space"> Pour adopter chez nous: </span></p> <br>
+                    <p class="mb-0"> Une fiche de renseignements sera à remplir avant toute rencontre: </p> <br>
+                    <a class="mb-0 d-block" href=""> Questionnaire adoption </a> <br>
+                    <p class="mb-0"> Lors de l'adoption vous devrez fournir : </p> <br>
+                    <p class="mb-0"> La photocopie d'une carte d'identité et d'un justificatif de domicile </p><br>
+                </div>
+            </div>
+            <div class="py-4">
+                <div class="p-4 bg-white rounded shadow-sm">
+                    <p class="font-italic mb-0"> <span class="font-weight-bold space"> Participation d'adoption: </span></p> <br>
+                    <p class="mb-0"> La participation d'adoption varie selon l'animal : </p> <br>
+                    <% for(let tarif of json.tarif) { %>
+                        <p class="mb-0"> <%= tarif.type_pet %> <%= tarif.sexe_pet %> : <%= tarif.price %> €</p> <br>
+                    <% }%> 
+                    
+                    <p class="mb-0"> Pour tout animal non stérilisé/castré, un chéque de caution vous sera demandé, cette operation sera obligatoire dès l'age requis atteint. </p> <br>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
