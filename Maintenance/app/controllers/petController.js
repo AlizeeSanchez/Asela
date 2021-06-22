@@ -7,87 +7,27 @@ const storage = require('express');
 
 const petController = {
 
-    //Afficher un animal
-    findOnePet: async (request, response, next) => {
+    //Afficher tout les questionnaires de l'animal
+    findOnePetWhithAllData: async (request, response) => {
         try{
             const petId = parseInt(request.params.id);
             const pet = await Pet.findOnePet(petId);
-            const petHostFamilly = await Pet.findHostFamillyPet(petId);
+            const hostFamilly = await Pet.findHostFamillyPet(petId);
             const allHostFamilly = await HostFamily.findAllHostFamily();
-            const petAdoptant = await Pet.findAdoptantPet(petId);
+            const adoptant = await Pet.findAdoptantPet(petId);
             const imgPet = await Pet.findImgPet(petId);
-            if (pet) {
-                response.pet = pet;
-                response.hostFamilly = petHostFamilly;
-                response.allHostFamilly = allHostFamilly;
-                response.adoptant = petAdoptant;
-                response.img = imgPet;
-                next();
-            } else {
-                response.status(404).json(`Cet animal n'existe pas.`);
-            }
-        }catch(error){
-            console.trace(error);
-        }
-    },
+            const comments = await Pet.findAllCommentPet(petId);
+            const questionnaire = await QuestionnaireAdopt.findOneQuestAdoptByPetID(petId);
 
-    //Afficher tout les commentaires
-    findAllComment: async (request, response, next) => {
-        try{
-        const petId = parseInt(request.params.id);
-        const comments = await Pet.findAllCommentPet(petId);
-            if (comments) {
-                response.comments = comments;
-                next();
-            } else {
-                response.status(404).json(`Cet animal n'existe pas.`);
-            }
-        }catch(error){
-            console.trace(error);
-        }
-    },
-
-    //Afficher tout les questionnaires de l'animal
-    findAllQuestAdoptForOnePet: async (request, response) => {
-        try{
-        const PetId = parseInt(request.params.id);
-        const questionnaire = await QuestionnaireAdopt.findOneQuestAdoptByPetID(PetId);
-            if (questionnaire) {
-                const jason = {
-                    pet: response.pet,
-                    hostFamilly: response.hostFamilly,
-                    allHostFamilly : response.allHostFamilly,  
-                    adoptant: response.adoptant,
-                    imgPet: response.img,
-                    comments: response.comments,
-                    questionnaire
-                }
-                //console.log(jason.allHostFamilly);
-                
+            if (pet) {                
                 response.render('onePet', {
-                    jason
+                    pet, hostFamilly, allHostFamilly, adoptant, imgPet, comments, questionnaire
                 });
             } else {
                 response.status(404).json(`Cet animal n'existe pas.`);
             }
         }catch(error){
             console.trace(error);
-        }
-    },
-
-    //On recupere les ANIMAUX décédés
-    allPetDead: async (request, response) => {
-        try{
-            const pets = await Pet.findPetDead();
-            if (pets) {
-                response.json(pets);
-            } else {
-                response.status(404).json(`Il n'y a aucun animal décédé en BDD.`);
-            }
-        }
-        catch(error){
-            console.trace(error)
-            return response.status(500).json(error.toString());
         }
     },
 
@@ -215,7 +155,9 @@ const petController = {
                 // On recupere toutes les données envoyées par le body
                 const petCommentary = {
                     pet_id: pet.id,
-                    commentaire: request.body.commentPet
+                    commentaire: request.body.commentPet,
+                    date_comment: request.body.date_comment,
+                    volunteer_author: request.body.volunteer_author
                 };
                  //on transmet les informations de l'animal a la fonction addNewPet et on lui envois notre animal recuperer precedemment
                  const savePet = await Pet.addNewCommentPet(petCommentary);
@@ -327,10 +269,12 @@ const petController = {
             const petId = parseInt(request.params.id);
             const pet = await Pet.findOnePet(petId);
             if(pet.site_publish === false){
+                console.log('je rentre false');
                 const petFalse = await Pet.publishSiteIsTrue(petId);
                 response.json({petFalse, TEXT:'Cet animal est disponible a l\'adoption'});
-            }
-            else if(pet.site_publish === true){
+            
+            }else if(pet.site_publish === true){
+                console.log('je rentre true');
                 const petTrue = await Pet.publishSiteIsFalse(petId);
                 response.json({petTrue, TEXT:'Cet animal n\'est plus disponible a l\'adoption'});
             } else {
@@ -344,25 +288,38 @@ const petController = {
     },
 
     //Signaler qu'un animal est Reservé
-    petReserve: async (request, response) => {
+    petBooked: async (request, response) => {
         try{
             const petId = parseInt(request.params.id);
             const pet = await Pet.findOnePet(petId);
-            if(pet.reserve === false){
-                const petFalse = await Pet.reserveIsTrue(petId);
-                response.json('Cet animal est réservé par un adoptant');
-            }
-            if(pet.reserve === true){
-                const petTrue = await Pet.reserveIsFalse(petId);
-                response.json('Cet animal n\'est pas reservé');
+            console.log('je rentre ici et je vois',request.body);
+            if(pet.booked === false){
+                //test if file exist and supprime file for save new file
+                const fileCurrent = await changeNameFileInFolder(file);
+                if (fileCurrent) {
+                 const existFile = fs.existsSync(`${fileCurrent.src}`);
+                    if (existFile) {
+                        fs.unlinkSync(`${fileCurrent.src}`);
+                    }
+                }         // name: request.body.name,   
+            };
+                const bookFalse = await Pet.bookedIsTrue(book);
+                response.json({bookFalse, TEXT:'Cet animal est reservé'});
+                return;
+            
+            if(pet.booked === true){
+                console.log(petId);
+                const bookTrue = await Pet.bookedIsFalse(petId);
+                response.json({bookTrue, TEXT:'Cet animal n\' est plus reservé'});
             } else {
-                response.status(404).json(`Cet animal n'existe pas.`);
+                response.status(404).json(`Une erreur c'est produite.`);
             }
         }
         catch(error){
             console.trace(error)
             return response.status(500).json(error.toString());
         }
+    
     },
 
     //Signaler qu'un animal est adopté
@@ -460,71 +417,64 @@ const petController = {
     },
 
     uploadPhotoPet: async (request, response) => {
-        try{
-            const storage = multer.diskStorage({
-                destination : path.join(__dirname, '..','public','uploads'),   
-                filename : (request, file, callback) =>{
-                    callback(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
-                }
-            });
-         
-            const upload = multer({
-                storage : storage,
-                limits : {
-                    filesize : 3000000
-                },
-                fileFilter : (request, file, callback) => {
-                    const prExt = /jpg|jpeg|png/;
-                    const checkExt = prExt.test(path.extname(file.originalname));
-                    const checkmime = prExt.test(file.mimetype);        
-                    if(checkExt && checkmime) { 
-                        callback(null, true);
-                    }else {
-                        callback('Veuillez inserez une image');
-                    }
-                }
-            }).single('petPicture');
-            
-            upload(request, response, error => {    
-            
-                if(request.file !== undefined){
-                    console.log(request.file.filename);
-                    response.send({
-                        file : request.file.filename
-                    })
-                   
-                }else{
-                    response.send({   
-                        error: 'veuillez ajouter une image'
-                    })
-                }
-                
-            })
-                
-                //if (error){
-                //    response.render('onePet', {
-                //        error : error
-                //    })  
-                //}else{
-                //    if(request.file !== undefined){
-                //        response.json(request.file)
-                //    
-                //    }else{
-                //        throw 'error'; ({
-                //            error: 'veuillez ajouter une image'
-                //        
-                            
-                       // })
-                    //}
-                //}
-        
 
-        } catch(error) {
+        console.log('je rentre dans mon controller avec mon obj',  request.body, request.params);
+        try{
+            console.log('file',request.body);
+            
+            const petId = parseInt(request.params.id);
+            const pet = await Pet.findOnePet(petId);
+            const hostFamilly = await Pet.findHostFamillyPet(petId);
+            const allHostFamilly = await HostFamily.findAllHostFamily();
+            const adoptant = await Pet.findAdoptantPet(petId);
+            const imgPet = await Pet.findImgPet(petId);
+            const comments = await Pet.findAllCommentPet(petId);
+            const questionnaire = await QuestionnaireAdopt.findOneQuestAdoptByPetID(petId);
+            //const newImage = await Pet.uploadImgPet(petId)
+
+            if(request.body){
+                const newImagePet = {
+                    title: request.body.title,
+                    pet_id: petId
+
+                }
+                console.log('newImagePet', newImagePet);
+                
+                //on transmet les informations de l'animal a la fonction addNewPet et on lui envois notre animal recuperer precedemment
+                const saveImgPet = await Pet.uploadImgPet( newImagePet);
+                console.log('saveImgPet', saveImgPet);
+                response.render('onePet', {
+                    pet, hostFamilly, allHostFamilly, adoptant, imgPet, comments, questionnaire,
+                    saveImgPet: request.body.title
+                })
+            }
+        }catch(error) {
             console.trace(error)
             return response.status(500).json(error.toString());
-        }
-    }
-       
-}
+        }  
+        
+    },
 
+    suppPet: async (request, response) => {
+        try{
+            console.log('je rentre dans mon controller');
+           const petId = parseInt(request.params.id);
+           console.log('id pet', petId);
+           const pet = await Pet.findOnePet(petId);
+           console.log('l\'animal', pet);
+           if(pet){
+               const pet = await Pet.suppPet(petId)
+               response.json('Cet animal a été supprimé avec succès.')
+ 
+           } else {
+             response.json('Cet animal ne peut pas etre supprimer car il n\'existe pas.');
+             }
+         }
+         catch(error){
+             console.trace(error)
+             return response.status(500).json(error.toString());
+         }  
+     },
+
+}
 module.exports = petController;

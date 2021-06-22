@@ -15,6 +15,17 @@ const Condition = {
         }
     },
 
+    purebred_pet: async () => {
+        try{
+            const condition = await db.query(
+                "SELECT * FROM purebred_pet;"
+         );
+            return condition.rows;
+        }catch (error){
+            console.trace(error);
+        }
+    },
+    
     //Afficher une condition
     findOneCondition: async (id) => {
         try{

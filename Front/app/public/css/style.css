@@ -15,14 +15,19 @@ p{
 img.img-fluid, h2  {
     margin-bottom: -0.3rem;
 }
+/*----------------------questionnaires */
+h5{
+    margin-bottom: 1rem !important;
+    font-size: 1.3rem !important;
+    text-decoration: underline;
+}
+
 /*----------------------home page */
 .section{
     margin-bottom: 2rem;
 }
 
-.flip-card-front {
-    background-image: url(https://www.notretemps.com/images/articles/refonte/chien-chaleur3.jpg);
-}
+
 
   
   .flip-card-inner {
@@ -35,11 +40,11 @@ img.img-fluid, h2  {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   }
   
-  .flip-card:hover .flip-card-inner {
+  .flip-card:hover .flip-card-inner{
     transform: rotateY(180deg);
   }
 
-  .flip-card:hover .flip-card-inner {
+  .flip-card:hover .flip-card-inner   {
     transform: rotateY(180deg);
   }
   
@@ -52,12 +57,10 @@ img.img-fluid, h2  {
   }
   
   .flip-card-front-1 {
-    background-image: url(https://www.notretemps.com/images/articles/refonte/chien-chaleur3.jpg);
     background-position: center;
     background-size: cover;
   }
   .flip-card-front-2 {
-    background-image: url(https://www.biofan.com/blog/wp-content/uploads/2019/06/photo-1545293944-e852415538eb.jpeg);
     background-position: center;
     background-size: cover;
   }
@@ -140,6 +143,7 @@ h2{
 .heading-p{
     font-size: 1.6rem;
     margin: 1rem 0;
+    font-family: 'Average', serif;
 }
 
 .important{
@@ -207,7 +211,7 @@ h2{
         margin-top: 2rem;
     }
 
-    .flip-card {
+    .flip-card, .flip-card2 {
         margin-bottom: 5rem;
         background-color: transparent;
         perspective: 1000px;  
@@ -216,6 +220,16 @@ h2{
 
     .flip-card-front-1, .flip-card-front-2, .flip-card-back {   
         height: 300px !important;
+    }
+    
+    .row {
+        margin-right: -15%;
+        margin-left: -15%;
+    }
+
+    .col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+         padding-right: 0px; 
+         padding-left: 0px; 
     }
 
 }
@@ -226,7 +240,7 @@ h2{
      -webkit-text-size-adjust: 100%;
      -ms-text-size-adjust: 100%;
     }
-    .flip-card {
+    .flip-card, .flip-card2 {
         margin-right: 5rem;
     }
 }
@@ -258,4 +272,29 @@ h2{
 .profil-banner{
     background-size: cover;
     background-position: center;
+}
+
+/*----------------------------------Formulaire Famille d'acceuil -------------------------------------*/
+.form-container {
+    border: 1px solid #6c757d;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    border-radius: 0.2rem;
+    background-color: #f8f9fa;
+}
+
+span.warning {
+    color: red;
+}
+
+input#codepostalFA {
+    width: 300px;
+}
+
+select#children_numberFA {
+    width: 85px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
 }

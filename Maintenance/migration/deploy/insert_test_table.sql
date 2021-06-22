@@ -1,6 +1,11 @@
 -- Deploy asela:insert_test_table to pg
 
 BEGIN;
+
+INSERT INTO "adoptant" ("lastname","firstname","postal_code","number_phone","email","adress","city") 
+VALUES ('alizee','sanchez','34170','0781025042','mail@mail.fr', '8 rue du pied tordue', 'coculand');
+
+
 ------------------- FAMILLES D'ACCUEILS -----------------------
 
 INSERT INTO "host_family" ("lastname", "firstname", "number_phone", "postal_code", "city", "adress", "email", "pet_composition")
@@ -22,7 +27,7 @@ VALUES ('Le Boudouil', 'Sophie', 'O687388358', '30230', 'Bouillargues', '1300 Ch
        ('Perez', 'Cendrine', '0615074798', '30870', 'St Come et Maruejols','48 chemin de la fontaine de robert', 'cendrineperez@hotmail.fr', '0'),
        ('Savri', 'Magali', '0609988497', '30000', 'Nimes', '866 Chemin des Terres de Rouviere', 'savrimagali@gmail.com', '0'),
        ('Sanchez', 'Alizée', '0781025042', '34170', 'Castelnau Le Lez', '18 rue des genets', 'alizee.sanchez0882@hotmail.fr', '6 chats un chien'),
-       ('Soutoul', 'Anna', '0784515210', '34170', 'Castelnau Le Lez', '4 imp puits de cours', 'anna.sout@outlook.fr', 'Chats et chiens'),
+       ('Soutoul', 'Anna', '0784515210', '30610', 'Sauve', '4 imp puits de cours', 'anna.sout@outlook.fr', 'Chats et chiens'),
        ('Roger', 'Gabriel', '0675953598', '34000', 'Montpellier', '130 av de palavas', 'gabriel395@hotmail.fr', '2 Chats');
 
 ---------------------ADOPTANTS--------------------------------
@@ -98,17 +103,8 @@ VALUES ('Adoption National', 'Nîmes', '2019/12/07', 'Nous avons participé au w
 
 
 ------------------- Tarif -----------------------
-INSERT INTO "price_adopt" ("type_pet", "sexe_pet", "price", "caution")
-VALUES ('Chiens', 'Femelle', '270', '0'),
-       ('Chiens', 'Mâle', '240', '0'),
-       ('Chiots', 'Mâle', '180', '250'),
-       ('Chiots', 'Femelle', '180', '250'),
-       ('Chiens de catégorie', 'Femelle', '270', '0'),
-       ('Chiens de catégorie', 'Mâle', '240', '0'),
-       ('Chats', 'Femelle', '130', '0'),
-       ('Chats', 'Mâle', '100', '0'),
-       ('Chatons', 'Femelle', '65', '200'),
-       ('Chatons', 'Mâle', '65', '200');
+INSERT INTO "price_adopt" ("dog_female", "dog_male", "cat_female" , "cat_male" , "puppy" , "kitten" , "dog_cat_female" , "dog_car_male" , "caution_kitten" , "caution_puppy")
+VALUES ('240', '280', '140', '100', '200', '75', '300', '250', '250', '250');
 
 ------------------- Condition-----------------------
 
@@ -123,7 +119,11 @@ VALUES ('Ne pas lui infliger de mauvais traitements et lui fournir l''attention 
        ('Si pour une quelconque raison vous devez vous séparer de l''animal ça serait exclusivement auprès de l’Association Sauve Et Les Animaux, vous ne pourrez ni le vendre, ni le céder. Aucun remboursement des frais d’adoption ne pourra être réclamé à l’Association.'),
        ('Si une des conditions d’adoption n’est pas respectée, l’Association Sauve Et Les Animaux peut à tout moment reprendre l’animal.');
 
--------------------Famille d'accueil chien--------------------
+-------------------ESSAI MAX--------------------
+INSERT INTO "adoptant" ("number_id_passport", "lastname", "firstname", "birthday", "job", "spouselastname", "spousefirstname", "spousebirthday", "spousejob", "postal_code", "number_phone", "number_phone2", "city", "email", "adress", "type_home", "fbpseudo", "numberadulthome", "numberchlidhome", "petcomposition", "black_list")
+VALUES ('123456789', 'rochefort', 'jean', '08/04/1964', 'Acteur', 'Michel', 'Jacqueline', '02/03/1967', 'Couturière', '30120', '0490233467', '0622789471', 'Uzes', 'jeanrochefort@gmail.fr', '2 rue du cheval', 'Chateau avec grand jardin', 'jeanot', '2', '1', '1 chien et deux chats', 'false');
 
+INSERT INTO "purebred_pet" ("extra","extra_charge") 
+VALUES ('true','Un supplement sera demandé si chien de race');
 
 COMMIT;

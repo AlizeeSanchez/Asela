@@ -1,0 +1,330 @@
+<%- include('partials/header') %>    
+<div >
+        <h3 style="text-align:center;"> ASELA > Nos Conditions et Tarif d'adoptions</h3>
+</div>
+<div class="user-dashboard">
+
+    <div class="row">
+        <div class="col-md-5 col-sm-5 col-xs-12 gutter">
+            <div class="box">
+                <div class="sales">
+                    <h2>Nos Tarifs Chiens</h2>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-purple" data-toggle="modal" data-target="#priceModalDog">Edit</button>
+                    </div>
+                </div>
+                <ul class="list-group">         
+                    <li class="list-group-item"> Chien Femelle <span class="text-right"> <%= priceOfAdopt[0].dog_female %>  €</span> </li>
+                </ul>
+                <ul class="list-group">         
+                    <li class="list-group-item"> Chien Mâle <span class="text-right"><%= priceOfAdopt[0].dog_male %> €</span> </li>
+                </ul>
+                <ul class="list-group">         
+                    <li class="list-group-item"> Chiot <span class="text-right"><%= priceOfAdopt[0].puppy %> €</span> </li>
+                </ul>
+                <ul class="list-group">         
+                    <li class="list-group-item"> Caution <span class="text-right"><%= priceOfAdopt[0].caution_puppy %> €</span> </li>
+                </ul>
+            </div>
+            <div class="box m-on">
+                <div class="sales">
+                    <h2>Nos Tarifs Chats</h2>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-purple" data-toggle="modal" data-target="#priceModalCat">Edit</button>
+                    </div>
+                </div>
+                <ul class="list-group">         
+                    <li class="list-group-item"> Chat Femelle <span class="text-right"> <%= priceOfAdopt[0].cat_female %> €</span> </li>
+                </ul>
+                <ul class="list-group">         
+                    <li class="list-group-item"> Chat Femelle <span class="text-right"> <%= priceOfAdopt[0].cat_male %> €</span> </li>
+                </ul>
+                <ul class="list-group">         
+                    <li class="list-group-item"> Chaton <span class="text-right"><%= priceOfAdopt[0].kitten %> €</span> </li>
+                </ul>
+                <ul class="list-group">         
+                    <li class="list-group-item"> Caution <span class="text-right"><%= priceOfAdopt[0].caution_kitten %> €</span> </li>
+                </ul>
+            </div>
+            <div class="box m-on">
+                <div class="sales">
+                    <h2>Animaux de races</h2>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-purple" id="breedPrice" data-toggle="modal" data-target="#breedAdopt">Edit</button>
+                    </div>
+                </div>
+                <ul class="list-group">         
+                    <li class="list-group-item"> Chien categorisé  Femelle<span class="text-right"><%= priceOfAdopt[0].dog_cat_female %> €</span> </li>
+                </ul>
+                <ul class="list-group">         
+                    <li class="list-group-item"> Chien categorisé Mâle<span class="text-right"><%= priceOfAdopt[0].dog_car_male %> €</span> </li>
+                </ul>
+                <ul class="list-group">
+                    <% if(purebred_pet[0].extra === true){%> 
+                        <li class="list-group-item">Supplément activé pour chien de race</li>
+                        <li class="list-group-item"><span class="text-right"> « <%= purebred_pet[0].extra_charge %> »</span></li>
+                    <% }else{ %>
+                    <li class="list-group-item">Supplément activé pour chien de race</li>
+                    <% } %>
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-7 col-sm-7 col-xs-12 gutter">  
+            <div class="box m-phone">   
+                <div class="sales">
+                    <h2>Nos Conditions</h2>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-purple" data-toggle="modal" data-target="#termAdoptModal" id="addTerm"> +</button>
+                    </div>
+                </div>
+                <ul class="list-group">
+                    <% for (let conditions of condition) {  %> 
+                        <li class="list-group-item ol" data-toggle="modal" data-target="#provisoModal">• <%= conditions.description %> </li>
+                        <!-- Modal -->
+                        <div class="modal fade" id="provisoModal" tabindex="-1" role="dialog" aria-labelledby="provisoModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content" data-article-id="<%= conditions.id%>">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="provisoModalLabel">Editer/supprimer ma clause</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                       <form>
+                                        <div class="form-group">
+                                            <label for="clauseArea">Clause à editer:</label>
+                                            <textarea class="form-control" id="cautionModal<%= conditions.id %>" rows="10"><%= conditions.description %></textarea>
+                                          </div>
+                                       </form>
+                                    </div>
+                                    <div class="modal-footer threebtn">
+                                        <button type="button" class="btn btn-danger deleteClause">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                              </svg>
+                                        </button>
+                                        <span class="pull-right">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                            <button type="button" class="btn btn-primary editProviso">Valider</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% }  %> 
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal add Condition-->
+<div class="modal fade" id="termAdoptModal" tabindex="-1" role="dialog" aria-labelledby="termAdoptModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="termAdoptModalLabel">Ajouter une condition</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+                <div class="alert alert-info" role="alert">
+                    Attention certaines données sont directement connectées au site web, attention à l'orthographe!
+                </div>
+                <label for="newTerm">Nouvelle Clause</label>
+                <textarea class="form-control" id="newTermAdopt" rows="3"></textarea>
+              </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary newTerm">Valider</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- Modal edit Price -->
+<div class="modal fade" id="priceModalDog" tabindex="-1" role="dialog" aria-labelledby="priceModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" data-article-id="<%= priceOfAdopt[0].id %>">
+            <div class="modal-header">
+                <h5 class="modal-title" id="priceModalLabel">Editer nos tarifs chiens</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="col-auto">                
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Chien femelle</div>
+                            </div>
+                            <input type="text" class="form-control" id="dog_female" value="<%= priceOfAdopt[0].dog_female %>" >
+                        </div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Chien mâle</div>
+                            </div>
+                            <input type="text" class="form-control" id="dog_male" value="<%= priceOfAdopt[0].dog_male %>" >
+                        </div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Chiots</div>
+                            </div>
+                            <input type="text" class="form-control" id="puppy" value="<%= priceOfAdopt[0].puppy %>" >
+                        </div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Caution</div>
+                            </div>
+                            <input type="text" class="form-control" id="caution_puppy" value="<%= priceOfAdopt[0].caution_puppy %>" >
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary validPriceDog">Valider</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal edit Price -->
+<div class="modal fade" id="priceModalCat" tabindex="-1" role="dialog" aria-labelledby="priceModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" data-article-id="<%= priceOfAdopt[0].id %>">
+            <div class="modal-header">
+                <h5 class="modal-title">Editer nos tarifs chats</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="col-auto">                
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Chat femelle</div>
+                            </div>
+                            <input type="text" class="form-control" id="cat_female" value="<%= priceOfAdopt[0].cat_female %>" >
+                        </div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Chat mâle</div>
+                            </div>
+                            <input type="text" class="form-control" id="cat_male" value="<%= priceOfAdopt[0].cat_male %>" >
+                        </div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Chaton</div>
+                            </div>
+                            <input type="text" class="form-control" id="kitten" value="<%= priceOfAdopt[0].kitten %>" >
+                        </div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Caution</div>
+                            </div>
+                            <input type="text" class="form-control" id="caution_kitten" value="<%= priceOfAdopt[0].caution_kitten %>" >
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary validPriceDog">Valider</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cautionModal" tabindex="-1" role="dialog" aria-labelledby="cautionModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cautionModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"> Chiots  </div>
+                </div>
+                <input type="text" class="form-control" id="dfg" value="" >
+                <div class="input-group-prepend">
+                    <div class="input-group-text">€</div>
+                </div>
+            </div>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"> Chatons  </div>
+                </div>
+                <input type="text" class="form-control" id="kitten" value="" >
+                <div class="input-group-prepend">
+                    <div class="input-group-text">€</div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary editCaution">Save changes</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="breedAdopt" tabindex="-1" role="dialog" aria-labelledby="breedAdoptLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="breedAdoptLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="extra">Supplément pour chien de Race</label>
+                <select class="form-control" id="extra">
+                    <%if(purebred_pet[0].extra === true){ %> 
+                    <option value="true">Oui</option>
+                    <option value="false">Non</option>
+                    <%}else{ %>
+                    <option value="false">Non</option>
+                    <option value="true">Oui</option>
+                    <%} %>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Affichié à l'utilisateur concernant le prix :</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" value="<%= purebred_pet[0].extra_charge %> ">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="/js/app.js"></script>
+<script src="/js/params.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<%- include('partials/footer') %>

@@ -31,30 +31,6 @@ const hostFamilyController = {
         } 
     }, 
 
-    findAllCommentHostFamily: async (request, response) => {
-        try{
-            const commentHostFamily = await HostFamily.findAllCommentHostFamily();
-            if(commentHostFamily){
-                const allHostFamilly = {
-                    gard: response.hostFamilyGard,
-                    herault: response.hostFamilyHerault,
-                    autre: response.hostFamilyAutre,
-                    comments: commentHostFamily 
-                }
-                response.render('hostFamily',{
-                    allHostFamilly
-                });    
-                
-            } else {
-                response.status(404).json(`Il n'y a aucun commentaire pour cette famille d'acceuil trouvés.`);
-            }
-        }
-        catch(error){
-            console.trace(error)
-            return response.status(500).json(error.toString());
-        }
-    },
-
     addHostFamily: async (request, response) => {
         try {
             //Test si tous les champs sont renseignés 
@@ -74,7 +50,7 @@ const hostFamilyController = {
                  };   
 
                 //on transmet les informations du membre a la fonction createMember
-                 await HostFamily.addHostFamily(saveHostFamily);
+                const addCommentHostfamilly = await HostFamily.addHostFamily(saveHostFamily);
                 response.json({ saveHostFamily , TEXT: 'Votre famille d\'acceuil a bien été enregistrer'});
              
 
@@ -152,9 +128,10 @@ const hostFamilyController = {
             const commentHostFamilyId = parseInt(request.params.id);
             const commentHostFamily = await HostFamily.findOneHostFamily(commentHostFamilyId);
             if(commentHostFamily) {
+                console.log('mon body',request.body);
                 const comment = {
                     id: commentHostFamilyId,
-                    commentaire: request.body.commentaire
+                    comment: request.body.commentHostfamilly
                 };
                 const hostFamilyComment = await HostFamily.addCommentFamilyHost(comment);
                 response.status(200).json({ hostFamilyComment, TEXT: `Votre commentaire à bien été ajouter à la famille d\'acceuil ${commentHostFamilyId}`});
@@ -163,52 +140,6 @@ const hostFamilyController = {
             }
         }catch(error){
             console.trace(error);
-        }
-    },
-
-    editCommentHostFamily: async (request, response) => {
-        try {
-            const editCommentHostFamilyId = parseInt(request.params.id);
-            console.log('premier',editCommentHostFamilyId);
-            
-            const editCommentHostFamily = await HostFamily.findOneHostFamily(editCommentHostFamilyId);
-            console.log('deuxieme', editCommentHostFamily);
-            
-            if(editCommentHostFamily) {
-                if(request.body) {
-                    const editComment = {
-                        id: editCommentHostFamilyId,
-                        commentaire: request.body.commentaire
-                    };
-                    const hostFamilyEdit = await HostFamily.editCommentHostFamily(editComment);
-                    response.status(200).json({ hostFamilyEdit, TEXT: `Votre commentaire à bien été modifié sur la famille d\'acceuil numero ${editCommentHostFamilyId}` });  
-                }
-                else {
-                    response.status(404).json('Ce commentaire n\'a pas été modifié');
-                }
-                response.status(404).json(`Cette famille d\'acceuil numéro ${hostFamilyId} n\'existe pas`);
-            }
-        } catch(error){
-            console.trace(error);
-        }
-    },
-
-    deleteCommentHostFamily: async(request, response) => {
-        try {
-            const deleteCommentHostFamilyId = parseInt(request.params.id);
-            const deleteCommentHostFamily = await HostFamily.findOneHostFamily(deleteCommentHostFamilyId); 
-            if (deleteCommentHostFamily) {
-                const commentHostFamilyToDel = {
-                    id: deleteCommentHostFamilyId,
-                };
-                await HostFamily.suppCommentHostFamily(commentHostFamilyToDel.id);
-                response.status(200).json('Votre commentaire de la famille d\'acceuil a bien été supprimée');
-            } else {
-                response.json('ce commentaire de la famille d\'acceuil n\'existe pas.');
-            }
-        } catch (error) {
-            console.trace(error)
-            return response.status(500).json(error.toString());
         }
     },
 

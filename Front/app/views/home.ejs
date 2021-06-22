@@ -36,21 +36,23 @@
         
         <div class="section">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h3 class="h4">Nos loulous qui attendes depuis trop longtemp</h3>                    
+                <h3 class="h4">Nos loulous qui attendent depuis trop longtemp</h3>                    
             </div>
             
             <div class="card-deck">
                 <div class="flip-card">
                     <div class="flip-card-inner">
-                        <div class="flip-card-front-1" >
+                        <div class="flip-card-front-1" style="background-image: url(http://localhost:3030/uploads/Joséphine.jpg);" >
                             
                         </div>
                         <div class="flip-card-back" >
                             
-                            <h3 class="card-title"> <%= json.starsCat[0].name%></h3>
-                            <h3 class="card-info" ><%= json.starsCat[0].sexe %> - <%= json.starsCat[0].breed %> - <%= json.starsCat[0].age.toLocaleString('en-GB').substr(0, 10) %></h3>
+                            <h3 class="card-title"> <%= json.starsDog.name%></h3>
+
                             <p class="card-text">
-                                Aujourd'hui cela fait x jours que <%= json.starsCat[0].name%> attend une famille.
+                                Aujourd'hui cela fait x jours que <%= json.starsDog.name%> attend une famille.
+                                <br>
+                                Chaque Animal mérite d'avoir un foyer aimant, les animaux adultes sont moins demandé, voir invisible... nous vous invitons à regarder sa fiche pour découvrir si vous pouvez vous correspondre.
                             </p>
                             
                         </div>
@@ -58,14 +60,14 @@
                 </div>
                 <div class="flip-card">
                     <div class="flip-card-inner">
-                        <div class="flip-card-front-2" >
+                        <div class="flip-card-front-2" style="background-image: url(https://www.biofan.com/blog/wp-content/uploads/2019/06/photo-1545293944-e852415538eb.jpeg);" >
                             
                         </div>
                         <div class="flip-card-back">
-                            <h5 class="card-title"> <%= json.starsCat[0].name%></h5>
-                            <h6 class="card-title"><%= json.starsCat[0].sexe %> - <%= json.starsCat[0].breed %> - <%= json.starsCat[0].age.toLocaleString('en-GB').substr(0, 10) %></h6>
+                            <h5 class="card-title"> <%= json.starsCat.name%></h5>
                             <p class="card-text">
-                                Aujourd'hui cela fait x jours que <%= json.starsCat[0].name%> attend une famille.
+                                Aujourd'hui cela fait x jours que <%= json.starsCat.name%> attend une famille. <br>
+                                Chaque Animal mérite d'avoir un foyer aimant, les animaux adultes sont moins demandé, voir invisible... nous vous invitons à regarder sa fiche pour découvrir si vous pouvez vous correspondre.
                             </p>
                         </div>
                     </div>
@@ -90,14 +92,14 @@
                     <tbody>
                         <tr>
                             <td>Chats pris en charges</td>
-                            <td>15</td>
+                            <td><%= json.CatSupportThisYear%></td>
                             <td>14</td>
                             <td>13</td>
                             <td>13</td>
                         </tr>
                         <tr>
                             <td>Chiens pris en charges</td>
-                            <td>75</td>
+                            <td><%= json.DogSupportThisYear%></td>
                             <td>83</td>
                             <td>65</td>
                             <td>13</td>

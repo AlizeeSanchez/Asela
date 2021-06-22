@@ -15,8 +15,10 @@ const Cat = {
     //On recupere les chats adoptés
     findCatAdopted: async () => {
         try{
-            const cats = await db.query("SELECT * FROM pet WHERE adopt = true AND type = 'chat' ORDER BY id;");
-            return cats.rows;
+            const pets = await db.query(
+            "SELECT pet.id, pet.name, pet.breed, pet.last_name_pet, pet.age, pet.sexe, adoptant.lastname, adoptant.firstname, adoptant.number_phone, adoptant.city,adoptant.postal_code, adoptant.adress FROM pet JOIN adoptant ON pet.adoptant_id = adoptant.id WHERE pet.adopt = true AND pet.type = 'chat';"
+            );
+            return pets.rows;
         }catch (error){
             console.trace(error);
         }
@@ -58,18 +60,18 @@ const Cat = {
     //Ajouter un chat a l'adoption
     addNewCat: async (cat) => {       
         try{
-            const addCat = `INSERT INTO pet ("type", "name", "age", "amity", "sexe", "breed", "ide", "sterilised", "description", "weight") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *;`;
+            const addCat = `INSERT INTO pet ("type", "name", "age", "amity", "sexe", "color", "ide", "sterilised", "description", "breed") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *;`;
             const data = await db.query(addCat, [
                 cat.type,
                 cat.name,
                 cat.age,
                 cat.amity,
                 cat.sexe,
-                cat.breed,
+                cat.color,
                 cat.ide,
                 cat.sterilised,
                 cat.description, 
-                cat.weight
+                cat.race
             ]); 
             console.log('Je suis arriver en fin de requete');
             

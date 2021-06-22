@@ -69,6 +69,7 @@ const dogController = {
                 response.json('Cet animal est disponible a l\'adoption');
             }
             if(pet.adopt ===true){
+                console.log('cette');
                 const petTrue = await Dog.adoptIsFalse(petId);
                 response.json('Cet animal n\'est pas disponible à l\'adoption');
             } else {
@@ -120,24 +121,8 @@ const dogController = {
         }
     },
 
-    //Supprimer un chien
-    suppPet: async (request, response) => {
-       try{
-          const petId = parseInt(request.params.id);
-          const pet = await Dog.findOnePet(petId);
-          if(pet){
-              const pet = await Dog.suppPet(petId)
-              response.json('Cet animal a été supprimé avec succès.')
-
-          } else {
-            response.json('Cet animal ne peut pas etre supprimer car il n\'existe pas.');
-            }
-        }
-        catch(error){
-            console.trace(error)
-            return response.status(500).json(error.toString());
-        }  
-    },
+    //Supprimer un chien A DEPLACER DANS PET
+    
            
 }
 

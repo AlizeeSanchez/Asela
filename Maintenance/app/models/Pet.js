@@ -17,6 +17,16 @@ const Pet = {
     },
 
     //Afficher un animal
+    findAllPet: async () => {
+        try{
+            const pet = await db.query("SELECT * FROM pet where adopt = false");   
+            return pet.rows;
+        }catch (error){
+            console.trace(error);
+        }
+    },
+
+    //Afficher un animal
     findAdoptantPet: async (id) => {
         try{
             const pet = await db.query(
@@ -139,10 +149,12 @@ const Pet = {
     //ajouter un commentaire sur un animal
     addNewCommentPet: async (comment) => {
         try{
-        const addcomment = `INSERT INTO commentaire_pet ("pet_id", "commentaire") VALUES ($1, $2) RETURNING *;`;
+        const addcomment = `INSERT INTO commentaire_pet ("pet_id", "commentaire", "date_comment", "volunteer_author") VALUES ($1, $2, $3, $4) RETURNING *;`;
         const data = await db.query(addcomment, [
             comment.pet_id,
-            comment.commentaire
+            comment.commentaire,
+            comment.date_comment,
+            comment.volunteer_author
         ]);
         return data.rows[0];
         }   
@@ -248,9 +260,9 @@ const Pet = {
     },
 
     //Signaler qu'un animal est reservé
-    reserveIsTrue: async (id) => {
+    bookedIsTrue: async (book) => {
         try{
-            const publishpet = await db.query('UPDATE pet SET reserve = true WHERE id = $1;', [id])
+            const publishpet = await db.query('UPDATE pet SET booked = true, booked_name = $1 WHERE id = $2;', [book.name, book.id])
             return publishpet.rows;
         }
         catch(error){
@@ -259,9 +271,9 @@ const Pet = {
     },
 
     //La reservation est annulé
-    reserveIsFalse: async (id) => {
+    bookedIsFalse: async (id) => {
         try{
-            const publishpet = await db.query('UPDATE pet SET reserve = false WHERE id = $1 ;', [id])
+            const publishpet = await db.query(`UPDATE pet SET booked = false, booked_name = '' WHERE id = $1 ;`, [id])
             return publishpet.rows;
         }
         catch(error){
@@ -306,6 +318,34 @@ const Pet = {
         }
         catch(error){
             console.trace(error)
+        }
+    },
+
+    uploadImgPet: async (image) => { 
+        try{
+            console.log('je rentre dans mon model', image);
+        const picturePet = `INSERT INTO picture_pet ("title", "pet_id") VALUES ($1, $2) RETURNING *;`;
+        const dataImg = await db.query(picturePet, [
+            image.title,
+            image.pet_id
+        ]);
+        console.log('dataImage',dataImg);
+        //return data.rows[0];
+        }   
+        catch (error) {
+            console.trace(error);
+        }
+    },
+
+    //Supprimer un animal a l'adoption
+    suppPet: async (id) => {
+        console.log('je rentre dans mon model');
+        try{
+        const suppPet = await db.query('DELETE FROM pet WHERE id = $1;',[id]);
+        console.log('suppression animal model', suppPet);
+        }
+        catch (error) {
+            console.trace(error);
         }
     }
 }

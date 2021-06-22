@@ -2,6 +2,7 @@ const { Router } = require('express');
 const petController = require('./controllers/petController');
 const mainController = require('./controllers/mainController')
 const otherController = require('./controllers/otherController')
+const formController = require('./controllers/formController')
 
 
 const router = Router();
@@ -37,14 +38,18 @@ router.get('/nos-evenements', otherController.event)
 router.get('/nous-soutenir', otherController.support)
 
 //Devenir Famille D'accueil
-router.get('/devenir-famille-accueil', otherController.host_family)
+router.get('/devenir-famille-accueil', formController.host_family)
+router.post('/devenir-famille-accueil', formController.AddNewFormHostFamilly)
 
 // Faire un DON
 
 // Toutes les démarches
 router.get('/nos-demarches', otherController.tearmAdopt)
 
-// Formulaire d'adoption         PAS ENCORE
+// Formulaire d'adoption
+router.get('/formulaire_adoption', formController.formAdopt)
+router.post('/formulaire_adoption', formController.AddNewFormAdopt)
+
 
 // Contact
 router.get('/contact', otherController.contact)

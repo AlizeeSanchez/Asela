@@ -1,18 +1,20 @@
 const QuestionnaireAdopt = require("../models/QuestionnaireAdopt");
 const Adoptant = require("../models/Adoptant");
+const Pet = require("../models/Pet");
 
 const questionnaireAdoptController = {
 
     //Répondre à un questionnaire
     responseQuest: async (request, response) => {
         try{
-            if(request.body.email && request.body.type_pet && request.body.lastname_firstname && request.body.date_birth && request.body.occupation && request.body.number_phone && request.body.postal_code && request.body.city && request.body.adress){
+            if(request.body.email && request.body.type_pet && request.body.lastname && request.body.firstname && request.body.date_birth && request.body.occupation && request.body.number_phone && request.body.postal_code && request.body.city && request.body.adress){
                 //On recupere les données envoyées par le body
                 questionnaire = {
                     email: request.body.email,
                     type_pet: request.body.type_pet,
                     name_pet: request.body.name_pet,
-                    lastname_firstname: request.body.lastname_firstname,
+                    lastname: request.body.lastname,
+                    firstname: request.body.firstname,
                     date_birth: request.body.date_birth,
                     occupation: request.body.occupation,
                     lastname_firstname_spouse: request.body.lastname_firstname_spouse,
@@ -32,8 +34,8 @@ const questionnaireAdoptController = {
                     allergy: request.body.allergy,
                     adopt_assos: request.body.adopt_assos,
                     adopt_assos2: request.body.adopt_assos2,
-                    trust_assos: request.body.trust_assos,
-                    trust_assos2: request.body.trust_assos2,
+                    abandoned_assos: request.body.abandoned_assos,
+                    abandoned_assos2: request.body.trust_assos2,
                     pet_familly: request.body.pet_familly,
                     pet_familly2: request.body.pet_familly2,
                     pet_familly_deceased: request.body.pet_familly_deceased,
@@ -83,12 +85,13 @@ const questionnaireAdoptController = {
                 //controler si mon adresse email ou mon numero de telephone a deja été utilisé dasn le passé pour creer un questionnaire (s'il existe en bdd).
                     //recuperer tout mes emails et number_phone en bdd
                     const bd = await QuestionnaireAdopt.findAllQuestAdopt();
+                    console.log('bd', bd);
                     //console.log('tout mes questionnaires', bd);
                     //Les passé a ma methode pou qu'elle les compare au body
                     const compare = await QuestionnaireAdopt.correspondenceQuest(questionnaire);
-                    console.log(compare);
 
                     if(compare){
+                        console.log('comparaison',compare);
                         response.json(`Cette adresse email ou ce numero de telephone a deja servi à remplir un questionnaire le ${compare.date_sending} pour un ${compare.type_pet} dénommé ${compare.name_pet}, nous allons actualiser votre questionnaire pour le ${questionnaire.type_pet} dénommé ${questionnaire.name_pet}.`);
                             // Si le type d'animal demandé est inchangé, je renvois juste le nom de l'animal et j'actualise la date (now)
                             if(questionnaire.type_pet === compare.type_pet){
@@ -161,14 +164,19 @@ const questionnaireAdoptController = {
              return response.status(500).json(error.toString());
          }  
      },
-
+   
      //Checker un questionnaire
      findOneQuestAdopt : async (request, response) => {
          try {
             const questAdoptId = parseInt(request.params.id);
             const questAdopt = await QuestionnaireAdopt.findOneQuestAdopt(questAdoptId);
+            const allPet = await Pet.findAllPet();
+            console.log('allpet',allPet);
             if (questAdopt) {
-                response.json(questAdopt);
+                response.render('oneQuestionnaire', {
+                    questAdopt,
+                    allPet
+                });
             } else {
                 response.status(404).json(`Ce questionnaire n'existe pas.`);
             }
@@ -207,31 +215,27 @@ const questionnaireAdoptController = {
         }
     },
 
-    //Afficher les questionnaires en attente // refusé // sans suite
-    findAllQuestAdoptWaiting : async (request, response) => {
+    findAllQuestionnaire : async (request, response) => {
         try {
-            //recuperer tout tes questionnaire en attente
-            const allQuest = await QuestionnaireAdopt.findAllQuestAdopt();
-            const questAdoptWaiting = await QuestionnaireAdopt.findAllQuestAdoptWaiting(allQuest); 
-            
-           if (questAdoptWaiting) {
-               response.json(questAdoptWaiting);
-           }
+            const waiting = await QuestionnaireAdopt.findAllQuestAdoptWaiting();  //En attente
+            console.log('questionnaire en attente', waiting);
+            const processed = await QuestionnaireAdopt.findAllQuestAdoptProcessed(); //Traité
+            const refused = await QuestionnaireAdopt.findAllQuestAdoptRefused(); //Refusé
+            const discontinued = await QuestionnaireAdopt.findAllQuestAdoptDiscontinued(); //Sans suite
+            const adopted = await QuestionnaireAdopt.findAllQuestAdopted(); //Adopté
+            //const waintingList = await QuestionnaireAdopt.findAllQuestWaintingList(); //Liste d'attente
 
-           const allQuestR = await QuestionnaireAdopt.findAllQuestAdopt();           
-           const questAdoptRefused = await QuestionnaireAdopt.findAllQuestAdoptRefused(allQuest);
-
-           if(questAdoptRefused) {
-             response.json(questAdoptRefused);
-           }
-           
-           const allQuestA = await QuestionnaireAdopt.findAllQuestAdopt();
-           const questAdoptAbandonned = await QuestionnaireAdopt.findAllQuestAdoptAbandonned(allQuest);
-
-           if(questAdoptAbandonned) {
-            response.json(questAdoptAbandonned);
+           if (waiting||processed||refused||discontinued||adopted/*|waintingList*/) {
+                response.render('questionnaireAdopt', {
+                    waiting,
+                    processed,
+                    refused,
+                    discontinued,
+                    adopted,
+                   // waintingList
+                });
            } else {
-               response.status(404).json(`Ce questionnaire n'existe pas.`);
+               response.status(404).json(`Aucun questionnaire existant.`);
            }
 
         } 

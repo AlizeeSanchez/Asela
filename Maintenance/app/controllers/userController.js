@@ -47,6 +47,7 @@ const userController = {
             const userId = (request.body.id)
             const addUser = await User.addUser(userId);
             if (addUser) {
+
                 response.json('Ajout de l\'utilisateur accepter');
             } else {
                 response.status(404).json(`Desolé on ne vous a pas permis de vous enregistrer veuillez saisir les bonnes informations !`);
@@ -73,9 +74,11 @@ const userController = {
                         email: request.body.userEmail,
                         password: encryptedPswd,
                     };  
-                    //on transmet les informations du membre a la fonction createMember
-                    const saveUser = await User.signIn(user);
-                    response.redirect('login');
+                    
+                     //on transmet les informations du membre a la methode signIn
+                     const saveUser = await User.signIn(user);
+
+                            
             }
         } catch (error){
              console.trace(error);
@@ -85,7 +88,8 @@ const userController = {
 
     //Se connecter
     login: async (request, response) => {
-        try {          
+        try {
+            console.log('je suis rentrer');          
             //On verifie si le membre est deja present en BDD via son email
             const user = await User.getMemberByEmail(request.body.mail)
             if(request.body.mail && request.body.password) { 
@@ -99,19 +103,18 @@ const userController = {
                     if (!validePass){
                         response.json('le mot de passe est incorrect')
                     } else {
+
                         request.session.user = {
                             lastname : member.lastname,
                             firstname : member.firstname,
                             mail : member.mail,
                             logged : true,
                        }                    
-                       //console.log(request.session.member)
+                       console.log('session', request.session.user)
                        console.log('Logged:',request.session.user.logged);
                        
                        response.json({ logged: true });
-                       //creer le member dans req.session  et le tuer pour deco if il existe = connecte if non personne deco
-
-                       //response.redirect('/isLogged');
+                       //creer le member dans req.session  et le tuer pour deco if il existe = connecte if non personne deco  
                     }
                 }   
             } else  {

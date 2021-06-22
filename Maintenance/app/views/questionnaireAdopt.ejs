@@ -1,0 +1,221 @@
+<%- include('partials/header') %>
+
+<div >
+  <h3 style="text-align:center;"> ASELA > Nos questionnaires adoptions</h3>
+</div>
+
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="En-Attente" data-toggle="tab" href="#waiting" role="tab" aria-controls="waiting" aria-selected="true">En attente</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="Traited" data-toggle="tab" href="#traited" role="tab" aria-controls="traited" aria-selected="false">Traité</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="Refused" data-toggle="tab" href="#refused" role="tab" aria-controls="refused" aria-selected="false">Refusé</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="Sans-suite" data-toggle="tab" href="#discontinued" role="tab" aria-controls="discontinued" aria-selected="false">Sans suite</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="Adopted" data-toggle="tab" href="#adopted" role="tab" aria-controls="adopted" aria-selected="false">Adopté</a>
+    </li>
+  </ul>
+
+  <div class="tab-content" id="myTabContent">
+
+    <!-------------------------------------------------En attente---------------------------------------------->
+    <div class="tab-pane fade show active" id="waiting" role="tabpanel" aria-labelledby="En-Attente">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th cope="col">Reçu le</th>
+            <th cope="col">Type</th>
+            <th cope="col">Nom Animal</th>
+            <th scope="col">Identité</th>
+            <th scope="col">Email</th>
+            <th scope="col">Numéro de téléphone</th>
+            <th scope="col">Code postal / Ville</th>
+            <th scope="col">Type de maison</th>
+            <th scope="col">Animaux</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let questWaiting of waiting){ %>
+            <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= questWaiting.id %>"> 
+              
+                <td data-label="Reçu le"><a href="questionnaire/<%= questWaiting.id %>"><%= questWaiting.date_sending.toLocaleString('en-GB').substr(0, 10) %></a></td>
+                <td><%= questWaiting.type_pet %></td>
+                <td><%= questWaiting.name_pet %></td>
+                <td><%= questWaiting.lastname %> <%= questWaiting.firstname %></td>
+                <td><%= questWaiting.email %></td>
+                <td><%= questWaiting.number_phone %></td>
+                <td><%= questWaiting.postal_code %> <%= questWaiting.city %></td>
+                <td><%= questWaiting.type_residence %></td>
+                <td><% if(questWaiting.pet_familly === true){ %> <%= questWaiting.pet_familly2 %> <% }else{ %> Non <%} %></td>
+            </tr>
+          <% } %> 
+            
+        </tbody>
+      </table>
+    </div>
+    <!-------------------------------------------------Traité---------------------------------------------->
+    <div class="tab-pane fade show" id="traited" role="tabpanel" aria-labelledby="Traited">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th cope="col">Reçu le</th>
+            <th cope="col">Type</th>
+            <th cope="col">Nom Animal</th>
+            <th scope="col">Identité</th>
+            <th scope="col">Email</th>
+            <th scope="col">Numéro de téléphone</th>
+            <th scope="col">Code postal / Ville</th>
+            <th scope="col">Type de maison</th>
+            <th scope="col">Animaux</th>
+            <th scope="col">Date de rencontre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let questProcessed of processed){ %>
+               
+            <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= questProcessed.id %>"> 
+              
+              <td><a href="questionnaire/<%= questProcessed.id %>"><%= questProcessed.date_sending.toLocaleString('en-GB').substr(0, 10) %></a></td>
+              <td><%= questProcessed.type_pet %></td>
+              <td><%= questProcessed.name_pet %></td>
+              <td><%= questProcessed.lastname %> <%= questProcessed.firstname %></td>
+              <td><%= questProcessed.email %></td>
+              <td><%= questProcessed.number_phone %></td>
+              <td><%= questProcessed.postal_code %> <%= questProcessed.city %></td>
+              <td><%= questProcessed.type_residence %></td>
+              <td><% if(questProcessed.pet_familly === true){ %> <%= questProcessed.pet_familly2 %> <% }else{ %> Non <% } %></td>
+              <td><% if(questProcessed.meet){ %> <% questProcessed.meet.toLocaleString('en-GB').substr(0, 10) %> <% }  %> </td>
+              
+            </tr>
+          <% } %> 
+            
+        </tbody>
+      </table>
+    </div> 
+    <!-------------------------------------------------Refusé---------------------------------------------->
+    <div class="tab-pane fade show" id="refused" role="tabpanel" aria-labelledby="Refused">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th cope="col">Reçu le</th>
+            <th cope="col">Type</th>
+            <th cope="col">Nom Animal</th>
+            <th scope="col">Identité</th>
+            <th scope="col">Email</th>
+            <th scope="col">Numéro de téléphone</th>
+            <th scope="col">Code postal / Ville</th>
+            <th scope="col">Type de maison</th>
+            <th scope="col">Animaux</th>
+            <th scope="col">Commentaire de refus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let questRefused of refused){ %>
+               
+            <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= questRefused.id %>"> 
+              <td><a href="questionnaire/<%= questRefused.id %>"><%= questRefused.date_sending.toLocaleString('en-GB').substr(0, 10) %></a></td>
+              <td><%= questRefused.type_pet %></td>
+              <td><%= questRefused.name_pet %></td>
+              <td><%= questRefused.lastname %> <%= questRefused.firstname %></td>
+              <td><%= questRefused.email %></td>
+              <td><%= questRefused.number_phone %></td>
+              <td><%= questRefused.postal_code %> <%= questRefused.city %></td>
+              <td><%= questRefused.type_residence %></td>
+              <td><% if(questRefused.pet_familly === true){ %> <%= questRefused.pet_familly2 %> <% }else{ %> Non <%} %></td>
+              <td><%= questRefused.refused_comment %></td>
+            </tr>
+          <% } %> 
+            
+        </tbody>
+      </table>
+    </div> 
+    <!-------------------------------------------------Sans suite---------------------------------------------->
+    <div class="tab-pane fade show" id="discontinued" role="tabpanel" aria-labelledby="Sans-suite">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th cope="col">Reçu le</th>
+            <th cope="col">Type</th>
+            <th cope="col">Nom Animal</th>
+            <th scope="col">Identité</th>
+            <th scope="col">Email</th>
+            <th scope="col">Numéro de téléphone</th>
+            <th scope="col">Code postal / Ville</th>
+            <th scope="col">Type de maison</th>
+            <th scope="col">Animaux</th>
+            <th scope="col">Commentaire général</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let questDiscontinued of discontinued){ %>
+               
+            <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= questDiscontinued.id %>"> 
+               
+              <td><a href="questionnaire/<%= questDiscontinued.id %>"><%= questDiscontinued.date_sending.toLocaleString('en-GB').substr(0, 10) %></a></td>
+              <td><%= questDiscontinued.type_pet %></td>
+              <td><%= questDiscontinued.name_pet %></td>
+              <td><%= questDiscontinued.lastname %> <%= questDiscontinued.firstname %></td>
+              <td><%= questDiscontinued.email %></td>
+              <td><%= questDiscontinued.number_phone %></td>
+              <td><%= questDiscontinued.postal_code %> <%= questDiscontinued.city %></td>
+              <td><%= questDiscontinued.type_residence %></td>
+              <td><% if(questDiscontinued.pet_familly === true){ %> <%= questDiscontinued.pet_familly2 %> <% }else{ %> Non <%} %></td>
+              <td><%= questDiscontinued.general_comment %></td>
+               
+            </tr>
+          <% } %> 
+            
+        </tbody>
+      </table>
+    </div> 
+    <!-------------------------------------------------Adopté---------------------------------------------->
+    <div class="tab-pane fade show" id="adopted" role="tabpanel" aria-labelledby="Adopted">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th cope="col">Reçu le</th>
+            <th cope="col">Type</th>
+            <th cope="col">Nom Animal</th>
+            <th scope="col">Identité</th>
+            <th scope="col">Email</th>
+            <th scope="col">Numéro de téléphone</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Type de maison</th>
+            <th scope="col">Animaux</th>
+            <th scope="col">Commentaire général</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let questAdopted of adopted){ %>
+               
+            <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= questAdopted.id %>"> 
+              <td><a href="questionnaire/<%= questAdopted.id %>"><%= questAdopted.date_sending.toLocaleString('en-GB').substr(0, 10) %></a></td>
+              <td><%= questAdopted.type_pet %></td>
+              <td><%= questAdopted.name_pet %></td>
+              <td><%= questAdopted.lastname %> <%= questAdopted.firstname %></td>
+              <td><%= questAdopted.email %></td>
+              <td><%= questAdopted.number_phone %></td>
+              <td><%= questAdopted.postal_code %> <%= questAdopted.city %> <%= questAdopted.adress %></td>
+              <td><%= questAdopted.type_residence %></td>
+              <td><% if(questAdopted.pet_familly === true){ %> <%= questAdopted.pet_familly2 %> <% }else{ %> Non <%} %></td>
+              <td><%= questAdopted.general_comment %></td>
+            </tr>
+          <% } %> 
+            
+        </tbody>
+      </table>
+    </div> 
+               
+  </div>
+   
+
+<%- include('partials/footer') %>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

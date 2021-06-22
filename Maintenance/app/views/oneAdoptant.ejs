@@ -1,0 +1,133 @@
+<%- include('partials/header') %>
+
+<div >
+  <h3 style="text-align:center;"> ASELA > Profil Adoptant n°<%= adoptant[0].id %> de <%= adoptant[0].lastname %> <%= adoptant[0].firstname %></h3>
+</div>
+
+<div class="row gutters-sm">
+  <div class="col-md-4 mb-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="titlePet title"> Famille</h5>
+        <hr>
+          <div class="row">
+            <div class="col-sm-6">
+              <h6 class="mb-0">Adoptant:</h6>
+            </div>
+            <div class="col-sm-6 text-secondary">
+              <%= adoptant[0].lastname %> <%= adoptant[0].firstname %><br>
+              <%= adoptant[0].birthday %><br>
+              <%= adoptant[0].job %>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-6">
+              <h6 class="mb-0">Conjoint:</h6>
+            </div>
+            <div class="col-sm-6 text-secondary">
+              <% if(adoptant[0].spouselastname){%> 
+                <%= adoptant[0].spouselastname %> <%= adoptant[0].spousefirstname %> <br>
+                <% if(adoptant[0].spousebirthday){%> <%= adoptant[0].spousebirthday %> <br> <% } %> 
+                <% if(adoptant[0].spousejob){%> <%= adoptant[0].spousejob %> <% } %>   
+              <% }else{ %>
+                /
+              <%} %>   
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-6">
+              <h6 class="mb-0">Famille:</h6>
+            </div>
+            <div class="col-sm-6 text-secondary">
+              <%= adoptant[0].numberadulthome %> adultes <br>
+           <% if(adoptant[0].numberchlidhome >= 1){ %>
+             <%= adoptant[0].numberchlidhome %> enfant(s)
+             <% } %>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="card mt-3" >
+      <div class="card-body">
+        <h5 class="titlePet title">Liste des animaux adopté</h5>
+          <% for(let pet of petAdopt){ %>
+            <hr>
+            <h6 class="mb-0"></h6>
+            <h4 class="title_pet"><%= pet.name %> <span class="text-secondary"><%= pet.type %></span></h4>
+            Identification: <span class="text-secondary"><%= pet.ide %></span> <br>
+            Date d'adoption: <span class="text-secondary"><%= pet.date_adopting.toLocaleString('en-GB').substr(0, 10) %></span>
+          <% } %> 
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card mb-3">
+      <div class="card-body">
+      <h5 class="titlePet title">Informations</h5>
+      <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <h6 class="mb-0">Email</h6>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            <%= adoptant[0].email %>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <h6 class="mb-0">Téléphone</h6>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            <%= adoptant[0].number_phone %>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <h6 class="mb-0">Adresse</h6>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            <%= adoptant[0].adress %> <br>
+            <%= adoptant[0].postal_code %> <%= adoptant[0].city %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cart-body comment" data-article-id="<%=adoptant[0].id %>">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="titlePet title">Commentaires</h5>
+          <% for(let comment of commentAdoptant){ %>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0"> <%= comment.date_comment.toLocaleString('en-GB').substr(0, 10) %>  </h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <%= comment.commentaire %>
+              </div>
+            </div>
+            <% } %> 
+        </div>
+      </div>
+      <hr>
+      <form>
+        <div class="form-group">
+          <label for="message-text" class="mb-0">Ajouter un commentaire</label>
+          <textarea class="form-control" id="commentAdoptant" ></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary addCommentAdoptant">Envoyer le commentaire</button>  
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+                      
+<%- include('partials/footer') %>
+<script src="/js/adoptants.js"></script>
+<script src="/js/app.js"></script>

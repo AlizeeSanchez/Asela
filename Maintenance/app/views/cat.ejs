@@ -1,442 +1,325 @@
 <%- include('partials/header') %>
 
-<div class ="bande-top">
-			<ul class="nav nav-tabs" id="myTab" role="tablist">
-				<li class="nav-item">
-				  	<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">A l'adoption</a>
-				</li>
-				<li class="nav-item">
-				  	<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Nos adoptés</a>
-				</li>
-				<li class="nav-item">
-				  	<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Nos décédés</a>
-				</li>
-				<li class="nav-item">
-					<button class="nav-link" type="button" class="btn btn-secondary" id="btn-createCat" data-toggle="modal" data-target="#AddCatModal">Ajouter un chat </button>
-			  </li>
-			</ul>
-			
-			<div class="tab-content" id="myTabContent">
-				
-				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-
-<!--------------------------------------------Partie a l'adoption--------------------------------------->		
-<main class="main1">
-	
-
-    <div class="container">
-		
-        		<div class="bloc-article">
-        		    <% for(let cat of jason.pets) { %>
-        		    <article class="article" data-article-id="<%= cat.id %>">
-        		        <header class="header-pet">
-							<h2 class="subTitle"><strong><%= cat.name %></strong></h2>
-        		            <img class="image-pet" src="/uploads/<%= cat.name %>.jpg" alt="Image de présentation de l'animal">
-        		        </header>
-        		        <main class="article-main-pet">
-        		            <ul class="content">
-								<li class="lien"><strong>Robe</strong>: <%= cat.color %></li>
-								<li class="lien"><strong>Age</strong>: <%= cat.age %></li>
-								<li class="lien"><strong>Sexe</strong>: <%= cat.sexe %></li>
-							</ul>
-        		        </main>
-						<footer class="Multi-button">
-        		            <button type="button" class="btn btn-success" onClick="location.href='pet/<%= cat.id %>'">Voir</button>
-        		            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal<%= cat.id %>">Modifier</button>
-        		            <% if (cat.site_publish === true) { %>
-        		            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPublish<%= cat.id %>">Dépublier</button>
-        		            <% } else { %>
-        		            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPublish<%= cat.id %>">Publier</button>
-        		            <% } %>
-		                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#suppCatModal<%= cat.id %>">Supprimer</button>
-		                </footer>
-					</article>
-					<!--------------------------------------------Modale publié / dépublié chat--------------------------------------->
-					<div class="modal fade" id="modalPublish<%= cat.id %>" tabindex="-1" role="dialog" aria-labelledby="publishModal" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-						  <div class="modal-content" data-article-id="<%= cat.id %>">
-							<div class="modal-header">
-							  <h5 class="modal-title" id="publishModal">Affichage sur le site</h5>
-							  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							  </button>
-							</div>
-							<div class="modal-body">
-							<% if (cat.site_publish === true) { %>
-							  <p>Voulez vous dépublier cet animal ?</p>
-							  <% } else { %>
-							  <p>Voulez vous publier cet animal ?</p>
-							  <% } %>
-							</div>
-							<div class="modal-footer">
-							  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-							  <% if (cat.site_publish === true) { %>
-							  <button type="button" class="btn btn-primary publishSite">Oui dépublier </button>
-							  <% } else { %>
-							  <button type="button" class="btn btn-primary publishSite">Oui publier </button>
-								<% } %>
-							</div>
-						  </div>
-						</div>
-					</div>
-
-					<!--------------------------------------------Modale supprimé chat--------------------------------------->
-					<div class="modal fade" id="suppCatModal<%= cat.id %>" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-						  <div class="modal-content" data-article-id="<%= cat.id %>">
-						
-							<div class="modal-header">
-							  <h5 class="modal-title" id="deleteModal">Supprimer un chat</h5>
-							  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							  </button>
-							</div>
-							<div class="modal-body">
-							  Souhaitez vous vraiment supprimer definitivement cet animal de la base de donnée ?
-							</div>
-							<div class="modal-footer">
-							  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulé</button>
-							  <button type="button" class="btn btn-primary deleteCat">Oui</button>
-							</div>
-						  </div>
-						</div>
-					</div>
-
-
-		            <!--------------------------------------------Modale Modification chat--------------------------------------->
-					<div class="modal fade" id="editModal<%= cat.id %>" tabindex="-1" role="dialog" aria-labelledby="Editer-un-chat" aria-hidden="false">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content" data-article-id="<%= cat.id %>">
-					      <div class="modal-header">
-					        <h5 class="modal-title" id="Editer-un-chat">Modifier <%= cat.name %></h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body">
-					        <form action="" method="POST">
-										<header class="modal-card-head">
-												<div class="alert alert-info" role="alert">
-													Attention certaines données sont directement connectées au site web, attention à l'orthographe!
-												  </div>
-												  <button class="delete close" type="button" aria-label="close"></button>
-											<button class="delete close" type="button" aria-label="close"></button>
-										</header>
-										<section class="modal-card-body">
-					            			<div class="field">
-												<div class="input-group mb-3">
-													<div class="input-group-prepend">
-													  <span class="input-group-text">Nom</span>
-													</div>
-													<input type="text" class="form-control" aria-label="Default" value="<%= cat.name %>" aria-describedby="inputGroup-sizing-default" id="editNameCat<%= cat.id %>">
-												  </div>
-											</div>
-											<div class="field">
-												<div class="input-group mb-3">
-													<div class="input-group-prepend">
-													  <span class="input-group-text">Age</span>
-													</div>
-													<input type="text" class="form-control" aria-label="Default" value="<%= cat.age %>" aria-describedby="inputGroup-sizing-default" id="editAgeCat<%= cat.id %>">
-												  </div>
-											</div>
-										
-											<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<label class="input-group-text" for="inputGroupSelect01">Sexe</label>
-										</div>
-										<select class="custom-select" id="editSexeCat<%= cat.id %>">
-											<% if (cat.sexe === "Mâle") { %>
-												<option selected="Mâle">Mâle</option>
-												<option value="Femelle">Femelle</option>
-											<% }else if (cat.sexe === "Femelle"){ %>
-												<option selected="Femelle">Femelle</option>
-												<option value="Mâle">Mâle</option>
-											<% }else{ %>
-												<option selected>Choisir*</option>
-												<option value="Femelle">Femelle</option>
-												<option value="Mâle">Mâle</option>
-											<% }%>
-					                    </select>
-									</div>
-								
-					            	<div class="field">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                              <span class="input-group-text">Race</span>
-                                            </div>
-                                            <input type="text" class="form-control" aria-label="Default" value="<%= cat.breed %>" aria-describedby="inputGroup-sizing-default" id="editBreedCat<%= cat.id %>">
-                                          </div>
-                                    </div>
-							
-					            <div class="field">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text">Entente</span>
-										</div>
-											<input type="text" class="form-control" aria-label="Default" value="<%= cat.amity %>" aria-describedby="inputGroup-sizing-default" id="editAmityCat<%= cat.id %>">
-									</div>
-								</div>
-							
-					            <div class="field">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text">Robe</span>
-										</div>
-											<input type="text" class="form-control" aria-label="Default" value="<%= cat.color %>" aria-describedby="inputGroup-sizing-default" id="editColorCat<%= cat.id %>">
-									  </div>
-								</div>
-							
-					            <div class="field">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text">Identification</span>
-										</div>
-										<input type="text" class="form-control" aria-label="Default" value="<%= cat.ide %>" aria-describedby="inputGroup-sizing-default" id="editIdeCat<%= cat.id %>">
-									  </div>
-								</div>
-							
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<label class="input-group-text" for="inputGroupSelect01">Stérilisé</label>
-									</div>
-									<select class="custom-select" id="editSterilisedCat<%= cat.id %>">
-										<% if (cat.sterilised === true) { %>
-											<option value="true" selected="true">oui</option>
-											<option value="false">non</option>
-										<% } else if (cat.sterilised === false) { %>
-											<option value="true">oui</option>
-											<option value="false" selected="false">non</option>
-										<% } else { %>
-											<option selected>Choisir*</option>
-											<option value="true">oui</option>
-											<option value="false">non</option>
-										<% } %>
-									</select>
-								</div>
-							
-								<div class="nofield" id="nofild">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text">Description</span>
-										</div>
-										<textarea class="form-control" aria-label="With textarea" id="editDescriptionCat<%= cat.id %>"><%= cat.description %></textarea>
-									  </div>
-								</div>
-							
-							</section>
-						</form>
-					</div>
-					    <div class="modal-footer">
-					    	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					        <button type="button" class="btn btn-primary saveChangeCat">Save changes</button>
-					    </div>
-					</div>
-				</div>
-
-			</div>
-			<% } %> 
-			 
-		</div>
-	</div>
-</main>
+<div >
+    <h3 style="text-align:center;"> ASELA > Nos chats</h3>
 </div>
-<!--------------------------------------------PARTIE ADOPTES--------------------------------------->
 
-				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-					<table class="table table-hover">
-						<thead>
-						  <tr>
-							<th scope="col">NOM</th>
-							<th scope="col">NOUVEAU NOM</th>
-							<th scope="col">Robe</th>
-							<th scope="col">AGE</th>
-							<th scope="col">SEXE</th>
-							<th scope="col">NOM ADOPTANT</th>
-							<th scope="col">PRENOM ADOPTANT</th>
-							<th scope="col">TELEPHONE</th>
-							<th scope="col">VILLE</th>
-							<th scope="col">CODE POSTAL</th>
-							<th scope="col">ADRESSE</th>
-						  </tr>
-						</thead>
-						<tbody>
-						<% for(catAdopted of jason.petsAdopt){ %>
-
-							<tr onClick="location.href='pet/<%= catAdopted.id %>'">
-							<td><%= catAdopted.name %></td>
-							<td><%= catAdopted.last_name_pet %></td>
+<div class ="bande-top">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="cat-tab" data-toggle="tab" href="#cat" role="tab" aria-controls="cat" aria-selected="true">A l'adoption</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Nos adoptés</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Nos décédés</a>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link btn btn-purple AddCat" type="button" id="btn-createCat" data-toggle="modal" data-target="#AddCatModal"> + Ajouter un chat</button>
+        </li>
+    </ul>
+    <!--------------------------------------------Section animaux disponibles--------------------------------------->
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="cat" role="tabpanel" aria-labelledby="cat-tab">
+            <div class="tab-pane fade show  table table-bordered table-responsive tableFixHead" id="cats" role="tabpanel" aria-labelledby="cat-tab">
+                <table class="table table-hover" >
+                    <thead>
+                        <tr>
+                            <th>Date d'entrée</th>
+                            <th>Nom</th>
+                            <th>Race</th>
+                            <th>Age</th>
+                            <th>Sexe</th>
+                            <th>Robe</th>
+                            <th>Identification</th>
+                            <th>Dernier Vaccin</th>
+                            <th>Publié</th>
+                            <th>Reservé</th>
+                        </tr>
+                    </thead>
+                    
+                    <% for(let cat of jason.pets) { %>
+                        <tbody>
+                            <td><%if(cat.date_supported){%><%= cat.date_supported.toLocaleString('en-GB').substr(0, 10) %><%} %></td>
+                            <td><a href="pet/<%= cat.id %>"><%= cat.name %></a></td>
+                            <td><%= cat.breed %></td>
+                            <td><%= cat.age.toLocaleString('en-GB').substr(0, 10) %></td>
+                            <td><%= cat.sexe %></td>
+                            <td><%= cat.color %></td>
+                            <td><%= cat.ide %></td>
+                            <td><%if(cat.date_vaccine){%><%= cat.date_vaccine.toLocaleString('en-GB').substr(0, 10)%><% } %> </td>  
+                            <td><% if(cat.site_publish===true){ %>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalPublish<%= cat.id %>">OUI</button>
+                                <% } else{ %>
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modalPublish<%= cat.id %>">NON</button>
+                                <% } %></td>                                  
+                            <td><% if(cat.booked===true){ %>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalBooked<%= cat.id %>">OUI</button>
+                                <% } else{ %>
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modalBooked<%= cat.id %>">NON</button>
+                                 <% } %></td>
+                        </tbody>
+                        <!---------Modale de publication ----------->
+                        <div class="modal fade" id="modalPublish<%= cat.id %>" tabindex="-1" role="dialog" aria-labelledby="publishModal" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content" id="modalPublish" data-article-id="<%= cat.id %>">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="publishModal">Affichage sur le site</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <% if (cat.site_publish === true) { %>
+                                        <p>Voulez vous dépublier cet animal ?</p>
+                                        <% } else { %>
+                                        <p>Voulez vous publier cet animal ?</p>
+                                        <% } %>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                        <% if (cat.site_publish === true) { %>
+                                        <button type="button" class="btn btn-primary publishSite">Oui dépublier </button>
+                                        <% } else { %>
+                                        <button type="button" class="btn btn-primary publishSite">Oui publier </button>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         <!---------Modale de reservation ----------->
+                        <div class="modal fade" id="modalBooked<%= cat.id %>" tabindex="-1" role="dialog" aria-labelledby="bookModal" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content" id="modalBook" data-article-id="<%= cat.id %>">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="bookModal"> Reservation d'un animal</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <% if (cat.booked === true) { %>
+                                        <p>Voulez vous annuler la reservation de cet animal ?</p>
+                                        <% } else { %>
+                                            <form>
+                                                <div class="form-group">
+                                                  <label for="bookName" class="col-form-label">Nom et prénom du reservant:</label>
+                                                  <input type="text" class="form-control" id="bookName">
+                                                </div>
+                                            </form>
+                                        <% } %>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                        <% if (cat.booked === true) { %>
+                                        <button type="button" class="btn btn-primary bookPet"> Annuler la reservation </button>
+                                        <% } else { %>
+                                        <button type="button" class="btn btn-primary bookPet"> Valider la reservation </button>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>            
+                    <% } %>
+                </table>
+            </div>
+        </div>
+        <!--------------------------------------------Section animaux adoptés--------------------------------------->
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Date d'entrée</th>
+                        <th>Nom Asela</th>
+                        <th>Nouveau nom</th>
+                        <th>Race</th>
+                        <th>Age</th>
+                        <th>Sexe</th>
+                        <th>Robe</th>
+                        <th>Identification</th>
+                        <th>Date d'adoption</th>
+                        <th>Nom adoptant</th>
+                        <th>Téléphone</th>
+                        <th>Code Postal et Ville</th>
+                        <th>Adresse</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(catAdopted of jason.petsAdopt){ %>
+                        <tbody >
+                            <td><%= catAdopted.date_supported.toLocaleString('en-GB').substr(0, 10) %></td>
+                            <td><a href="pet/<%= catAdopted.id %>"><%= catAdopted.name %></a></td>
+                            <td><%= catAdopted.last_name_pet %></td>
+                            <td><%= catAdopted.breed %></td>
+                            <td><%= catAdopted.age.toLocaleString('en-GB').substr(0, 10) %> %></td>
+                            <td><%= catAdopted.sexe %></td>
 							<td><%= catAdopted.color %></td>
-							<td><%= catAdopted.age %></td>
-							<td><%= catAdopted.sexe %></td>
-							<td><%= catAdopted.lastname %></td>
-							<td><%= catAdopted.firstname %></td>
-							<td><%= catAdopted.number_phone %></td>
-							<td><%= catAdopted.city %>
-							<td><%= catAdopted.postal_code %></td>
-							<td><%= catAdopted.adress %></td>
-						  </tr>
-
-
-						<% } %> 
-						
-						</tbody>
-					</table>
-					
-				</div>
-
-<!--------------------------------------------PARTIE Décédé--------------------------------------->
-
-<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-	
-	<table class="table table-hover">
-		<thead class="TitleTab">
-			<tr>
-				<th scope="col">Nom de l'animal</th>
-				<th scope="col">Robe</th>
-				<th scope="col">Age</th>
-				<th scope="col">Sexe</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% for(catDead of jason.petsDead) { %>
-			<tr>
-				<td><%= catDead.name %></td>
-				<td><%= catDead.color %></td>
-				<td><%= catDead.age %></td>
-				<td><%= catDead.sexe %></td>
-			</tr>	
-			<% } %>
-	</table>
-	
+                            <td><%= catAdopted.ide %></td>
+                            <td><%= catAdopted.date_adopting %> </td>
+                            <td><%= catAdopted.lastname %> <%= catAdopted.firstname %></td>
+                            <td><%= catAdopted.number_phone %></td>
+                            <td><%= catAdopted.postal_code %> <%= catAdopted.city %></td>
+                            <td><%= catAdopted.adress %></td>
+                        </tbody>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+        <!--------------------------------------------Section animaux décèdes--------------------------------------->       
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <table class="table table-hover">
+                <thead class="TitleTab">
+                    <tr>
+                        <th scope="col">Date d'entrée</th>
+                        <th scope="col">Nom de l'animal</th>
+                        <th scope="col">Race</th>
+                        <th scope="col">Robe</th>
+                        <th scope="col">Date naissance</th>
+                        <th scope="col">Sexe</th>
+                        <th scope="col">Date du décès</th>
+                        <th scope="col">Cause</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(catDead of jason.petsDead) { %>
+                    <tr>                        
+                        <td><%= catDead.date_supported.toLocaleString('en-GB').substr(0, 10) %></td>
+                        <td><%= catDead.name %></td>
+                        <td><%= catDead.breed %></td>
+                        <td><%= catDead.color %></td>
+                        <td><%= catDead.age.toLocaleString('en-GB').substr(0, 10) %> %></td>
+                        <td><%= catDead.sexe %></td>
+                        <td><%= catDead.deceased_date.toLocaleString('en-GB').substr(0, 10) %> %></td>
+                        <td><%= catDead.deceased_cause %></td>
+                    </tr>	
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <!--------------------------------------------Modale AJOUT chat--------------------------------------->
 
 <div class="modal fade" id="AddCatModal" tabindex="-1" role="dialog" aria-labelledby="Ajouter-un-chien" aria-hidden="false">
-	<div class="modal-dialog" role="document">
-	  <div class="modal-content" data-article-id="addCat">
-		<div class="modal-header">
-		  <h5 class="modal-title" id="Ajouter_chat"> Creer la fiche d'un chat</h5>
-		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		  </button>
-		</div>
-		<div class="modal-body">
-
-		  <form action="" method="POST">
-					  <header class="modal-card-head">
-						<div class="alert alert-info" role="alert">
-							Attention certaines données sont directement connectées au site web, attention à l'orthographe!
-						  </div>
-						  <button class="delete close" type="button" aria-label="close"></button>
-					  </header>
-					  <section class="modal-card-body">
-
-						<div class="field">
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-								  <span class="input-group-text">Nom</span>
-								</div>
-								<input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addNameCat">
-							  </div>
-						</div>
-
-			  <div class="field">
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-					  <span class="input-group-text">Age</span>
-					</div>
-					<input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addAgeCat">
-				  </div>
-			
-
-			  </div>
-
-			  <div class="field">
-			  <div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<label class="input-group-text" for="inputGroupSelect01">Sexe</label>
-  				</div>
-				  <select class="custom-select" id="addSexeCat">
-					<option selected>Choisir*</option>
-					<option value="Femelle">Femelle</option>
-					<option value="Mâle">Mâle</option>
-				  </select>
-				</div>
-				
-			  </div>
-			  
-			  <div class="field">
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-					  <span class="input-group-text">Race</span>
-					</div>
-					<input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addBreedCat">
-				  </div>
-			
-				<div class="field">
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-						  <span class="input-group-text">Entente</span>
-						</div>
-						<input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addAmityCat">
-					  </div>
-
-			  <div class="field">
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-					  <span class="input-group-text">Robe</span>
-					</div>
-					<input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addColorCat">
-				  </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" data-article-id="addCat">
+            <div class="modal-header">
+                <h5 class="modal-title" id="Ajouter_chat"> Creer la fiche d'un chat</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-					  
-			<div class="field">
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-					  <span class="input-group-text">Identification</span>
-					</div>
-					<input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addIdeCat">
-				  </div>
+            <div class="modal-body">
+                <form action="" method="POST">
+                    <header class="modal-card-head">
+                        <div class="alert alert-info" role="alert">
+                            Attention certaines données sont directement connectées au site web, attention à l'orthographe!
+                        </div>
+                        <button class="delete close" type="button" aria-label="close"></button>
+                    </header>
+                    <section class="modal-card-body">
+                        
+                        <div class="field">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Nom</span>
+                                </div>
+                                <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addNameCat">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Age</span>
+                                </div>
+                                <input type="date" class="form-control" aria-label="Default" value="2021-01-01"  aria-describedby="inputGroup-sizing-default" id="addAgeCat">
+                            </div>
+                            
+                            
+                        </div>                   
+                        <div class="field">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroupSelect01">Sexe</label>
+                                </div>
+                                <select class="custom-select" id="addSexeCat">
+                                    <option selected>Choisir*</option>
+                                    <option value="Femelle">Femelle</option>
+                                    <option value="Mâle">Mâle</option>
+                                </select>
+                            </div>
+                            
+                        </div>                        
+                        <div class="field">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Race</span>
+                                </div>
+                                <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addRaceCat">
+                            </div>
+                        </div>                            
+                        <div class="field">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Entente</span>
+                                </div>
+                                <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addAmityCat" placeholder="Si inconnu écrire : Inconnu">>
+                            </div>
+                        </div>                                
+                        <div class="field">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Robe</span>
+                                </div>
+                                <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addColorCat">
+                            </div>
+                        </div>                               
+                        <div class="field">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Identification</span>
+                                </div>
+                                <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addIdeCat">
+                            </div>
+                        </div>      
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Stérilisé</label>
+                            </div>
+                            <select class="custom-select" id="sterilisedAddCat">
+                                <option selected>Choisir*</option>
+                                <option value="true">oui</option>
+                                <option value="false">non</option>
+                            </select>
+                        </div>        
+                        <div class="field">
+                            <div class="nofield" id="nofildCat">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Description</span>
+                                    </div>
+                                    <textarea class="form-control" aria-label="With textarea" id="descriptionAddCat"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </form>
             </div>
-			  
-			  <div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<label class="input-group-text" for="inputGroupSelect01">Stérilisé</label>
-				</div>
-				<select class="custom-select" id="sterilisedAddCat">
-					<option selected>Choisir*</option>
-					<option value="true">oui</option>
-					<option value="false">non</option>
-                </select>
-				</div>
-				
-				<div class="field">
-					
-					  <div class="nofield" id="nofildCat">
-						<div class="input-group">
-							<div class="input-group-prepend">
-							  <span class="input-group-text">Description</span>
-							</div>
-							<textarea class="form-control" aria-label="With textarea" id="descriptionAddCat"></textarea>
-						  </div>
-					</div>
-				</section>
-			</form>
-		</div>
-		<div class="modal-footer">
-		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulé</button>
-		  <button type="button" class="btn btn-primary saveNewCat">Ajouter</button>
-		</div>
-	  </div>
-	</div>
-  </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulé</button>
+            <button type="button" class="btn btn-primary saveNewCat">Ajouter</button>
+            </div>
+        </div>
+    </div>
+</div>
+                  
+                
+<%- include('partials/footer') %>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="/js/cat.js"></script>
-
-
-
-</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/js/app.js"></script>
+<script src="/js/pet.js"></script>

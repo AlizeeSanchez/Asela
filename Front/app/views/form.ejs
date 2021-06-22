@@ -1,1 +1,483 @@
 <%- include('partials/header') %>
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+        <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0">
+            </div>
+        </div>
+        <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:200%;height:200%;left:0; top:0">
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h2 class="h2">Le formulaire adoption.</h2>
+    </div>
+    <div class="row">        
+        <div class="col-md-6">  
+            <p>Vous avez pris la décision d'accueillir un animal dans votre foyer...               
+                Ce questionnaire permet de nous assurer que l'animal que vous souhaitez adopter correspond aux caractéristiques de votre foyer, ou de vous en proposer un.
+                Dans le cas où vous remplissez un formulaire pour un animal particulier, merci de nous communiquer son nom.
+                Le formulaire d'adoption pour un animal particulier, n'est en aucun cas une procédure de réservation, nous vous contacterons pour vous indiquer les suites données à votre questionnaire.
+            </p>
+                <form id="registrationForm">
+                    <div class="form-container">
+                        <div class="form-group">
+                            <label for="inputEmail">Adresse Email: <span class="warning">*</span></label>
+                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="exemple@mail.fr">
+                            <small id="emailHelp" style="color: rgb(96, 96, 221);">Nous ne partagerons jamais votre adresse email.</small>
+                        </div> 
+                        <label for="inputfistlastname">Nom et Prénom <span class="warning">*</span>:</label>
+                        <div class="form-group" style="display:flex;">
+                            <input type="lastname" class="form-control" id="lastname" placeholder="Entrer votre Nom de famille" required>
+                            <input type="firstname" class="form-control" id="firstname" placeholder="Entrer votre Prenom" required>
+                        </div>
+                        <label for="inputBirthday" name="trip-start" >Date de naissance <span class="warning">*</span>:</label>
+                        <div class="form-group" style="display:flex;">
+                            <input type="date" class="form-control" id="date_birth" required>
+                        </div>
+                        <label for="occupation">Profession <span class="warning">*</span>:</label>
+                        <div class="form-group" style="display:flex;">
+                            <input type="occupation" class="form-control" id="occupation" placeholder="Entrer votre profession" required>
+                        </div>
+                        <label for="inputAdress">Adresse: <span class="warning">*</span></label>
+                        <div class="form-group" style="display:flex;">
+                            <input type="postal_code" class="form-control" id="postal_code" placeholder="Entrer votre Code postal">
+                            <input type="city" class="form-control" id="city" placeholder="Entrer votre ville">
+                        </div>
+                        <div class="form-group" style="display:flex;">
+                            <input type="adress" class="form-control" id="adress" placeholder="Entrer votre Adresse">
+                        </div>
+                        <div class="form-group">
+                            <label for="Inputnumber_phone">Numéro de téléphone: <span class="warning">*</span></label>
+                            <input type="number_phone" class="form-control" id="number_phone" placeholder="Format : 0600000000">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputlastnameFirstnameSpouse">Nom et Prénom de votre conjoint:</label>
+                            <input type="lastname_firstname_spouse" class="form-control" id="lastname_firstname_spouse" placeholder="Entrer le nom et prénom de votre conjoint">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputBirthdaySpouse">Date de naissance de votre conjoint:</label>
+                            <input type="date" class="form-control" id="date_birth_spouse" >
+                        </div>
+                        <div class="form-group">
+                            <label for="inputJobSpouse">Metier de votre conjoint:</label>
+                            <input type="occupation_spouse" class="form-control" id="occupation_spouse" placeholder="Entrer son métier">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputnumberAdult">Nombre d'adulte vivant dans le foyer:</label>
+                            <select name="number_adult" class="form-control" id="number_adult">
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4 et +">4 et +</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputchildren_home">Nombre d'enfant à la maison: </label>
+                            <select name="number_children" class="form-control" id="number_children">
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4+">4 et +</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputold_children">L'age de vos enfant si vous en avez: </label>
+                            <input type="age_children" class="form-control" id="age_children" placeholder="Rentrez l'age de vos enfants'">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPet">Quel type d'animal souhaitez vous adopter </label>
+                            <select type="type_pet" class="form-control" id="type_pet">
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="cat">Chat</option>
+                                <option value="dog">Chien</option>
+                                <option value="nac">Nac (lapin, hamster, cochon d'inde ect...)</option>
+                                <option value="horse">Equidé</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputNamePet">Si vous souhaitez adopter un animal en particulier, quel est son nom ?  </label>
+                            <input type="name_pet" class="form-control" id="name_pet" placeholder="Rentrez le nom de l'animal">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputshifting"> Comptez vous vous deplacer pour rencontrer l'animal ?</label>
+                            <select type="shifting" class="form-control" id="shifting">
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputTypeHome"> Quel est le type de votre logement ? </label>
+                            <select name="type_residence" class="form-control" id="type_residence">
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="Maison avec Jardin">Maison avec Jardin</option>
+                                <option value="Maison avec cour ou Terrasse">Maison avec cour ou Terrasse</option>
+                                <option value="Maison sans exterieur">Maison sans exterieur</option>
+                                <option value="Appartement avec Jardin">Appartement avec Jardin</option>
+                                <option value="Appartement avec cour ou Terrasse">Appartement avec cour ou Terrasse</option>
+                                <option value="Appartement sans exterieur">Appartement sans exterieur</option>
+                                <option value="Studio avec Jardin">Studio avec Jardin</option>
+                                <option value="Studio avec cour ou Terrasse">Studio avec cour ou Terrasse</option>
+                                <option value="Studio sans exterieur">Studio sans exterieur</option>
+                                <option value="Terrain/ Caravane/ MobilHome">Terrain/ Caravane/ MobilHome</option>
+                                <option value="Bateau">Bateau</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputProprietor"> Etes vous proprietaire, locataire ou hébérgé?</label>
+                            <select type="text" class="form-control" id="proprietor">
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="Proprietaire">Proprietaire</option>
+                                <option value="Locataire">Locataire</option>
+                                <option value="Hébérgé">Hébérgé</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputFencing">Votre terrain est il entierement cloturé ? </label>
+                            <select type="text" class="form-control" id="fencing">
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputHeightFencing">Quelle est la hauteur de votre cloture ? </label>
+                            <input type="text" class="form-control" id="height_fence" placeholder="Exemple : 1m20">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputareaHome">Quelle est la superficie de votre logement ? </label>
+                            <input type="text" class="form-control" id="area_home" placeholder="Exemple : 50m2">
+                        </div>                    
+                        <div class="form-group">
+                            <label for="areaGarden">Quelle est la superficie de votre jardin/Terasse ou cours si vous en avez ? </label>
+                            <input type="text" class="form-control" id="area_garden" placeholder="Exemple : 25m2">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAllergy"> Si un occupant de votre foyer devient allergique à votre animal que ferez-vous ? </label>
+                            <input type="text" class="form-control" id="allergy">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAdoptAssos">Avez-vous déjà adopté un animal dans une association, refuge ou une SPA </label>
+                            <select type="text" class="form-control" id="adopt_assos">
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputwhereAssos"> Si oui où ? </label>
+                            <input type="adopt_assos2" class="form-control" id="adopt_assos2" placeholder="Rentrez le nom de l'association">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputtrust_assos">Avez-vous déjà abandonné un animal dans une association, refuge ou une SPA </label>
+                            <select type="text" class="form-control" id="abandoned_assos">
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputtrust_assos2"> Si oui dans quelle circonstances ? </label>
+                            <textarea class="form-control" id="abandoned_assos2" rows="3" placeholder="Expliquez ce qui vous a poussez a prendre cette décision"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputpetHome">Avez vous un ou des animaux ? </label>
+                            <select type="text" class="form-control" id="pet_familly">
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="text"> Dresser une liste des animaux présents dans le foyer en précisant le  Type/Race Âge Sexe Stérilisé/Castré vacciné ? </label>
+                            <textarea class="form-control" id="pet_familly2" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="text"> Dresser une liste des animaux que vous avez eu au cours de votre vie et qui sont décédé, quel sont les causes du décés ? </label>
+                            <textarea class="form-control" id="pet_familly_deceased" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputveterinary">Avez vous un vétérinaire ?</label>
+                            <select name="veterinary" class="form-control" id="veterinary" >
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputveterinary-contact">Si oui, merci d'indiquer ses coordonnées ?</label>
+                            <input type="veterinary2" class="form-control" id="veterinary2" placeholder="Donnez les coordonnées de votre vétérinaire">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputVeterinairePet">Ferez vous appel a un vétérinaire pour suivre l'animal ?</label>
+                            <select name="veterinary3" class="form-control" id="veterinary3" >
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputpresence">Est-ce qu’il y a quelqu’un à votre domicile la journée ?</label>
+                            <select name="disponibility" class="form-control" id="disponibility" >
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputLongTime"> Si non, pendant combien d’heures êtes vous absent(e)? </label>
+                            <input type="disponibility2" class="form-control" id="disponibility2" >
+                        </div>
+                        <div class="form-group">
+                            <label for="inputguarding">Lors d’une absence (vacances, longue journée de travail, travail de nuit, déplacement professionnel, ect), qui prendra soin de votre animal ?</label>
+                            <select name="holiday" class="form-control" id="holiday" >
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="On le prend avec nous">On le prend avec nous</option>
+                                <option value="Agence de gardiennage">Agence de gardiennage</option>
+                                <option value="Petsitter">Petsitter</option>
+                                <option value="Chenil">Chenil</option>
+                                <option value="Voisin">Voisin</option>
+                                <option value="Famille">Famille</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputguarding2"> Si autre, veuillez préciser : </label>
+                            <input type="holiday2" class="form-control" id="holiday2" >
+                        </div>
+                        <div class="form-group">
+                            <label for="inputawareness">Un chien ou un chat peut vivre 10 à 20 ans. Êtes-vous prêt à vous engager à vivre avec votre animal pour sa vie entière ?</label>
+                            <select name="awareness" class="form-control" id="awareness" >
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inpueducation"> Comment éduquerez- vous votre animal pour mettre fin à d’éventuels comportements destructifs? </label>
+                            <textarea class="form-control" id="education" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputinformed">L intégralité de votre foyer est-il averti et d 'accord avec cette adoption ?</label>
+                            <select name="informed" class="form-control" id="informed" >
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputadopt1">Pour qui adoptez vous cet animal ?</label>
+                            <input type="adopt" class="form-control" id="adopt" >
+                        </div>
+                        <div class="form-group">
+                            <label for="inputadopt2">Pourquoi voulez-vous adopter un chat/chien ?</label>
+                            <input type="adopt2" class="form-control" id="adopt2" placeholder="Compagnie, garde, pour les enfants, pour le travail, ... ?">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputtomove">Si vous décidez de déménager, que ferez-vous de votre animal ? </label>
+                            <input type="tomove" class="form-control" id="tomove" placeholder="Cession a une personne de confiance, le garder, le confier à la spa ou une association ... ?">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputsterilization">Quelle est votre opinion sur la stérilisation et la castration ?</label>
+                            <input type="sterilization" class="form-control" id="sterilization" placeholder="Pour ? contre ? votre opinion nous interesse.">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputforbearance">Votre animal aura besoin de temps pour s'adapter à votre maison. Serez vous patient et compréhensif ?</label>
+                            <input type="forbearance" class="form-control" id="forbearance" >
+                        </div>
+                        <div class="form-group">
+                            <label for="inputcleanliness">Si l’animal que vous adoptez n’est pas propre ou a besoin d’éducation, que ferez-vous ?</label>
+                            <input type="cleanliness" class="form-control" id="cleanliness" >
+                        </div>
+                        <div class="form-group">
+                            <label for="inputamity">Si a des animaux : Que ferez-vous si votre animal ne s’entend pas avec celui que vous avez déjà ?</label>
+                            <input type="amity" class="form-control" id="amity" >
+                        </div>
+                        <div class="form-group">
+                            <label for="inputgarden">Si vous avez un exterieur votre animal y aura acces ?</label>
+                            <select name="garden" class="form-control" id="garden" >
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputbed">Où couchera votre animal?</label>
+                            <input type="bed" class="form-control" id="bed" placeholder="Niche ? panier/arbre à chat ? dedans ou dehors ? Dans un chenil ? Sur le canapé ? ">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputwaiting">Qu'attendez vous de la part de votre animal ?</label>
+                            <input type="waiting" class="form-control" id="waiting" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputmotivation">Qu’est-ce qui vous motive à adopter un animal via une Association ?</label>
+                            <input type="motivation" class="form-control" id="motivation">
+                        </div>
+                        <hr>
+                        <h5>Questions pour chats uniquement:</h5>
+                        
+                        <div class="form-group">
+                            <label for="inputdeclawing">Planifiez-vous faire dégriffer votre chat ?</label>
+                            <select name="declawing" class="form-control" id="declawing" >
+                                <option value="/">----Choisir une réponse----</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+
+                        <h5>Questions pour chiens uniquement:</h5>
+
+                        <div class="form-group">
+                            <label for="inputrace_pet">Race de l'animal recherché</label>
+                            <input type="race_pet" class="form-control" id="race_pet" placeholder="Race de l'animal demandé ou recherché ">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputpetstatus">Qu'attendez vous de la part de votre animal ?</label>
+                            <input type="petstatus" class="form-control" id="petstatus" placeholder="Recherchez vous un animal : de compagnie, pour la sécurité, bon chasseur, pour garder un troupeaux, ... ? ">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputresponsability">Qui, parmi les occupants de votre maison, aura les responsabilités suivantes : Education et balades.</label>
+                            <input type="responsability" class="form-control" id="responsability">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputeducation2">Quelle méthode utiliserez vous l’éduquer et pour qu’il obéisse? Donnez des exemples.</label>
+                            <input type="education2" class="form-control" id="education2">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputcage">Avez-vous déjà utilisé une cage pour mettre fin à un comportement destructeur ?</label>
+                            <select name="cage" class="form-control" id="cage" >
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputcage2">Si oui , L'utiliserez vous encore ?</label>
+                            <input type="cage2" class="form-control" id="cage2">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputlifeabscent">Quand vous serez absent (Au travail ou au course par exemple.), où restera votre animal ?</label>
+                            <select name="absent" class="form-control" id="absent" >
+                                <option value="/">----Choisir une réponse----</option>
+                                <option value="Dans le jardin">Dans le jardin</option>
+                                <option value="Sur la terrasse/cours">Sur la terrasse/cours</option>
+                                <option value="Dans la maison">Dans la maison</option>
+                                <option value="Attaché dans le jardin">Attaché dans le jardin</option>
+                                <option value="Dans un chenil/ enclos à lui">Dans un chenil/ enclos à lui</option>
+                                <option value="Dans une cage adapté aux chiens">Dans une cage adapté aux chiens</option>
+                                <option value="Dans une piece type buanderie/garage">Dans une piece type buanderie/garage</option>
+                                <option value="Chez un proche">Chez un proche</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputlifepresent">Quand vous êtes présent, où restera votre animal ?</label>
+                            <select name="present" class="form-control" id="present">
+                                <option value="/">----Choisir une réponse----</option>
+                                <option value="à l'interieur ou à l'exterieur de la maison, avec moi">A l'interieur ou à l'exterieur de la maison, avec moi.</option>
+                                <option value="Dans le jardin">Dans le jardin</option>
+                                <option value="Sur la terrasse/cours">Sur la terrasse/cours</option>
+                                <option value="Dans la maison">Dans la maison</option>
+                                <option value="Attaché dans le jardin">Attaché dans le jardin</option>
+                                <option value="Dans un chenil/ enclos à lui">Dans un chenil/ enclos à lui</option>
+                                <option value="Dans une cage adapté aux chiens">Dans une cage adapté aux chiens</option>
+                                <option value="Dans une piece type buanderie/garage">Dans une piece type buanderie/garage</option>
+                                <option value="Chez un proche">Chez un proche</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputactivity">Quel type d’activités prévoyez-vous pour votre chien ? ( Choix multiple )</label>
+                            <select name="activity" class="form-control" id="activity">
+                                <option value="/">----Choisir une réponse----</option>
+                                <option value="Balade en laisse">Balade en laisse</option>
+                                <option value="Balade en liberté">Balade en liberté</option>
+                                <option value="Randonnée">Randonnée</option>
+                                <option value="Accès à une cour clôturée">Accès à une cour clôturée</option>
+                                <option value="Libre dans le jardin">Libre dans le jardin</option>
+                                <option value="Agility">Agility</option>
+                                <option value="Dog Dancing">Dog Dancing</option>
+                                <option value="Club canin">Club canin</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputactivity2">Précisez la durée de l’activité et la fréquence des balades</label>
+                            <input type="activity2" class="form-control" id="activity2">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputeducator">Avez-vous déjà fait appel à un/une éducateur canin ?</label>
+                            <select name="educator" class="form-control" id="educator" >
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputeducator2">Si oui, précisez ses coordonnées</label>
+                            <input type="educator2" class="form-control" id="educator2">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputeducator3">Sinon pensez vous faire appel à un éducateur canin ?</label>
+                            <select name="educator3" class="form-control" id="educator3" >
+                                <option value="">----Choisir une réponse----</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+                        <h5>Renseignements complementaires non obligatoires:</h5>
+                        <div class="form-group">
+                            <label for="inputfacebook_pseudo">Quel est votre pseudo Facebook ?</label>
+                            <input type="facebook_pseudo" class="form-control" id="facebook_pseudo">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputadvertisement">Où avez-vous entendu parler de notre association ?</label>
+                            <input type="advertisement" class="form-control" id="advertisement">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputfree">Si oui, précisez ses coordonnées</label>
+                            <textarea class="form-control" id="free" rows="3" placeholder="Si vous avez d'autre element dont vous souhaitez nous faire part c'est ici"></textarea>
+                        </div>
+                        <div class="form-group" style="display:flex;" >
+
+                            <div class="form-check form-check-inline">
+                                <label for="poeple-certificate">Je certifie que ces renseignements sont sincères et véritables : <span class="warning" style="margin-right:.8rem">*</span></label>
+                                <input class="form-check-input" type="radio" name="certificate_people" id="certificate_people" value="false" onchange="this.value = this.checked ? 'true' : 'false'">
+                                <label class="form-check-label" for="inlineRadio1">Oui</label>
+                            </div>
+    
+                        </div>
+                        <div class="form-group" style="display:flex;" >
+                            <div class="form-check form-check-inline">
+                                <label for="poeple-approuved">LU ET APPROUVE :  <span class="warning" style="margin-right:.8rem"> * </span></label>
+                                <input class="form-check-input" type="radio" name="approuved_people" id="approuved_people" value="false" onchange="this.value = this.checked ? 'true' : 'false'">
+                                <label class="form-check-label" for="inlineRadio1">Oui</label>
+                            </div>
+    
+                        </div>
+
+                        <button type="submit" style="margin-top: 1rem;" class="btn btn-primary validFormAdopt">Envoyé</button>
+                    
+                    </div>
+                </form>
+        </div>
+        <div class="col-md-6 img">
+            <div class="col-lg-10 mb-2 pr-lg-1">
+                <a href="/img/form.png"><img style="margin: 1rem 0;" src="/img/form.png"  alt="" class="img-fluid rounded shadow-sm"></a>
+            </div>
+        </div>
+    </div>
+    
+</main>
+</div>
+</div>
+
+<script src="/js/app.js"></script>

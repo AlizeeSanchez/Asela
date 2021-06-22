@@ -1,309 +1,496 @@
 <%- include('partials/header') %>
 
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">ADOPTANTS</a>
-  </li>
-
-<li class="nav-item">
-<button class="nav-link" type="button" class="btn btn-secondary" id="btn-createHostFamily" data-toggle="modal" data-target="#AddAdoptantModal">AJOUTER UN ADOPTANT</button>
-</li>
-</ul>
-
-<div class="tab-content" id="myTabContent">
-
-<!------------------------ADOPTANTS TABLEAU-------------------------->
-
-
-
-
-<div class="alert alert-warning" role="alert">
-  Il faudra trier par ordre alphabétique
+<div >
+  <h3 style="text-align:center;"> ASELA > Nos adoptants</h3>
 </div>
 
-<div class="table table-bordered table-responsive" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <table class="table table-hover">
+<div class ="bande-top">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="adoptant-2017" data-toggle="tab" href="#2017" role="tab" aria-controls="2017" aria-selected="true">2017</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="adoptant-2018" data-toggle="tab" href="#2018" role="tab" aria-controls="2018" aria-selected="false">2018</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="adoptant-2019" data-toggle="tab" href="#2019" role="tab" aria-controls="2019" aria-selected="false">2019</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="adoptant-2020" data-toggle="tab" href="#2020" role="tab" aria-controls="2020" aria-selected="false">2020</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="adoptant-2021" data-toggle="tab" href="#2021" role="tab" aria-controls="2021" aria-selected="false">2021</a>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link btn btn-purple AddAdoptant" type="button" id="btn-createAdoptant" data-toggle="modal" data-target="#AddAdoptantModal"> Ajouter un adoptant</button>
+    </li>
+  </ul>
+
+  <div class="tab-content" id="myTabContent">
+    <!-------------------------------------------------2017---------------------------------------------->
+    <div class="tab-pane fade show active" id="2017" role="tabpanel" aria-labelledby="adoptant-2017">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">PRENOM</th>
             <th scope="col">NOM DE FAMILLE</th>
+            <th scope="col">PRENOM EPOUX</th>
+            <th scope="col">NOM DE FAMILLE EPOUX</th>
             <th scope="col">TELEPHONE</th>
-            <th scope="col">CODE POSTAL</th>
             <th scope="col">VILLE</th>
+            <!--<th scope="col">VILLE</th>-->
             <th scope="col">ADRESSE</th>
+            <th scope="col">TYPE DE MAISON</th>
             <th scope="col">EMAIL</th>
             <th scope="col">ANIMAL ADOPTE</th>
-            <th scope="col">SUPP/EDIT</th>
+            <th scope="col">DATE ANIMAL ADOPTE</th>
+            
           </tr>
         </thead>
         <tbody>
             
             <% for(let adoptantTab of adoptant){ %>
-              <% console.log(adoptantTab) %> 
-
-            <td><%= adoptantTab.firstname %></td>
-            <td><%= adoptantTab.lastname %></td>
-            <td><%= adoptantTab.number_phone %></td>
-            <td><%= adoptantTab.postal_code %></td>
-            <td><%= adoptantTab.city %></td>
-            <td><%= adoptantTab.adress %></td>
-            <td><%= adoptantTab.email %></td>
-            <td><%= adoptantTab.name %></td>
-            <td><button type="button" class="btn btn-outline-primary" aria-haspopup="dialog" aria-controls="SuppAdoptantModal" data-toggle="modal" data-target="#SuppAdoptantModal" >
-              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"></path>
-              </svg>
-          </button>
-              <button type="button" class="btn btn-outline-primary" aria-haspopup="dialog" aria-controls="EditAdoptantModal" data-toggle="modal" data-target="#EditAdoptantModal">
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                  </svg>
-            </button>
-            </td>
-            </tr>
-
+               
+              <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= adoptantTab.id %>"> 
+                <% if(adoptantTab.date_adopting.toISOString().substr(0, 4) === '2017') { %> 
+                  <td><%= adoptantTab.firstname %></td>
+                  <td><a href="adoptant/<%= adoptantTab.id %>"><%= adoptantTab.lastname %></a></td>
+                  <td><%= adoptantTab.spousefirstname %></td>
+                  <td><%= adoptantTab.spouselastname %></td>
+                  <td><%= adoptantTab.number_phone %></td>
+                  <td><%= adoptantTab.postal_code %><%= adoptantTab.city %></td>
+                  <!--<td><%= adoptantTab.city %></td>-->
+                  <td><%= adoptantTab.adress %></td>
+                  <td><%= adoptantTab.type_home %></td>
+                  <td><%= adoptantTab.email %></td>
+                  <td><%= adoptantTab.name %></td>
+                  <td><%= adoptantTab.date_adopting.toLocaleString('en-GB').substr(0, 10) %></td>
+                <% } %>
+              </tr>
             <% } %>
-
         </tbody>
-    </table>
-    
-</div>
-
-<!-------------------------------MODAL AJOUTER ADOPTANT-----------------------------> 
-<div class="modal fade" id="AddAdoptantModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter un Adoptant</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="POST">
-          <header class="modal-card-head">
-          <div class="alert alert-warning" role="alert">
-            Attention certaines données sont directement connectées au site web, attention à l'orthographe!
-            </div>
-            <button class="delete close" type="button" aria-label="close"></button>
-          </header>
-          <section class="modal-card-body">
-
-          <div class="field">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Prénom</span>
-              </div>
-              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addFirstname">
-              </div>
-          </div>
-
-          <div class="field">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Nom</span>
-              </div>
-              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addLastname">
-              </div>
-          </div>
-
-          <div class="field">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Numéro de Téléphone</span>
-              </div>
-              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addNumberPhone">
-              </div>
-          </div>
-
-          <div class="field">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Code postal</span>
-              </div>
-              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addPostalCode">
-              </div>
-          </div>
-
-          <div class="field">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Ville</span>
-              </div>
-              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addCity">
-              </div>
-          </div>
-
-          <div class="field">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Adresse</span>
-              </div>
-              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addAdress">
-              </div>
-          </div>
-
-          <div class="field">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Email</span>
-              </div>
-              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addEmail">
-              </div>
-          </div>
-
-          <div class="field">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Animal Adopté</span>
-              </div>
-              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addPetAdopted">
-              </div>
-            </div>
-          </section>
-        </form>    
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Ajouter</button>
-      </div>
+      </table>
+    </div>                
+    <!-----------------------------------------2018----------------------------------------------->
+    <div class="tab-pane fade" id="2018" role="tabpanel" aria-labelledby="adoptant-2018">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">PRENOM</th>
+            <th scope="col">NOM DE FAMILLE</th>
+            <th scope="col">PRENOM EPOUX</th>
+            <th scope="col">NOM DE FAMILLE EPOUX</th>
+            <th scope="col">TELEPHONE</th>
+            <th scope="col">VILLE</th>
+            <!--<th scope="col">VILLE</th>-->
+            <th scope="col">ADRESSE</th>
+            <th scope="col">TYPE DE MAISON</th>
+            <th scope="col">EMAIL</th>
+            <th scope="col">ANIMAL ADOPTE</th>
+            <th scope="col">DATE ANIMAL ADOPTE</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+            
+            <% for(let adoptantTab of adoptant){ %>
+               
+              <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= adoptantTab.id %>"> 
+              <% if(adoptantTab.date_adopting.toISOString().substr(0, 4) === '2018') { %> 
+                <td><%= adoptantTab.firstname %></td>
+                <td><a href="adoptant/<%= adoptantTab.id %>"><%= adoptantTab.lastname %></a></td>
+                <td><%= adoptantTab.spousefirstname %></td>
+                <td><%= adoptantTab.spouselastname %></td>
+                <td><%= adoptantTab.number_phone %></td>
+                <td><%= adoptantTab.postal_code %>  <%= adoptantTab.city %></td>
+                <!--<td><%= adoptantTab.city %></td>-->
+                <td><%= adoptantTab.adress %></td>
+                <td><%= adoptantTab.type_home %></td>
+                <td><%= adoptantTab.email %></td>
+                <td><%= adoptantTab.name %></td>
+                <td><%= adoptantTab.date_adopting.toLocaleString('en-GB').substr(0, 10) %></td>
+              <% } %>
+            </tr>
+            <% } %> 
+        </tbody>
+      </table>
+    </div>
+    <!----------------------------------2019--------------------------------------------->
+    <div class="tab-pane fade" id="2019" role="tabpanel" aria-labelledby="adoptant-2019">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">PRENOM</th>
+            <th scope="col">NOM DE FAMILLE</th>
+            <th scope="col">PRENOM EPOUX</th>
+            <th scope="col">NOM DE FAMILLE EPOUX</th>
+            <th scope="col">TELEPHONE</th>
+            <th scope="col">VILLE</th>
+            <!--<th scope="col">VILLE</th>-->
+            <th scope="col">ADRESSE</th>
+            <th scope="col">TYPE DE MAISON</th>
+            <th scope="col">EMAIL</th>
+            <th scope="col">ANIMAL ADOPTE</th>
+            <th scope="col">DATE ANIMAL ADOPTE</th> 
+          </tr>
+        </thead>
+        <tbody>
+            
+            <% for(let adoptantTab of adoptant){ %>
+               
+              <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= adoptantTab.id %>"> 
+              <% if(adoptantTab.date_adopting.toISOString().substr(0, 4) === '2019') { %> 
+                <td><%= adoptantTab.firstname %></td>
+                <td><a href="adoptant/<%= adoptantTab.id %>"><%= adoptantTab.lastname %></a></td>
+                <td><%= adoptantTab.spousefirstname %></td>
+                <td><%= adoptantTab.spouselastname %></td>
+                <td><%= adoptantTab.number_phone %></td>
+                <td><%= adoptantTab.postal_code %>  <%= adoptantTab.city %></td>
+                <!--<td><%= adoptantTab.city %></td>-->
+                <td><%= adoptantTab.adress %></td>
+                <td><%= adoptantTab.type_home %></td>
+                <td><%= adoptantTab.email %></td>
+                <td><%= adoptantTab.name %></td>
+                <td><%= adoptantTab.date_adopting.toLocaleString('en-GB').substr(0, 10) %></td>
+              <% } %>
+            </tr>
+            <% } %>  
+        </tbody>
+      </table>
+    </div>
+    <!--------------------------------------2020-------------------------------------------------->
+    <div class="tab-pane fade" id="2020" role="tabpanel" aria-labelledby="adoptant-2020">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">PRENOM</th>
+            <th scope="col">NOM DE FAMILLE</th>
+            <th scope="col">PRENOM EPOUX</th>
+            <th scope="col">NOM DE FAMILLE EPOUX</th>
+            <th scope="col">TELEPHONE</th>
+            <th scope="col">VILLE</th>
+            <!--<th scope="col">VILLE</th>-->
+            <th scope="col">ADRESSE</th>
+            <th scope="col">TYPE DE MAISON</th>
+            <th scope="col">EMAIL</th>
+            <th scope="col">ANIMAL ADOPTE</th>
+            <th scope="col">DATE ANIMAL ADOPTE</th> 
+          </tr>
+        </thead>
+        <tbody>
+            
+            <% for(let adoptantTab of adoptant){ %>
+             
+              <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= adoptantTab.id %>"> 
+              <% if(adoptantTab.date_adopting.toISOString().substr(0, 4) === '2020') { %> 
+                <td><%= adoptantTab.firstname %></td>
+                <td><a href="adoptant/<%= adoptantTab.id %>"><%= adoptantTab.lastname %></a></td>
+                <td><%= adoptantTab.spousefirstname %></td>
+                <td><%= adoptantTab.spouselastname %></td>
+                <td><%= adoptantTab.number_phone %></td>
+                <td><%= adoptantTab.postal_code %>  <%= adoptantTab.city %></td>
+                <!--<td><%= adoptantTab.city %></td>-->
+                <td><%= adoptantTab.adress %></td>
+                <td><%= adoptantTab.type_home %></td>
+                <td><%= adoptantTab.email %></td>
+                <td><%= adoptantTab.name %></td>
+                <td><%= adoptantTab.date_adopting.toLocaleString('en-GB').substr(0, 10) %></td>
+              <% } %>
+            </tr>
+            <% } %> 
+        </tbody>
+      </table>
+    </div>
+    <!--------------------------------------2021-------------------------------------------->
+    <div class="tab-pane fade" id="2021" role="tabpanel" aria-labelledby="adoptant-2021">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">PRENOM</th>
+            <th scope="col">NOM DE FAMILLE</th>
+            <th scope="col">PRENOM EPOUX</th>
+            <th scope="col">NOM DE FAMILLE EPOUX</th>
+            <th scope="col">TELEPHONE</th>
+            <th scope="col">VILLE</th>
+            <!--<th scope="col">VILLE</th>-->
+            <th scope="col">ADRESSE</th>
+            <th scope="col">TYPE DE MAISON</th>
+            <th scope="col">EMAIL</th>
+            <th scope="col">ANIMAL ADOPTE</th>
+            <th scope="col">DATE ANIMAL ADOPTE</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+            
+            <% for(let adoptantTab of adoptant){ %>
+               
+              <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= adoptantTab.id %>"> 
+              <% if(adoptantTab.date_adopting.toISOString().substr(0, 4) === '2021') { %> 
+                <td><%= adoptantTab.firstname %></td>
+                <td><a href="adoptant/<%= adoptantTab.id %>"><%= adoptantTab.lastname %></a></td>
+                <td><%= adoptantTab.spousefirstname %></td>
+                <td><%= adoptantTab.spouselastname %></td>
+                <td><%= adoptantTab.number_phone %></td>
+                <td><%= adoptantTab.postal_code %>  <%= adoptantTab.city %></td>
+                <!--<td><%= adoptantTab.city %></td>-->app
+                <td><%= adoptantTab.adress %></td>
+                <td><%= adoptantTab.type_home %></td>
+                <td><%= adoptantTab.email %></td>
+                <td><%= adoptantTab.name %></td>
+                <td><%= adoptantTab.date_adopting.toLocaleString('en-GB').substr(0, 10) %></td>
+              <% } %>
+              </tr>
+            <% } %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
 
-<!------------------------------MODAL SUPPRIMER OUI NON------------------------->   
-<div class="modal" tabindex="-1" role="dialog" id="SuppAdoptantModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Supression d'un adoptant</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Souhaitez-vous vraiment supprimer cet adoptant ?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Oui</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+<!--------------------------------------------Modale AJOUT adoptant--------------------------------------->
 
-<!-------------------------------------------------MODAL MODIFIER EVENEMENT------------------------------------>
-<div class="modal fade" id="EditAdoptantModal" tabindex="-1" role="dialog" aria-labelledby="Editer-un-adoptant" aria-hidden="false">
+<div class="modal fade" id="AddAdoptantModal" tabindex="-1" role="dialog" aria-labelledby="Ajouter-un-adoptant" aria-hidden="false">
   <div class="modal-dialog" role="document">
-    <% for(let adoptantTab of adoptant){ %> 
-    <div class="modal-content" data-article-id="<%= adoptant.id %>">
-    <% } %>
-      <div class="modal-header">
-        <h5 class="modal-title" id="Editer-un-adoptant">Modifier l'adoptant</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="POST">
-                    <header class="modal-card-head">
-                            <div class="alert alert-warning" role="alert">
-                                Attention certaines données sont directement connectées au site web, attention à l'orthographe!
+      <div class="modal-content" data-article-id="addAdoptant">
+          <div class="modal-header">
+              <h5 class="modal-title" id="Ajouter_adoptant"> Creer la fiche d'un adoptant</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <form action="" method="POST">
+                  <header class="modal-card-head">
+                      <div class="alert alert-info" role="alert">
+                          Attention certaines données sont directement connectées au site web, attention à l'orthographe!
+                      </div>
+                      <button class="delete close" type="button" aria-label="close"></button>
+                  </header>
+                  <section class="modal-card-body">
+                      
+                      <div class="field">
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text">Numéro de passport</span>
                               </div>
-                              <button class="delete close" type="button" aria-label="close"></button>
-                        <button class="delete close" type="button" aria-label="close"></button>
-                    </header>
-                    <section class="modal-card-body">
-                      <div class="field">
-                        <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text">Prénom</span>
-                          </div>
-                          <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="editFirstname">
+                              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addNumberIdPassport">
                           </div>
                       </div>
-            
                       <div class="field">
-                        <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text">Nom</span>
-                          </div>
-                          <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="editLastname">
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text">Nom</span>
+                              </div>
+                              <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addLastname">
                           </div>
                       </div>
-            
+                      <div class="field">
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text">Prénom</span>
+                              </div>
+                              <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addFirstname">
+                          </div> 
+                      </div>   
+                      <div class="field">
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text">Date de naissance</span>
+                              </div>
+                              <input type="date" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addBirthday">
+                          </div>  
+                      </div> 
                       <div class="field">
                         <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text">Numéro de Téléphone</span>
-                          </div>
-                          <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="editNumberPhone">
-                          </div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Mêtier</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addJob">
+                        </div>  
                       </div>
-            
-                      <div class="field">
-                        <div class="input-group mb-3">
+                    <div class="field">
+                      <div class="input-group mb-3">
                           <div class="input-group-prepend">
-                            <span class="input-group-text">Code postal</span>
+                              <span class="input-group-text">Nom de l'époux(se)</span>
                           </div>
-                          <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="editPostalCode">
-                          </div>
-                      </div>
-            
-                      <div class="field">
-                        <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text">Ville</span>
-                          </div>
-                          <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="editCity">
-                          </div>
-                      </div>
-            
-                      <div class="field">
-                        <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text">Adresse</span>
-                          </div>
-                          <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="editAdress">
-                          </div>
-                      </div>
-            
-                      <div class="field">
-                        <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text">Email</span>
-                          </div>
-                          <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="editEmail">
-                          </div>
-                      </div>
-            
-                      <div class="field">
-                        <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text">Animal Adopté</span>
-                          </div>
-                          <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="editPetAdopted">
-                          </div>
+                          <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addSpouseLastname">
+                      </div>  
+                    </div> 
+                  <div class="field">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Prénom de l'époux(se)</span>
                         </div>
-        
-            
-        </section>
-    </form>
-</div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary saveChange">Save changes</button>
-    </div>
-</div>
+                        <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addSpouseFirstname">
+                    </div>  
+                  </div> 
+                <div class="field">
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">Date de naissance de l'époux(se)</span>
+                      </div>
+                      <input type="date" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addSpouseBirthday">
+                  </div>  
+                </div> 
+                <div class="field">
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Mêtier de l'époux(se)</span>
+                      </div>
+                      <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addSpouseJob">
+                  </div>  
+                </div> 
+                <div class="field">
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">Code postal</span>
+                      </div>
+                      <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addPostalCode">
+                  </div>  
+                </div>
+                <div class="field">
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">Numéro de téléphone</span>
+                      </div>
+                      <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addNumberPhone">
+                </div>  
+                </div>
+                <div class="field">
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">Numéro de téléphone 2</span>
+                      </div>
+                      <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addNumberPhone2">
+                  </div>  
+                </div> 
+                <div class="field">
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">Ville</span>
+                      </div>
+                      <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addCity">
+                  </div>  
+                </div>                              
+                <div class="field">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Email</span>
+                        </div>
+                        <input type="email" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addEmail">
+                    </div>
+                </div>                            
+                <div class="field">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Adresse</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="AddAdress">
+                    </div>
+                </div>                                
+                <div class="field">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Type de maison</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addType_home">
+                    </div>
+                </div>                               
+                <div class="field">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Pseudo Facebook</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addFbPseudo">
+                    </div>
+                </div>           
+                <div class="field">
+                  <div class="input-group mb-3">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Nombre d'adulte</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addNumberAdultHome">
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                  <div class="input-group mb-3">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Nombre d'enfant</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addNumberChlidHome">
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                  <div class="input-group mb-3">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Animaux actuel</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addPetComposition">
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                  <div class="input-group mb-3">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">BlackListe</span>
+                            </div>
+                            <select class="custom-select" id="addBlacklist">
+                              <option>Choisir</option>
+                              <option value="true" >Oui</option>
+                              <option value="false">Non</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                  <div class="input-group mb-3">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Animal Adopté</span>
+                            </div>
+                             <h5 class="modal-title" id="addPetAdopted">Selectionner un chien disponible a l'adoption</h5>
+                        </div>
+                      <div class="modal-body">
+                        <select class="custom-select" id="SelectHostFamily">                
+                          <option> Choisir* </option> 
+                           <% for(let adoptantTab of adoptant){ %> 
+                          <option value="<%= adoptantTab.id%>"><%= adoptantTab.name %></option> 
+                          <% } %>  
+                        </select>
+                      </div> 
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="input-group mb-3">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Date d'adoption'</span>
+                            </div>
+                            <input type="date" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addDatePetAdopted">
+                        </div>
+                    </div>
+                </div>
+
+              </section>
+              </form>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulé</button>
+          <button type="button" class="btn btn-primary saveNewAdoptant">Ajouter</button>
+          </div>
+      </div>
+  </div>
 </div>
 
-</div>
-
-
-
+<%- include('partials/footer') %>
+<script src="/js/adoptants.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="/js/app.js"></script>
-<script src="/js/adoptants.js"></script>
-</body>

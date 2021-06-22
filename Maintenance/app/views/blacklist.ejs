@@ -1,0 +1,203 @@
+<%- include('partials/header') %>
+
+<div >
+  <h3 style="text-align:center;"> ASELA > Nos Blacklister</h3>
+</div>
+
+<div class ="bande-top">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <span class="nav-link active">Toutes nos personne blacklister</span>
+    </li>
+    <li class="nav-item">
+      <button type="button" class="nav-link btn btn-purple" id="btn-createEvent"  data-toggle="modal" data-target="#AddBlacklistModal">+ Ajouter un blacklister</button>
+    </li>
+  </ul>
+</div>
+
+ <!-------------------------------------------------Blacklister---------------------------------------------->
+ <div class="tab-pane fade show active" id="blacklist" role="tabpanel" aria-labelledby="blacklister">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Carte d'identité</th>
+          <th scope="col">Nom de famille</th>
+          <th scope="col">Prénom </th>
+          <th scope="col">Code postal</th>
+          <th scope="col">Numéro de téléphone</th>
+          <th scope="col">VILLE</th>
+          <th scope="col">ADRESSE</th>
+          <th scope="col">EMAIL</th>
+          <th scope="col">Commentaire</th>
+          <th scope="col">Date</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+          
+          <% for(let blacklist of blacklists){ %>
+             
+            <tr data-toggle="modal" data-target="#blacklistModal<%= blacklist.id %>">  
+                <td><%= blacklist.number_id_passport %></td>
+                <td><%= blacklist.lastname %></a></td>
+                <td><%= blacklist.firstname %></td>
+                <td><%= blacklist.postal_code %></td>
+                <td><%= blacklist.number_phone %></td>
+                <td><%= blacklist.city %></td>
+                <td><%= blacklist.email %></td>
+                <td><%= blacklist.adress %></td>
+                <td><%= blacklist.comment %></td>
+                <td><%= blacklist.date.toLocaleString('en-GB').substr(0, 10) %></td>
+            </tr>
+          <!-------------------------------------------------MODAL supp Blacklist------------------------------------>
+          <div class="modal fade bd-blacklist-modal-lg" id="blacklistModal<%= blacklist.id %>" tabindex="-1" role="dialog" aria-labelledby="blacklistModal<%= blacklist.id %>Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content" data-article-id="<%= blacklist.id %>">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Suppression d'un blacklister</h5> 
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Voulez vous supprimez cette personne de la blackliste ?
+                </div>
+                <div class="modal-footer threebtn">
+                  <button type="button" class="btn btn-danger deleteBlacklist">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewbox="0 0 16 16">
+                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                    </svg>
+                  </button>
+                  <span class="pull-right">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"> Fermer</button>
+                    
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div> 
+          <% } %>  
+      </tbody>
+    </table>
+  </div> 
+
+  <!--------------------------------------------Modale AJOUT blacklister--------------------------------------->
+
+<div class="modal fade" id="AddBlacklistModal" tabindex="-1" role="dialog" aria-labelledby="Ajouter-un-blacklister" aria-hidden="false">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content" data-article-id="addBlacklist">
+          <div class="modal-header">
+              <h5 class="modal-title" id="Ajouter_blacklist"> Creer la fiche d'un blacklister</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <form action="" method="POST">
+                  <header class="modal-card-head">
+                      <div class="alert alert-info" role="alert">
+                          Attention certaines données sont directement connectées au site web, attention à l'orthographe!
+                      </div>
+                      <button class="delete close" type="button" aria-label="close"></button>
+                  </header>
+                  <section class="modal-card-body">
+                      
+                      <div class="field">
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text">Numéro de passport</span>
+                              </div>
+                              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addNumberIdPassportBlacklist">
+                          </div>
+                      </div>
+                      <div class="field">
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text">Nom</span>
+                              </div>
+                              <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addLastnameBlacklist">
+                          </div>
+                      </div>
+                      <div class="field">
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text">Prénom</span>
+                              </div>
+                              <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addFirstnameBlacklist">
+                          </div> 
+                      </div>   
+                      <div class="field">
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text">Code Postal</span>
+                              </div>
+                              <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addPostalCodeBlacklist">
+                          </div>  
+                      </div> 
+                      <div class="field">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Numéro de téléphone</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addNumberPhoneBlacklist">
+                        </div>  
+                      </div>
+                    <div class="field">
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text">Ville</span>
+                          </div>
+                          <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addCityBlacklist">
+                      </div>  
+                    </div> 
+                  <div class="field">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Email</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addEmailBlacklist">
+                    </div>  
+                  </div> 
+                <div class="field">
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">Adresse</span>
+                      </div>
+                      <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addAdressBlacklist">
+                  </div>  
+                </div> 
+                <div class="field">
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Commentaire</span>
+                      </div>
+                      <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addCommentBlacklist">
+                  </div>  
+                </div> 
+                <div class="field">
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">Date</span>
+                      </div>
+                      <input type="date" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addDateBlacklist">
+                  </div>  
+                </div>
+              </section>
+              </form>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulé</button>
+          <button type="button" class="btn btn-primary saveNewBlacklist">Ajouter</button>
+          </div>
+      </div>
+  </div>
+</div>
+  
+<%- include('partials/footer') %>
+
+<script src="/js/app.js"></script>
+<script src="/js/blacklist.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

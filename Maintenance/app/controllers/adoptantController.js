@@ -1,84 +1,41 @@
 const Adoptant = require("../models/Adoptant");
 
     const adoptantController = {
-
-        findAllAdoptant: async (request, response, next) => {
-            try{
-                const adoptant = await Adoptant.findAllAdoptant(); 
+      // on recupere tous les adoptants[0]
+        findAllAdoptant: async (request, response) => {
+        
+            try {
+                const adoptant = await Adoptant.findAllAdoptant();
                 if(adoptant){
                     response.render('adoptants', {
                         adoptant
-                    });
-                } else {
-                    response.status(404).json(`Il n'y a aucun adoptant trouvés.`);
+                    });  
+                        
                 }
-            }
-            catch(error){
+                else {
+                    response.status(404).json(`Il n'y a aucun adoptant`);
+                }
+            }catch(error){
                 console.trace(error)
                 return response.status(500).json(error.toString());
             }
         },
-        
-        // ca recupere les animaux de l'adoptant (next) (pet.adoptant_id = id de l'adoptant)
+
+        //On récupere tout les animaux adoptés par un adoptant
         findAllPetAdoptant: async (request, response) => {
-        
             try {
-                const petId = parseInt(request.params.id);
-                const petAdoptant = await Adoptant.findAllPetToAdoptant(petId);
-                if(petAdoptant){
-
-                    response.render('adoptants', {
-                        jason
-                    });
-                }else {
-                    response.status(404).json(`L'adoptant numéro ${petId} n'existe pas`);
+                const id = parseInt(request.params.id);
+                const adoptant = await Adoptant.findOneAdoptant(id);
+                const petAdopt = await Adoptant.findAllPetToAdoptant(id);
+                const commentAdoptant = await Adoptant.findAllCommentToAdoptant(id);
+                if(adoptant){  
+                                 
+                    response.render('oneAdoptant', {
+                        petAdopt, commentAdoptant, adoptant
+                    }); 
                 }
-            }catch(error){
-                console.trace(error)
-                return response.status(500).json(error.toString());
-            }
-        },
-
-        findOneAdoptant: async (request, response, next) => {
-            try{
-                const adoptantId = parseInt(request.params.id);
-                console.log('premier', adoptantId);
-                
-                const adoptant = await Adoptant.findOneAdoptant(adoptantId);
-                console.log('second', adoptant);
-                
-                if(adoptant){
-                    response.adoptant = adoptant;
-                    next();
-                }else {
-                    response.status(404).json(`L'adoptant numéro ${adoptantId} n'existe pas`);
-                }
-            }catch(error){
-                console.trace(error)
-                return response.status(500).json(error.toString());
-            }
-        },
-
-        // recupere les commentaires de l'adoptant 
-        findAllCommentAdoptant: async (request, response) => {
-            try {
-                const commentId = parseInt(request.params.id);
-                console.log('sixieme', commentId);
-                
-                const commentAdoptant = await Adoptant.findAllCommentToAdoptant(commentId);
-                console.log('septieme'), commentAdoptant;
-                
-                if(commentAdoptant){
-                    const json = {
-                        adoptant: response.adoptant,
-                        petAdoptant: response.petAdoptant,
-                        commentAdoptant
-                    }
-                    response.json({json, TEXT: 'Voila ce qui concerne notre adoptant'});
-                    console.log(json);
-                    
-                }else {
-                    response.status(404).json(`L'adoptant numéro ${petId} n'existe pas`);
+                else {
+                    response.status(404).json(`Il n'y a aucun adoptant`);
                 }
             }catch(error){
                 console.trace(error)
@@ -89,13 +46,15 @@ const Adoptant = require("../models/Adoptant");
         // commenter une famille d'adoptant
         commentAdoptant: async (request, response) => {
             try {
-                const commentAdoptantId = parseInt(request.params.id);
-                const commentAdoptant = await Adoptant.findOneAdoptant(commentAdoptantId);
+                const adoptantId = parseInt(request.params.id);
+                const commentAdoptant = await Adoptant.findOneAdoptant(adoptantId);
+                
                 if(commentAdoptant) {
                     const comment = {
-                        id: commentAdoptantId,
-                        commentaire: request.body.commentaire
+                        adoptant_id: adoptantId,
+                        commentaire: request.body.commentAdoptant,
                     };
+                    
                     const adoptantComment = await Adoptant.addCommentAdoptant(comment);
                     response.status(200).json({ adoptantComment, TEXT: `Votre commentaire à bien été ajouter à l'adoptant ${commentAdoptantId}`});
                 }else {
@@ -123,6 +82,24 @@ const Adoptant = require("../models/Adoptant");
                 console.trace(error)
                 return response.status(500).json(error.toString());
             }
+        },
+
+        addAdoptant: async (request, response) => {
+            try {
+                //Test si tous les champs sont renseignés 
+                if(request.body.lastname && request.body.firstname && request.body.number_phone && request.body.postal_code && request.body.city && request.body.adress && request.body.email) {  
+                    
+                    const dataAdoptant= request.body;
+                    const adoptant = await Adoptant.addAdoptant(dataAdoptant);
+                    response.json({ saveAdoptant: adoptant , TEXT: 'Votre adoptant a bien été enregistrer dans la liste des adoptants'});
+                
+                } else{
+                        response.json('Veuillez remplir tous les champs svp');
+                }   
+            } catch (error){
+                console.trace(error)
+                return response.status(500).json(error.toString());
+            }                 
         },
     
     }

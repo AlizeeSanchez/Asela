@@ -5,6 +5,7 @@ const mainController = {
     home: async (request, response) => {
         try{
             const starsCat = await Home.findStarCat();
+            console.log(starsCat);
             const starsDog = await Home.findStarDog();
             const dateDogSupport = await Home.findNumberDogSupport();
             const dateCatSupport = await Home.findNumberCatSupport();
@@ -56,7 +57,9 @@ const mainController = {
             console.trace(error)
             return response.status(500).json(error.toString());
         }
-    }
+    },
+
+
 
 }
 

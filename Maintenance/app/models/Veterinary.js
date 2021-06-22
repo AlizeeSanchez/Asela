@@ -42,24 +42,45 @@ const Veterinary = {
         }
     },
 
-    //Ajouter un chat a l'adoption
+    //Ajouter un veterinaire
     addVeterinary: async (veterinary) => {
         try{
-            const addVeterinary = `INSERT INTO veterinary ("name", "number_phone", "postal_code", "city", "adress", "email", "price_ide_eval", "price_vaccine_eval", "price_cat_eval", "price_litledog_eval", "price_bigdog_eval") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *;`;
+            const addVeterinary = `INSERT INTO veterinary ("name", "city", "postal_code", "adress", "number_phone", "email", "dog_castration", "dog_ovario_10", "dog_ovario_10_25", "dog_ovario_25_40", "dog_ovario_40", "dog_vaccine", "dog_ide", "cat_castration", "cat_castration_tatouage", "cat_ovario", "cat_ovario_tatouage", "cat_vaccine", "cat_ide") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19) RETURNING *;`;
             const data = await db.query(addVeterinary, [
                 veterinary.name,
-                veterinary.number_phone,
-                veterinary.postal_code,
                 veterinary.city,
+                veterinary.postal_code,
                 veterinary.adress,
+                veterinary.number_phone,
                 veterinary.email,
-                veterinary.price_ide_eval,
-                veterinary.price_vaccine_eval,
-                veterinary.price_cat_eval, 
-                veterinary.price_litledog_eval,
-                veterinary.price_bigdog_eval
+                veterinary.dog_castration,
+                veterinary.dog_ovario_10,
+                veterinary.dog_ovario_10_25,
+                veterinary.dog_ovario_25_40,
+                veterinary.dog_ovario_40,
+                veterinary.dog_vaccine,
+                veterinary.dog_ide,
+                veterinary.cat_castration,
+                veterinary.cat_castration_tatouage,
+                veterinary.cat_ovario,
+                veterinary.cat_ovario_tatouage,
+                veterinary.cat_vaccine,
+                veterinary.cat_ide
             ]); 
             return data.rows[0];
+        } catch (error) {
+        console.trace(error);
+        }
+    },
+
+    //Modifier une famille d'acceuil
+    editVeterinary: async (veterinary) => {
+        try{
+            console.log('dans mon model', veterinary);
+            const addVeterinary = await db.query(`UPDATE veterinary SET name = $1, city= $2, postal_code= $3, adress= $4, number_phone= $5, email= $6, dog_castration= $7, dog_ovario_10= $8,dog_ovario_10_25= $9, dog_ovario_25_40= $10, dog_ovario_40= $11, dog_vaccine= $12, dog_ide= $13,cat_castration= $14, cat_castration_tatouage= $15, cat_ovario= $16,cat_ovario_tatouage= $17, cat_vaccine= $18, cat_ide= $19 WHERE id = $20;`,
+            [ veterinary.name, veterinary.city, veterinary.postal_code, veterinary.adress, veterinary.number_phone, veterinary.email, veterinary.dog_castration, veterinary.dog_ovario_10,veterinary.dog_ovario_10_25, veterinary.dog_ovario_25_40, veterinary.dog_ovario_40, veterinary.dog_vaccine, veterinary.dog_ide, veterinary.cat_castration, veterinary.cat_castration_tatouage, veterinary.cat_ovario,veterinary.cat_ovario_tatouage ,veterinary.cat_vaccine , veterinary.cat_ide ,veterinary.id]
+            ); 
+            return addVeterinary;
         } catch (error) {
         console.trace(error);
         }
@@ -85,16 +106,7 @@ const Veterinary = {
         }
     },
 
-    //Modifier une famille d'acceuil
-    editVeterinary: async (veterinary) => {
-        try{
-            const editVeterinary = await db.query('UPDATE veterinary SET name = $1, number_phone = $2, postal_code = $3, city = $4, adress = $5, email = $6, price_ide_eval = $7, price_vaccine_eval = $8, price_cat_eval= $9, price_litledog_eval = $10, price_bigdog_eval = $11 WHERE id = $12;', [veterinary.name, veterinary.number_phone, veterinary.postal_code, veterinary.city, veterinary.adress, veterinary.email, veterinary.price_ide_eval, veterinary.price_vaccine_eval, veterinary.price_cat_eval, veterinary.price_litledog_eval, veterinary.price_bigdog_eval, veterinary.id])
-            return editVeterinary;
-        }
-        catch(error){
-            console.trace(error)
-        }
-    },
+
 
     findAllPrice: async () => {
         try {

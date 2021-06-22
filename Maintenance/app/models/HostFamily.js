@@ -51,15 +51,6 @@ const HostFamily = {
         }
     },
 
-    findAllCommentHostFamily: async () => {
-        try{
-            const commentHostFamily = await db.query("SELECT * FROM commentaire_host_familly;");   
-            return commentHostFamily.rows;
-        }catch (error){
-            console.trace(error);
-        }
-    },
-
     addHostFamily: async (hostFamily) => {
         try{
             const addHostFamily = `INSERT INTO host_family ("lastname", "firstname", "number_phone", "postal_code", "city", "adress", "email", "pet_composition", "pet_accepted", "disponibility", "pet_asela") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *;`;
@@ -105,10 +96,11 @@ const HostFamily = {
 
     addCommentFamilyHost: async (comment) => {
         try {
-            const commentHostFamily = ('INSERT INTO commentaire_host_familly (host_family_id, commentaire) VALUES ($1,$2) RETURNING *;');
+            console.log(comment);
+            const commentHostFamily = ('UPDATE host_family SET comment = $1 WHERE id = $2 RETURNING *;');
             const data = await db.query(commentHostFamily, [
-                comment.id,
-                comment.commentaire
+                comment.comment,
+                comment.id
             ])
             return data.rows;
         }catch(error) {

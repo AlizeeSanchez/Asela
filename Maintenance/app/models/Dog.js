@@ -48,25 +48,10 @@ const Dog = {
             console.trace(error);
         }
     },
-
-    //On passe l'adoption a true quand un chien est disponible à l'adoption.
-    adoptIsTrue: async (id) => {
-        try{
-            const editpet = await db.query('UPDATE pet SET adopt = true WHERE id = $1;', [id])
-            return editpet.rows;
-        }
-        catch(error){
-            console.trace(error)
-        }
-
-    },
-
     
 
     //Ajouter un chien a l'adoption
-    addNewPet: async (pet) => {
-        console.log('Je suis dans mon model et je recois:',pet);
-        
+    addNewPet: async (pet) => {      
         try{
         const addPet = `INSERT INTO pet ("type", "name", "age", "sexe", "breed", "amity", "color", "weight", "ide", "sterilised", "date_vaccine", "description") VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *;`;
         const data = await db.query(addPet, [
@@ -90,15 +75,7 @@ const Dog = {
         }
     },
 
-    //Supprimer un chien a l'adoption
-    suppPet: async (id) => {
-        try{
-        const suppPet = await db.query('DELETE FROM pet WHERE id = $1;',[id]);
-        }
-        catch (error) {
-            console.trace(error);
-        }
-    }
+    
 
 };
 

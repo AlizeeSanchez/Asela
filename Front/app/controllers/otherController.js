@@ -14,16 +14,8 @@ const otherController = {
 
     },
 
-    host_family: async (request, response) => {
-        try{
-            response.render('hostFamilly');
-        }
-        catch(error){
-            console.trace(error)
-            return response.status(500).json(error.toString());
-        }
+  
 
-    },
 
     support: async (request, response) => {
         try{

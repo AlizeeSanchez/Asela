@@ -85,19 +85,19 @@ const catController = {
     AddNewCatToAdopt: async (request, response) => {
         try {
             //Test si tous les champs sont renseignés 
-            if(request.body.eventName && request.body.eventAge && request.body.eventSexe && request.body.eventDescription) {  
+            if(request.body.eventName && request.body.eventAge && request.body.eventDescription) {  
                 
                 const cat= {
                     type: 'chat',
                     name: request.body.eventName,
                     age: request.body.eventAge,
-                    amity: request.body.eventAmity,
                     sexe: request.body.eventSexe,
-                    breed: request.body.eventBreed,
+                    amity: request.body.eventAmity,
+                    color: request.body.eventColor,
                     ide: request.body.eventIde,
                     sterilized: request.body.eventSterilized,
                     description: request.body.eventDescription,
-                    weight: request.body.eventWeight,
+                    race: request.body.eventRace
                 };
                 //on transmet les informations du chat à la fonction addNewCat
                 const saveCat = await Cat.addNewCat(cat);

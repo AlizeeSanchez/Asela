@@ -3,20 +3,23 @@ const user= {
 
     init: function () {
         user.addListenerToActions();
+       // user.saveUser();
     },
 
     addListenerToActions: function () {
         // on cible le bouton inscription dans la page signin
         const signin = document.querySelector('.validateUser');
         console.log(signin);
-        
-        signin.addEventListener('click', user.saveUser);
+        if(signin){
+            signin.addEventListener('click', user.saveUser);
+            
+        }
+
         
     },
 
-    validateForm: function()                         
-    {  
-       //console.log('test',locals.messageError); 
+    validateForm: function() {
+
         const lastname = document.forms["myForm"]["lastname"];
         const firstname = document.forms["myForm"]["firstname"];
         const number = document.forms["myForm"]["number_phone"];        
@@ -29,15 +32,12 @@ const user= {
             document.getElementById('errorname').textContent= "veuillez remplir tous les champs";
             document.getElementById('errorDiv').style= 'color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; padding: .50rem .50rem; border: 1px solid transparent; border-radius: .25rem;';
             return true;
-        }
-        // else{
-        //     document.getElementById('errorname').textContent= "";
-        //     }   
-        }, 
+        }  
+    }, 
 
-        saveUser: async function (event) {
-        event.preventDefault();
-        //try{
+    saveUser: async function (event) {
+
+        try{
             const buttonSave = event.target;
             const article = buttonSave.closest('.show-log-panel');
             const userLastname = document.getElementById('userLastname').value;
@@ -54,75 +54,36 @@ const user= {
                 userEmail: userEmail,
                 userPassword: userPassword,
                 userValidate_password: userValidate_password
-            });  
+            }); 
+            console.log('mon user', dataUser);
 
-            // fetch(`http://localhost:3030/v1/signin`, {
-            //          method: 'POST',
-            //          body: dataUser,
-            //          headers:{
-            //              'Content-Type' : 'application/json'
-            //          }
-            //      }).then((response) => {
-            //          return response.json()
-            //      }).then((json) => {
-            //          console.log("json", json.messageError)
-            //          document.getElementById('errorname').textContent= json.messageError;
-            //          document.getElementById('errorDiv').style= 'color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; padding: .50rem .50rem; border: 1px solid transparent; border-radius: .25rem;';         
-            //      }).catch(error => console.log(error))
+            
+            const response = await fetch(`http://localhost:3030/v1/signin`, {
+                method: 'POST',
+                body: dataUser,
+                headers:{
+                    'Content-Type' : 'application/json'
+                },
+               
+            })
+            
 
-                 const response = await fetch(`http://localhost:3030/v1/signin`, {
-                    method: 'POST',
-                    body: dataUser,
-                    headers:{
-                        'Content-Type' : 'application/json'
-                    }
-                })
-
-                const json = await response.json()
+            const json = await response.json()
+            if(json){
                 document.getElementById('errorname').textContent= json.messageError;
-                document.getElementById('errorDiv').style= 'color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; padding: .50rem .50rem; border: 1px solid transparent; border-radius: .25rem;';         
-
-
-
-        // const response = await fetch(`http://localhost:3030/v1/signin`, {
-        //     method: 'POST',
-        //     body: dataUser,
-        //     headers:{
-        //         'Content-Type' : 'application/json'
-        //     }
-        // });
-        // console.log(JSON.stringify(response));
-        // if(response.status === 200) {
-        //     //document.location.reload();
-        //     console.log('response.status = 200');
+                document.getElementById('errorDiv').style= 'color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; padding: .50rem .50rem; border: 1px solid transparent; border-radius: .25rem;';
+            }
+            else{
             
-        //     //localStorage.setItem('abs');
-        //     //console.log('user.js localstorage', localStorage.getItem);
-            
-        //     //document.location = 'http://localhost:3030/v1/login'
-        // } 
-        // else if (response.status === 400) {
-        //     //throw new Error(validateBody)
-        
-        // }
-        // else {
-        //     response.json("Impossible de vous enregistrez")
-        // }
-        // }catch(error) {
-
-        //     //const messageError = validateBody.error.details[0].message;
-        //     console.log(error);
+            document.location.href="http://localhost:3030/v1/login";
+            //window.location = "http://localhost:3030/v1/login";
+            }
+                   
+        }catch(error){
+            console.trace(error);
+        }
+    }
     
-        //     //response.locals.error = {messageError};
-
-        //     // if(messageError){
-        //     //     response.render('signin', {
-        //     //         messageError
-        //     //     })
-        //     // }
-        //     console.trace(error);
-        // }
-    } 
-}
-// on accroche un écouteur d'évènement sur le document : quand le chargement est terminé, on lance app.init
+};
+// on accroche un écouteur d'évènement sur le document : quand le chargement est terminé, on lance user.init
 document.addEventListener('DOMContentLoaded', user.init );

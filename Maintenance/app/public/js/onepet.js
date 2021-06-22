@@ -1,32 +1,5 @@
 const onePet = {
-    init: function () {
-		onePet.addListenerToActions();
-    },
-
-	addListenerToActions: function () {
-
-    //On cible le bouton valider la date de prise en charge dans la page profil animal
-    const checkDateSupported = document.querySelector('.checkDateSupported');
-    checkDateSupported.addEventListener('click', onePet.checkDateSupported); 
-
-    //On cible le bouton valider la date de prise en charge dans la page profil animal
-    const checkDateVaccine = document.querySelector('.checkDateVaccine');
-    checkDateVaccine.addEventListener('click', onePet.checkDateVaccine); 
-
-    // On cible le bouton valider une image d'un animal
-    const checkUplaodPet = document.querySelector('.addPicturePets');
-    checkUplaodPet.addEventListener('click', onePet.uploadPicturePet);
-
-    //On cible le bouton Valider les modification d'une famille d'acceuil
-    const validateHostFamily = document.querySelector('.saveHostFamily');
-    validateHostFamily.addEventListener('click', onePet.validateIdHostFamily);
-
-    //On cible le bouton Valider un commentaire d'un animal
-    const valideCommentPet = document.querySelector('.ValideCommentPet');
-    valideCommentPet.addEventListener('click', onePet.validateCommentPet);
-
-    },
-
+    
      editPet: async function (event) {
 
         // On empeche le rechargement du formulaire
@@ -130,21 +103,26 @@ const onePet = {
     },
 
     uploadPicturePet: async function (event) {
-        event.preventDefault();
-        const buttonUpload = event.target;
-        const article = buttonUpload.closest('.modal-content');
-        const petId = article.getAttribute('data-article-id');
-        const eventPicture = document.getElementById('addPicturePet').value;
         try{
-            const event = JSON.stringify({ eventPicture: eventPicture });
-            const response = await fetch(`http://localhost:3030/v1/uploadPet`, {
+            event.preventDefault();
+            const buttonClicked = event.target;
+            const imageElement = buttonClicked.closest('.modal-content');
+            const petId = imageElement.getAttribute('data-article-id');
+        
+            const formData = new FormData();
+            const petPicture = document.querySelector('input[type="file"]');
+            formData.append("title", petPicture);
+            console.log('mon formData', formData);
+            console.log('mes images', petPicture);
+            const uploadImage = await fetch(`http://localhost:3030/v1/uploadpet/${petId}`, {
                 method: 'POST',
-                body: event,
-                headers:{
-                    'Content-Type' : 'application/json'
-                }
-            });
-            window.location.href = `http://localhost:3030/v1/pet/${petId}`;
+                body: formData,
+                
+            })
+            console.log('uploadImage', uploadImage);
+            
+            // window.location.href = `http://localhost:3030/v1/pet/${petId}`;
+           
         }catch(error) {
             console.trace(error);
         }
@@ -195,7 +173,9 @@ const onePet = {
              console.log('id article', articleId);
              
              const commentPet = document.getElementById('message-text').value;
-            console.log('mon commentaire pet', commentPet);
+             console.log('mon commentaire pet', commentPet);
+
+             const date_comment = document.getElementById('')
             
              const dataCommentPet = JSON.stringify({
                 petId: articleId,
@@ -222,7 +202,9 @@ const onePet = {
             console.log(error);
             
          }
-    }
+    },
+
+
 };
 
 // on accroche un écouteur d'évènement sur le document : quand le chargement est terminé, on lance app.init

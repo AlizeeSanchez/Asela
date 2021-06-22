@@ -2,7 +2,6 @@ const db = require("../database");
 
 const QuestionnaireAdopt = {
 
-
     //route pour check dans les questionnaires
     findAllQuestAdopt: async () => {
         try {
@@ -29,6 +28,7 @@ const QuestionnaireAdopt = {
         try {
             const questionnaireCorresp = await db.query('SELECT questionnaire_adopt.id, questionnaire_adopt.email, questionnaire_adopt.number_phone, questionnaire_adopt.date_sending ,questionnaire_adopt.type_pet, questionnaire_adopt.name_pet FROM questionnaire_adopt WHERE email = $1 OR number_phone = $2', [questionnaire.email, questionnaire.number_phone]);
             return questionnaireCorresp.rows[0];
+            console.log('questionnaireCorresp', questionnaireCorresp);
         }
         catch(error){
             console.trace(error)
@@ -37,13 +37,15 @@ const QuestionnaireAdopt = {
 
     //Ajouter un questionnaire
     responseQuest: async (questionnaire) => {
+        console.log('je rentre dans mon model', questionnaire);
         try{
-        const addQuest = `INSERT INTO questionnaire_adopt ("email", "type_pet", "name_pet", "lastname_firstname", "date_birth", "occupation",    "lastname_firstname_spouse", "date_birth_spouse", "occupation_spouse", "number_phone", "postal_code", "city", "adress", "shifting",    "type_residence", "height_fence", "proprietor", "number_adult", "number_children", "age_children", "allergy", "adopt_assos", "adopt_assos2",   "trust_assos", "trust_assos2", "pet_familly", "pet_familly2", "pet_familly_deceased", "veterinary", "veterinary2", "veterinary3",     "disponibility", "disponibility2", "holiday", "holiday2", "awareness", "education", "informed", "adopt", "adopt2", "tomove", "sterilization",   "forbearance","cleanliness", "amity", "garden", "bed", "waiting", "motivation", "declawing", "race_pet", "petstatus", "responsability",   "education2", "cage", "cage2", "absent", "present", "activity", "activity2", "educator", "educator2", "educator3", "facebook_pseudo",  "advertisement", "free") VALUES ( $1, $2, $3, $4, $5, $6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27,$28,   $29,$30,$31,$32,$33,$34,$35,$36,$37,$38,$39,$40,$41,$42,$43,$44,$45,$46,$47,$48,$49,$50,$51,$52,$53,$54,$55,$56,$57,$58,$59,$60,$61,$62,$63,$64,$65,$66) RETURNING *;`;
+        const addQuest = `INSERT INTO questionnaire_adopt ("email", "type_pet", "name_pet", "lastname","firstname", "date_birth", "occupation",    "lastname_firstname_spouse", "date_birth_spouse", "occupation_spouse", "number_phone", "postal_code", "city", "adress", "shifting",    "type_residence", "height_fence", "proprietor", "number_adult", "number_children", "age_children", "allergy", "adopt_assos", "adopt_assos2",   "abandoned_assos", "abandoned_assos2", "pet_familly", "pet_familly2", "pet_familly_deceased", "veterinary", "veterinary2", "veterinary3",     "disponibility", "disponibility2", "holiday", "holiday2", "awareness", "education", "informed", "adopt", "adopt2", "tomove", "sterilization",   "forbearance","cleanliness", "amity", "garden", "bed", "waiting", "motivation", "declawing", "race_pet", "petstatus", "responsability",   "education2", "cage", "cage2", "absent", "present", "activity", "activity2", "educator", "educator2", "educator3", "facebook_pseudo",  "advertisement", "free") VALUES ( $1, $2, $3, $4, $5, $6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27,$28,  $29,$30,$31,$32,$33,$34,$35,$36,$37,$38,$39,$40,$41,$42,$43,$44,$45,$46,$47,$48,$49,$50,$51,$52,$53,$54,$55,$56,$57,$58,$59,$60,$61,$62,$63,$64,$65,$66,$67) RETURNING *;`;
         const data = await db.query(addQuest, [
             questionnaire.email,
             questionnaire.type_pet,
             questionnaire.name_pet,
-            questionnaire.lastname_firstname,
+            questionnaire.lastname,
+            questionnaire.firstname,
             questionnaire.date_birth,
             questionnaire.occupation,
             questionnaire.lastname_firstname_spouse,
@@ -63,8 +65,8 @@ const QuestionnaireAdopt = {
             questionnaire.allergy,
             questionnaire.adopt_assos,
             questionnaire.adopt_assos2,
-            questionnaire.trust_assos,
-            questionnaire.trust_assos2,
+            questionnaire.abandoned_assos,
+            questionnaire.abandoned_assos2,
             questionnaire.pet_familly,
             questionnaire.pet_familly2,
             questionnaire.pet_familly_deceased,
@@ -109,6 +111,7 @@ const QuestionnaireAdopt = {
             questionnaire.advertisement,
             questionnaire.free
         ]);
+        console.log('mes donnée du formulaire', data);
         return data.rows[0];
         }   
         catch (error) {
@@ -187,8 +190,19 @@ const QuestionnaireAdopt = {
     //Afficher les questionnaires "En attentes"
     findAllQuestAdoptWaiting: async () => {
         try {
-            const questAdoptWaiting = await db.query(`SELECT * FROM questionnaire_adopt WHERE status = 'En attente'`);           
-            return questAdoptWaiting.rows;
+            const questionnaire = await db.query(`SELECT * FROM questionnaire_adopt WHERE status = 'En attente' ORDER BY date_sending DESC`);           
+            return questionnaire.rows;
+        }
+        catch(error){
+            console.trace(error)
+        }
+    },
+
+    //Afficher les questionnaires "Traité"
+    findAllQuestAdoptProcessed: async () => {
+        try {
+            const questionnaire = await db.query(`SELECT * FROM questionnaire_adopt WHERE status = 'Traité' ORDER BY date_sending DESC`);           
+            return questionnaire.rows;
         }
         catch(error){
             console.trace(error)
@@ -198,8 +212,8 @@ const QuestionnaireAdopt = {
     //Afficher les questionnaires Refusé
     findAllQuestAdoptRefused: async () => {
         try {
-            const questAdoptRefused = await db.query(`SELECT * FROM questionnaire_adopt WHERE status = 'Refusé'`);
-            return questAdoptRefused.rows;
+            const questionnaire = await db.query(`SELECT * FROM questionnaire_adopt WHERE status = 'Refusé' ORDER BY date_sending DESC`);
+            return questionnaire.rows;
         }
         catch(error){
             console.trace(error)
@@ -207,15 +221,37 @@ const QuestionnaireAdopt = {
     },
 
     //Sans suite
-    findAllQuestAdoptAbandonned: async () => {
+    findAllQuestAdoptDiscontinued: async () => {
         try {
-            const questAdoptAbandonned = await db.query(`SELECT * FROM questionnaire_adopt WHERE status = 'Sans suite'`);
-            return questAdoptAbandonned.rows;
+            const questionnaire = await db.query(`SELECT * FROM questionnaire_adopt WHERE status = 'Sans suite' ORDER BY date_sending DESC`);
+            return questionnaire.rows;
         }
         catch(error){
             console.trace(error)
         }
     },
+
+    //Adopté
+    findAllQuestAdopted: async () => {
+        try {
+            const questionnaire = await db.query(`SELECT * FROM questionnaire_adopt WHERE status = 'Adoptant' ORDER BY date_sending DESC`);
+            return questionnaire.rows;
+        }
+        catch(error){
+            console.trace(error)
+        }
+    },
+
+    //Liste attente
+    /*findAllQuestWaintingList: async () => {
+        try {
+            const questionnaire = await db.query(`SELECT * FROM questionnaire_adopt WHERE status = 'Liste d'attente' ORDER BY date_sending DESC`);
+            return questionnaire.rows;
+        }
+        catch(error){
+            console.trace(error)
+        }
+    },*/
    
     //Passer les données d'un questionnairez adoption à "adoptant", on passe aussi le chien a "adopté = true" et on donne l'id de l'adoptant a l'animal
     passQuestToAdoptant: async (quest) => {

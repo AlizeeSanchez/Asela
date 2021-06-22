@@ -4,8 +4,11 @@ const express = require('express');
 const session = require('express-session');
 const multer = require('multer');
 const path = require('path');
-const bodyparser = require('body-parser');
-
+//const bodyparser = require('body-parser');
+//var fileupload = require("express-fileupload");
+const upload= multer({
+	dest: path.join(__dirname, '..', 'app', 'public','images'),
+})
 
 const app = express();
 const port = process.env.PORT || 3030;
@@ -15,9 +18,9 @@ app.set('views', './app/views');
 app.set('view engine', 'ejs');
 
 // Body-parser middleware 
-app.use(bodyparser.urlencoded({ extended: false }));
-app.use(bodyparser.json());
-
+//app.use(bodyparser.urlencoded({ extended: false }));
+//app.use(bodyparser.json());
+//app.use(fileupload());
 app.use(express.urlencoded({ extended: true }));
 app.use(
 	session({
@@ -25,7 +28,7 @@ app.use(
 		resave: false,
 		saveUninitialized: true,
 		cookie: {maxAge: 24 * 60 * 60 * 1000},
-		logged: false
+		logged: true
 	})
 );
 
