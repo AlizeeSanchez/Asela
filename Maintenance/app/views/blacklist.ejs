@@ -38,16 +38,16 @@
           <% for(let blacklist of blacklists){ %>
              
             <tr data-toggle="modal" data-target="#blacklistModal<%= blacklist.id %>">  
-                <td><%= blacklist.number_id_passport %></td>
-                <td><%= blacklist.lastname %></a></td>
-                <td><%= blacklist.firstname %></td>
-                <td><%= blacklist.postal_code %></td>
-                <td><%= blacklist.number_phone %></td>
-                <td><%= blacklist.city %></td>
-                <td><%= blacklist.email %></td>
-                <td><%= blacklist.adress %></td>
-                <td><%= blacklist.comment %></td>
-                <td><%= blacklist.date.toLocaleString('en-GB').substr(0, 10) %></td>
+                <td data-label="Passeport"><%= blacklist.number_id_passport %></td>
+                <td data-label="Nom"><%= blacklist.lastname %></a></td>
+                <td data-label="Prénom"><%= blacklist.firstname %></td>
+                <td data-label="Code postal"><%= blacklist.postal_code %></td>
+                <td data-label="Téléphone"><%= blacklist.number_phone %></td>
+                <td data-label="Ville"><%= blacklist.city %></td>
+                <td data-label="Email"><%= blacklist.email %></td>
+                <td data-label="Adresse"><%= blacklist.adress %></td>
+                <td data-label="Commentaire"><%= blacklist.comment %></td>
+                <td data-label="Date liste noire"><%= blacklist.date.toLocaleString('en-GB').substr(0, 10) %></td>
             </tr>
           <!-------------------------------------------------MODAL supp Blacklist------------------------------------>
           <div class="modal fade bd-blacklist-modal-lg" id="blacklistModal<%= blacklist.id %>" tabindex="-1" role="dialog" aria-labelledby="blacklistModal<%= blacklist.id %>Label" aria-hidden="true">
@@ -175,16 +175,8 @@
                       <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addCommentBlacklist">
                   </div>  
                 </div> 
-                <div class="field">
-                  <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                          <span class="input-group-text">Date</span>
-                      </div>
-                      <input type="date" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addDateBlacklist">
-                  </div>  
-                </div>
               </section>
-              </form>
+            </form>
           </div>
           <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulé</button>

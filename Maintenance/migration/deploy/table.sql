@@ -34,38 +34,22 @@ CREATE TABLE "host_family" (
     number_adult TEXT, -- Choix : Nombre d'adulte vivant au domicile (choix 1,2,3,4+)
     number_children TEXT, -- Choix : Nombre d'enfant vivant au domicile (choix 0,1,2,3,4+)
     age_children TEXT , -- Age des enfants
-    contact_children_pet TEXT, --children contact with pet ?
-    poeple_fur_allergic BOOLEAN, --people fur allergic
-    poeple_asthma BOOLEAN, --poeple to asthma
     pet_composition TEXT,-- pet composition family to host_family
-    pet_composition_vaccined TEXT, --pet to host_family vaccined
     pet_sterilised TEXT, --pet sterilised/castrated to host_family
-    cat_amity TEXT, -- cat amity to host_family
-    dog_amity TEXT, -- dog amity to host_family
     kitten_accepted BOOLEAN DEFAULT false,-- if kitten accepted to host_family
     cat_accepted BOOLEAN DEFAULT false,-- if cat accepted to host_family
     dog_big_accepted BOOLEAN DEFAULT false,-- if big dog accepted to host_family
     dog_middle_accepted BOOLEAN DEFAULT false,-- if middle dog accepted to host_family
     dog_little_accepted BOOLEAN DEFAULT false,-- if little dog accepted to host_family
     puppy_accepted BOOLEAN DEFAULT false,-- if puppy accepted to host_family
-    cat_hostfamily_test TEXT, --cat to host_family test for FIV/FELV
-    cat_hostfamily_day_test TEXT, --date to test FIV/FELV cat host_family
     family_accept_acceuil TEXT, -- if host_family accept to acceuil pet
-    family_accept_15_days TEXT, -- if host_family accepted to take pet for 15 days
-    how_many_timeout_dog TEXT, -- dog out per day
-    dog_timeout TEXT, -- time to dog out to host_family
     hour_absence_day TEXT, --how many hour poeple absence by day
-
     -----------------------------question cat acceuil----------------------------------------
-    cat_number_accepted TEXT, --STOP
-    cat_sexe_acceuil TEXT, -- sexe of cat acceuil to host_family
-    poeple_amity_cat BOOLEAN DEFAULT true, --Connaissance en biberonnage
-    
+    poeple_amity_cat BOOLEAN DEFAULT true, --cat comportement
     ----------------------------question chien------------------------------------------------
     dog_sexe_acceuil TEXT, -- sexe of dog acceuil to host_family
     poeple_educate TEXT, -- experience educate for dog to host_family
     dog_accept_problem TEXT, -- host_family accept dog problem
-    dog_accept_handicap TEXT, -- host_family accept dog handicap
     dog_closed_room TEXT, -- room for dog if need
     dog_sleep TEXT, -- where is dog sleeping
     poeple_with_dog TEXT, -- where is dog when poeple will be present
@@ -73,33 +57,23 @@ CREATE TABLE "host_family" (
     poeple_ask TEXT, -- precision to host_family
     poeple_drive_veterinary TEXT, -- if host_family drive dog to veterinary
     poeple_car TEXT, -- if host_family have a car
-    poeple_holidays TEXT, -- if host_family go often in holidays
     poeple_counsciousness TEXT, --if host_family have counciousness to dog
-    poeple_ready_counsciousness TEXT, -- if host_family accept counsciousness
-    dog_hour_alone TEXT, --how many time by day the dog will be alone
-    dog_holidays_acceuil TEXT, -- what are disposition for dog since holidays
     poeple_motivation TEXT, --what are the motivation to host_family
     poeple_warning TEXT, --important to signalate to host_family
-    
-    -------------------------------------question veterinary----------------------------------
-    veterinary_hostfamily TEXT, -- veterinary to host_family
-    veterinary_contact_hostfamily TEXT, -- veterinary contact to host_family
-    price_asso_veterinary TEXT, -- price association veterinary to host_family
-    -----------------------------------------------------------------------------------------
-
     ---------------------------certificate---------------------------------------------------
     certificate_poeple BOOLEAN DEFAULT false, -- certificate to host_family
     approuved_poeple BOOLEAN DEFAULT false, -- read / approuved to host_family
-
     -------------------------------------------------------------------------------------------
-    disponibility BOOLEAN DEFAULT true,-- If host_family is disponible
-    noLongerContact BOOLEAN DEFAULT false,-- If is old host_family indisponible
+    disponibility BOOLEAN DEFAULT true,-- If host_family is disponible 
+    people_date_accueil TEXT
+    nolongercontact BOOLEAN DEFAULT false,-- If is old host_family indisponible
     pet_complet BOOLEAN DEFAULT false,-- if the familly host have pet asele at home
     pet_asela TEXT,-- name of pet asela 
     comment TEXT,-- comment to host familly
     black_list BOOLEAN DEFAULT false,-- if the host_family is black list
     new BOOLEAN DEFAULT true-- if is a new host familly
-    
+    date_sending DATE DEFAULT NOW() NOT NULL, -- Date d'envois du questionnaire
+
 );
 
 CREATE TABLE "adoptant" (
@@ -157,6 +131,7 @@ CREATE TABLE "pet" (
     deceased_cause TEXT, -- cause of death
     site_publish BOOLEAN DEFAULT FALSE, -- Si un animal est publié ou non sur le site
     missingInfo BOOLEAN DEFAULT FALSE-- Si une information est manquante
+    avatar TEXT-- photo de profil d'un animal
 );
 
 CREATE TABLE "veterinary" (
@@ -220,7 +195,7 @@ CREATE TABLE "purebred_pet"(
 
 CREATE TABLE "picture_pet"(
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,-- ID default
-    title VARCHAR (50) NOT NULL,
+    title TEXT NOT NULL,
     pet_id INT NOT NULL REFERENCES "pet"(id) ON DELETE CASCADE
 );
 
@@ -254,7 +229,8 @@ CREATE TABLE "questionnaire_adopt" ( -- Questionnaire adoptant
     firstname VARCHAR (25) NOT NULL, -- Firstname to host_family
     date_birth VARCHAR (70) NOT NULL, -- 
     occupation VARCHAR (70)NOT NULL,
-    lastname_firstname_spouse VARCHAR (70), -- Nom et prenom du conjoint
+    spouselastname TEXT, -- Nom et prenom du conjoint
+    spousefirstname TEXT,
     date_birth_spouse VARCHAR (70), 
     occupation_spouse VARCHAR (70),
     number_phone VARCHAR(10) NOT NULL,
@@ -312,6 +288,7 @@ CREATE TABLE "questionnaire_adopt" ( -- Questionnaire adoptant
     educator2 TEXT, -- Si oui, précisez ses coordonnées
     educator3 BOOLEAN, -- Sinon pensez vous faire appel à un éducateur canin ?
     ---------complementary
+
     facebook_pseudo VARCHAR (70), -- pseudo facebook
     advertisement TEXT, -- Où avez-vous entendu parler de notre association ? ( Choix multiple )
     free VARCHAR (500), -- Si vous avez d'autre element dont vous souhaitez nous faire part c'est ici 
@@ -321,11 +298,13 @@ CREATE TABLE "questionnaire_adopt" ( -- Questionnaire adoptant
     --------------------RESERVE BENEVOLE-----------------------------
     date_sending DATE DEFAULT NOW() NOT NULL, -- Date d'envois du questionnaire
     pet_id int REFERENCES "pet"(id) ON DELETE SET NULL, -- Lier le questionnaire avec un animal en particulier
-    status TEXT DEFAULT 'En attente' NOT NULL, -- Status du questionnaire (En attente, Traité, Refusé, Sans suite, Adopté, liste d'attente)
+    status TEXT DEFAULT 'En attente' NOT NULL, -- Status du questionnaire (En attente, Traité, Refusé, Sans suite, Adopté, Liste d'attente)
     meet TEXT, --  Si rencontre : Date de la rencontre
     refused_comment TEXT, -- si refusé : commentaire
     general_comment TEXT, -- commentaire en tout genre
-    volunteer_assigned TEXT
+    wait_pet TEXT, -- Quel type d'animal est attendu
+    volunteer_assigned TEXT,
+    new BOOLEAN DEFAULT true;
 
 );
 

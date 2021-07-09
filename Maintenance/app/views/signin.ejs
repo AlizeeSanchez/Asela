@@ -7,89 +7,80 @@
     <link rel="stylesheet" href="/css/styleLogin.css">
     <title>Asela</title>
 </head>
-<header class="header">
-    <div>
-        <div class="header-dark">
-            <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
-                <div class="container">
-                    <div class="collapse navbar-collapse" id="navcol-1">
-                        <h1>Association Sauve Et Les Animaux - Espace Bénévoles</h1>                           
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
-</header>
-<body>
-    <div class="login-reg-panel">
 
-        
-							
-		<div class="register-info-box">
-			<h2>Être benevole</h2>
-			<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates quas, adipisci fuga, non sunt ipsum distinctio id recusandae ad, repellat vel a. Veniam odio reiciendis cumque quis atque, nostrum, labore expedita unde sequi, nulla excepturi totam ab vero veritatis voluptates.
-            </p>
-		</div>
-							
-		<div class="white-panel">
-			<div class="login-show">
-                <h2>Inscription</h2>
-      
-                <form name="myForm" >
-                    <div id="errorDiv"><span class="error" id="errorname"></span></div>
-                    <input type="text" required name="lastname" class="field-long" placeholder="Nom *" id="userLastname"/>
-                    <input type="text" required name="firstname" class="field-long" placeholder="Prenom *" id="userFirstname">
-                    <input type="text" required name="number_phone" class="field-long" placeholder="Numéro de téléphone *" id="userNumber_phone">
-				    <input type="text" required name="email" class="field-long" placeholder="Email *" id="userEmail">
-                    <input type="password" required name="password" class="field-long" placeholder="Password *" id="userPassword">
-                    <input type="password" required name="passwordCopie" class="field-long" placeholder="Confirmation Password *" id="userValidate_password">
-                    <input type="button" onclick="user.validateForm()" class="validateUser" value="S'inscrire">
-                </form>
+
+<body class="form-v4">
+	<div class="page-content">
+		<div class="form-v4-content">
+			<div class="form-left">
+				<h2>Association sauve et les animaux</h2>
+				<p class="text-1">Si vous êtes bénévole pour l'association sauve et les animaux et que l'une de nos membre vous a demandé de vous inscrire vous pouvez remplir ce formulaire.</p>
+				<p class="text-2"><span>Si vous n'êtes pas bénévole:</span> Vous vous êtes perdu ! Revenez sur notre site en <a href="http://localhost:4040/v1/home" style="color: white; text-decoration: underline; font-weight: 800;">cliquant ICI.</a></p>
+				<div class="form-left-last">
+					<a class="account" href="http://localhost:3030/v1/login">Je suis inscrit</a>
+				</div>
+			</div>
+			<form class="form-detail" name="myForm" action="#" method="post" id="myform">
+				<h2>Inscription</h2>
+          
+          <div id="errorDiv"><span class="error" id="errorname"></span></div>
+         
+          <div class="form-group">
+            <div class="form-row form-row-1">
+              <label for="userLastname">Nom de famille</label>
+              <input type="text" name="userLastname" class="input-text" id="userLastname" aria-describedby="basic-addon3" required>
             </div>
-        </div>
-	</div>
-
-
-</body>
-<style>
+            <div class="form-row form-row-1">
+              <label for="userFirstname">Prénom</label>
+              <input type="text"  name="userFirstname" class="input-text" id="userFirstname" aria-describedby="basic-addon3" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="your_phone">Téléphone</label>
+            <input type="text" name="userNumber_phone" class="input-text" id="userNumber_phone" aria-describedby="basic-addon3" required>
+          </div>
+          <div class="form-row">
+            <label for="your_email">Email</label>
+            <input type="email" name="userEmail" class="input-text" id="userEmail" aria-describedby="basic-addon3" required>
+          </div>
+          <div class="form-group">
+            <div class="form-row form-row-1 ">
+              <label for="userPassword">Mot de passe</label>
+              <input type="password"  name="userPassword" id="userPassword"  autocomplete="current-password" class="input-text" required>
+            </div>
+            <div class="form-row form-row-1">
+              <label for="comfirm-password">Confirme mdp</label>
+              <input type="password" name="userValidate_password" id="userValidate_password"  autocomplete="off" class="input-text" required>
+            </div>
+          </div>
+		  <span class="form-row form-row-1 " style="color:red">Le mot de passe doit contenir une lettre et un chiffre entre 7 et 20 caractères</span>
+          
+          <div class="form-row-last">
+            <input type="button" class="validateUser" value="S'inscrire" id="button">
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <script>
+      
+    </script>
+  </body>
+  </html>
+  
+  <style>
     input:invalid {
-        border: 1px solid #ff000078 !important;
+      border: 1px solid #205071 !important;
     }
     input:valid {
-        border: 1px solid black !important;
+      border: 1px solid #2fc548 !important;
     }
-</style>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-<script>
-
-$(document).ready(function(){
-    $('.login-info-box').fadeOut();
-    $('.login-show').addClass('show-log-panel');
-});
-
-
-$('.login-reg-panel input[type="radio"]').on('change', function() {
-    if($('#log-login-show').is(':checked')) {
-        $('.register-info-box').fadeOut(); 
-        $('.login-info-box').fadeIn();
-        
-        $('.white-panel').addClass('right-log');
-        $('.register-show').addClass('show-log-panel');
-        $('.login-show').removeClass('show-log-panel');
-        
-    }
-    else if($('#log-reg-show').is(':checked')) {
-        $('.register-info-box').fadeIn();
-        $('.login-info-box').fadeOut();
-        
-        $('.white-panel').removeClass('right-log');
-        
-        $('.login-show').addClass('show-log-panel');
-        $('.register-show').removeClass('show-log-panel');
-    }
-});
-</script>
-<script src="/js/user.js"></script>
-    
+  </style>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="/js/user.js"></script>
+  <script src="/js/app.js"></script>
+  

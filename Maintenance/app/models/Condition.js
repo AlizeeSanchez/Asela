@@ -32,7 +32,6 @@ const Condition = {
             const condition = await db.query(
                 "SELECT * FROM condition_adopt WHERE id = $1 ORDER BY id;", [id]
             );
-            console.log(condition);
             return condition.rows[0];
         } catch (error){
             console.trace(error);
@@ -48,7 +47,6 @@ const Condition = {
             condition.description,
 
         ]);
-        console.log("monconsole log add condition :", condition);
         return data.rows[0];
         }   
         catch (error) {
@@ -58,9 +56,6 @@ const Condition = {
 
     //Modifier une condition d'adoption
     editCondition: async (condition) => {
-        console.log('dans mon model:', condition)
-        console.log('dans mon model:', condition.id)
-
         try{
             const editCondition = await db.query(`UPDATE condition_adopt SET description = $1 WHERE id = $2;`, [condition.description, condition.id]);
             return editCondition;
@@ -81,9 +76,6 @@ const Condition = {
         }
         
     }
-
-
-
 }
 
 module.exports = Condition;

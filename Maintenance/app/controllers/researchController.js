@@ -19,7 +19,6 @@ const researchController = {
         }catch(error){
             console.trace(error);
         }
-        
     },
 
     loadHostFamily: async (request, response, next) => {
@@ -36,7 +35,6 @@ const researchController = {
         }catch(error){
             console.trace(error);
         }
-        
     },
 
     loadAdoptant: async (request, response, next) => {
@@ -53,7 +51,6 @@ const researchController = {
         }catch(error){
             console.trace(error);
         }
-        
     },
 
     loadAllSearch: async (request, response, next) => {

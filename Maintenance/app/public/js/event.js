@@ -52,22 +52,23 @@ const events= {
             console.trace(error);
         }
     
-    }
+    },
 
-    //addPicturePet: async function (event) {
-//
-    //    event.preventDefault();
-    //    try{
-    //    const response = await fetch(`http://localhost:3030/v1/upload`, {
-    //        method: 'POST',
-    //        headers:{
-    //            'Content-Type' : 'application/json'
-    //        }
-    //    });
-    //    }catch(error) {
-    //        console.trace(error);
-    //    }
-    //}
+    addPicturePet: async function (event) {
+        console.log(event);
+
+        event.preventDefault();
+        try{
+        const response = await fetch(`http://localhost:3030/v1/upload`, {
+            method: 'POST',
+            headers:{
+                'Content-Type' : 'application/json'
+            }
+        });
+        }catch(error) {
+            console.trace(error);
+        }
+    }
     
 };
 

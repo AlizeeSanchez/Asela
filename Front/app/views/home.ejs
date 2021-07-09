@@ -16,7 +16,6 @@
             <h2 class="h2">Bienvenue sur le site web de l'association ASELA</h2>
         </div>
         <div class="row">
-            
             <div class="col-md-6 details">
                 <p>
                     L'Association Sauve Et Les Animaux est une association à but non lucratif de protection Animale loi 1901 dans le GARD. <br>
@@ -24,51 +23,52 @@
                     Nous n'avons pas de structure d'accueil comme les refuges, ce qui signifie que les familles d'accueil ont une importance primordiale pour nous aider à secourir un maximum d'animaux! <br>
                     Chaque animal pris en charge est rencontré par un vétérinaire, soigné si besoin, identifié systématiquement, castré ou stérilisé dès que l'âge nous le permet, et déparasité. <br>
                     Il sera choyé par une famille d'accueil, ce qui permet de retrouver un équilibre quand ils ont un vécu difficile et surtout cela nous permet de connaitre un maximum les petites habitudes de chaque loulou, nous pouvons donc les confier à des familles qui leur correspondent au mieux ! 
-                    
                 </p>
             </div>
             <div class="col-md-6 img">
                 <div class="col-lg-6 mb-2 pr-lg-1">
-                    <img src="/img/logo5.jpg"  alt="" class="img-fluid rounded shadow-sm"></div>
+                    <img src="/img/logo5.jpg"  alt="" class="img-fluid rounded shadow-sm">
                 </div>
             </div>
         </div>
-        
         <div class="section">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                 <h3 class="h4">Nos loulous qui attendent depuis trop longtemp</h3>                    
             </div>
-            
             <div class="card-deck">
                 <div class="flip-card">
                     <div class="flip-card-inner">
-                        <div class="flip-card-front-1" style="background-image: url(http://localhost:3030/uploads/Joséphine.jpg);" >
-                            
+                        <div class="flip-card-front-1" style="background-image: url(http://localhost:3030/uploads/<%=starsDog.avatar%>);" >
                         </div>
                         <div class="flip-card-back" >
-                            
-                            <h3 class="card-title"> <%= json.starsDog.name%></h3>
-
                             <p class="card-text">
-                                Aujourd'hui cela fait x jours que <%= json.starsDog.name%> attend une famille.
-                                <br>
-                                Chaque Animal mérite d'avoir un foyer aimant, les animaux adultes sont moins demandé, voir invisible... nous vous invitons à regarder sa fiche pour découvrir si vous pouvez vous correspondre.
+                                <%= starsDog.name%> attend une famille depuis le <%= starsDog.date_supported.toLocaleString('en-GB').substr(0, 10)%>. <br>
+                                Chaque Animal mérite d'avoir un foyer aimant, les animaux adultes sont moins demandé, voir invisible... <br>
+                                Regarder sa fiche, peut être que vous êtes la famille qu'elle attend depuis si longtemps...
                             </p>
-                            
+                            <div class="footer" >
+                                <a class="clickMe" style="margin-top: 1rem; color: white;" href="/V1/fiche/<%= starsDog.id %>">
+                                    Cliquez ici pour <% if(starsDog.sexe === 'Mâle'){ %> le <%}else{%> la <%}%> découvrir.
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="flip-card">
                     <div class="flip-card-inner">
-                        <div class="flip-card-front-2" style="background-image: url(https://www.biofan.com/blog/wp-content/uploads/2019/06/photo-1545293944-e852415538eb.jpeg);" >
-                            
+                        <div class="flip-card-front-2" style="background-image: url(http://localhost:3030/uploads/<%=starsCat.avatar%>);" >
                         </div>
                         <div class="flip-card-back">
-                            <h5 class="card-title"> <%= json.starsCat.name%></h5>
                             <p class="card-text">
-                                Aujourd'hui cela fait x jours que <%= json.starsCat.name%> attend une famille. <br>
-                                Chaque Animal mérite d'avoir un foyer aimant, les animaux adultes sont moins demandé, voir invisible... nous vous invitons à regarder sa fiche pour découvrir si vous pouvez vous correspondre.
+                                <%= starsCat.name%> attend une famille depuis le <%= starsCat.date_supported.toLocaleString('en-GB').substr(0, 10)%>. <br>
+                                Chaque Animal mérite d'avoir un foyer aimant, les animaux adultes sont moins demandé, voir invisible... <br>
+                                Regarder sa fiche, peut être que vous êtes la famille qu'elle attend depuis si longtemps...
                             </p>
+                            <div class="footer" >
+                                <a class="clickMe" style="margin-top: 1rem; color: white;" href="/V1/fiche/<%= starsCat.id %>">
+                                    Cliquez ici pour <% if(starsCat.sexe === 'Mâle'){ %> le <%}else{%> la <%}%> découvrir.
+                                </a>
+                            </div>  
                         </div>
                     </div>
                 </div>
@@ -86,32 +86,29 @@
                             <th scope="col">2021</th>
                             <th scope="col">2020</th>
                             <th scope="col">2019</th>
-                            <th scope="col">2018</th>
+                            <th scope="col">2018 et 2017</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Chats pris en charges</td>
                             <td><%= json.CatSupportThisYear%></td>
-                            <td>14</td>
-                            <td>13</td>
-                            <td>13</td>
+                            <td>187</td>
+                            <td>69</td>
+                            <td>67</td>
                         </tr>
                         <tr>
                             <td>Chiens pris en charges</td>
                             <td><%= json.DogSupportThisYear%></td>
-                            <td>83</td>
                             <td>65</td>
-                            <td>13</td>
+                            <td>78</td>
+                            <td>148</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-    </main>
-</div>
-</div>
+    </div>       
+</main>
 
-
-</body>
-</html>
+<%- include('partials/footer') %>

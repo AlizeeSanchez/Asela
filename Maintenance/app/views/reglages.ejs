@@ -64,9 +64,8 @@
                         <li class="list-group-item">Supplément activé pour chien de race</li>
                         <li class="list-group-item"><span class="text-right"> « <%= purebred_pet[0].extra_charge %> »</span></li>
                     <% }else{ %>
-                    <li class="list-group-item">Supplément activé pour chien de race</li>
+                    <li class="list-group-item">Supplément désactivé pour chien de race</li>
                     <% } %>
-
                 </ul>
             </div>
         </div>
@@ -80,11 +79,11 @@
                 </div>
                 <ul class="list-group">
                     <% for (let conditions of condition) {  %> 
-                        <li class="list-group-item ol" data-toggle="modal" data-target="#provisoModal">• <%= conditions.description %> </li>
+                        <li class="list-group-item ol" data-toggle="modal" data-target="#provisoModal<%= conditions.id %>">• <%= conditions.description %> </li>
                         <!-- Modal -->
-                        <div class="modal fade" id="provisoModal" tabindex="-1" role="dialog" aria-labelledby="provisoModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content" data-article-id="<%= conditions.id%>">
+                        <div class="modal fade" id="provisoModal<%= conditions.id %>" tabindex="-1" role="dialog" aria-labelledby="provisoModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document" >
+                                <div class="modal-content" data-article-id="<%= conditions.id %>">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="provisoModalLabel">Editer/supprimer ma clause</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -95,7 +94,7 @@
                                        <form>
                                         <div class="form-group">
                                             <label for="clauseArea">Clause à editer:</label>
-                                            <textarea class="form-control" id="cautionModal<%= conditions.id %>" rows="10"><%= conditions.description %></textarea>
+                                            <textarea class="form-control editCondition" id="cautionModal<%= conditions.id %>" rows="10"><%= conditions.description %></textarea>
                                           </div>
                                        </form>
                                     </div>
@@ -239,7 +238,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-primary validPriceDog">Valider</button>
+                <button type="button" class="btn btn-primary validPriceCat">Valider</button>
             </div>
         </div>
     </div>
@@ -286,9 +285,9 @@
 <!-- Modal -->
 <div class="modal fade" id="breedAdopt" tabindex="-1" role="dialog" aria-labelledby="breedAdoptLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
+      <div class="modal-content" data-article-id="<%= priceOfAdopt[0].id %>">
         <div class="modal-header">
-          <h5 class="modal-title" id="breedAdoptLabel">Modal title</h5>
+          <h5 class="modal-title" id="breedAdoptLabel">Supplement chien de race</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -297,23 +296,23 @@
             <div class="form-group">
                 <label for="extra">Supplément pour chien de Race</label>
                 <select class="form-control" id="extra">
-                    <%if(purebred_pet[0].extra === true){ %> 
+                    <% if(purebred_pet[0].extra === true){ %> 
                     <option value="true">Oui</option>
                     <option value="false">Non</option>
-                    <%}else{ %>
+                    <% } else { %>
                     <option value="false">Non</option>
                     <option value="true">Oui</option>
-                    <%} %>
+                    <% } %>
                 </select>
               </div>
               <div class="form-group">
                 <label for="exampleFormControlInput1">Affichié à l'utilisateur concernant le prix :</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" value="<%= purebred_pet[0].extra_charge %> ">
+                <input type="email" class="form-control" id="breedPet" value="<%= purebred_pet[0].extra_charge %> ">
             </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary editPriceBreed">Valider</button>
         </div>
       </div>
     </div>

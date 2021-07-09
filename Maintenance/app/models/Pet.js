@@ -103,7 +103,7 @@ const Pet = {
         console.log(pet);
         
         try{
-            const editpet = await db.query(`UPDATE pet SET name = $1, age = $2, amity = $3, sexe = $4, breed = $5, color = $6, ide = $7, sterilised = $8, description = $9, weight = $10 WHERE id = $11;`, [pet.name, pet.age, pet.amity, pet.sexe, pet.breed, pet.color, pet.ide, pet.sterilised, pet.description, pet.weight, pet.id]);
+            const editpet = await db.query(`UPDATE pet SET name = $1, age = $2, amity = $3, sexe = $4, breed = $5, color = $6, ide = $7, sterilised = $8, description = $9, weight = $10, avatar = $11 WHERE id = $12;`, [pet.name, pet.age, pet.amity, pet.sexe, pet.breed, pet.color, pet.ide, pet.sterilised, pet.description, pet.weight,pet.avatar, pet.id]);
             return editpet;
         }
         catch(error){
@@ -148,13 +148,12 @@ const Pet = {
 
     //ajouter un commentaire sur un animal
     addNewCommentPet: async (comment) => {
+        console.log('je rentre dans mon model');
         try{
-        const addcomment = `INSERT INTO commentaire_pet ("pet_id", "commentaire", "date_comment", "volunteer_author") VALUES ($1, $2, $3, $4) RETURNING *;`;
+        const addcomment = `INSERT INTO commentaire_pet ("pet_id", "commentaire") VALUES ($1, $2) RETURNING *;`;
         const data = await db.query(addcomment, [
             comment.pet_id,
             comment.commentaire,
-            comment.date_comment,
-            comment.volunteer_author
         ]);
         return data.rows[0];
         }   
@@ -262,7 +261,7 @@ const Pet = {
     //Signaler qu'un animal est reservé
     bookedIsTrue: async (book) => {
         try{
-            const publishpet = await db.query('UPDATE pet SET booked = true, booked_name = $1 WHERE id = $2;', [book.name, book.id])
+            const publishpet = await db.query('UPDATE pet SET booked = true, site_publish = false, booked_name = $1 WHERE id = $2;', [book.name, book.id])
             return publishpet.rows;
         }
         catch(error){
@@ -271,9 +270,9 @@ const Pet = {
     },
 
     //La reservation est annulé
-    bookedIsFalse: async (id) => {
+    bookedIsFalse: async (file) => {
         try{
-            const publishpet = await db.query(`UPDATE pet SET booked = false, booked_name = '' WHERE id = $1 ;`, [id])
+            const publishpet = await db.query(`UPDATE pet SET booked = false, site_publish = true, booked_name = '' WHERE id = $1 ;`, [file.id])
             return publishpet.rows;
         }
         catch(error){
@@ -326,8 +325,8 @@ const Pet = {
             console.log('je rentre dans mon model', image);
         const picturePet = `INSERT INTO picture_pet ("title", "pet_id") VALUES ($1, $2) RETURNING *;`;
         const dataImg = await db.query(picturePet, [
-            image.title,
-            image.pet_id
+            image.namefile,
+            image.id
         ]);
         console.log('dataImage',dataImg);
         //return data.rows[0];
@@ -337,17 +336,44 @@ const Pet = {
         }
     },
 
+    delImgPet: async (id) => { 
+        try{
+            console.log('je rentre dans mon model', id);
+            const picturePet = await db.query(`DELETE FROM picture_pet WHERE id = $1;`,[id]);
+        }   
+        catch (error) {
+            console.trace(error);
+        }
+    },
+
     //Supprimer un animal a l'adoption
     suppPet: async (id) => {
-        console.log('je rentre dans mon model');
         try{
         const suppPet = await db.query('DELETE FROM pet WHERE id = $1;',[id]);
-        console.log('suppression animal model', suppPet);
         }
         catch (error) {
             console.trace(error);
         }
-    }
+    },
+
+    suppPhoto: async (id) => {
+        try{
+        const suppPhoto = await db.query('DELETE FROM picture_pet WHERE id = $1;',[id]);
+        }
+        catch (error) {
+            console.trace(error);
+        }
+    },
+
+    suppComment: async (id) => {
+        try{
+        const suppComment = await db.query('DELETE FROM commentaire_pet WHERE id = $1;',[id]);
+        }
+        catch (error) {
+            console.trace(error);
+        }
+    },
+
 }
 
 module.exports = Pet;

@@ -13,791 +13,1213 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">FA AUTRE</a>
-  </li>
-  <li class="nav-item">
-  <button class="nav-link btn btn-secondary addFamilyhost" type="button" id="btn-createHostFamily" data-toggle="modal" data-target="#AddHostFamilyModal">AJOUTER UNE FA</button>
- </li>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="ancienne-tab" data-toggle="tab" href="#ancienne" role="tab" aria-controls="ancienne" aria-selected="false">FA ancienne</a>
+    </li>
 </ul>
 
 <div class="tab-content" id="myTabContent">
-    
+
 <!-----------------------------------------------FA GARD------------------------------------------->
 
-<div class="tab-pane fade show active table table-bordered table-responsive tableFixHead" id="home" role="tabpanel" aria-labelledby="home-tab">
+<div class="tab-pane fade show active table table-responsive tableFixHead" id="home" role="tabpanel" aria-labelledby="home-tab">
   <table class="table table-hover" >
       <thead>
         <tr>
-          <th >PRENOM</th>
-          <th >NOM DE FAMILLE</th>
-          <th >TELEPHONE</th>
-          <th >CODE POSTAL</th>
-          <th >VILLE</th>
-          <th >ADRESSE</th>
-          <th >EMAIL</th>
-          <th >COMPOSITION FAMILLE</th>
-          <th >ANIMAL ACCEPTE</th>
-          <th >ANIMAL ACCUEILLI</th>
+          <th>Prénom</th>
+          <th>Nom</th>
+          <th>Téléphone</th>
+          <th>Ville</th>
+          <th>Adresse</th>
+          <th>Animaux possédés</th>
+          <th>Type accepté(s)</th>
+          <th>En FA</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="m-phone">
       <% for(let hostFamilyTab of allHostFamilly.gard){ %>
         <tr data-toggle="modal" data-target=".bd-familyHost-modal-lg<%= hostFamilyTab.id %>">
-          <td><%= hostFamilyTab.firstname %></td>
-          <td><%= hostFamilyTab.lastname %></td>
-          <td><%= hostFamilyTab.number_phone %></td>
-          <td><%= hostFamilyTab.postal_code %></td>
-          <td><%= hostFamilyTab.city %></td>
-          <td><%= hostFamilyTab.adress %></td>
-          <td><%= hostFamilyTab.email %></td>
-          <td><%= hostFamilyTab.pet_composition %></td>
-          <td><%if(hostFamilyTab.kitten_accepted){%>Chaton -<%}%> <%if(hostFamilyTab.cat_accepted){%>Chat -<%}%> <%if(hostFamilyTab.dog_big_accepted){%>Gros chien -<%}%> <%if(hostFamilyTab.dog_middle_accepted){%>Moyen chien -<%}%> <%if(hostFamilyTab.dog_little_accepted){%>Petit chien -<%}%> <%if(hostFamilyTab.puppy_accepted){%>Chiots<%}%></td>
-          <td><%= hostFamilyTab.pet_asela %></td>
-        </tr> 
-          <!-------------------------------------------------MODAL FA------------------------------------>
-          <div class="modal fade bd-familyHost-modal-lg<%= hostFamilyTab.id %>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content">
-                <div class="row gutters-sm">
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="d-flex flex-column align-items-center text-center">
-                          <div class="mt-3">
-                            <h4><%= hostFamilyTab.lastname %> <%= hostFamilyTab.firstname %></h4>
-                            <p class="text-secondary mb-1"><%= hostFamilyTab.email %></p> 
-                            <p class="text-secondary mb-1"><%= hostFamilyTab.number_phone %></p>
-                            <p class="text-secondary mb-1"><%= hostFamilyTab.adress %></p>
-                            <p class="text-secondary mb-1"><%= hostFamilyTab.postal_code %> <%= hostFamilyTab.city %></p>
-                          </div>
-                          <div class="mt-3">
-                            <p class="text-secondary mb-1">Abscence durant : <%= hostFamilyTab.dog_hour_alone %> /j</p>
-                            <p class="text-secondary mb-1">Véhiculé : <%= hostFamilyTab.poeple_car %> </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card mt-3">
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"><h6 class="h6section">CHATS</h6></li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                          <h6 class="mb-0">Chats</h6>
-                          <% if(hostFamilyTab.cat_accepted === true){%> 
-                            <span class="text-secondary" style="color: green !important; font-weight: bold; ">Oui</span>
-                          <%}else{%> 
-                            <span class="text-secondary" style="color: red !important; font-weight: bold; ">Non</span>
-                          <%} %> 
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                          <h6 class="mb-0">Chatons</h6>
-                          <% if(hostFamilyTab.kitten_accepted === true){%> 
-                            <span class="text-secondary" style="color: green !important; font-weight: bold; ">Oui</span>
-                          <%}else{%> 
-                            <span class="text-secondary" style="color: red !important; font-weight: bold; ">Non</span>
-                          <%} %>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                          <h6 class="mb-0">Préference</h6>
-                            <span class="text-secondary"> <%= hostFamilyTab.cat_sexe_acceuil%> </span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"><h6 class="h6section">CHIENS</h6></li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                          <h6 class="mb-0">Grand Chien </h6>
-                          <% if(hostFamilyTab.dog_big_accepted === true){%> 
-                            <span class="text-secondary" style="color: green !important; font-weight: bold; ">Oui</span>
-                          <%}else{%> 
-                            <span class="text-secondary" style="color: red !important; font-weight: bold; ">Non</span>
-                          <%} %>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                          <h6 class="mb-0">Moyen Chien </h6>
-                          <% if(hostFamilyTab.dog_middle_accepted === true){%> 
-                            <span class="text-secondary" style="color: green !important; font-weight: bold; ">Oui</span>
-                          <%}else{%> 
-                            <span class="text-secondary" style="color: red !important; font-weight: bold; ">Non</span>
-                          <%} %>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                          <h6 class="mb-0">Petit Chien</h6>
-                          <% if(hostFamilyTab.dog_little_accepted === true){%> 
-                            <span class="text-secondary" style="color: green !important; font-weight: bold; ">Oui</span>
-                          <%}else{%> 
-                            <span class="text-secondary" style="color: red !important; font-weight: bold; ">Non</span>
-                          <%} %>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                          <h6 class="mb-0">Chiots</h6>
-                          <% if(hostFamilyTab.puppy_accepted === true){%> 
-                            <span class="text-secondary" style="color: green !important; font-weight: bold; ">Oui</span>
-                          <%}else{%> 
-                            <span class="text-secondary" style="color: red !important; font-weight: bold; ">Non</span>
-                          <%} %>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                          <h6 class="mb-0">Préference</h6>
-                          <span class="text-secondary"> <%= hostFamilyTab.dog_sexe_acceuil%> </span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"><h6 class="h6section">...</h6></li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                          <h6 class="mb-0">Spécificité</h6>
-                          <span class="text-secondary"> <%= hostFamilyTab.poeple_ask %> </span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card mb-3">
-                      <div class="card-body">
-                        <div class="row">
-                          <div class="col-sm-3">
-                            <h6 class="mb-0">Domicile</h6>
-                          </div>
-                          <div class="col-sm-9 text-secondary">
-                            <%= hostFamilyTab.type_home %> de <%= hostFamilyTab.area_home %>
-                          </div>
-                          <% if(hostFamilyTab.type_home === 'Appartement avec Jardin'|'Appartement avec Jardin'|'Maison avec cour ou Terrasse'|'Appartement avec cour ou Terrasse'|'Studio avec Jardin'|'Studio avec cour ou Terrasse'|'Terrain/ Caravane/ MobilHome'){%>
-                            <div class="col-sm-3">
-                              <h6 class="mb-0">Extérieur</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                              Extérieur de  <%= hostFamilyTab.area_garden %>
-                            </div>
-                            <div class="col-sm-3">
-                              <h6 class="mb-0">Cloture</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                              <% if(hostFamilyTab.fencing === true){%> Oui : <%= hostFamilyTab.fencing_height %> m. <%} else{%> Non / Pas entièrement <% } %>
-                            </div>
-                            <div class="col-sm-3">
-                              <h6 class="mb-0">Accès au jardin</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                              <%= hostFamilyTab.pet_accepted_garden %>
-                            </div>
-                          <% }%>
-                        </div>
-                        <hr>
-                        <div class="row">
-                          <div class="col-sm-3">
-                            <h6 class="mb-0">Famille</h6>
-                          </div>
-                          <div class="col-sm-9 text-secondary">
-                            <%= hostFamilyTab.number_adult %> Adultes et  <%= hostFamilyTab.number_children %> Enfants.
-                            <% if(hostFamilyTab.type_home ===! 0){%>
-                              <br>
-                              Ages des enfants : <%= hostFamilyTab.age_children %>
-                              <br>
-                              Les enfants ont déjà eu des contactes avec des animaux : <%= hostFamilyTab.contact_children_pet %>
-                            <% }%>
-                            </div>                        
-                          <div class="col-sm-3">
-                            <h6 class="mb-0">Allergie</h6>
-                          </div>
-                          <div class="col-sm-9 text-secondary">
-                            <% if(hostFamilyTab.poeple_fur_allergic === false){%> Non <%}else{%>  Oui <%}%> 
-                          </div>
-                          <div class="col-sm-3">
-                            <h6 class="mb-0">Asthme</h6>
-                          </div>
-                          <div class="col-sm-9 text-secondary">
-                            <% if(hostFamilyTab.poeple_asthma === false){%> Non <%}else{%>  Oui <%}%> 
-                          </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                          <div class="col-sm-3">
-                            <h6 class="mb-0">Animaux</h6>
-                          </div>
-                          <div class="col-sm-9 text-secondary">
-                            <%= hostFamilyTab.pet_composition %>  
-                          </div>
-                          <div class="col-sm-3">
-                            <h6 class="mb-0">Vaccin</h6>
-                          </div>
-                          <div class="col-sm-9 text-secondary">
-                            <% if(hostFamilyTab.pet_composition !== 'Non'| 'Non' | '0'){%> <%= hostFamilyTab.pet_composition_vaccined %>   <%}  %> 
-                          </div>
-                          <div class="col-sm-3">
-                            <h6 class="mb-0">Stérilisé</h6>
-                          </div>
-                          <div class="col-sm-9 text-secondary">
-                            <% if(hostFamilyTab.pet_sterilised !== 'Non'| 'Non' | '0'){%> <%= hostFamilyTab.pet_sterilised %><%}  %> 
-                          </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                          <div class="col-sm-3">
-                            <h6 class="mb-0">Chien</h6>
-                          </div>
-                          <div class="col-sm-9 text-secondary">
-                            Chien a probleme
-                            chien indicapé
-                            expérience education
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-sm-3">
-                            <h6 class="mb-0">Chat</h6>
-                          </div>
-                          <div class="col-sm-9 text-secondary">
-                           FIF ?
-                           Bib ?
-                          </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                          <div class="col-sm-3">
-                            <h6 class="mb-0">Title</h6>
-                          </div>
-                          <div class="col-sm-9 text-secondary">
-                            Text
-                          </div>
-                        </div>                 
-                        <hr>
-                        <div class="commentForm" data-article-id="<%= hostFamilyTab.id %>">
-                          <div class="cart-body" >
-                            <h6 class="mb-0">Commentaire</h6>
-                            <div class="card">
-                              <div class="card-body">
-                                <%= hostFamilyTab.comment %>  
-                              </div>    
-                            </div>
-                          </div>
-                          <form>
-                            <div class="form-group" >
-                              <label for="message-text" class="mb-0">Mettre à jour le commentaire:</label>
-                              <textarea class="form-control familly_id " id="commentaire_text<%= hostFamilyTab.id %>"></textarea>
-                            </div>
-                          </form>
-                          <button type="button" class="btn btn-primary addCommentHostfamilly">Envoyer le commentaire</button>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          </div>
-                        </div>                  
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <% } %>
-        </tbody>
-      </table>
-    </div>
+          <td data-label="Prénom"><%= hostFamilyTab.firstname %></td>
+          <td data-label="Nom"><%= hostFamilyTab.lastname %></td>
+          <td data-label="Téléphone"><%= hostFamilyTab.number_phone %></td>
+          <td data-label="Ville"><%= hostFamilyTab.postal_code %> <%= hostFamilyTab.city %></td>
+          <td data-label="Adresse"><%= hostFamilyTab.adress %></td>
+          <td data-label="Animaux"><%= hostFamilyTab.pet_composition %></td>
+          <td data-label="Animaux accéptés"><%if(hostFamilyTab.kitten_accepted){%>Chaton -<%}%> <%if(hostFamilyTab.cat_accepted){%>Chat -<%}%> <%if(hostFamilyTab.dog_big_accepted){%>Gros chien -<%}%> <%if(hostFamilyTab.dog_middle_accepted){%>Moyen chien -<%}%> <%if(hostFamilyTab.dog_little_accepted){%>Petit chien -<%}%> <%if(hostFamilyTab.puppy_accepted){%>Chiots<%}%></td>
+          <td data-label="Animaux Asela"><%= hostFamilyTab.pet_asela %></td>
+        </tr>
 
-<!--------------------------------------FA HERAULT----------------------------------------------->
-
-<div class="tab-pane fade table table-bordered table-responsive tableFixHead" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-  
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">PRENOM</th>
-        <th scope="col">NOM DE FAMILLE</th>
-        <th scope="col">TELEPHONE</th>
-        <th scope="col">CODE POSTAL</th>
-        <th scope="col">VILLE</th>
-        <th scope="col">ADRESSE</th>
-        <th scope="col">EMAIL</th>
-        <th scope="col">COMPOSITION FAMILLE</th>
-        <th scope="col">ANIMAL ACCEPTE</th>
-        <th scope="col">ANIMAL ACCUEILLI</th>
-        <th scope="col">SUPP/EDIT</th>
-      </tr>
-    </thead>
-    <tbody data-spy="scroll" data-target="#navbar-example2" data-offset="0">
-      
-      <% for(let hostFamilyTab of allHostFamilly.herault){ %>
-        
-        <% if(hostFamilyTab.disponibility===true){ %>
-          <tr style="background-color: rgb(141, 214, 153)">
-            <% } else{ %>
-              <tr>
-                <% } %>
-                <td><%= hostFamilyTab.firstname %></td>
-                <td><%= hostFamilyTab.lastname %></td>
-                <td><%= hostFamilyTab.number_phone %></td>
-                <td><%= hostFamilyTab.postal_code %></td>
-                <td><%= hostFamilyTab.city %></td>
-                <td><%= hostFamilyTab.adress %></td>
-                <td><%= hostFamilyTab.email %></td>
-                <td><%= hostFamilyTab.pet_composition %></td>
-                <td><%= hostFamilyTab.pet_accepted %>
-                  <td><%= hostFamilyTab.pet_asela %></td>
-                  <td>
-                    <button type="button" class="btn btn-outline-primary" aria-haspopup="dialog" aria-controls="SuppHostFamilyModal<%= hostFamilyTab.id %>" data-toggle="modal" data-target="#SuppHostFamilyModal<%= hostFamilyTab.id %>" >
-                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"></path>
-                      </svg>
-                    </button>
-                    <button type="button" class="btn btn-outline-primary" aria-haspopup="dialog" aria-controls="EditHostFamilyModal<%= hostFamilyTab.id %>" data-toggle="modal" data-target="#EditHostFamilyModal<%= hostFamilyTab.id %>">
-                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                      </svg>
-                    </button>
-                  </td>
-                  
-                </tr>
-                <div class="modal fade bd-familyHost-modal-lg<%= hostFamilyTab.id %>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                      <div class="row gutters-sm">
-                        <div class="col-md-4 mb-3">
-                          <div class="card">
-                            <div class="card-body">
-                              <div class="d-flex flex-column align-items-center text-center">
-                                <img src="/img/dogcatprofil.png" alt="Admin" class="rounded-circle" width="150">
-                                <div class="mt-3">
-                                  <h4><%= hostFamilyTab.lastname %> <%= hostFamilyTab.firstname %></h4>
-                                  <p class="text-secondary mb-1">Possede : <%= hostFamilyTab.pet_composition %></p>
-                                  <p class="text-secondary mb-1">Disponibilité: <input type="checkbox" checked data-toggle="toggle" data-on="Dispo" data-off="Indispo" data-onstyle="success" data-offstyle="danger" style="width: 5rem;"> </p> 
-                                  <p class="text-secondary mb-1">Possede : <%= hostFamilyTab.pet_composition %></p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="card mt-3">
-                            <ul class="list-group list-group-flush">
-                              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0">Chats acceptés</h6>
-                                <span class="text-secondary" style="color: green !important; font-weight: bold; ">Oui</span>
-                              </li>
-                              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0">Chatons acceptés</h6>
-                                <span class="text-secondary" style="color: red !important; font-weight: bold; ">Non</span>
-                              </li>
-                              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0">Chiens acceptés</h6>
-                                <span class="text-secondary" style="color: green !important; font-weight: bold; ">Oui</span>
-                              </li>
-                              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0">Chiots acceptés</h6>
-                                <span class="text-secondary" style="color: green !important; font-weight: bold; ">Oui</span>
-                              </li>
-                              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0">Spécificité</h6>
-                                <span class="text-secondary" style="font-weight: bold; "><%= hostFamilyTab.pet_accepted %></span>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="col-md-8">
-                          <div class="card mb-3">
-                            <div class="card-body">
-                              <div class="row">
-                                <div class="col-sm-3">
-                                  <h6 class="mb-0">Email</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                  <%= hostFamilyTab.email %>
-                                </div>
-                              </div>
-                              <hr>
-                              <div class="row">
-                                <div class="col-sm-3">
-                                  <h6 class="mb-0">Téléphone</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                  <%= hostFamilyTab.number_phone %>
-                                </div>
-                              </div>
-                              <hr>
-                              <div class="row">
-                                <div class="col-sm-3">
-                                  <h6 class="mb-0">Adresse</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                  <%= hostFamilyTab.adress %> <br>
-                                  <%= hostFamilyTab.postal_code%> <%= hostFamilyTab.city%>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="cart-body ">
-                            <h6 class="mb-0">Commentaire</h6>
-                            <div class="card">
-                              
-                              <div class="card-body comment" data-article-id="<% hostFamilyTab.id %>">
-                                <%= hostFamilyTab.comment%>
-                              </div>
-                            </div>
-                            <hr>
-                            <form>
-                              <div class="form-group">
-                                <label for="message-text" class="mb-0">Mettre à jour le commentaire:</label>
-                                <textarea class="form-control commentaire_text" ></textarea>
-                              </div>
-                            </form>
-                              <button type="button" class="btn btn-primary addCommentHostfamilly">Envoyer le commentaire</button>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>   
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <% } %>   
-                </tbody>
-              </table>
-            </div>
-            
-            <!--------------------------------------FA AUTRE----------------------------------------------->
-            <div class="tab-pane fade table table-bordered table-responsive tableFixHead" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-              
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">NOM DE FAMILLE</th>
-                    <th scope="col">PRENOM</th>
-                    <th scope="col">TELEPHONE</th>
-                    <th scope="col">CODE POSTAL</th>
-                    <th scope="col">VILLE</th>
-                    <th scope="col">ADRESSE</th>
-                    <th scope="col">EMAIL</th>
-                    <th scope="col">COMPOSITION FAMILLE</th>
-                    <th scope="col">ANIMAL ACCEPTE</th>
-                    <th scope="col">ANIMAL ACCUEILLI</th>
-                    <th scope="col">SUPP/EDIT</th> 
-                  </tr>
-                </thead>
-                <tbody>
-                  
-                  <% for(let hostFamilyTab of allHostFamilly.autre){ %>
-                    
-                    <% if(hostFamilyTab.disponibility===true){ %>
-                      <tr style="background-color: rgb(141, 214, 153)">
-                        <% } else{ %>
-                          <tr>
-                            <% } %>
-                            <td><%= hostFamilyTab.lastname %></td>
-                            <td><%= hostFamilyTab.firstname %></td>
-                            <td><%= hostFamilyTab.number_phone %></td>
-                            <td><%= hostFamilyTab.postal_code %></td>
-                            <td><%= hostFamilyTab.city %></td>
-                            <td><%= hostFamilyTab.adress %></td>
-                            <td><%= hostFamilyTab.email %></td>
-                            <td><%= hostFamilyTab.pet_composition %></td>
-                            <td><%= hostFamilyTab.pet_accepted %>
-                              <td><%= hostFamilyTab.pet_asela %></td>
-                              <td><button type="button" class="btn btn-outline-primary" aria-haspopup="dialog" aria-controls="SuppHostFamilyModal<% hostFamilyTab.id %>" data-toggle="modal" data-target="#SuppHostFamilyModal<% hostFamilyTab.id %>">
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                  <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"></path>
-                                </svg>
-                              </button>
-                              <button type="button" class="btn btn-outline-primary" aria-haspopup="dialog" aria-controls="EditHostFamilyModal" data-toggle="modal" data-target="#EditHostFamilyModal">
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                  <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                </svg>
-                              </button>
-                            </td>
-                          </tr>
-                          
-                          <% } %>
-                          
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  
-                  
-                  <!-------------------------------------------------MODAL MODIFIER FA------------------------------------>
-                  <% for(let hostFamilyTab of allHostFamilly.all){ %>
-                    <div class="modal fade" id="EditHostFamilyModal<%= hostFamilyTab.id %>" tabindex="-1" role="dialog" aria-labelledby="Editer-une-fa" aria-hidden="false">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content" data-article-id="<%= hostFamilyTab.id %>">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="Editer-une-fa">Modifier la FA</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <form action="" method="POST">
-                              <header class="modal-card-head">
-                                <button class="delete close" type="button" aria-label="close"></button>
-                                <button class="delete close" type="button" aria-label="close"></button>
-                              </header>
-                              <section class="modal-card-body">
-                                <div class="field">
-                                  <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text">Prénom</span>
-                                    </div>
-                                    <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.firstname %>" aria-describedby="inputGroup-sizing-default" id="editFirstname<%= hostFamilyTab.id %>">
-                                  </div>
-                                </div>
-                                
-                                <div class="field">
-                                  <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text">Nom</span>
-                                    </div>
-                                    <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.lastname %>" aria-describedby="inputGroup-sizing-default" id="editLastname<%= hostFamilyTab.id %>">
-                                  </div>
-                                </div>
-                                
-                                <div class="field">
-                                  <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text">Numéro de Téléphone</span>
-                                    </div>
-                                    <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.number_phone %>" aria-describedby="inputGroup-sizing-default" id="editNumberPhone<%= hostFamilyTab.id %>">
-                                  </div>
-                                </div>
-                                
-                                <div class="field">
-                                  <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text">Code postal</span>
-                                    </div>
-                                    <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.postal_code %>" aria-describedby="inputGroup-sizing-default" id="editPostalCode<%= hostFamilyTab.id %>">
-                                  </div>
-                                </div>
-                                
-                                <div class="field">
-                                  <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text">Ville</span>
-                                    </div>
-                                    <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.city %>" aria-describedby="inputGroup-sizing-default" id="editCity<%= hostFamilyTab.id %>">
-                                  </div>
-                                </div>
-                                
-                                <div class="field">
-                                  <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text">Adresse</span>
-                                    </div>
-                                    <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.adress %>" aria-describedby="inputGroup-sizing-default" id="editAdress<%= hostFamilyTab.id %>">
-                                  </div>
-                                </div>
-                                
-                                <div class="field">
-                                  <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text">Email</span>
-                                    </div>
-                                    <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.email %>" aria-describedby="inputGroup-sizing-default" id="editEmail<%= hostFamilyTab.id %>">
-                                  </div>
-                                </div>
-                                
-                                <div class="field">
-                                  <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text">Composition de la FA</span>
-                                    </div>
-                                    <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.pet_composition %>" aria-describedby="inputGroup-sizing-default" id="editComposition<%= hostFamilyTab.id %>">
-                                  </div>
-                                </div>
-                                
-                                <div class="field">
-                                  <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text">Animaux acceptés</span>
-                                    </div>
-                                    <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.pet_accepted%>" aria-describedby="inputGroup-sizing-default" id="editAcceptedPet<%= hostFamilyTab.id %>">
-                                  </div>
-                                </div>
-                                
-                                <div class="field">
-                                  <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text">Animaux accueillis</span>
-                                    </div>
-                                    <input type="text" class="form-control" aria-label="Default" value="<%= hostFamilyTab.pet_asela %>" aria-describedby="inputGroup-sizing-default" id="editPetAsela<%= hostFamilyTab.id %>">
-                                  </div>
-                                </div>
-                                
-                                <div class="field">
-                                  <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text">Disponible</span>
-                                    </div>
-                                    <%  if(hostFamilyTab.disponibility == true){ %>
-                                      <select class="custom-select" id="editDisponibility<%= hostFamilyTab.id %>">
-                                        <option value="true" >Oui</option>
-                                        <option value="false">Non</option>
-                                      </select>
-                                      <%} else{ %>
-                                        <select class="custom-select" id="editDisponibility<%= hostFamilyTab.id %>">
-                                          <option value="false">Non</option>
-                                          <option value="true" >Oui</option>
-                                        </select>
-                                        <% } %>
-                                      </div>
-                                    </div>             
-                                  </section>
-                                </form>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-primary editHostFamillyValidate">Sauvegarder les modifications</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <!------------------------------MODAL SUPPRIMER OUI NON GARD------------------------->   
-                        <div class="modal" tabindex="-1" role="dialog" id="SuppHostFamilyModal<%= hostFamilyTab.id %>">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title">Suppression d'une FA</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <p>Souhaitez-vous vraiment supprimer <%= hostFamilyTab.firstname %> <%= hostFamilyTab.lastname %> des FA ?</p>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-primary">Oui</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <% } %>
-
-                        <!--------------------------------------------Modale AJOUT Famille d'acceuil--------------------------------------->
-<div class="modal fade" id="AddHostFamilyModal" tabindex="-1" role="dialog" aria-labelledby="Ajouter-une-famille-acceuil" aria-hidden="false">
-  <div class="modal-dialog" role="document">
-      <div class="modal-content" data-article-id="addHostfamilly">
-          <div class="modal-header">
-              <h5 class="modal-title" id="Ajouter_hostfamilly"> Creer la fiche d'une Famille d'acceuil</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div class="modal fade bd-familyHost-modal-lg<%= hostFamilyTab.id %>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content" data-article-id="<%= hostFamilyTab.id %>">
+              <div class="modal-header">
+                <h5 class="modal-title">Questionnaire de la FA N° <%= hostFamilyTab.id %> reçu le <%= hostFamilyTab.date_sending.toLocaleString('en-GB', { timeZone: 'UTC' }) %></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
               </button>
-          </div>
-          <div class="modal-body">
-              <form action="" method="POST">
-                  <header class="modal-card-head">
-                      <div class="alert alert-info" role="alert">
-                          Attention certaines données sont directement connectées au site web, attention à l'orthographe!
-                      </div>
-                      <button class="delete close" type="button" aria-label="close"></button>
-                  </header>
-                  <section class="modal-card-body">
-                      
-                      <div class="field">
-                          <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                  <span class="input-group-text">Prénom</span>
-                              </div>
-                              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addFirstname">
-                          </div>
-                      </div>
-                      <div class="field">
-                          <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                  <span class="input-group-text">Nom</span>
-                              </div>
-                              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addLastname">
-                          </div>
-                      </div>
-                      <div class="field">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Numéro de téléphone</span>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addNumberPhone">
-                        </div>
+              </div>
+              <div class="modal-body">
+                <% if(hostFamilyTab.black_list === true){ %> 
+                <div class="alert alert-danger" role="alert">
+                  Cette famille d'accueil est inscrite en liste rouge !
+                </div>
+                <%} else if(hostFamilyTab.new === true) {%>
+                  <div class="alert alert-info" role="alert">
+                    C'est une nouvelle famille d'accueil, elle n'a jamais été contacté.
+                  </div>
+                <%} else if(hostFamilyTab.nolongercontact === true) {%>
+                  <div class="alert alert-warning" role="alert">
+                    C'est une ancienne famille d'accueil : <br> <%= hostFamilyTab.comment %>
+                  </div>
+                <%} else if(hostFamilyTab.disponibility === false) {%>
+                  <div class="alert alert-secondary" role="alert">
+                    Cette famille d'accueil est indisponible jusqu'au "<%= hostFamilyTab.people_date_accueil %>" ou jusqu'à qu'elle nous recontacte.
+                  </div>
+                <% } %>
+                <form>
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label for="inputlastname" > Nom</label>
+                      <input type="text" class="form-control" id="inputLastname<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.lastname %>" disabled <% if (hostFamilyTab.black_list === true){ %> style="background-color: #ff474775;" <% } %>>
                     </div>
-          
-                      <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                              <label class="input-group-text" for="inputGroupSelect01">Code postal</label>
-                          </div>
-                          <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addPostalCode">
-                      </div>
-                      
-                      <div class="field">
-                          <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                  <span class="input-group-text">Ville</span>
-                              </div>
-                              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addCity">
-                          </div>
-                          
-                          <div class="field">
-                              <div class="input-group mb-3">
-                                  <div class="input-group-prepend">
-                                      <span class="input-group-text">Adresse</span>
-                                  </div>
-                                  <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addAdress">
-                              </div>
-                          </div>
-                                                
-                          <div class="field">
-                              <div class="input-group mb-3">
-                                  <div class="input-group-prepend">
-                                      <span class="input-group-text">Email</span>
-                                  </div>
-                                  <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addEmail">
-                              </div>
-                          </div>
-                           
-                          <div class="field">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Animaux</span>
-                                </div>
-                                <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addComposition">
-                            </div>
-                        </div>
-
-                        <div class="field">
-                          <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                  <span class="input-group-text">Animaux Acceptés</span>
-                              </div>
-                              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addAcceptedPet">
-                          </div>
-                      </div>
-
-                      <div class="field">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Animaux adoptés</span>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addPetAsela">
-                        </div>
+                    <div class="form-group col-md-4">
+                      <label for="inputfirstname">Prénom</label>
+                      <input type="text" class="form-control" id="inputFirstname<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.firstname %>" disabled <% if (hostFamilyTab.black_list === true){ %> style="background-color: #ff474775" <% } %>>
                     </div>
-
-                    <div class="field">
-                      <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                              <span class="input-group-text">Disponibilité</span>
-                          </div>
-                          <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addDisponibility">
+                    <div class="form-group col-md-4">
+                      <label for="inputBirthday">Date de naissance</label>
+                      <input type="text" class="form-control" id="inputBirthday<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.birthday %>" disabled>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputAddress">Addresse</label>
+                    <input type="text" class="form-control" id="inputAddress<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.adress%>">
+                  </div>
+                    <div class="form-group col-md-4">
+                      <label for="inputCity">Ville</label>
+                      <input type="text" class="form-control" id="inputCity<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.city %>">
+                    </div>
+                    <div class="form-group col-md-2">
+                      <label for="inputPC">Code Postale</label>
+                      <input type="text" class="form-control" id="inputPC<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.postal_code %>">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-2">
+                      <label for="inputNP">Téléphone</label>
+                      <input type="text" class="form-control" id="inputNP<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.number_phone %>">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="inputEmail">Email</label>
+                      <input type="email" class="form-control" id="inputEmail<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.email %>" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="inputEmail">Facebook</label>
+                      <input type="email" class="form-control" id="inputPseudoFB<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.facebook %>">
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="inputEmail">Profession</label>
+                      <input type="email" class="form-control" id="inputjob<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.job %>" disabled>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-2">
+                      <label for="inputlogement">Nb. adulte</label>
+                      <input type="text" class="form-control" id="inputAdult<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.number_adult %>" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="inputlogement">Nb. enfant</label>
+                      <input type="text" class="form-control" id="inputChild<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.number_children %> de <%= hostFamilyTab.age_children %>." disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="inputEmail">Animaux</label>
+                      <input type="email" class="form-control" id="inputComposition<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.pet_composition %>" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="inputEmail">Stérilisé</label>
+                      <input type="email" class="form-control" id="inputSterilized<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.pet_sterilized %>" disabled>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-5">
+                      <label for="inputlogement">Logement</label>
+                      <input type="text" class="form-control" id="inputLogement<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.type_home %> de <%= hostFamilyTab.area_home %>." disabled>
+                    </div>
+                      <% if(hostFamilyTab.type_home === 'Appartement avec Jardin'|'Appartement avec Jardin'|'Maison avec cour ou Terrasse'|'Appartement avec cour ou Terrasse'|'Studio avec Jardin'|'Studio avec cour ou Terrasse'|'Terrain/ Caravane/ MobilHome'){ %>
+                        <div class="form-group col-md-2">
+                          <label for="inputgarden">Exterieur</label>
+                          <input type="text" class="form-control" id="inputGarden<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.area_garden %>. " disabled>
+                        </div>
+                        <div class="form-group col-md-2">
+                          <label for="inputgarden">Cloture</label>
+                          <input type="text" class="form-control" id="inputfencing<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.fencing === true){%>Oui de <%= hostFamilyTab.fencing_height %>  <% }else{ %>Non<% } %>." disabled>
+                        </div>
+                      <% } %>
+                      <div class="form-group col-md-3">
+                        <label for="inputdisponibility">Disponible</label>
+                        <% if(hostFamilyTab.disponibility === true) { %>
+                            <select type="text" class="form-control" style="background-color: #6efb72c2;" id="inputdisponibility<%= hostFamilyTab.id %>">
+                            <option value="true">Oui</option>
+                            <option value="false">Non</option>
+                          </select>
+                          <% }else { %>
+                            <select type="text" class="form-control" style="background-color: #f1b510ad;" id="inputdisponibility<%= hostFamilyTab.id %>">
+                              <option value="false">Non</option>
+                              <option value="true">Oui</option>
+                          </select>
+                          <% } %> 
                       </div>
                   </div>
-                  </div>		
-                  </section>
-              </form>
+                  <div class="form-row">
+                    <div class="form-group col-md-2">
+                      <label for="poeple_counsciousness">Dégradation</label>
+                      <input type="text" class="form-control" id="poeple_counsciousness<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.poeple_counsciousness%>" disabled>
+                    </div>
+                    <div class="form-group col-md-2">
+                      <label for="poeple_drive_veterinary">Dép. Vétérinaire</label>
+                      <input type="text" class="form-control" id="poeple_drive_veterinary<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.poeple_drive_veterinary%>" disabled>
+                    </div>
+                    <div class="form-group col-md-2">
+                      <label for="poeple_car">Dép. Fournitures</label>
+                      <input type="text" class="form-control" id="poeple_car<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.poeple_car%>" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="family_accept_acceuil">Famille averti</label>
+                      <input type="text" class="form-control" id="family_accept_acceuil<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.poeple_car%>" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="people_date_accueil">Date de dispo</label>
+                      <input type="text" class="form-control" id="people_date_accueil<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.people_date_accueil%>">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-2">
+                      <label for="inputCat">Chats acceptés</label>
+                      <input type="text" class="form-control" id="inputCat<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.cat_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="inputKitten">Chatons acceptés</label>
+                        <input type="text" class="form-control" id="inputKitten<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.kitten_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                    </div>
+                    <div class="form-group col-md-2">
+                      <label for="inputPuppy">Chiots acceptés</label>
+                        <input type="text" class="form-control" id="inputPuppy<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.puppy_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                    </div>
+                    <div class="form-group col-md-5">
+                      <label for="inputpoeple_amity_cat">Connaissance en biberonnage</label>
+                        <input type="text" class="form-control" id="inputpoeple_amity_cat<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.poeple_amity_cat === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-3">
+                      <label for="inputLittleDog">Chiens (petit) acceptés</label>
+                      <input type="text" class="form-control" id="inputLittleDog<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.dog_little_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="inputMiddleDog">Chiens (moyen) acceptés</label>
+                        <input type="text" class="form-control" id="inputMiddleDog<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.dog_middle_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="inputBigDog">Chiens (grand) acceptés</label>
+                        <input type="text" class="form-control" id="inputBigDog<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.poeple_dog_big_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="inputpoeple_educate">Niveau Education</label>
+                        <input type="text" class="form-control" id="inputpoeple_educate<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.inputLittleDog%>" disabled>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-3">
+                      <label for="dog_sexe_acceuil">Conditions de sexe</label>
+                      <input type="text" class="form-control" id="dog_sexe_acceuil<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.dog_sexe_acceuil%>" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="hour_absence_day">Nb. Absence /J</label>
+                      <input type="text" class="form-control" id="hour_absence_day<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.hour_absence_day%>" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="dog_accept_problem">Animaux à problemes</label>
+                      <input type="text" class="form-control" id="dog_accept_problem<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.dog_accept_problem%>" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="dog_closed_room">Piece d'isolation</label>
+                      <input type="text" class="form-control" id="dog_closed_room<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.dog_closed_room %> " disabled>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="poeple_ask">Précisions particulières</label>
+                    <textarea type="text" cols="30" rows="1" class="form-control" id="poeple_ask<%= hostFamilyTab.id %>" disabled><%=  hostFamilyTab.poeple_ask%></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="poeple_motivation">Motivations</label>
+                    <textarea type="text" cols="30" rows="2" class="form-control" id="poeple_motivation<%= hostFamilyTab.id %>" disabled><%= hostFamilyTab.poeple_motivation%></textarea>
+                  </div>
+                  <hr>
+                  <div class="form-row">
+                    <div class="form-group col-md-2">
+                      <label for="new">Contacté</label>
+                      <% if(hostFamilyTab.new === true) { %>
+                        <select type="text" class="form-control" id="new<%= hostFamilyTab.id %>">
+                          <option value="false">Non</option>
+                          <option value="true">Oui</option>
+                      </select>
+                      <% }else { %>
+                        <select type="text" class="form-control" id="new<%= hostFamilyTab.id %>">
+                          <option value="true">Oui</option>
+                          <option value="false">Non</option>
+                      </select>
+                      <% } %> 
+                    </div>
+                    <div class="form-group col-md-2">
+                      <label for="nolongercontact">Ancienne FA</label>
+                      <% if(hostFamilyTab.nolongercontact === true) { %>
+                        <select type="text" class="form-control" id="nolongercontact<%= hostFamilyTab.id %>">
+                          <option value="true">Oui</option>
+                          <option value="false">Non</option>
+                      </select>
+                      <% }else { %>
+                        <select type="text" class="form-control" id="nolongercontact<%= hostFamilyTab.id %>">
+                          <option value="false">Non</option>
+                          <option value="true">Oui</option>
+                      </select>
+                      <% } %> 
+                    </div>
+                    <div class="form-group col-md-8">
+                      <label for="pet_asela">Animaux en FA</label>
+                      <input type="text" class="form-control" id="pet_asela<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.pet_asela%>">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="comment">Commentaire</label>
+                    <textarea type="text" cols="30" rows="2" class="form-control" id="comment<%= hostFamilyTab.id %>"> <%= hostFamilyTab.comment%> </textarea>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer threebtn">
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Envoyer en liste Rouge">
+                  <button type="button" class="btn btn-danger blacklistFA">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bug-fill" viewBox="0 0 16 16">
+                      <path d="M4.978.855a.5.5 0 1 0-.956.29l.41 1.352A4.985 4.985 0 0 0 3 6h10a4.985 4.985 0 0 0-1.432-3.503l.41-1.352a.5.5 0 1 0-.956-.29l-.291.956A4.978 4.978 0 0 0 8 1a4.979 4.979 0 0 0-2.731.811l-.29-.956z"/>
+                      <path d="M13 6v1H8.5v8.975A5 5 0 0 0 13 11h.5a.5.5 0 0 1 .5.5v.5a.5.5 0 1 0 1 0v-.5a1.5 1.5 0 0 0-1.5-1.5H13V9h1.5a.5.5 0 0 0 0-1H13V7h.5A1.5 1.5 0 0 0 15 5.5V5a.5.5 0 0 0-1 0v.5a.5.5 0 0 1-.5.5H13zm-5.5 9.975V7H3V6h-.5a.5.5 0 0 1-.5-.5V5a.5.5 0 0 0-1 0v.5A1.5 1.5 0 0 0 2.5 7H3v1H1.5a.5.5 0 0 0 0 1H3v1h-.5A1.5 1.5 0 0 0 1 11.5v.5a.5.5 0 1 0 1 0v-.5a.5.5 0 0 1 .5-.5H3a5 5 0 0 0 4.5 4.975z"/>
+                    </svg>
+                  </button>
+                </span>
+                <span class="pull-right">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"> Fermer</button>
+                  <button type="button" class="btn btn-primary editFA">Valider les modifications</button>
+                </span>
+            </div>
+            </div>
           </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-              <button type="button" class="btn btn-primary saveNewDog">Ajouter le nouveau chien</button>
-          </div>
-      </div>
-  </div>
+        </div>
+        <% } %> 
+    </tbody>
+  </table>
 </div>
-                        
-                        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-                        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-                        <script src="/js/app.js"></script>
-                        <script src="/js/hostfamily.js"></script>
-                        <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-                        <script>
-                          var $th = $('.tableFixHead').find('thead')
-                          $('.tableFixHead').on('scroll', function() {
-                            $th.css('transform', 'translateY('+ this.scrollTop +'px)');
-                          });
-                        </script>
-                        
-                      </body>
+
+<!--------------------------------------FA HERAULT----------------------------------------------->
+<div class="tab-pane fade table table-responsive tableFixHead" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+  <table class="table table-hover" >
+    <thead>
+      <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Téléphone</th>
+        <th>Ville</th>
+        <th>Adresse</th>
+        <th>Animaux possédés</th>
+        <th>Type accepté(s)</th>
+        <th>En FA</th>
+      </tr>
+    </thead>
+    <tbody class="m-phone">
+    <% for(let hostFamilyTab of allHostFamilly.herault){ %>
+      <tr data-toggle="modal" data-target=".bd-familyHost-modal-lg<%= hostFamilyTab.id %>">
+        <td data-label="Prénom"><%= hostFamilyTab.firstname %></td>
+        <td data-label="Nom"><%= hostFamilyTab.lastname %></td>
+        <td data-label="Téléphone"><%= hostFamilyTab.number_phone %></td>
+        <td data-label="Ville"><%= hostFamilyTab.postal_code %> <%= hostFamilyTab.city %></td>
+        <td data-label="Adresse"><%= hostFamilyTab.adress %></td>
+        <td data-label="Animaux"><%= hostFamilyTab.pet_composition %></td>
+        <td data-label="Animaux accéptés"><%if(hostFamilyTab.kitten_accepted){%>Chaton -<%}%> <%if(hostFamilyTab.cat_accepted){%>Chat -<%}%> <%if(hostFamilyTab.dog_big_accepted){%>Gros chien -<%}%> <%if(hostFamilyTab.dog_middle_accepted){%>Moyen chien -<%}%> <%if(hostFamilyTab.dog_little_accepted){%>Petit chien -<%}%> <%if(hostFamilyTab.puppy_accepted){%>Chiots<%}%></td>
+        <td data-label="Animaux Asela"><%= hostFamilyTab.pet_asela %></td>
+      </tr>
+
+      <div class="modal fade bd-familyHost-modal-lg<%= hostFamilyTab.id %>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content" data-article-id="<%= hostFamilyTab.id %>">
+            <div class="modal-header">
+              <h5 class="modal-title">Questionnaire de la FA N° <%= hostFamilyTab.id %> reçu le <%= hostFamilyTab.date_sending.toLocaleString('en-GB', { timeZone: 'UTC' }) %></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+              <% if(hostFamilyTab.black_list === true){ %> 
+              <div class="alert alert-danger" role="alert">
+                Cette famille d'accueil est inscrite en liste rouge !
+              </div>
+              <%} else if(hostFamilyTab.new === true) {%>
+                <div class="alert alert-info" role="alert">
+                  C'est une nouvelle famille d'accueil, elle n'a jamais été contacté.
+                </div>
+              <%} else if(hostFamilyTab.nolongercontact === true) {%>
+                <div class="alert alert-warning" role="alert">
+                  C'est une ancienne famille d'accueil : <br> <%= hostFamilyTab.comment %>
+                </div>
+              <%} else if(hostFamilyTab.disponibility === false) {%>
+                <div class="alert alert-secondary" role="alert">
+                  Cette famille d'accueil est indisponible jusqu'au "<%= hostFamilyTab.people_date_accueil %>" ou jusqu'à qu'elle nous recontacte.
+                </div>
+              <% } %>
+              <form>
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="inputlastname" > Nom</label>
+                    <input type="text" class="form-control" id="inputLastname<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.lastname %>" disabled <% if (hostFamilyTab.black_list === true){ %> style="background-color: #ff474775;" <% } %>>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputfirstname">Prénom</label>
+                    <input type="text" class="form-control" id="inputFirstname<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.firstname %>" disabled <% if (hostFamilyTab.black_list === true){ %> style="background-color: #ff474775" <% } %>>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputBirthday">Date de naissance</label>
+                    <input type="text" class="form-control" id="inputBirthday<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.birthday %>" disabled>
+                  </div>
+                </div>
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputAddress">Addresse</label>
+                  <input type="text" class="form-control" id="inputAddress<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.adress%>">
+                </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputCity">Ville</label>
+                    <input type="text" class="form-control" id="inputCity<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.city %>">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputPC">Code Postale</label>
+                    <input type="text" class="form-control" id="inputPC<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.postal_code %>">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="inputNP">Téléphone</label>
+                    <input type="text" class="form-control" id="inputNP<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.number_phone %>">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" class="form-control" id="inputEmail<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.email %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputEmail">Facebook</label>
+                    <input type="email" class="form-control" id="inputPseudoFB<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.facebook %>">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputEmail">Profession</label>
+                    <input type="email" class="form-control" id="inputjob<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.job %>" disabled>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="inputlogement">Nb. adulte</label>
+                    <input type="text" class="form-control" id="inputAdult<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.number_adult %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputlogement">Nb. enfant</label>
+                    <input type="text" class="form-control" id="inputChild<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.number_children %> de <%= hostFamilyTab.age_children %>." disabled>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputEmail">Animaux</label>
+                    <input type="email" class="form-control" id="inputComposition<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.pet_composition %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputEmail">Stérilisé</label>
+                    <input type="email" class="form-control" id="inputSterilized<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.pet_sterilized %>" disabled>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-5">
+                    <label for="inputlogement">Logement</label>
+                    <input type="text" class="form-control" id="inputLogement<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.type_home %> de <%= hostFamilyTab.area_home %>." disabled>
+                  </div>
+                    <% if(hostFamilyTab.type_home === 'Appartement avec Jardin'|'Appartement avec Jardin'|'Maison avec cour ou Terrasse'|'Appartement avec cour ou Terrasse'|'Studio avec Jardin'|'Studio avec cour ou Terrasse'|'Terrain/ Caravane/ MobilHome'){ %>
+                      <div class="form-group col-md-2">
+                        <label for="inputgarden">Exterieur</label>
+                        <input type="text" class="form-control" id="inputGarden<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.area_garden %>. " disabled>
+                      </div>
+                      <div class="form-group col-md-2">
+                        <label for="inputgarden">Cloture</label>
+                        <input type="text" class="form-control" id="inputfencing<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.fencing === true){%>Oui de <%= hostFamilyTab.fencing_height %>  <% }else{ %>Non<% } %>." disabled>
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label for="inputdisponibility">Disponible</label>
+                        <% if(hostFamilyTab.disponibility === true) { %>
+                            <select type="text" class="form-control" style="background-color: #6efb72c2;" id="inputdisponibility<%= hostFamilyTab.id %>">
+                            <option value="true">Oui</option>
+                            <option value="false">Non</option>
+                          </select>
+                          <% }else { %>
+                            <select type="text" class="form-control" style="background-color: #f1b510ad;" id="inputdisponibility<%= hostFamilyTab.id %>">
+                              <option value="false">Non</option>
+                              <option value="true">Oui</option>
+                          </select>
+                          <% } %> 
+                      </div> 
+                    <% } %>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="poeple_counsciousness">Dégradation</label>
+                    <input type="text" class="form-control" id="poeple_counsciousness<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.poeple_counsciousness%>" disabled>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="poeple_drive_veterinary">Dép. Vétérinaire</label>
+                    <input type="text" class="form-control" id="poeple_drive_veterinary<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.poeple_drive_veterinary%>" disabled>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="poeple_car">Dép. Fournitures</label>
+                    <input type="text" class="form-control" id="poeple_car<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.poeple_car%>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="family_accept_acceuil">Famille averti</label>
+                    <input type="text" class="form-control" id="family_accept_acceuil<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.poeple_car%>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="people_date_accueil">Date de dispo</label>
+                    <input type="text" class="form-control" id="people_date_accueil<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.people_date_accueil%>">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="inputCat">Chats acceptés</label>
+                    <input type="text" class="form-control" id="inputCat<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.cat_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputKitten">Chatons acceptés</label>
+                      <input type="text" class="form-control" id="inputKitten<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.kitten_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputPuppy">Chiots acceptés</label>
+                      <input type="text" class="form-control" id="inputPuppy<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.puppy_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                  <div class="form-group col-md-5">
+                    <label for="inputpoeple_amity_cat">Connaissance en biberonnage</label>
+                      <input type="text" class="form-control" id="inputpoeple_amity_cat<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.poeple_amity_cat === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-3">
+                    <label for="inputLittleDog">Chiens (petit) acceptés</label>
+                    <input type="text" class="form-control" id="inputLittleDog<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.dog_little_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputMiddleDog">Chiens (moyen) acceptés</label>
+                      <input type="text" class="form-control" id="inputMiddleDog<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.dog_middle_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputBigDog">Chiens (grand) acceptés</label>
+                      <input type="text" class="form-control" id="inputBigDog<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.poeple_dog_big_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputpoeple_educate">Niveau Education</label>
+                      <input type="text" class="form-control" id="inputpoeple_educate<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.inputLittleDog%>" disabled>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-3">
+                    <label for="dog_sexe_acceuil">Conditions de sexe</label>
+                    <input type="text" class="form-control" id="dog_sexe_acceuil<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.dog_sexe_acceuil%>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="hour_absence_day">Nb. Absence /J</label>
+                    <input type="text" class="form-control" id="hour_absence_day<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.hour_absence_day%>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="dog_accept_problem">Animaux à problemes</label>
+                    <input type="text" class="form-control" id="dog_accept_problem<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.dog_accept_problem%>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="dog_closed_room">Piece d'isolation</label>
+                    <input type="text" class="form-control" id="dog_closed_room<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.dog_closed_room %> " disabled>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="poeple_ask">Précisions particulières</label>
+                  <textarea type="text" cols="30" rows="1" class="form-control" id="poeple_ask<%= hostFamilyTab.id %>" disabled><%=  hostFamilyTab.poeple_ask%></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="poeple_motivation">Motivations</label>
+                  <textarea type="text" cols="30" rows="2" class="form-control" id="poeple_motivation<%= hostFamilyTab.id %>" disabled><%= hostFamilyTab.poeple_motivation%></textarea>
+                </div>
+                <hr>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="new">Contacté</label>
+                    <% if(hostFamilyTab.new === true) { %>
+                      <select type="text" class="form-control" id="new<%= hostFamilyTab.id %>">
+                        <option value="false">Non</option>
+                        <option value="true">Oui</option>
+                    </select>
+                    <% }else { %>
+                      <select type="text" class="form-control" id="new<%= hostFamilyTab.id %>">
+                        <option value="true">Oui</option>
+                        <option value="false">Non</option>
+                    </select>
+                    <% } %> 
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="nolongercontact">Ancienne FA</label>
+                    <% if(hostFamilyTab.nolongercontact === true) { %>
+                      <select type="text" class="form-control" id="nolongercontact<%= hostFamilyTab.id %>">
+                        <option value="true">Oui</option>
+                        <option value="false">Non</option>
+                    </select>
+                    <% }else { %>
+                      <select type="text" class="form-control" id="nolongercontact<%= hostFamilyTab.id %>">
+                        <option value="false">Non</option>
+                        <option value="true">Oui</option>
+                    </select>
+                    <% } %> 
+                  </div>
+                  <div class="form-group col-md-8">
+                    <label for="pet_asela">Animaux en FA</label>
+                    <input type="text" class="form-control" id="pet_asela<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.pet_asela%>">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="comment">Commentaire</label>
+                  <textarea type="text" cols="30" rows="2" class="form-control" id="comment<%= hostFamilyTab.id %>"> <%= hostFamilyTab.comment%> </textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer threebtn">
+              <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Envoyer en liste Rouge">
+                <button type="button" class="btn btn-danger blacklistFA">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bug-fill" viewBox="0 0 16 16">
+                    <path d="M4.978.855a.5.5 0 1 0-.956.29l.41 1.352A4.985 4.985 0 0 0 3 6h10a4.985 4.985 0 0 0-1.432-3.503l.41-1.352a.5.5 0 1 0-.956-.29l-.291.956A4.978 4.978 0 0 0 8 1a4.979 4.979 0 0 0-2.731.811l-.29-.956z"/>
+                    <path d="M13 6v1H8.5v8.975A5 5 0 0 0 13 11h.5a.5.5 0 0 1 .5.5v.5a.5.5 0 1 0 1 0v-.5a1.5 1.5 0 0 0-1.5-1.5H13V9h1.5a.5.5 0 0 0 0-1H13V7h.5A1.5 1.5 0 0 0 15 5.5V5a.5.5 0 0 0-1 0v.5a.5.5 0 0 1-.5.5H13zm-5.5 9.975V7H3V6h-.5a.5.5 0 0 1-.5-.5V5a.5.5 0 0 0-1 0v.5A1.5 1.5 0 0 0 2.5 7H3v1H1.5a.5.5 0 0 0 0 1H3v1h-.5A1.5 1.5 0 0 0 1 11.5v.5a.5.5 0 1 0 1 0v-.5a.5.5 0 0 1 .5-.5H3a5 5 0 0 0 4.5 4.975z"/>
+                  </svg>
+                </button>
+              </span>
+              <span class="pull-right">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"> Fermer</button>
+                <button type="button" class="btn btn-primary editFA">Valider les modifications</button>
+              </span>
+          </div>
+          </div>
+        </div>
+      </div>
+      <% } %> 
+  </tbody>
+</table>
+</div>
+<!--------------------------------------FA AUTRE----------------------------------------------->
+<div class="tab-pane fade table table-responsive tableFixHead" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+  <table class="table table-hover" >
+    <thead>
+      <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Téléphone</th>
+        <th>Ville</th>
+        <th>Adresse</th>
+        <th>Animaux possédés</th>
+        <th>Type accepté(s)</th>
+        <th>En FA</th>
+      </tr>
+    </thead>
+    <tbody class="m-phone">
+    <% for(let hostFamilyTab of allHostFamilly.autre){ %>
+      <tr data-toggle="modal" data-target=".bd-familyHost-modal-lg<%= hostFamilyTab.id %>">
+        <td data-label="Prénom"><%= hostFamilyTab.firstname %></td>
+        <td data-label="Nom"><%= hostFamilyTab.lastname %></td>
+        <td data-label="Téléphone"><%= hostFamilyTab.number_phone %></td>
+        <td data-label="Ville"><%= hostFamilyTab.postal_code %> <%= hostFamilyTab.city %></td>
+        <td data-label="Adresse"><%= hostFamilyTab.adress %></td>
+        <td data-label="Animaux"><%= hostFamilyTab.pet_composition %></td>
+        <td data-label="Animaux accéptés"><%if(hostFamilyTab.kitten_accepted){%>Chaton -<%}%> <%if(hostFamilyTab.cat_accepted){%>Chat -<%}%> <%if(hostFamilyTab.dog_big_accepted){%>Gros chien -<%}%> <%if(hostFamilyTab.dog_middle_accepted){%>Moyen chien -<%}%> <%if(hostFamilyTab.dog_little_accepted){%>Petit chien -<%}%> <%if(hostFamilyTab.puppy_accepted){%>Chiots<%}%></td>
+        <td data-label="Animaux Asela"><%= hostFamilyTab.pet_asela %></td>
+      </tr>
+
+      <div class="modal fade bd-familyHost-modal-lg<%= hostFamilyTab.id %>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content" data-article-id="<%= hostFamilyTab.id %>">
+            <div class="modal-header">
+              <h5 class="modal-title">Questionnaire de la FA N° <%= hostFamilyTab.id %> reçu le <%= hostFamilyTab.date_sending.toLocaleString('en-GB', { timeZone: 'UTC' }) %></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+              <% if(hostFamilyTab.black_list === true){ %> 
+              <div class="alert alert-danger" role="alert">
+                Cette famille d'accueil est inscrite en liste rouge !
+              </div>
+              <%} else if(hostFamilyTab.new === true) {%>
+                <div class="alert alert-info" role="alert">
+                  C'est une nouvelle famille d'accueil, elle n'a jamais été contacté.
+                </div>
+              <%} else if(hostFamilyTab.nolongercontact === true) {%>
+                <div class="alert alert-warning" role="alert">
+                  C'est une ancienne famille d'accueil : <br> <%= hostFamilyTab.comment %>
+                </div>
+              <%} else if(hostFamilyTab.disponibility === false) {%>
+                <div class="alert alert-secondary" role="alert">
+                  Cette famille d'accueil est indisponible jusqu'au "<%= hostFamilyTab.people_date_accueil %>" ou jusqu'à qu'elle nous recontacte.
+                </div>
+              <% } %>
+              <form>
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="inputlastname" > Nom</label>
+                    <input type="text" class="form-control" id="inputLastname<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.lastname %>" disabled <% if (hostFamilyTab.black_list === true){ %> style="background-color: #ff474775;" <% } %>>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputfirstname">Prénom</label>
+                    <input type="text" class="form-control" id="inputFirstname<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.firstname %>" disabled <% if (hostFamilyTab.black_list === true){ %> style="background-color: #ff474775" <% } %>>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputBirthday">Date de naissance</label>
+                    <input type="text" class="form-control" id="inputBirthday<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.birthday %>" disabled>
+                  </div>
+                </div>
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputAddress">Addresse</label>
+                  <input type="text" class="form-control" id="inputAddress<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.adress%>">
+                </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputCity">Ville</label>
+                    <input type="text" class="form-control" id="inputCity<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.city %>">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputPC">Code Postale</label>
+                    <input type="text" class="form-control" id="inputPC<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.postal_code %>">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="inputNP">Téléphone</label>
+                    <input type="text" class="form-control" id="inputNP<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.number_phone %>">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" class="form-control" id="inputEmail<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.email %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputEmail">Facebook</label>
+                    <input type="email" class="form-control" id="inputPseudoFB<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.facebook %>">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputEmail">Profession</label>
+                    <input type="email" class="form-control" id="inputjob<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.job %>" disabled>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="inputlogement">Nb. adulte</label>
+                    <input type="text" class="form-control" id="inputAdult<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.number_adult %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputlogement">Nb. enfant</label>
+                    <input type="text" class="form-control" id="inputChild<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.number_children %> de <%= hostFamilyTab.age_children %>." disabled>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputEmail">Animaux</label>
+                    <input type="email" class="form-control" id="inputComposition<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.pet_composition %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputEmail">Stérilisé</label>
+                    <input type="email" class="form-control" id="inputSterilized<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.pet_sterilized %>" disabled>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-5">
+                    <label for="inputlogement">Logement</label>
+                    <input type="text" class="form-control" id="inputLogement<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.type_home %> de <%= hostFamilyTab.area_home %>." disabled>
+                  </div>
+                    <% if(hostFamilyTab.type_home === 'Appartement avec Jardin'|'Appartement avec Jardin'|'Maison avec cour ou Terrasse'|'Appartement avec cour ou Terrasse'|'Studio avec Jardin'|'Studio avec cour ou Terrasse'|'Terrain/ Caravane/ MobilHome'){ %>
+                      <div class="form-group col-md-2">
+                        <label for="inputgarden">Exterieur</label>
+                        <input type="text" class="form-control" id="inputGarden<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.area_garden %>. " disabled>
+                      </div>
+                      <div class="form-group col-md-2">
+                        <label for="inputgarden">Cloture</label>
+                        <input type="text" class="form-control" id="inputfencing<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.fencing === true){%>Oui de <%= hostFamilyTab.fencing_height %>  <% }else{ %>Non<% } %>." disabled>
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label for="inputdisponibility">Disponible</label>
+                        <% if(hostFamilyTab.disponibility === true) { %>
+                            <select type="text" class="form-control" style="background-color: #6efb72c2;" id="inputdisponibility<%= hostFamilyTab.id %>">
+                            <option value="true">Oui</option>
+                            <option value="false">Non</option>
+                          </select>
+                          <% }else { %>
+                            <select type="text" class="form-control" style="background-color: #f1b510ad;" id="inputdisponibility<%= hostFamilyTab.id %>">
+                              <option value="false">Non</option>
+                              <option value="true">Oui</option>
+                          </select>
+                          <% } %> 
+                      </div> 
+                    <% } %>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="poeple_counsciousness">Dégradation</label>
+                    <input type="text" class="form-control" id="poeple_counsciousness<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.poeple_counsciousness%>" disabled>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="poeple_drive_veterinary">Dép. Vétérinaire</label>
+                    <input type="text" class="form-control" id="poeple_drive_veterinary<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.poeple_drive_veterinary%>" disabled>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="poeple_car">Dép. Fournitures</label>
+                    <input type="text" class="form-control" id="poeple_car<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.poeple_car%>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="family_accept_acceuil">Famille averti</label>
+                    <input type="text" class="form-control" id="family_accept_acceuil<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.poeple_car%>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="people_date_accueil">Date de dispo</label>
+                    <input type="text" class="form-control" id="people_date_accueil<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.people_date_accueil%>">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="inputCat">Chats acceptés</label>
+                    <input type="text" class="form-control" id="inputCat<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.cat_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputKitten">Chatons acceptés</label>
+                      <input type="text" class="form-control" id="inputKitten<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.kitten_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputPuppy">Chiots acceptés</label>
+                      <input type="text" class="form-control" id="inputPuppy<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.puppy_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                  <div class="form-group col-md-5">
+                    <label for="inputpoeple_amity_cat">Connaissance en biberonnage</label>
+                      <input type="text" class="form-control" id="inputpoeple_amity_cat<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.poeple_amity_cat === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-3">
+                    <label for="inputLittleDog">Chiens (petit) acceptés</label>
+                    <input type="text" class="form-control" id="inputLittleDog<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.dog_little_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputMiddleDog">Chiens (moyen) acceptés</label>
+                      <input type="text" class="form-control" id="inputMiddleDog<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.dog_middle_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputBigDog">Chiens (grand) acceptés</label>
+                      <input type="text" class="form-control" id="inputBigDog<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.poeple_dog_big_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputpoeple_educate">Niveau Education</label>
+                      <input type="text" class="form-control" id="inputpoeple_educate<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.inputLittleDog%>" disabled>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-3">
+                    <label for="dog_sexe_acceuil">Conditions de sexe</label>
+                    <input type="text" class="form-control" id="dog_sexe_acceuil<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.dog_sexe_acceuil%>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="hour_absence_day">Nb. Absence /J</label>
+                    <input type="text" class="form-control" id="hour_absence_day<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.hour_absence_day%>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="dog_accept_problem">Animaux à problemes</label>
+                    <input type="text" class="form-control" id="dog_accept_problem<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.dog_accept_problem%>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="dog_closed_room">Piece d'isolation</label>
+                    <input type="text" class="form-control" id="dog_closed_room<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.dog_closed_room %> " disabled>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="poeple_ask">Précisions particulières</label>
+                  <textarea type="text" cols="30" rows="1" class="form-control" id="poeple_ask<%= hostFamilyTab.id %>" disabled><%=  hostFamilyTab.poeple_ask%></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="poeple_motivation">Motivations</label>
+                  <textarea type="text" cols="30" rows="2" class="form-control" id="poeple_motivation<%= hostFamilyTab.id %>" disabled><%= hostFamilyTab.poeple_motivation%></textarea>
+                </div>
+                <hr>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="new">Contacté</label>
+                    <% if(hostFamilyTab.new === true) { %>
+                      <select type="text" class="form-control" id="new<%= hostFamilyTab.id %>">
+                        <option value="false">Non</option>
+                        <option value="true">Oui</option>
+                    </select>
+                    <% }else { %>
+                      <select type="text" class="form-control" id="new<%= hostFamilyTab.id %>">
+                        <option value="true">Oui</option>
+                        <option value="false">Non</option>
+                    </select>
+                    <% } %> 
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="nolongercontact">Ancienne FA</label>
+                    <% if(hostFamilyTab.nolongercontact === true) { %>
+                      <select type="text" class="form-control" id="nolongercontact<%= hostFamilyTab.id %>">
+                        <option value="true">Oui</option>
+                        <option value="false">Non</option>
+                    </select>
+                    <% }else { %>
+                      <select type="text" class="form-control" id="nolongercontact<%= hostFamilyTab.id %>">
+                        <option value="false">Non</option>
+                        <option value="true">Oui</option>
+                    </select>
+                    <% } %> 
+                  </div>
+                  <div class="form-group col-md-8">
+                    <label for="pet_asela">Animaux en FA</label>
+                    <input type="text" class="form-control" id="pet_asela<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.pet_asela%>">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="comment">Commentaire</label>
+                  <textarea type="text" cols="30" rows="2" class="form-control" id="comment<%= hostFamilyTab.id %>"> <%= hostFamilyTab.comment%> </textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer threebtn">
+              <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Envoyer en liste Rouge">
+                <button type="button" class="btn btn-danger blacklistFA">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bug-fill" viewBox="0 0 16 16">
+                    <path d="M4.978.855a.5.5 0 1 0-.956.29l.41 1.352A4.985 4.985 0 0 0 3 6h10a4.985 4.985 0 0 0-1.432-3.503l.41-1.352a.5.5 0 1 0-.956-.29l-.291.956A4.978 4.978 0 0 0 8 1a4.979 4.979 0 0 0-2.731.811l-.29-.956z"/>
+                    <path d="M13 6v1H8.5v8.975A5 5 0 0 0 13 11h.5a.5.5 0 0 1 .5.5v.5a.5.5 0 1 0 1 0v-.5a1.5 1.5 0 0 0-1.5-1.5H13V9h1.5a.5.5 0 0 0 0-1H13V7h.5A1.5 1.5 0 0 0 15 5.5V5a.5.5 0 0 0-1 0v.5a.5.5 0 0 1-.5.5H13zm-5.5 9.975V7H3V6h-.5a.5.5 0 0 1-.5-.5V5a.5.5 0 0 0-1 0v.5A1.5 1.5 0 0 0 2.5 7H3v1H1.5a.5.5 0 0 0 0 1H3v1h-.5A1.5 1.5 0 0 0 1 11.5v.5a.5.5 0 1 0 1 0v-.5a.5.5 0 0 1 .5-.5H3a5 5 0 0 0 4.5 4.975z"/>
+                  </svg>
+                </button>
+              </span>
+              <span class="pull-right">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"> Fermer</button>
+                <button type="button" class="btn btn-primary editFA">Valider les modifications</button>
+              </span>
+          </div>
+          </div>
+        </div>
+      </div>
+      <% } %> 
+  </tbody>
+</table>
+</div>
+<!--------------------------------------FA ancienne----------------------------------------------->
+<div class="tab-pane fade table table-responsive tableFixHead" id="ancienne" role="tabpanel" aria-labelledby="ancienne-tab">
+  <table class="table table-hover" >
+    <thead>
+      <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Téléphone</th>
+        <th>Ville</th>
+        <th>Adresse</th>
+        <th>Animaux possédés</th>
+        <th>Type accepté(s)</th>
+        <th>Commentaire</th>
+      </tr>
+    </thead>
+    <tbody class="m-phone">
+    <% for(let hostFamilyTab of allHostFamilly.ancienne){ %>
+      <tr data-toggle="modal" data-target=".bd-familyHost-modal-lg<%= hostFamilyTab.id %>">
+        <td data-label="Prénom"><%= hostFamilyTab.firstname %></td>
+        <td data-label="Nom"><%= hostFamilyTab.lastname %></td>
+        <td data-label="Téléphone"><%= hostFamilyTab.number_phone %></td>
+        <td data-label="Ville"><%= hostFamilyTab.postal_code %> <%= hostFamilyTab.city %></td>
+        <td data-label="Adresse"><%= hostFamilyTab.adress %></td>
+        <td data-label="Animaux"><%= hostFamilyTab.pet_composition %></td>
+        <td data-label="Animaux accéptés"><%if(hostFamilyTab.kitten_accepted){%>Chaton -<%}%> <%if(hostFamilyTab.cat_accepted){%>Chat -<%}%> <%if(hostFamilyTab.dog_big_accepted){%>Gros chien -<%}%> <%if(hostFamilyTab.dog_middle_accepted){%>Moyen chien -<%}%> <%if(hostFamilyTab.dog_little_accepted){%>Petit chien -<%}%> <%if(hostFamilyTab.puppy_accepted){%>Chiots<%}%></td>
+        <td data-label="Animaux Asela"><%= hostFamilyTab.comment %></td>
+      </tr>
+
+      <div class="modal fade bd-familyHost-modal-lg<%= hostFamilyTab.id %>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content" data-article-id="<%= hostFamilyTab.id %>">
+            <div class="modal-header">
+              <h5 class="modal-title">Questionnaire de la FA N° <%= hostFamilyTab.id %> reçu le <%= hostFamilyTab.date_sending.toLocaleString('en-GB', { timeZone: 'UTC' }) %></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+              <% if(hostFamilyTab.black_list === true){ %> 
+              <div class="alert alert-danger" role="alert">
+                Cette famille d'accueil est inscrite en liste rouge !
+              </div>
+              <%} else if(hostFamilyTab.new === true) {%>
+                <div class="alert alert-info" role="alert">
+                  C'est une nouvelle famille d'accueil, elle n'a jamais été contacté.
+                </div>
+              <%} else if(hostFamilyTab.nolongercontact === true) {%>
+                <div class="alert alert-warning" role="alert">
+                  C'est une ancienne famille d'accueil : <br> <%= hostFamilyTab.comment %>
+                </div>
+              <%} else if(hostFamilyTab.disponibility === false) {%>
+                <div class="alert alert-secondary" role="alert">
+                  Cette famille d'accueil est indisponible jusqu'au "<%= hostFamilyTab.people_date_accueil %>" ou jusqu'à qu'elle nous recontacte.
+                </div>
+              <% } %>
+              <form>
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="inputlastname" > Nom</label>
+                    <input type="text" class="form-control" id="inputLastname<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.lastname %>" disabled <% if (hostFamilyTab.black_list === true){ %> style="background-color: #ff474775;" <% } %>>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputfirstname">Prénom</label>
+                    <input type="text" class="form-control" id="inputFirstname<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.firstname %>" disabled <% if (hostFamilyTab.black_list === true){ %> style="background-color: #ff474775" <% } %>>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputBirthday">Date de naissance</label>
+                    <input type="text" class="form-control" id="inputBirthday<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.birthday %>" disabled>
+                  </div>
+                </div>
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputAddress">Addresse</label>
+                  <input type="text" class="form-control" id="inputAddress<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.adress%>">
+                </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputCity">Ville</label>
+                    <input type="text" class="form-control" id="inputCity<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.city %>">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputPC">Code Postale</label>
+                    <input type="text" class="form-control" id="inputPC<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.postal_code %>">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="inputNP">Téléphone</label>
+                    <input type="text" class="form-control" id="inputNP<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.number_phone %>">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" class="form-control" id="inputEmail<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.email %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputEmail">Facebook</label>
+                    <input type="email" class="form-control" id="inputPseudoFB<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.facebook %>">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputEmail">Profession</label>
+                    <input type="email" class="form-control" id="inputjob<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.job %>" disabled>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="inputlogement">Nb. adulte</label>
+                    <input type="text" class="form-control" id="inputAdult<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.number_adult %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputlogement">Nb. enfant</label>
+                    <input type="text" class="form-control" id="inputChild<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.number_children %> de <%= hostFamilyTab.age_children %>." disabled>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputEmail">Animaux</label>
+                    <input type="email" class="form-control" id="inputComposition<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.pet_composition %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputEmail">Stérilisé</label>
+                    <input type="email" class="form-control" id="inputSterilized<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.pet_sterilized %>" disabled>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-5">
+                    <label for="inputlogement">Logement</label>
+                    <input type="text" class="form-control" id="inputLogement<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.type_home %> de <%= hostFamilyTab.area_home %>." disabled>
+                  </div>
+                    <% if(hostFamilyTab.type_home === 'Appartement avec Jardin'|'Appartement avec Jardin'|'Maison avec cour ou Terrasse'|'Appartement avec cour ou Terrasse'|'Studio avec Jardin'|'Studio avec cour ou Terrasse'|'Terrain/ Caravane/ MobilHome'){ %>
+                      <div class="form-group col-md-2">
+                        <label for="inputgarden">Exterieur</label>
+                        <input type="text" class="form-control" id="inputGarden<%= hostFamilyTab.id %>" value="<%= hostFamilyTab.area_garden %>. " disabled>
+                      </div>
+                      <div class="form-group col-md-2">
+                        <label for="inputgarden">Cloture</label>
+                        <input type="text" class="form-control" id="inputfencing<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.fencing === true){%>Oui de <%= hostFamilyTab.fencing_height %>  <% }else{ %>Non<% } %>." disabled>
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label for="inputdisponibility">Disponible</label>
+                        <% if(hostFamilyTab.disponibility === true) { %>
+                            <select type="text" class="form-control" style="background-color: #6efb72c2;" id="inputdisponibility<%= hostFamilyTab.id %>">
+                            <option value="true">Oui</option>
+                            <option value="false">Non</option>
+                          </select>
+                          <% }else { %>
+                            <select type="text" class="form-control" style="background-color: #f1b510ad;" id="inputdisponibility<%= hostFamilyTab.id %>">
+                              <option value="false">Non</option>
+                              <option value="true">Oui</option>
+                          </select>
+                          <% } %> 
+                      </div> 
+                    <% } %>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="poeple_counsciousness">Dégradation</label>
+                    <input type="text" class="form-control" id="poeple_counsciousness<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.poeple_counsciousness%>" disabled>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="poeple_drive_veterinary">Dép. Vétérinaire</label>
+                    <input type="text" class="form-control" id="poeple_drive_veterinary<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.poeple_drive_veterinary%>" disabled>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="poeple_car">Dép. Fournitures</label>
+                    <input type="text" class="form-control" id="poeple_car<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.poeple_car%>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="family_accept_acceuil">Famille averti</label>
+                    <input type="text" class="form-control" id="family_accept_acceuil<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.poeple_car%>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="people_date_accueil">Date de dispo</label>
+                    <input type="text" class="form-control" id="people_date_accueil<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.people_date_accueil%>">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="inputCat">Chats acceptés</label>
+                    <input type="text" class="form-control" id="inputCat<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.cat_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputKitten">Chatons acceptés</label>
+                      <input type="text" class="form-control" id="inputKitten<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.kitten_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputPuppy">Chiots acceptés</label>
+                      <input type="text" class="form-control" id="inputPuppy<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.puppy_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                  <div class="form-group col-md-5">
+                    <label for="inputpoeple_amity_cat">Connaissance en biberonnage</label>
+                      <input type="text" class="form-control" id="inputpoeple_amity_cat<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.poeple_amity_cat === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-3">
+                    <label for="inputLittleDog">Chiens (petit) acceptés</label>
+                    <input type="text" class="form-control" id="inputLittleDog<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.dog_little_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputMiddleDog">Chiens (moyen) acceptés</label>
+                      <input type="text" class="form-control" id="inputMiddleDog<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.dog_middle_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputBigDog">Chiens (grand) acceptés</label>
+                      <input type="text" class="form-control" id="inputBigDog<%= hostFamilyTab.id %>" value="<% if(hostFamilyTab.poeple_dog_big_accepted === true){%> Oui <% }else{ %>Non<% } %>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputpoeple_educate">Niveau Education</label>
+                      <input type="text" class="form-control" id="inputpoeple_educate<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.inputLittleDog%>" disabled>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-3">
+                    <label for="dog_sexe_acceuil">Conditions de sexe</label>
+                    <input type="text" class="form-control" id="dog_sexe_acceuil<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.dog_sexe_acceuil%>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="hour_absence_day">Nb. Absence /J</label>
+                    <input type="text" class="form-control" id="hour_absence_day<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.hour_absence_day%>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="dog_accept_problem">Animaux à problemes</label>
+                    <input type="text" class="form-control" id="dog_accept_problem<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.dog_accept_problem%>" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="dog_closed_room">Piece d'isolation</label>
+                    <input type="text" class="form-control" id="dog_closed_room<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.dog_closed_room %> " disabled>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="poeple_ask">Précisions particulières</label>
+                  <textarea type="text" cols="30" rows="1" class="form-control" id="poeple_ask<%= hostFamilyTab.id %>" disabled><%=  hostFamilyTab.poeple_ask%></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="poeple_motivation">Motivations</label>
+                  <textarea type="text" cols="30" rows="2" class="form-control" id="poeple_motivation<%= hostFamilyTab.id %>" disabled><%= hostFamilyTab.poeple_motivation%></textarea>
+                </div>
+                <hr>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="new">Contacté</label>
+                    <% if(hostFamilyTab.new === true) { %>
+                      <select type="text" class="form-control" id="new<%= hostFamilyTab.id %>">
+                        <option value="false">Non</option>
+                        <option value="true">Oui</option>
+                    </select>
+                    <% }else { %>
+                      <select type="text" class="form-control" id="new<%= hostFamilyTab.id %>">
+                        <option value="true">Oui</option>
+                        <option value="false">Non</option>
+                    </select>
+                    <% } %> 
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="nolongercontact">Ancienne FA</label>
+                    <% if(hostFamilyTab.nolongercontact === true) { %>
+                      <select type="text" class="form-control" id="nolongercontact<%= hostFamilyTab.id %>">
+                        <option value="true">Oui</option>
+                        <option value="false">Non</option>
+                    </select>
+                    <% }else { %>
+                      <select type="text" class="form-control" id="nolongercontact<%= hostFamilyTab.id %>">
+                        <option value="false">Non</option>
+                        <option value="true">Oui</option>
+                    </select>
+                    <% } %> 
+                  </div>
+                  <div class="form-group col-md-8">
+                    <label for="pet_asela">Animaux en FA</label>
+                    <input type="text" class="form-control" id="pet_asela<%= hostFamilyTab.id %>" value="<%=hostFamilyTab.pet_asela%>">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="comment">Commentaire</label>
+                  <textarea type="text" cols="30" rows="2" class="form-control" id="comment<%= hostFamilyTab.id %>"> <%= hostFamilyTab.comment%> </textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer threebtn">
+              <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Envoyer en liste Rouge">
+                <button type="button" class="btn btn-danger blacklistFA">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bug-fill" viewBox="0 0 16 16">
+                    <path d="M4.978.855a.5.5 0 1 0-.956.29l.41 1.352A4.985 4.985 0 0 0 3 6h10a4.985 4.985 0 0 0-1.432-3.503l.41-1.352a.5.5 0 1 0-.956-.29l-.291.956A4.978 4.978 0 0 0 8 1a4.979 4.979 0 0 0-2.731.811l-.29-.956z"/>
+                    <path d="M13 6v1H8.5v8.975A5 5 0 0 0 13 11h.5a.5.5 0 0 1 .5.5v.5a.5.5 0 1 0 1 0v-.5a1.5 1.5 0 0 0-1.5-1.5H13V9h1.5a.5.5 0 0 0 0-1H13V7h.5A1.5 1.5 0 0 0 15 5.5V5a.5.5 0 0 0-1 0v.5a.5.5 0 0 1-.5.5H13zm-5.5 9.975V7H3V6h-.5a.5.5 0 0 1-.5-.5V5a.5.5 0 0 0-1 0v.5A1.5 1.5 0 0 0 2.5 7H3v1H1.5a.5.5 0 0 0 0 1H3v1h-.5A1.5 1.5 0 0 0 1 11.5v.5a.5.5 0 1 0 1 0v-.5a.5.5 0 0 1 .5-.5H3a5 5 0 0 0 4.5 4.975z"/>
+                  </svg>
+                </button>
+              </span>
+              <span class="pull-right">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"> Fermer</button>
+                <button type="button" class="btn btn-primary editFA">Valider les modifications</button>
+              </span>
+          </div>
+          </div>
+        </div>
+      </div>
+      <% } %> 
+  </tbody>
+</table>
+</div>
+
+<%- include('partials/footer') %>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/hostfamily.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script>
+  var $th = $('.tableFixHead').find('thead')
+  $('.tableFixHead').on('scroll', function() {
+    $th.css('transform', 'translateY('+ this.scrollTop +'px)');
+  });
+</script>

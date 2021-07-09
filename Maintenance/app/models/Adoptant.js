@@ -56,7 +56,16 @@ const AdoptantModels = {
 
     findAllCommentToAdoptant: async (id) => {
         try {
-            const commentAdopting = await db.query('SELECT * FROM commentaire_adoptant WHERE  adoptant_id = $1', [id]);
+            const commentAdopting = await db.query('SELECT * FROM commentaire_adoptant WHERE  adoptant_id = $1 ORDER BY date_comment', [id]);
+            return commentAdopting.rows;
+        }catch(error){
+            console.trace(error)
+        }
+    },
+
+    findOneComment: async (id) => {
+        try {
+            const commentAdopting = await db.query('SELECT * FROM commentaire_adoptant WHERE  id = $1', [id]);
             return commentAdopting.rows;
         }catch(error){
             console.trace(error)
@@ -71,7 +80,20 @@ const AdoptantModels = {
                 comment.adoptant_id,
                 comment.commentaire
             ])
-            console.log('objet data',data);
+            return data.rows;
+        }catch(error) {
+            console.trace(error)
+        }
+    },
+
+    editCommentAdoptant: async (comment) => {
+        try {
+            console.log('modif comment',comment  );
+            const commentAdoptant = ('UPDATE commentaire_adoptant SET commentaire = $1 WHERE id = $2;');
+            const data = await db.query(commentAdoptant, [
+                 comment.commentaire,
+                 comment.id              
+            ])
             return data.rows;
         }catch(error) {
             console.trace(error)
@@ -90,7 +112,7 @@ const AdoptantModels = {
 
        
 
-    //Ajouter un veterinaire
+    //Ajouter un adoptant
     addAdoptant: async (adoptant) => {
         try{
             const addAdoptant = `INSERT INTO adoptant ("number_id_passport", "lastname", "firstname", "birthday", "job","spouselastname", "spousefirstname", "spousebirthday", "spousejob", "postal_code", "number_phone", "number_phone2", "city", "email", "adress", "type_home", "fbpseudo", "numberadulthome", "numberchlidhome", "petcomposition", "black_list")
@@ -127,6 +149,48 @@ const AdoptantModels = {
             return data.rows[0];
         } catch (error) {
         console.trace(error);
+        }
+    },
+
+    //route pour chercher un adoptant par son email
+    searchAdoptant: async (data) => {
+       try {
+           console.log(data[0].email);
+           const adoptant = await db.query(`SELECT * FROM adoptant WHERE email = $1;`, [data[0].email]);
+           console.log(adoptant);
+           return adoptant.rows;
+       }
+       catch(error){
+           console.trace(error)
+       }
+    },
+
+    //route pour chercher un adoptant par son email
+    AdoptantToPet: async (data) => {
+        try {
+            const adoptant = await db.query(`UPDATE pet SET adoptant_id = $1, date_adopting = $2, adopt = 'true', site_publish = 'false', booked = 'false', booked_name = ''  WHERE id = $3;`, 
+            [
+                data.adoptant_id, 
+                data.date,
+                data.id
+            ]); 
+            console.log(adoptant);
+            return adoptant.rows;
+        }
+        catch(error){
+            console.trace(error)
+        }
+     },
+
+     correspondanceSearch: async (adoptant) => {
+        try {
+            const questionnaireCorresp = await db.query('SELECT * FROM questionnaire_adopt WHERE (email = $1) OR (number_phone = $2) OR (lastname = $3 AND firstname = $4)', [adoptant.email, adoptant.number_phone, adoptant.lastname, adoptant.firstname]);
+            console.log(questionnaireCorresp.rows);
+            return questionnaireCorresp.rows;
+            
+        }
+        catch(error){
+            console.trace(error)
         }
     },
 }

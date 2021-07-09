@@ -28,7 +28,6 @@ const conditionController = {
             const priceOfAdopt = await Price.findOnePriceAdopt(id);
             if (priceOfAdopt){
                 if (request.body){
-                    console.log(request.body);
                     const editPrice = {
                         id: request.body.id,
                         dog_female: request.body.dog_female,
@@ -44,6 +43,60 @@ const conditionController = {
                 }
             } else {
                  response.status(404).json(`Ce prix numéro ${petId} n\'existe pas`);
+            }
+        }
+        catch(error) {
+            console.trace(error);
+        }
+    },
+
+    editPriceCat: async (request, response) => {
+        try {
+            const id = parseInt(request.body.id);
+            const priceOfAdopt = await Price.findOnePriceAdopt(id);
+            if (priceOfAdopt){
+                if (request.body){
+                    const editPrice = {
+                        id: request.body.id,
+                        cat_female: request.body.cat_female,
+                        cat_male: request.body.cat_male,
+                        kitten: request.body.kitten,
+                        caution_kitten: request.body.caution_kitten
+                    };
+                    //on transmet les informations de l'animal à la fonction editPet
+                    await Price.editPriceCat(editPrice);
+                    response.status(200).json({editPrice});
+                } else {
+                    response.status(404).json('Il n\' y a rien à modifier');
+                }
+            } else {
+                 response.status(404).json(`Ce prix numéro ${petId} n\'existe pas`);
+            }
+        }
+        catch(error) {
+            console.trace(error);
+        }
+    },
+
+    breedPet: async (request, response) => {
+        try {
+            const priceOfBreed = await Price.findOnePriceBreed();
+            if (priceOfBreed){
+                if (request.body){
+
+                    const editPriceBreed = {
+                        id: request.body.id,
+                        extra: request.body.extra,
+                        extra_charge: request.body.extra_charge
+                    };
+                    //on transmet les informations de l'animal à la fonction editPet
+                    await Price.editPriceBreedPet(editPriceBreed);
+                    response.status(200).json({editPriceBreed});
+                } else {
+                    response.status(404).json('Il n\' y a rien à modifier');
+                }
+            } else {
+                 response.status(404).json(`Ce prix numéro ${id} n\'existe pas`);
             }
         }
         catch(error) {
@@ -67,24 +120,20 @@ const conditionController = {
 
     },
 
+    
+
     //Ajouter une condition d'adoption
     addNewCondition: async (request, response) => {
-        console.log(request.body);
         try{
-            //Test si tous les champs sont renseignés
             if(request.body.description){
-                
-                // On recupere toutes les données envoyées par le body
                 const condition = {
                     description: request.body.description
                 };
                 const saveCondition = await Condition.addNewCondition(condition);
                 response.json({saveCondition: condition, TEXT: 'La condition a bien été enregistrée'});
-                 //Redirection 
             } else {
                 response.json('Vous n\'avez pas rempli tous les champs !');
             }
-            
         }
         catch(error){
             console.trace(error)
@@ -95,17 +144,14 @@ const conditionController = {
     //Modifier une condition d'adoption
     editCondition: async (request, response) => {
         try {
-            const conditionId = parseInt(request.params.id);
+            const conditionId = parseInt(request.body.id);
             const condition = await Condition.findOneCondition(conditionId);
-            
             if (condition){
-                console.log('ma condition a modifier', condition)
                 if (request.body){
                     const editCondition = {
-                        id: condition.id,
+                        id: request.body.id,
                         description: request.body.description
                     };
-                    console.log('log', editCondition)
                     //on transmet les informations de la condition à la fonction editCondition
                     await Condition.editCondition(editCondition);
                     response.status(200).json({editCondition});
@@ -113,7 +159,7 @@ const conditionController = {
                     response.status(404).json('Il n\' y a rien à modifier');
                 }
             } else {
-                 response.status(404).json(`Cette condition numéro ${petId} n\'existe pas`);
+                 response.status(404).json(`Cette condition numéro ${conditionId} n\'existe pas`);
             }
         }
         catch(error) {
@@ -126,23 +172,18 @@ const conditionController = {
         try{
            const conditionId = parseInt(request.params.id);
            const condition = await Condition.findOneCondition(conditionId);
-           console.log(condition.supp);
-           if(condition){
+            if(condition){
                const condition = await Condition.suppCondition(conditionId)
                response.json('Cette condition a été supprimée avec succès.')
- 
-           } else {
+            } else {
              response.json('Cette condition ne peut pas etre supprimée car elle n\'existe pas.');
-             }
-         }
-         catch(error){
-             console.trace(error)
-             return response.status(500).json(error.toString());
-         }  
-     }
-
-
-
+            }
+        }
+        catch(error){
+            console.trace(error)
+            return response.status(500).json(error.toString());
+        }  
+    }
 }
 
 module.exports = conditionController;

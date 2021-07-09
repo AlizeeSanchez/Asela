@@ -1,43 +1,29 @@
 const hostfamily = {
     
-    init: function () {
-        hostfamily.addListenerToActions();
-    },
-    
-    addListenerToActions: function () {
-        
-        //On cible le bouton modifier une FA
-        const editFamillyHost = document.querySelectorAll('.editHostFamillyValidate');
-        editFamillyHost.forEach((buttonValidateModify) => {
-            buttonValidateModify.addEventListener('click', hostfamily.editHostFamilly)
-        });
-        
-    },
-    
     addHostFamily: async function (event){
         event.preventDefault();
         try{
-            const eventFirstname = document.getElementById('addFirstname').value;
-            const eventLastname = document.getElementById('addLastname').value;
-            const eventNumberPhone = document.getElementById('addNumberPhone').value;
-            const eventPostalCode = document.getElementById('addPostalCode').value;
-            const eventCity = document.getElementById('addCity').value;
-            const eventAdress = document.getElementById('addAdress').value;
-            const eventEmail = document.getElementById('addEmail').value;    
-            const eventComposition = document.getElementById('addComposition').value;
-            const eventAcceptedPet = document.getElementById('addAcceptedPet').value; 
-            const eventPetAsela = document.getElementById('AddPetAsela').value;
-            const eventDisponibility = document.getElementById('addDisponibility').value;
-            const event = JSON.stringify({ eventFirstname: eventFirstname, eventLastname: eventLastname, eventNumberPhone: eventNumberPhone, eventPostalCode: eventPostalCode, eventCity: eventCity, eventAdress: eventAdress, eventEmail: eventEmail, eventComposition: eventComposition, eventAcceptedPet: eventAcceptedPet, eventPetAsela: eventPetAsela, eventDisponibility: eventDisponibility});
+            const firstname = document.getElementById('addFirstname').value;
+            const lastname = document.getElementById('addLastname').value;
+            const numberPhone = document.getElementById('addNumberPhone').value;
+            const postalCode = document.getElementById('addPostalCode').value;
+            const city = document.getElementById('addCity').value;
+            const adress = document.getElementById('addAdress').value;
+            const email = document.getElementById('addEmail').value;    
+            const composition = document.getElementById('addComposition').value;
+            const acceptedPet = document.getElementById('addAcceptedPet').value; 
+            const petAsela = document.getElementById('AddPetAsela').value;
             
+            const hostfamily = JSON.stringify({ firstname, lastname, numberPhone, postalCode, city, adress, email, composition, acceptedPet, petAsela});
+        
             const response = await fetch(`http://localhost:3030/v1/addHostFamily`, {
                 method: 'POST',
-                body: event,
+                body: hostfamily,
                 headers:{
                     'Content-Type' : 'application/json'
                 }
             });
-        document.location.reload();
+        //document.location.reload();
         }catch(error) {
         console.trace(error);
         }
@@ -50,54 +36,53 @@ editHostFamilly: async function (event){
     const buttonClicked = event.target;
     const articleElement = buttonClicked.closest('.modal-content');
     const articleId = articleElement.getAttribute('data-article-id');
+    console.log(articleId);
     try {
-        const eventFirstname = document.getElementById(`editFirstname${articleId}`).value;
-        const eventLastname = document.getElementById(`editLastname${articleId}`).value;
-        const eventNumberPhone = document.getElementById(`editNumberPhone${articleId}`).value;
-        const eventPostalCode = document.getElementById(`editPostalCode${articleId}`).value;
-        const eventCity = document.getElementById(`editCity${articleId}`).value;
-        const eventAdress = document.getElementById(`editAdress${articleId}`).value;
-        const eventEmail = document.getElementById(`editEmail${articleId}`).value;    
-        const eventComposition = document.getElementById(`editComposition${articleId}`).value;
-        const eventAcceptedPet = document.getElementById(`editAcceptedPet${articleId}`).value; 
-        const eventPetAsela = document.getElementById(`editPetAsela${articleId}`).value;
-        const eventDisponibility = document.getElementById(`editDisponibility${articleId}`).value;
+        const numberPhone = document.getElementById(`inputNP${articleId}`).value;
+        const postalCode = document.getElementById(`inputPC${articleId}`).value;
+        const city = document.getElementById(`inputCity${articleId}`).value;
+        const adress = document.getElementById(`inputAddress${articleId}`).value;
+        const facebook = document.getElementById(`inputPseudoFB${articleId}`).value; 
+        const disponibility = document.getElementById(`inputdisponibility${articleId}`).value;
+        const people_date_accueil = document.getElementById(`people_date_accueil${articleId}`).value;
+        const newFA = document.getElementById(`new${articleId}`).value;
+        const nolongercontact = document.getElementById(`nolongercontact${articleId}`).value;
+        const pet_asela = document.getElementById(`pet_asela${articleId}`).value;
+        const comment = document.getElementById(`comment${articleId}`).value;
         
-        const event = JSON.stringify({ 
-            eventFirstname: eventFirstname, 
-            eventLastname: eventLastname, 
-            eventNumberPhone: eventNumberPhone, 
-            eventPostalCode: eventPostalCode, 
-            eventCity: eventCity, 
-            eventAdress: eventAdress, 
-            eventEmail: eventEmail, 
-            eventComposition: eventComposition, 
-            eventAcceptedPet: eventAcceptedPet, 
-            eventPetAsela: eventPetAsela, 
-            eventDisponibility: eventDisponibility
+        const data = JSON.stringify({ 
+            id: articleId,
+            number_phone: numberPhone, 
+            postal_code: postalCode, 
+            city: city, 
+            people_date_accueil: people_date_accueil,
+            adress: adress,
+            facebook: facebook,
+            disponibility: disponibility,
+            new: newFA,
+            nolongercontact: nolongercontact,
+            pet_asela: pet_asela, 
+            comment: comment
         });
-        console.log(event);
         
         const response = await fetch(`http://localhost:3030/v1/editHostFamily/${articleId}`, {
         method: 'PATCH',
-        body: event,
+        body: data,
         headers: {
             'Content-type': 'application/json'
         }
-    });
-    console.log(response);
+        });
     
-    
-    if (response.status === 200) {
-        article.remove();
-        document.location.reload();
-    } 
-    else {
-        response.json(`Impossible de modifier cette famille d'accueil`)
+        if (response.status === 200) {
+            articleElement.remove();
+            document.location.reload();
+        } 
+        else {
+            response.json(`Impossible de modifier cette famille d'accueil`)
+        }
+    }catch(error){
+        console.log(error);  
     }
-}catch(error){
-    console.log(error);  
-}
 },
 
 addCommentHostfamilly: async function (event){
@@ -116,13 +101,33 @@ addCommentHostfamilly: async function (event){
         headers:{
             'Content-Type' : 'application/json'
         }
-    });
-     document.location.reload();
-}catch(error) {
+        });
+        document.location.reload();
+    }catch(error) {
     console.trace(error);
-}
+    }
 
-}
+},
+
+blacklistHostFamilly: async function (event){
+    event.preventDefault();
+    const buttonClicked = event.target;
+    const articleElement = buttonClicked.closest('.modal-content');
+    const articleId = articleElement.getAttribute('data-article-id');
+    try{
+        
+        const response = await fetch(`http://localhost:3030/v1/blacklistHostFamilly/${articleId}`, {
+        method: 'POST',
+        headers:{
+            'Content-Type' : 'application/json'
+        }
+        });
+        document.location.reload();
+    }catch(error) {
+    console.trace(error);
+    }
+
+},
 
 };
 

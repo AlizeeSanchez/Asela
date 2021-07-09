@@ -12,10 +12,7 @@ const petController = {
                 const thisYear = date.getFullYear();
                 const lastYear = thisYear-1;
                 const oneYear = dateCompare.toLocaleString('en-GB').substr(0, 6)+lastYear
-
                 const pets = await Pet.findDogNotAdopted(oneYear);
-                
-                console.log(pets);
                 
                 if (pets) {
                     response.render('allDog', {
@@ -107,21 +104,22 @@ const petController = {
         }
     },
 
-    //On récupere un animal en particulier
+    //On récupere un animal par son id
     onePet: async (request, response) => {
         try{
 
             const petId = request.params.id;
-            const pet = await Pet.findOnePet(petId); 
-
+            const pet = await Pet.findOnePet(petId);
+            const imgPet = await Pet.findImgPet(petId); 
             const participation = await Other.findRate();
+            const purebred_pet = await Other.purebred_pet();
 
             const json = {
                 pet : pet,
-                tarif : participation
+                tarif : participation,
+                imgPet : imgPet,
+                purebred_pet: purebred_pet
             }
-
-            console.log(json);
 
             if (pet) {
                 response.render('onePet', {

@@ -4,9 +4,11 @@ const mainController = {
 
     home: async (request, response) => {
         try{
-            const starsCat = await Home.findStarCat();
+            const starsCat = (await Home.findStarCat())[0]
+            const starsDog = (await Home.findStarDog())[0]
+            //const starsCat = (await Home.findStarCat())[0]
             console.log(starsCat);
-            const starsDog = await Home.findStarDog();
+
             const dateDogSupport = await Home.findNumberDogSupport();
             const dateCatSupport = await Home.findNumberCatSupport();
 
@@ -35,8 +37,6 @@ const mainController = {
 
             
             const json = {
-                starsCat : starsCat,
-                starsDog : starsDog,
                 DogSupportThisYear : goodDog.length,
                 DogSupportLastYear : goodDog1.length,
                 DogSupportTwiceYear : goodDog2.length,
@@ -46,11 +46,12 @@ const mainController = {
                 CatSupportTwiceYear : goodCat2.length,
                 CatSupportTwoLastYear : goodCat3.length,
             }
-            console.log('json:' ,json);
+            //console.log('json:' ,json, starsCat, starsDog);
             
             response.render('home',{
-                json
+                json , starsCat: starsCat, starsDog: starsDog
             });
+           
 
 
         }catch(error){

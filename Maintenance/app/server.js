@@ -3,14 +3,41 @@ const cors = require('cors')
 const express = require('express');
 const session = require('express-session');
 const multer = require('multer');
-const path = require('path');
-//const bodyparser = require('body-parser');
-//var fileupload = require("express-fileupload");
-const upload= multer({
-	dest: path.join(__dirname, '..', 'app', 'public','images'),
-})
+
+const Pet = require("../app/models/Pet");
+const HostFamily = require("../app/models/HostFamily");
+const QuestionnaireAdopt = require("../app/models/QuestionnaireAdopt");
 
 const app = express();
+
+
+const fileStorage = multer.diskStorage({
+    destination: `${__dirname}/public/uploads/`,
+    filename: (request, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname)
+    },
+})
+
+const upload = multer({storage: fileStorage});
+
+app.post('/photos/upload/:id', upload.array('files[]'), async (req, res) => {
+	try{
+		const petId = parseInt(req.params.id);
+    	const pet = await Pet.findOnePet(petId);
+		const namefile = req.files[0].filename;
+		if(namefile && pet){
+			const obj = {
+				namefile : namefile,
+				id : petId
+			}
+			const newImg = await Pet.uploadImgPet(obj);
+			res.redirect(`http://localhost:3030/v1/pet/${petId}`)
+			}
+	}catch(error){
+		console.trace(error);
+	}
+});
+
 const port = process.env.PORT || 3030;
 const router = require('./router');
 
@@ -26,9 +53,9 @@ app.use(
 	session({
 		secret: 'les petits chats sont mignons',
 		resave: false,
-		saveUninitialized: true,
+		saveUninitialized: false,
 		cookie: {maxAge: 24 * 60 * 60 * 1000},
-		logged: true
+		//logged: true
 	})
 );
 
@@ -54,6 +81,7 @@ app.use((req, res, next) => {
   
 	next();
   });
+
 app.use(express.json());
 
 app.use('/v1',router);

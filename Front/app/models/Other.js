@@ -23,7 +23,18 @@ const Other = {
         }catch (error){
             console.trace(error);
         }
-    }
+    },
+
+    purebred_pet: async () => {
+        try{
+            const events = await db.query(
+                "SELECT * FROM purebred_pet;"
+         );
+            return events.rows;
+        }catch (error){
+            console.trace(error);
+        }
+    },
     
 }
 

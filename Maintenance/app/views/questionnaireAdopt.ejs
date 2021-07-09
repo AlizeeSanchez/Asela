@@ -44,15 +44,15 @@
           <% for(let questWaiting of waiting){ %>
             <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= questWaiting.id %>"> 
               
-                <td data-label="Reçu le"><a href="questionnaire/<%= questWaiting.id %>"><%= questWaiting.date_sending.toLocaleString('en-GB').substr(0, 10) %></a></td>
-                <td><%= questWaiting.type_pet %></td>
-                <td><%= questWaiting.name_pet %></td>
-                <td><%= questWaiting.lastname %> <%= questWaiting.firstname %></td>
-                <td><%= questWaiting.email %></td>
-                <td><%= questWaiting.number_phone %></td>
-                <td><%= questWaiting.postal_code %> <%= questWaiting.city %></td>
-                <td><%= questWaiting.type_residence %></td>
-                <td><% if(questWaiting.pet_familly === true){ %> <%= questWaiting.pet_familly2 %> <% }else{ %> Non <%} %></td>
+                <td data-label="Reçu le"><a href="/v1/questionnaire/<%= questWaiting.id %>"><%= questWaiting.date_sending.toLocaleString('en-GB').substr(0, 10) %></a></td>
+                <td data-label="Type"><%= questWaiting.type_pet %></td>
+                <td data-label="Nom animal"><%= questWaiting.name_pet %></td>
+                <td data-label="Identité"><%= questWaiting.lastname %> <%= questWaiting.firstname %></td>
+                <td data-label="Email"><%= questWaiting.email %></td>
+                <td data-label="Téléphone"><%= questWaiting.number_phone %></td>
+                <td data-label="Ville"><%= questWaiting.postal_code %> <%= questWaiting.city %></td>
+                <td data-label="Logement"><%= questWaiting.type_residence %></td>
+                <td data-label="Animaux"><% if(questWaiting.pet_familly === true){ %> <%= questWaiting.pet_familly2 %> <% }else{ %> Non <%} %></td>
             </tr>
           <% } %> 
             
@@ -73,24 +73,26 @@
             <th scope="col">Code postal / Ville</th>
             <th scope="col">Type de maison</th>
             <th scope="col">Animaux</th>
+            <th scope="col">Commentaire</th>
             <th scope="col">Date de rencontre</th>
           </tr>
         </thead>
         <tbody>
           <% for(let questProcessed of processed){ %>
-               
+               <% console.log(questProcessed); %> 
             <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= questProcessed.id %>"> 
-              
-              <td><a href="questionnaire/<%= questProcessed.id %>"><%= questProcessed.date_sending.toLocaleString('en-GB').substr(0, 10) %></a></td>
-              <td><%= questProcessed.type_pet %></td>
-              <td><%= questProcessed.name_pet %></td>
-              <td><%= questProcessed.lastname %> <%= questProcessed.firstname %></td>
-              <td><%= questProcessed.email %></td>
-              <td><%= questProcessed.number_phone %></td>
-              <td><%= questProcessed.postal_code %> <%= questProcessed.city %></td>
-              <td><%= questProcessed.type_residence %></td>
-              <td><% if(questProcessed.pet_familly === true){ %> <%= questProcessed.pet_familly2 %> <% }else{ %> Non <% } %></td>
-              <td><% if(questProcessed.meet){ %> <% questProcessed.meet.toLocaleString('en-GB').substr(0, 10) %> <% }  %> </td>
+              <td data-label="Reçu le"><a href="/v1/questionnaire/<%= questProcessed.id %>"><%= questProcessed.date_sending.toLocaleString('en-GB').substr(0, 10) %></a></td>
+              <%= console.log(questProcessed.id); %> 
+              <td data-label="Type"><%= questProcessed.type_pet %></td>
+              <td data-label="Nom Animal"><%= questProcessed.name %></td>
+              <td data-label="Identité"><%= questProcessed.lastname %> <%= questProcessed.firstname %></td>
+              <td data-label="Email"><%= questProcessed.email %></td>
+              <td data-label="Téléphone"><%= questProcessed.number_phone %></td>
+              <td data-label="Ville"><%= questProcessed.postal_code %> <%= questProcessed.city %></td>
+              <td data-label="Logement"><%= questProcessed.type_residence %></td>
+              <td data-label="Animaux"><% if(questProcessed.pet_familly === true){ %> <%= questProcessed.pet_familly2 %> <% }else{ %> Non <% } %></td>
+              <td data-label="Commentaire"><%= questProcessed.general_comment %></td>
+              <td data-label="Date de rencontre"><%= questProcessed.meet%></td>
               
             </tr>
           <% } %> 
@@ -119,16 +121,16 @@
           <% for(let questRefused of refused){ %>
                
             <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= questRefused.id %>"> 
-              <td><a href="questionnaire/<%= questRefused.id %>"><%= questRefused.date_sending.toLocaleString('en-GB').substr(0, 10) %></a></td>
-              <td><%= questRefused.type_pet %></td>
-              <td><%= questRefused.name_pet %></td>
-              <td><%= questRefused.lastname %> <%= questRefused.firstname %></td>
-              <td><%= questRefused.email %></td>
-              <td><%= questRefused.number_phone %></td>
-              <td><%= questRefused.postal_code %> <%= questRefused.city %></td>
-              <td><%= questRefused.type_residence %></td>
-              <td><% if(questRefused.pet_familly === true){ %> <%= questRefused.pet_familly2 %> <% }else{ %> Non <%} %></td>
-              <td><%= questRefused.refused_comment %></td>
+              <td data-label="Reçu le"><a href="/v1/questionnaire/<%= questRefused.id %>"><%= questRefused.date_sending.toLocaleString('en-GB').substr(0, 10) %></a></td>
+              <td data-label="Type"><%= questRefused.type_pet %></td>
+              <td data-label="Nom animal"><%= questRefused.name_pet %></td>
+              <td data-label="Identité"><%= questRefused.lastname %> <%= questRefused.firstname %></td>
+              <td data-label="Email"><%= questRefused.email %></td>
+              <td data-label="Téléphone"><%= questRefused.number_phone %></td>
+              <td data-label="Ville"><%= questRefused.postal_code %> <%= questRefused.city %></td>
+              <td data-label="Logement"><%= questRefused.type_residence %></td>
+              <td data-label="Animaux"><% if(questRefused.pet_familly === true){ %> <%= questRefused.pet_familly2 %> <% }else{ %> Non <%} %></td>
+              <td data-label="Commentaire de refus"><%= questRefused.refused_comment %></td>
             </tr>
           <% } %> 
             
@@ -147,7 +149,7 @@
             <th scope="col">Email</th>
             <th scope="col">Numéro de téléphone</th>
             <th scope="col">Code postal / Ville</th>
-            <th scope="col">Type de maison</th>
+            <th scope="col">Logement</th>
             <th scope="col">Animaux</th>
             <th scope="col">Commentaire général</th>
           </tr>
@@ -157,16 +159,16 @@
                
             <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= questDiscontinued.id %>"> 
                
-              <td><a href="questionnaire/<%= questDiscontinued.id %>"><%= questDiscontinued.date_sending.toLocaleString('en-GB').substr(0, 10) %></a></td>
-              <td><%= questDiscontinued.type_pet %></td>
-              <td><%= questDiscontinued.name_pet %></td>
-              <td><%= questDiscontinued.lastname %> <%= questDiscontinued.firstname %></td>
-              <td><%= questDiscontinued.email %></td>
-              <td><%= questDiscontinued.number_phone %></td>
-              <td><%= questDiscontinued.postal_code %> <%= questDiscontinued.city %></td>
-              <td><%= questDiscontinued.type_residence %></td>
-              <td><% if(questDiscontinued.pet_familly === true){ %> <%= questDiscontinued.pet_familly2 %> <% }else{ %> Non <%} %></td>
-              <td><%= questDiscontinued.general_comment %></td>
+              <td data-label="Reçu le"><a href="/v1/questionnaire/<%= questDiscontinued.id %>"><%= questDiscontinued.date_sending.toLocaleString('en-GB').substr(0, 10) %></a></td>
+              <td data-label="Type"><%= questDiscontinued.type_pet %></td>
+              <td data-label="Nom animal"><%= questDiscontinued.name_pet %></td>
+              <td data-label="Identité"><%= questDiscontinued.lastname %> <%= questDiscontinued.firstname %></td>
+              <td data-label="Email"><%= questDiscontinued.email %></td>
+              <td data-label="Téléphone"><%= questDiscontinued.number_phone %></td>
+              <td data-label="Ville"><%= questDiscontinued.postal_code %> <%= questDiscontinued.city %></td>
+              <td data-label="Logement"><%= questDiscontinued.type_residence %></td>
+              <td data-label="Animaux"><% if(questDiscontinued.pet_familly === true){ %> <%= questDiscontinued.pet_familly2 %> <% }else{ %> Non <%} %></td>
+              <td data-label="Commentaire général">  <% if(questDiscontinued.general_comment){ %> <%= questDiscontinued.general_comment %> <% }else{%> - <%} %> </td>
                
             </tr>
           <% } %> 
@@ -186,32 +188,33 @@
             <th scope="col">Email</th>
             <th scope="col">Numéro de téléphone</th>
             <th scope="col">Adresse</th>
-            <th scope="col">Type de maison</th>
+            <th scope="col">Logement</th>
             <th scope="col">Animaux</th>
             <th scope="col">Commentaire général</th>
           </tr>
         </thead>
         <tbody>
           <% for(let questAdopted of adopted){ %>
-               
             <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= questAdopted.id %>"> 
-              <td><a href="questionnaire/<%= questAdopted.id %>"><%= questAdopted.date_sending.toLocaleString('en-GB').substr(0, 10) %></a></td>
-              <td><%= questAdopted.type_pet %></td>
-              <td><%= questAdopted.name_pet %></td>
-              <td><%= questAdopted.lastname %> <%= questAdopted.firstname %></td>
-              <td><%= questAdopted.email %></td>
-              <td><%= questAdopted.number_phone %></td>
-              <td><%= questAdopted.postal_code %> <%= questAdopted.city %> <%= questAdopted.adress %></td>
-              <td><%= questAdopted.type_residence %></td>
-              <td><% if(questAdopted.pet_familly === true){ %> <%= questAdopted.pet_familly2 %> <% }else{ %> Non <%} %></td>
-              <td><%= questAdopted.general_comment %></td>
+              <td data-label="Reçu le">
+                <a href="/v1/questionnaire/<%= questAdopted.id %>"><%= questAdopted.date_sending.toLocaleString('en-GB').substr(0, 10) %>
+                </a>
+              </td>
+              <td data-label="Type"> <%= questAdopted.type_pet %> </td>
+              <td data-label="Nom Animal"><%= questAdopted.name_pet %></td>
+              <td data-label="Identité"><%= questAdopted.lastname %> <%= questAdopted.firstname %></td>
+              <td data-label="Email"><%= questAdopted.email %></td>
+              <td data-label="Téléphone"><%= questAdopted.number_phone %></td>
+              <td data-label="Adresse"><%= questAdopted.postal_code %> <%= questAdopted.city %> <%= questAdopted.adress %></td>
+              <td data-label="Logement"><%= questAdopted.type_residence %></td>
+              <td data-label="Animaux"><% if(questAdopted.pet_familly === true){ %> <%= questAdopted.pet_familly2 %> <% }else{ %> Non <%} %></td>
+              <td data-label="Commentaire général">  <% if(questAdopted.general_comment){ %> <%= questAdopted.general_comment %> <% }else{%> - <%} %> </td>
             </tr>
           <% } %> 
             
         </tbody>
       </table>
-    </div> 
-               
+    </div>           
   </div>
    
 

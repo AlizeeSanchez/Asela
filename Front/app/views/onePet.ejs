@@ -1,29 +1,12 @@
 <%- include('partials/header') %>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-    <h2 class="titlePage" >Fiche descriptive de <%= json.pet[0].name %></h2>
-</div>
+
 <div class="row py-5 px-4">
     <div class="col-xl-8 col-md-3 col-sm-3 mx-auto">
         <!-- Profile widget -->
         <div class="bg-white shadow rounded overflow-hidden">
-            <div class="px-4 pt-0 pb-4 bg-dark profil-banner" style="background-image: url(/img/profil-banner.png)">
-                <div class="media align-items-end profile-header">
-                    <div class="profile mr-3"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/European_Groenendael_male.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail"></div>
-                    <div class="media-body mb-5 text-dark">
-                        
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-light p-4 d-flex justify-content-end text-center">
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block profilSize capitalize"><%= json.pet[0].name %></h5>
-                    </li>
-                </ul>
-            </div>
-
+            
+            <h2 class="titlePage" >Fiche descriptive de <%= json.pet[0].name %></h2>
             <div class="py-4 px-4">
                 <div class="py-4">
                     <h5 class="mb-3 profilSize">Informations</h5>
@@ -38,7 +21,7 @@
                 <div class="py-4">
                     <h5 class="mb-3 profilSize">Description</h5>
                     <div class="p-4 bg-light rounded shadow-sm">
-                        <p class="font-italic mb-0"><%= json.pet[0].description %> </p>
+                        <p style="white-space: pre-line;" class="font-italic mb-0"><%= json.pet[0].description %> </p>
                         <ul class="list-inline small text-muted mt-3 mb-0">
                             <li class="list-inline-item commentSize"><i class="fa fa-comment-o mr-2"></i>
                                 Pour tout autres questions nous contacter par email:   
@@ -51,11 +34,9 @@
                     <h5 class="mb-0 profilSize">Photos</h5>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6 mb-2 pr-lg-1"><img src="https://www.mouss-le-chien.com/medias/album/chien-groenendael-qui-court-sur-l-herbe.jpg" alt="" class="img-fluid rounded shadow-sm"></div>
-                    <div class="col-lg-6 mb-2 pl-lg-1"><img src="https://i.pinimg.com/474x/a2/f3/52/a2f352d21c9b25673ccb69aa6733007f.jpg" alt="" class="img-fluid rounded shadow-sm"></div>
-                    <div class="col-lg-6 pr-lg-1 mb-2"><img src="https://jardinage.lemonde.fr/images/dossiers/2019-06/berger-belge-groenendael-2-073930.jpg" alt="" class="img-fluid rounded shadow-sm"></div>
-                    <div class="col-lg-6 pl-lg-1 mb-2"><img src="https://www.racedechien.info/uploads/thumbs/282x282-crop/dog/731/berger-belge-groenendael-13603.jpg" alt="" class="img-fluid rounded shadow-sm"></div>
-                    <div class="col-lg-6 pl-lg-1 mb-2"><img src="https://d1syos9fsbz8ei.cloudfront.net/Images/amp/BlogImages/chien-noir-neige_11287.jpg" alt="" class="img-fluid rounded shadow-sm"></div>
+                    <% for(let img of json.imgPet) { %>
+                        <div class="col-lg-6 mb-2 pr-lg-1"><img src="http://localhost:3030/uploads/<%= img.title %>" alt="" class="img-fluid rounded shadow-sm"></div>
+                    <% } %>
                 </div>
                 
             </div>
@@ -82,10 +63,37 @@
                 <div class="p-4 bg-white rounded shadow-sm">
                     <p class="font-italic mb-0"> <span class="font-weight-bold space"> Participation d'adoption: </span></p> <br>
                     <p class="mb-0"> La participation d'adoption varie selon l'animal : </p> <br>
-                    <% for(let tarif of json.tarif) { %>
-                        <p class="mb-0"> <%= tarif.type_pet %> <%= tarif.sexe_pet %> : <%= tarif.price %> €</p> <br>
-                    <% }%> 
+
+                    <div class="tarif">
+                        <p class="mb-0"> Chien femelle: </p>
+                        <p class="mb-0"> <span class="right"><%= json.tarif[0].dog_female %> €</span></p>
+                    </div>
+                    <div class="tarif">
+                        <p class="mb-0"> Chien mâle: </p>
+                        <p class="mb-0"> <span class="right"><%= json.tarif[0].dog_male %> €</span></p>
+                    </div>
+                    <div class="tarif">
+                        <p class="mb-0"> Chiot (-1 ans): </p>
+                        <p class="mb-0"> <span class="right"><%= json.tarif[0].puppy %> €</span></p>
+                    </div> <br>
+                    <div class="tarif">
+                        <p class="mb-0"> Chat femelle: </p>
+                        <p class="mb-0"> <span class="right"><%= json.tarif[0].cat_female %> €</span></p>
+                    </div>
+                    <div class="tarif">
+                        <p class="mb-0"> Chat mâle: </p>
+                        <p class="mb-0"> <span class="right"><%= json.tarif[0].cat_male %> €</span></p>
+                    </div>
+                    <div class="tarif">
+                        <p class="mb-0"> Chaton: </p>
+                        <p class="mb-0"> <span class="right"><%= json.tarif[0].kitten %> €</span></p>
+                    </div> <br>
+
+                    <% if(json.purebred_pet[0].extra === true){ %>
+                        <p class="mb-0"><%= json.purebred_pet[0].extra_charge %></p> <br>
+                   <% } %> 
                     
+
                     <p class="mb-0"> Pour tout animal non stérilisé/castré, un chéque de caution vous sera demandé, cette operation sera obligatoire dès l'age requis atteint. </p> <br>
                     
                 </div>
@@ -94,3 +102,11 @@
     </div>
 </div>
 </main>
+
+<script>
+
+function nl2br (str, is_xhtml) {   
+    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';    
+    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1'+ breakTag +'$2');
+}
+</script>

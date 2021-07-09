@@ -4,183 +4,190 @@
   <h3 style="text-align:center;"> ASELA > Questionnaire Adoption n°<%= questAdopt[0].id %> de <%= questAdopt[0].lastname %> <%= questAdopt[0].firstname %></h3>
 </div>
 
+<% if(blackList === true){%>
+  <div class="alert alert-danger row" role="alert" style="width: 50%; margin: auto;">
+    <div class="col-sm-5">
+      Attention, cette personne semble être dans notre liste rouge ! <br>
+      Motif : <%= searchBlackList[0].comment %>. 
+    </div>
+    <div class="blackList col-sm-6">
+      <%= searchBlackList[0].lastname %> <%= searchBlackList[0].firstname %> habitant à <%= searchBlackList[0].postal_code %> <%= searchBlackList[0].city %> <br>
+      <%= searchBlackList[0].email %> <%= searchBlackList[0].number_phone %>.
+    </div> 
+  </div>
+  <% }%>
+
 <div class="row gutters-sm">
   <div class="col-md-5 mb-3">
-    <div class="card" >
+    <div class="card mt-3">   
+      <div class="card-header1" >
+        <h5 class="titlePet"> Identitée et Coordonnées</h5>
+      </div>        <hr>
       <div class="card-body">
-        <h5 class="titlePet"> Famille</h5>
-        <ul class="list-group list-group-flush"> 
-          <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"></li>
-          <div class="row">
-            <div class="col-sm-6">
-              <h6 class="mb-0">Adoptant:</h6>
-            </div>
-            <div class="col-sm-6 text-secondary">
-              <%= questAdopt[0].lastname %> <%= questAdopt[0].firstname %><br>
-              <%= questAdopt[0].date_birth %><br>
-              <%= questAdopt[0].occupation %>
-            </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <h6 class="mb-0">Identitée:</h6>
           </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <h6 class="mb-0">Conjoint:</h6>
-            </div>
-            <div class="col-sm-6 text-secondary">
-              <% if(questAdopt[0].lastname_firstname_spouse){%> 
-                <%= questAdopt[0].lastname_firstname_spouse %> <br>
-                <% if(questAdopt[0].date_birth_spouse){%> <%= questAdopt[0].date_birth_spouse %> <br> <% } %> 
-                <% if(questAdopt[0].occupation_spouse){%> <%= questAdopt[0].occupation_spouse %> <% } %>   
-              <% }else{ %>
-                /
-              <%} %>   
-            </div>
+          <div class="col-sm-6 text-secondary">
+            <%= questAdopt[0].lastname %> <%= questAdopt[0].firstname %><br>
+            <%= questAdopt[0].date_birth %><br>
+            <%= questAdopt[0].occupation %>
           </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <h6 class="mb-0">Famille:</h6>
-            </div>
-            <div class="col-sm-6 text-secondary">
-              <%= questAdopt[0].number_adult %> adultes <br>
-           <% if(questAdopt[0].number_children >= 1){ %>
-             <%= questAdopt[0].number_children %> enfant(s) de <%= questAdopt[0].age_children %>
-             <% } %>
-            </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <h6 class="mb-0">Conjoint:</h6>
           </div>
-        </ul>
-      </div>
-    </div>
-    <div class="card mt-3" >   
-      <div class="card-body">
-        <h5 class="titlePet"> Coordonnées</h5>
-        <ul class="list-group list-group-flush"> 
-          <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"></li>
-          <div class="row">
-            <div class="col-sm-6">
-              <h6 class="mb-0">Adresse:</h6>
-            </div>
-            <div class="col-sm-6 text-secondary">
-              <%= questAdopt[0].adress %> <br>
+          <div class="col-sm-6 text-secondary">
+            <% if(questAdopt[0].spouselastname){%> 
+              <%= questAdopt[0].spouselastname %><%= questAdopt[0].spousefirstname %><br>
+              <% if(questAdopt[0].date_birth_spouse){%> <%= questAdopt[0].date_birth_spouse %> <br> <% } %> 
+              <% if(questAdopt[0].occupation_spouse){%> <%= questAdopt[0].occupation_spouse %> <% } %>   
+            <% }else{ %>
+              /
+            <%} %>   
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <h6 class="mb-0">Famille:</h6>
+          </div>
+          <div class="col-sm-6 text-secondary">
+            <%= questAdopt[0].number_adult %> adultes <br>
+            <% if(questAdopt[0].number_children >= 1){ %>
+              <%= questAdopt[0].number_children %> enfant(s) de <%= questAdopt[0].age_children %>
+            <% } %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <h6 class="mb-0">Adresse:</h6>
+          </div>
+          <div class="col-sm-6 text-secondary">
+            <%= questAdopt[0].adress %> <br>
             <%= questAdopt[0].postal_code %> <%= questAdopt[0].city %>
-            </div>
           </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <h6 class="mb-0">Email:</h6>
-            </div>
-            <div class="col-sm-6 text-secondary">
-              <%= questAdopt[0].email %>
-            </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <h6 class="mb-0">Email:</h6>
           </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <h6 class="mb-0">Téléphone:</h6>
-            </div>
-            <div class="col-sm-6 text-secondary">
-              <%= questAdopt[0].number_phone %>
-            </div>
+          <div class="col-sm-6 text-secondary">
+            <%= questAdopt[0].email %>
           </div>
-        </ul>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <h6 class="mb-0">Téléphone:</h6>
+          </div>
+          <div class="col-sm-6 text-secondary">
+            <%= questAdopt[0].number_phone %>
+          </div>
+        </div>
       </div>
     </div>
     <div class="card mt-3" >
-      <div class="card-body">
+      <div class="card-header1">
         <h5 class="titlePet"> Animal demandé</h5>
-        <ul class="list-group list-group-flush"> 
-          <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"></li>
-          <div class="row">
-            <div class="col-sm-6">
-              <h6 class="mb-0">Type d'animal:</h6>
-            </div>
-            <div class="col-sm-6 text-secondary">
-              <%= questAdopt[0].type_pet %>
-            </div>
+        <hr>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <h6 class="mb-0">Type d'animal:</h6>
           </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <h6 class="mb-0">Race:</h6>
-            </div>
-            <div class="col-sm-6 text-secondary">
-              <%= questAdopt[0].race_pet %>
-            </div>
+          <div class="col-sm-6 text-secondary">
+            <%= questAdopt[0].type_pet %>
           </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <h6 class="mb-0">Nom:</h6>
-            </div>
-            <div class="col-sm-6 text-secondary">
-              <%= questAdopt[0].name_pet %>
-            </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <h6 class="mb-0">Race:</h6>
           </div>
-        </ul>
+          <div class="col-sm-6 text-secondary">
+            <%= questAdopt[0].race_pet %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <h6 class="mb-0">Nom:</h6>
+          </div>
+          <div class="col-sm-6 text-secondary">
+            <%= questAdopt[0].name_pet %>
+          </div>
+        </div>
       </div>
     </div>
     <div class="card mt-3" >
+      <div class="card-header1">
+        <h5 class="titlePet">  Foyer</h5>
+        <hr>
+      </div>
       <div class="card-body">
-        <h5 class="titlePet"> Foyer</h5>
-        <ul class="list-group list-group-flush"> 
-          <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"></li>
-          <div class="row">
-            <div class="col-sm-6">
-              <h6 class="mb-0">Logement:</h6>
-            </div>
-            <div class="col-sm-6 text-secondary">
+        <div class="row">
+          <div class="col-sm-6">
+            <h6 class="mb-0">Logement:</h6>
+          </div>
+          <div class="col-sm-6 text-secondary">
             <%= questAdopt[0].type_residence %>
-            </div>
           </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <h6 class="mb-0">Superficie interieur:</h6>
-            </div>
-            <div class="col-sm-6 text-secondary">
-              <%= questAdopt[0].area_home %>
-            </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <h6 class="mb-0">Superficie interieur:</h6>
           </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <h6 class="mb-0">Exterieur:</h6>
-            </div>
-            <div class="col-sm-6 text-secondary">
-              <% if(questAdopt[0].type_residence === 'Appartement avec jardin'|'Maison avec jardin'|'Maison avec cour ou terrasse'|'Appartement avec cour ou terrasse'|'Studio avec jardin'|'Studio avec cour ou terrasse'|'Terrain/ Caravane/ MobilHome'){%>
+          <div class="col-sm-6 text-secondary">
+            <%= questAdopt[0].area_home %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <h6 class="mb-0">Exterieur:</h6>
+          </div>
+          <div class="col-sm-6 text-secondary">
+            <% if(questAdopt[0].type_residence === 'Appartement avec jardin'|'Maison avec jardin'|'Maison avec cour ou terrasse'|'Appartement avec cour ou terrasse'|'Studio avec jardin'|'Studio avec cour ou terrasse'|'Terrain/ Caravane/ MobilHome'){%>
               <%= questAdopt[0].area_garden %>
-              <% } %>
-            </div>
+            <% } %>
           </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <h6 class="mb-0">Cloture:</h6>
-            </div>
-            <div class="col-sm-6 text-secondary">
-               <% if(questAdopt[0].fencing === 'Non'){ %> <%= questAdopt[0].fencing %><% }else{ %> <%= questAdopt[0].fencing %> <%= questAdopt[0].height_fence %> <% } %> 
-            </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <h6 class="mb-0">Cloture:</h6>
           </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <h6 class="mb-0">Animaux:</h6>
-            </div>
-            <div class="col-sm-6 text-secondary">
-              <% if(questAdopt[0].pet_familly === 'false'){ %> Non <% }else{ %> <%= questAdopt[0].pet_familly2 %> <% } %> 
-            </div>
+          <div class="col-sm-6 text-secondary">
+            <% if(questAdopt[0].fencing === 'Non'){ %> <%= questAdopt[0].fencing %><% }else{ %> <%= questAdopt[0].fencing %> <%= questAdopt[0].height_fence %> <% } %> 
           </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <h6 class="mb-0">Anciens animaux:</h6>
-            </div>
-            <div class="col-sm-6 text-secondary">
-             <%= questAdopt[0].pet_familly_deceased %>  
-            </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <h6 class="mb-0">Animaux:</h6>
           </div>
-        </ul>
+          <div class="col-sm-6 text-secondary">
+            <% if(questAdopt[0].pet_familly === 'false'){ %> Non <% }else{ %> <%= questAdopt[0].pet_familly2 %> <% } %> 
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <h6 class="mb-0">Anciens animaux:</h6>
+          </div>
+          <div class="col-sm-6 text-secondary">
+            <%= questAdopt[0].pet_familly_deceased %>  
+          </div>
+        </div>
       </div>
     </div>
     <div class="card mt-3" >
-      <div class="card-body">
+      <div class="card-header1">
         <h5 class="titlePet"> Chien Uniquement</h5>
+        <hr>
+      </div> 
+      <div class="card-body">
         <div class="row">
           <div class="col-sm-6">
             <h6 class="mb-0">Quel type de chien recherchez vous ?</h6>
           </div>
           <div class="col-sm-6 text-secondary">
-           <%= questAdopt[0].petstatus %>  
+            <%= questAdopt[0].petstatus %>  
           </div>
         </div>
         <hr>
@@ -189,7 +196,7 @@
             <h6 class="mb-0">Qui, parmi les occupants de votre maison, aura les responsabilités suivantes : Education et balades ?</h6>
           </div>
           <div class="col-sm-6 text-secondary">
-           <%= questAdopt[0].responsability %>  
+            <%= questAdopt[0].responsability %>  
           </div>
         </div>
         <hr>
@@ -198,7 +205,7 @@
             <h6 class="mb-0">Quelle méthode utiliserez vous pour l’éduquer et pour qu’il obéisse ?</h6>
           </div>
           <div class="col-sm-6 text-secondary">
-           <%= questAdopt[0].education2 %>  
+            <%= questAdopt[0].education2 %>  
           </div>
         </div>
         <hr>
@@ -207,27 +214,27 @@
             <h6 class="mb-0">Avez-vous déjà utilisé une cage pour mettre fin à un comportement destructeur?</h6>
           </div>
           <div class="col-sm-6 text-secondary">
-           <% if(questAdopt[0].cage === true) { %> Oui <% } else { %> Non %><% } %> 
+            <% if(questAdopt[0].cage === true) { %> Oui <% } else { %> Non %><% } %> 
           </div>
         </div>
         <hr>
         <% if(questAdopt[0].cage === true) { %>
-        <div class="row">
-          <div class="col-sm-6">
-            <h6 class="mb-0">Si oui , L'utiliserez vous encore ?</h6>
+          <div class="row">
+            <div class="col-sm-6">
+              <h6 class="mb-0">Si oui , L'utiliserez vous encore ?</h6>
+            </div>
+            <div class="col-sm-6 text-secondary">
+              <%= questAdopt[0].cage2 %>  
+            </div>
           </div>
-          <div class="col-sm-6 text-secondary">
-           <%= questAdopt[0].cage2 %>  
-          </div>
-        </div>
-        <hr>
+          <hr>
         <% } %> 
         <div class="row">
           <div class="col-sm-6">
             <h6 class="mb-0">Quand vous serez absent, où restera votre animal ?</h6>
           </div>
           <div class="col-sm-6 text-secondary">
-           <%= questAdopt[0].absent %>  
+            <%= questAdopt[0].absent %>  
           </div>
         </div>
         <hr>
@@ -236,7 +243,7 @@
             <h6 class="mb-0">Quand vous êtes présent, où restera votre animal ?</h6>
           </div>
           <div class="col-sm-6 text-secondary">
-           <%= questAdopt[0].present %>  
+            <%= questAdopt[0].present %>  
           </div>
         </div>
         <hr>
@@ -245,7 +252,7 @@
             <h6 class="mb-0">Quel type d’activités prévoyez-vous pour votre chien ?</h6>
           </div>
           <div class="col-sm-6 text-secondary">
-           <%= questAdopt[0].activity %>  
+            <%= questAdopt[0].activity %>  
           </div>
         </div>
         <hr>
@@ -254,7 +261,7 @@
             <h6 class="mb-0">Précisez la durée de l’activité et son rythme balade en laisse et en liberté, accès jardin ?</h6>
           </div>
           <div class="col-sm-6 text-secondary">
-           <%= questAdopt[0].activity2 %>  
+            <%= questAdopt[0].activity2 %>  
           </div>
         </div>
         <hr>
@@ -268,45 +275,81 @@
         </div>
         <hr>
         <% if(questAdopt[0].educator === true) {%>
-        <div class="row">
-          <div class="col-sm-6">
-            <h6 class="mb-0">Si oui, précisez ses coordonnées</h6>
+          <div class="row">
+            <div class="col-sm-6">
+              <h6 class="mb-0">Si oui, précisez ses coordonnées</h6>
+            </div>
+            <div class="col-sm-6 text-secondary">
+              <%= questAdopt[0].educator2 %>  
+            </div>
           </div>
-          <div class="col-sm-6 text-secondary">
-           <%= questAdopt[0].educator2 %>  
-          </div>
-        </div>
-        <hr>
+          <hr>
         <% }if(questAdopt[0].educator === false) {%>
-        <div class="row">
-          <div class="col-sm-6">
-            <h6 class="mb-0">Sinon pensez vous faire appel à un éducateur canin ?</h6>
+          <div class="row">
+            <div class="col-sm-6">
+              <h6 class="mb-0">Sinon pensez vous faire appel à un éducateur canin ?</h6>
+            </div>
+            <div class="col-sm-6 text-secondary">
+              <% if(questAdopt[0].educator3 === true) { %> Non <% } else { %> Oui %><% } %>  
+            </div>
           </div>
-          <div class="col-sm-6 text-secondary">
-            <% if(questAdopt[0].educator3 === true) { %> Non <% } else { %> Oui %><% } %>  
-          </div>
-        </div>
         <% } %>
       </div>
     </div>
     <div class="card mt-3" >
+      <div class="card-header1">
+        <h5 class="titlePet">Chat uniquement</h5>
+        <hr>
+      </div>
       <div class="card-body">
-        <h5 class="titlePet"> Chat Uniquement</h5>
         <div class="row">
           <div class="col-sm-6">
             <h6 class="mb-0">Planifiez-vous faire dégriffer votre chat ?</h6>
           </div>
           <div class="col-sm-6 text-secondary">
-           <% if(questAdopt[0].declawing === true) { %> Oui <% } else { %> Non %><% } %> 
+            <% if(questAdopt[0].declawing === true) { %> Oui <% } else { %> Non %><% } %> 
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-7">
-    <div class="card mb-3">
+    <div class="card mt-3" >
+      <div class="card-header1">
+        <h5 class="titlePet">Correspondance</h5>
+        <hr>
+      </div>
       <div class="card-body">
-        <h5 class="titlePet"> Questionnaire Famille</h5> <br>
+        <% if(correspondance.length >= 2){%>
+          <% for(let correspondances of correspondance){ %>
+            
+            <% if( correspondances.id != questAdopt[0].id){ %>
+              <div class="row" >
+                <div class="col-sm-5">
+                  <h6 class="mb-0"> <a href="/v1/questionnaire/<%= correspondances.id %>" target="_blank"> Correspondance</a></h6>
+                </div>
+                <div class="col-sm-7 text-secondary">
+                  Nom et Prénom : <%= correspondances.lastname %> <%= correspondances.firstname %> <br> 
+                  Email : <%= correspondances.email %> <br> 
+                  Téléphone : <%= correspondances.number_phone %> <br> 
+                  Ville : <%= correspondances.postal_code %> <%= correspondances.city %> <br>
+                  Status : <%= correspondances.status %> <br>
+                </div>
+              </div>
+              <br>
+            <% } %>
+          <% } %>
+        <%} else{%>
+          <h6 class="mb-0">Il n'y a aucune correspondance</h6>
+        <%} %> 
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7 mb-3">
+    <div class="card mt-3">
+      <div class="card-header1">
+        <h5 class="titlePet">Questionnaire</h5>
+        <hr>
+      </div>
+      <div class="card-body">
         <div class="row">
           <div class="col-sm-5">
             <h6 class="mb-0">Si un occupant de la maison devient allergique à votre animal que ferez-vous ?</h6>
@@ -329,7 +372,7 @@
           <div class="col-sm-5">
             <h6 class="mb-0">Avez-vous déjà adopté un animal dans une association, refuge ou SPA ?</h6>
           </div>
-          <div class="col-sm-7 text-secondary">
+          <div class="col-sm-7 text-secondarhttps://www.youtube.com/watch?v=7iTlieFgAqgy">
             <% if(questAdopt[0].adopt_assos === true){ %> Oui <% }else if(questAdopt[0].adopt_assos === false){ %> Non <% } %>
           </div>
         </div>
@@ -344,199 +387,207 @@
             </div>
           </div>
           <hr>
-        <%}%>
-        <div class="row">
-          <div class="col-sm-5">
-            <h6 class="mb-0">Avez-vous déjà laissé un animal dans une association, refuge, SPA, autre ?</h6>
-          </div>
-          <div class="col-sm-7 text-secondary">
-            <% if(questAdopt[0].abandoned_assos === true){ %> Oui <% }else if(questAdopt[0].abandoned_assos === false){ %> Non <% } %>
-          </div>
-        </div>
-        <hr>
-        <%if( questAdopt[0].abandoned_assos === true ){%>
+          <%}%>
           <div class="row">
             <div class="col-sm-5">
-              <h6 class="mb-0">Si oui dans quelles conditions ?</h6>
+              <h6 class="mb-0">Avez-vous déjà laissé un animal dans une association, refuge, SPA, autre ?</h6>
             </div>
             <div class="col-sm-7 text-secondary">
-              <%= questAdopt[0].abandoned_assos %>
+              <% if(questAdopt[0].abandoned_assos === true){ %> Oui <% }else if(questAdopt[0].abandoned_assos === false){ %> Non <% } %>
             </div>
           </div>
           <hr>
-        <%}%>
-        <div class="row">
-          <div class="col-sm-5">
-            <h6 class="mb-0">Est-ce qu’il y a quelqu’un à votre domicile la journée ?</h6>
-          </div>
-          <div class="col-sm-7 text-secondary">
-            <% if(questAdopt[0].disponibility === true){ %> Oui <% }else if(questAdopt[0].disponibility === false){ %> Non <% } %>
-          </div>
-        </div>
-        <hr>
-        <%if( questAdopt[0].disponibility2 === false ){%>
+          <%if( questAdopt[0].abandoned_assos === true ){%>
+            <div class="row">
+              <div class="col-sm-5">
+                <h6 class="mb-0">Si oui dans quelles conditions ?</h6>
+              </div>
+              <div class="col-sm-7 text-secondary">
+                <%= questAdopt[0].abandoned_assos %>
+              </div>
+            </div>
+            <hr>
+          <%}%>
           <div class="row">
             <div class="col-sm-5">
-              <h6 class="mb-0">Si oui dans quelles conditions ?</h6>
+              <h6 class="mb-0">Est-ce qu’il y a quelqu’un à votre domicile la journée ?</h6>
             </div>
             <div class="col-sm-7 text-secondary">
-              <%= questAdopt[0].disponibility2 %>
+              <% if(questAdopt[0].disponibility === true){ %> Oui <% }else if(questAdopt[0].disponibility === false){ %> Non <% } %>
             </div>
           </div>
           <hr>
-        <%}%>
-        <div class="row">
-          <div class="col-sm-5">
-            <h6 class="mb-0">Lors d’une absence (vacances, longue journée de travail, travail de nuit), qui prendra soin de votre animal ?</h6>
+          <%if( questAdopt[0].disponibility2 === false ){%>
+            <div cdogslass="row">
+              <div class="col-sm-5">
+                <h6 class="mb-0">Si oui dans quelles conditions ?</h6>
+              </div>
+              <div class="col-sm-7 text-secondary">
+                <%= questAdopt[0].disponibility2 %>
+              </div>
+            </div>
+            <hr>
+          <%}%>
+          <div class="row">
+            <div class="col-sm-5">
+              <h6 class="mb-0">Lors d’une absence (vacances, longue journée de travail, travail de nuit), qui prendra soin de votre animal ?</h6>
+            </div>
+            <div class="col-sm-7 text-secondary">
+              <%= questAdopt[0].holiday %>
+            </div>
           </div>
-          <div class="col-sm-7 text-secondary">
-            <%= questAdopt[0].holiday %>
+          <hr>
+          <div class="row">
+            <div class="col-sm-5">
+              <h6 class="mb-0">Un chien ou un chat peut vivre 10 à 20 ans. Êtes-vous prêt à vous engager à vivre avec votre animal pour sa vie entière ?</h6>
+            </div>
+            <div class="col-sm-7 text-secondary">
+              <% if(questAdopt[0].awareness === true){ %> Oui <% }else if(questAdopt[0].awareness === false){ %> Non <% } %>
+            </div>
           </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-sm-5">
-            <h6 class="mb-0">Un chien ou un chat peut vivre 10 à 20 ans. Êtes-vous prêt à vous engager à vivre avec votre animal pour sa vie entière ?</h6>
+          <hr>
+          <div class="row">
+            <div class="col-sm-5">
+              <h6 class="mb-0">Comment éduquerez- vous votre animal pour mettre fin à d’éventuels comportements destructifs?</h6>
+            </div>
+            <div class="col-sm-7 text-secondary">
+              <%= questAdopt[0].education %>
+            </div>
           </div>
-          <div class="col-sm-7 text-secondary">
-            <% if(questAdopt[0].awareness === true){ %> Oui <% }else if(questAdopt[0].awareness === false){ %> Non <% } %>
+          <hr>
+          <div class="row">
+            <div class="col-sm-5">
+              <h6 class="mb-0">L intégralité de votre foyer est-il averti et d 'accord avec cette adoption ?</h6>
+            </div>
+            <div class="col-sm-7 text-secondary">
+              <% if(questAdopt[0].informed === true){ %> Oui <% }else if(questAdopt[0].informed === false){ %> Non <% } %>
+            </div>
           </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-sm-5">
-            <h6 class="mb-0">Comment éduquerez- vous votre animal pour mettre fin à d’éventuels comportements destructifs?</h6>
+          <hr>
+          <div class="row">
+            <div class="col-sm-5">
+              <h6 class="mb-0">Pourquoi voulez-vous adopter un chat/chien ?</h6>
+            </div>
+            <div class="col-sm-7 text-secondary">
+              <%= questAdopt[0].adopt %>
+            </div>
           </div>
-          <div class="col-sm-7 text-secondary">
-            <%= questAdopt[0].education %>
+          <hr>
+          <div class="row">
+            <div class="col-sm-5">
+              <h6 class="mb-0">Si vous décidez de déménager, que ferez-vous de votre animal ?</h6>
+            </div>
+            <div class="col-sm-7 text-secondary">
+              <%= questAdopt[0].tomove %>
+            </div>
           </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-sm-5">
-            <h6 class="mb-0">L intégralité de votre foyer est-il averti et d 'accord avec cette adoption ?</h6>
+          <hr>
+          <div class="row">
+            <div class="col-sm-5">
+              <h6 class="mb-0">Quelle est votre opinion sur la stérilisation et la castration ?</h6>
+            </div>
+            <div class="col-sm-7 text-secondary">
+              <%= questAdopt[0].sterilization %>
+            </div>
           </div>
-          <div class="col-sm-7 text-secondary">
-           <% if(questAdopt[0].informed === true){ %> Oui <% }else if(questAdopt[0].informed === false){ %> Non <% } %>
+          <hr>
+          <div class="row">
+            <div class="col-sm-5">
+              <h6 class="mb-0">Votre animal aura besoin de temps pour s'adapter à votre maison. Serez vous patient et compréhensif ?</h6>
+            </div>
+            <div class="col-sm-7 text-secondary">
+              <%= questAdopt[0].forbearance %>
+            </div>
           </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-sm-5">
-            <h6 class="mb-0">Pourquoi voulez-vous adopter un chat/chien ?</h6>
+          <hr>
+          <div class="row">
+            <div class="col-sm-5">
+              <h6 class="mb-0">Si l’animal que vous adoptez n’est pas propre ou a besoin d’éducation, que ferez-vous ?</h6>
+            </div>
+            <div class="col-sm-7 text-secondary">
+              <%= questAdopt[0].cleanliness %>
+            </div>
           </div>
-          <div class="col-sm-7 text-secondary">
-            <%= questAdopt[0].adopt %>
+          <hr>
+          <div class="row">
+            <div class="col-sm-5">
+              <h6 class="mb-0">Si a des animaux : Que ferez-vous si votre animal ne s’entend pas avec celui que vous avez déjà ?</h6>
+            </div>
+            <div class="col-sm-7 text-secondary">
+              <%= questAdopt[0].amity %>
+            </div>
           </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-sm-5">
-            <h6 class="mb-0">Si vous décidez de déménager, que ferez-vous de votre animal ?</h6>
+          <hr>
+          <div class="row">
+            <div class="col-sm-5">
+              <h6 class="mb-0">Si vous avez un exterieur comment votre animal y aura acces ?</h6>
+            </div>
+            <div class="col-sm-7 text-secondary">
+              <%= questAdopt[0].garden %>
+            </div>
           </div>
-          <div class="col-sm-7 text-secondary">
-            <%= questAdopt[0].tomove %>
+          <hr>
+          <div class="row">
+            <div class="col-sm-5">
+              <h6 class="mb-0">Ou dormira votre animal ?</h6>
+            </div>
+            <div class="col-sm-7 text-secondary">
+              <%= questAdopt[0].bed %>
+            </div>
           </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-sm-5">
-            <h6 class="mb-0">Quelle est votre opinion sur la stérilisation et la castration ?</h6>
+          <hr>
+          <div class="row">
+            <div class="col-sm-5">
+              <h6 class="mb-0">Qu'attendez vous de la part de votre animal?</h6>
+            </div>
+            <div class="col-sm-7 text-secondary">
+              <%= questAdopt[0].waiting %>
+            </div>
           </div>
-          <div class="col-sm-7 text-secondary">
-            <%= questAdopt[0].sterilization %>
-          </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-sm-5">
-            <h6 class="mb-0">Votre animal aura besoin de temps pour s'adapter à votre maison. Serez vous patient et compréhensif ?</h6>
-          </div>
-          <div class="col-sm-7 text-secondary">
-            <%= questAdopt[0].forbearance %>
-          </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-sm-5">
-            <h6 class="mb-0">Si l’animal que vous adoptez n’est pas propre ou a besoin d’éducation, que ferez-vous ?</h6>
-          </div>
-          <div class="col-sm-7 text-secondary">
-            <%= questAdopt[0].cleanliness %>
-          </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-sm-5">
-            <h6 class="mb-0">Si a des animaux : Que ferez-vous si votre animal ne s’entend pas avec celui que vous avez déjà ?</h6>
-          </div>
-          <div class="col-sm-7 text-secondary">
-            <%= questAdopt[0].amity %>
-          </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-sm-5">
-            <h6 class="mb-0">Si vous avez un exterieur comment votre animal y aura acces ?</h6>
-          </div>
-          <div class="col-sm-7 text-secondary">
-            <%= questAdopt[0].garden %>
-          </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-sm-5">
-            <h6 class="mb-0">Ou dormira votre animal ?</h6>
-          </div>
-          <div class="col-sm-7 text-secondary">
-            <%= questAdopt[0].bed %>
-          </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-sm-5">
-            <h6 class="mb-0">Qu'attendez vous de la part de votre animal?</h6>
-          </div>
-          <div class="col-sm-7 text-secondary">
-            <%= questAdopt[0].waiting %>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5 class="titlePet">Traitement</h5> <br>
-        <div class="form-group">
-          <label for="attributePet">Attribuer un animal</label>
-          <select class="form-control" id="attributePet">
-            <% for(let pet of allPet) { %>
-            <option value="Traité"> <%= pet.name %>  </option>
-            <% } %> 
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlSelect1">Status du questionnaire</label>
-          <select class="form-control" id="exampleFormControlSelect1">
-            <option value="Traité">Traité en attente</option>
-            <option value="Traité">Rencontre</option>
-            <option value="Refusé">Refusé</option>
-            <option value="Sans suite">Sans suite</option>
-            <option value="Adoptant">A adoptanté</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlTextarea1">Commentaire</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Rencontre</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
         </div>
       </div>
-    </div>
+      <div class="card mb-3">
+        <div class="card-header1">
+          <h5 class="titlePet"> Traitement</h5>
+          <hr>
+        </div>
+        <div class="card-body quest" data-article-id="<%= questAdopt[0].id %> ">
+          <div class="form-group">
+            <label for="questPet">Attribuer un animal</label>
+            <select class="form-control" id="questPet">
+              <option value=""> Choisir*  </option>
+              <% for(let pet of allPet) { %>
+                <option value="<%= pet.id %>"> <%= pet.name %>  </option>
+              <% } %> 
+            </select>
+          </div>
+          <div class="form-group myNamePet">
+            <label for="questStatus">Status du questionnaire</label>
+            <select class="form-control" id="questStatus">
+              <option value="Traité">Traité</option>
+              <option value="Rencontre">Rencontre</option>
+              <option value="Refusé">Refusé</option>
+              <option value="Sans suite">Sans suite</option>
+              <option value="Adoptant">A adopté</option>
+              <option value="Liste d'attente">Liste d'attente</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="questComment">Commentaire</label>
+            <textarea class="form-control" id="questComment" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="questMeet">Rencontre</label>
+            <input type="text" class="form-control" id="questMeet" placeholder="">
+          </div>
+          <button type="button" class="btn btn-primary treatment">Envoyer</button>
+        </div>
+      </div>
   </div>
 </div>
-
-
-<%- include('partials/footer') %>
-                      
+  
+  <script src="/js/app.js"></script>
+  <script src="/js/adoptants.js"></script>
+  
+  <%- include('partials/footer') %>
+  

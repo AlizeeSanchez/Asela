@@ -55,7 +55,7 @@ const volunteerSchema = Joi.object({
         ),
 
     userValidate_password: Joi.ref('userPassword')
-
+       
 });
 
 module.exports = volunteerSchema;

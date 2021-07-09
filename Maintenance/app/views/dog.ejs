@@ -7,7 +7,7 @@
 <div class ="bande-top">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="dog-tab" data-toggle="tab" href="#dog" role="tab" aria-controls="dog" aria-selected="true">A l'adoption</a>
+            <a class="nav-link active" id="pet-tab" data-toggle="tab" href="#pet" role="tab" aria-controls="pet" aria-selected="true">A l'adoption</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Nos adoptés</a>
@@ -22,8 +22,7 @@
     
     <!--------------------------------------------Section animaux disponibles--------------------------------------->
     <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="dog" role="tabpanel" aria-labelledby="dog-tab">
-            <div class="tab-pane fade show  table table-bordered table-responsive tableFixHead" id="dogs" role="tabpanel" aria-labelledby="dog-tab">
+        <div class="tab-pane fade show active table table-responsive tableFixHead" id="pet" role="tabpanel" aria-labelledby="pet-tab">
                 <table class="table table-hover" >
                     <thead>
                         <tr>
@@ -41,32 +40,32 @@
                         </tr>
                     </thead>
                     
-                    <% for(let dog of jason.pets) { %>
+                    <% for(let pet of jason.pets) { %>
                         <tbody class="m-phone">
-                            <td data-label="Date entrée"><%if(dog.date_supported){%><%= dog.date_supported.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
-                            <td data-label="Nom"><a href="pet/<%= dog.id %>"><%= dog.name %></a></td>
-                            <td data-label="Race"><%= dog.breed %></td>
-                            <td data-label="Age"><%= dog.age.toLocaleString('en-GB').substr(0, 10) %></td>
-                            <td data-label="Sexe"><%= dog.sexe %></td>
-                            <td data-label="Robe"> <%if(dog.color){%> <%= dog.color %> <%}else{%>Inconnu<%}%></td>
-                            <td data-label="Taille"><%if(dog.weight){%> <%= dog.weight %> <%}else{%>Inconnu<%}%></td>
-                            <td data-label="Identification"> <%if(dog.ide){%><%= dog.ide %> <%}else{%>Inconnu<%}%></td>
-                            <td data-label="Dernier Vaccin"><%if(dog.date_vaccine){%> <%= dog.date_vaccine.toLocaleString('en-GB').substr(0, 10)%><%}else{%>Inconnu<%}%> </td>  
-                            <td data-label="Publié"><% if(dog.site_publish===true){ %>
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalPublish<%= dog.id %>">OUI</button>
-                                <% } else{ %>
-                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modalPublish<%= dog.id %>">NON</button>
+                            <td data-label="Date entrée"><%if(pet.date_supported){%><%= pet.date_supported.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
+                            <td data-label="Nom"><a href="pet/<%= pet.id %>"><%= pet.name %></a></td>
+                            <td data-label="Race"><%if(pet.breed){%><%= pet.breed %> <%}else{%>Inconnu<%}%></td>
+                            <td data-label="Age"><%if(pet.age){%><%= pet.age.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
+                            <td data-label="Sexe"><%if(pet.sexe){%><%= pet.sexe %> <%}else{%>Inconnu<%}%></td>
+                            <td data-label="Robe"> <%if(pet.color){%> <%= pet.color %> <%}else{%>Inconnu<%}%></td>
+                            <td data-label="Taille"><%if(pet.weight){%> <%= pet.weight %> <%}else{%>Inconnu<%}%></td>
+                            <td data-label="Identification"> <%if(pet.ide){%><%= pet.ide %> <%}else{%>Inconnu<%}%></td>
+                            <td data-label="Dernier Vaccin"><%if(pet.date_vaccine){%> <%= pet.date_vaccine.toLocaleString('en-GB').substr(0, 10)%><%}else{%>Inconnu<%}%> </td>  
+                            <td data-label="Publié"><% if(pet.site_publish===true){ %>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalPublish<%= pet.id %>">OUI</button>
+                                <% } else { %>
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modalPublish<%= pet.id %>">NON</button>
                                 <% } %></td>                                  
-                            <td data-label="Reservé"><% if(dog.booked===true){ %>
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalBooked<%= dog.id %>">OUI</button>
-                                <% } else{ %>
-                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modalBooked<%= dog.id %>">NON</button>
+                            <td data-label="Reservé"><% if(pet.booked===true){ %>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalBooked<%= pet.id %>">OUI</button>
+                                <% } else { %>
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modalBooked<%= pet.id %>">NON</button>
                                  <% } %></td>
                         </tbody>
                         <!---------Modale de publication ----------->
-                        <div class="modal fade" id="modalPublish<%= dog.id %>" tabindex="-1" role="dialog" aria-labelledby="publishModal" aria-hidden="true">
+                        <div class="modal fade" id="modalPublish<%= pet.id %>" tabindex="-1" role="dialog" aria-labelledby="publishModal" aria-hidden="true">
                             <div class="modal-dialog" role="document">
-                                <div class="modal-content" id="modalPublish" data-article-id="<%= dog.id %>">
+                                <div class="modal-content" id="modalPublish" data-article-id="<%= pet.id %>">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="publishModal">Affichage sur le site</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -74,7 +73,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <% if (dog.site_publish === true) { %>
+                                        <% if (pet.site_publish === true) { %>
                                         <p>Voulez vous dépublier cet animal ?</p>
                                         <% } else { %>
                                         <p>Voulez vous publier cet animal ?</p>
@@ -82,7 +81,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                        <% if (dog.site_publish === true) { %>
+                                        <% if (pet.site_publish === true) { %>
                                         <button type="button" class="btn btn-primary publishSite">Oui dépublier </button>
                                         <% } else { %>
                                         <button type="button" class="btn btn-primary publishSite">Oui publier </button>
@@ -92,9 +91,9 @@
                             </div>
                         </div>
                          <!---------Modale de reservation ----------->
-                        <div class="modal fade" id="modalBooked<%= dog.id %>" tabindex="-1" role="dialog" aria-labelledby="bookModal" aria-hidden="true">
+                        <div class="modal fade" id="modalBooked<%= pet.id %>" tabindex="-1" role="dialog" aria-labelledby="bookModal" aria-hidden="true">
                             <div class="modal-dialog" role="document">
-                                <div class="modal-content" id="modalBook" data-article-id="<%= dog.id %>">
+                                <div class="modal-content" id="modalBook" data-article-id="<%= pet.id %>" >
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="bookModal"> Reservation d'un animal</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -102,20 +101,19 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <% if (dog.booked === true) { %>
+                                        <% if (pet.booked === true) { %>
                                         <p>Voulez vous annuler la reservation de cet animal ?</p>
+                                        <input type="text" class="form-control" aria-label="Default" value="<%= pet.booked_name %>" aria-describedby="inputGroup-sizing-default" id="bookName<%= pet.id %>" disabled>
                                         <% } else { %>
-                                            <form>
-                                                <div class="form-group">
-                                                  <label for="bookName" class="col-form-label">Nom et prénom du reservant:</label>
-                                                  <input type="text" class="form-control" id="bookName">
-                                                </div>
-                                            </form>
+                                            <div class="form-group">
+                                              <label class="col-form-label">Nom et prénom du reservant:</label>
+                                              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="bookName<%= pet.id %>">
+                                            </div>
                                         <% } %>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                        <% if (dog.booked === true) { %>
+                                        <% if (pet.booked === true) { %>
                                         <button type="button" class="btn btn-primary bookPet"> Annuler la reservation </button>
                                         <% } else { %>
                                         <button type="button" class="btn btn-primary bookPet"> Valider la reservation </button>
@@ -126,42 +124,39 @@
                         </div>            
                     <% } %>
                 </table>
-            </div>
         </div>
         <!--------------------------------------------Section animaux adoptés--------------------------------------->
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Date d'entrée</th>
-                        <th>Nom ASELA</th>
-                        <th>Nouveau nom</th>
-                        <th>Race</th>
-                        <th>Age</th>
-                        <th>Sexe</th>
-                        <th>Identification</th>
-                        <th>Date d'adoption</th>
-                        <th>Nom adoptant</th>
-                        <th>Téléphone</th>
-                        <th>Code Postal et Ville</th>
-                        <th>Adresse</th>
+                        <th scope="col">Date d'entrée</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Race</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Sexe</th>
+                        <th scope="col">Identification</th>
+                        <th scope="col">Date d'adoption</th>
+                        <th scope="col">Nom adoptant</th>
+                        <th scope="col">Téléphone</th>
+                        <th scope="col">Code Postal et Ville</th>
+                        <th scope="col">Adresse</th>
                     </tr>
                 </thead>
-                <% for(let dogAdopted of jason.petsAdopt) { %>
-                    <tbody>
-                        <td><%= dogAdopted.date_supported %></td>
-                        <td> <a href="pet/<%= dogAdopted.id %>"><%= dogAdopted.name %></a></td>
-                        <td><%= dogAdopted.last_name_pet %></td>
-                        <td><%= dogAdopted.breed %></td>
-                        <td><%= dogAdopted.age.toLocaleString('en-GB').substr(0, 10) %> %></td>
-                        <td><%= dogAdopted.sexe %></td>
-                        <td><%= dogAdopted.ide %></td>
-                        <td><%= dogAdopted.date_adopting %> </td>
-                        <td><%= dogAdopted.lastname %> <%= dogAdopted.firstname %></td>
-                        <td><%= dogAdopted.number_phone %></td>
-                        <td><%= dogAdopted.postal_code %> <%= dogAdopted.city %>
-                        <td><%= dogAdopted.adress %></td>
-                    </tbody>
+                <% for(let pet of jason.petsAdopt) { %>
+                    <tr>
+                        <td data-label="Date entrée"><%if(pet.date_supported){%><%= pet.date_supported.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
+                        <td data-label="Nom"> <a href="pet/<%= pet.id %>"><%= pet.name %> <% if(pet.last_name_pet){%> (<%= pet.last_name_pet %>) <%}else{%><%}%>  </a></td>
+                        <td data-label="Race"><%if(pet.breed){%><%= pet.breed %> <%}else{%>Inconnu<%}%></td>
+                        <td data-label="Age"><%if(pet.age){%><%= pet.age.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
+                        <td data-label="Sexe"><%if(pet.sexe){%><%= pet.sexe %> <%}else{%>Inconnu<%}%></td>
+                        <td data-label="Identification"><%if(pet.ide){%><%= pet.ide %> <%}else{%>Inconnu<%}%></td>
+                        <td data-label="Age"><%if(pet.date_adopting){%><%= pet.date_adopting.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
+                        <td data-label="Nom adoptant"><%= pet.lastname %> <%= pet.firstname %></td>
+                        <td data-label="Téléphone"><%= pet.number_phone %></td>
+                        <td data-label="Code Postal et Ville"><%= pet.postal_code %> <%= pet.city %></td>
+                        <td data-label="Adresse"><%= pet.adress %></td>
+                    </tr>
                 <% } %>
             </table>
         </div>
@@ -172,6 +167,7 @@
                     <tr>
                         <th scope="col">Date d'entrée</th>
                         <th scope="col">Nom de l'animal</th>
+                        <th scope="col">Identification</th>
                         <th scope="col">Race</th>
                         <th scope="col">Robe</th>
                         <th scope="col">Date naissance</th>
@@ -181,16 +177,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% for(dogDead of jason.petsDead) { %>
+                    <% for(pet of jason.petsDead) { %>
                     <tr>                        
-                        <td><%= dogDead.date_supported %></td>
-                        <td><a href="pet/<%= dogDead.id %>"><%= dogDead.name %></a></td>
-                        <td><%= dogDead.breed %></td>
-                        <td><%= dogDead.color %></td>
-                        <td><%= dogDead.age.toLocaleString('en-GB').substr(0, 10) %> %></td>
-                        <td><%= dogDead.sexe %></td>
-                        <td><%= dogDead.deceased_date.toLocaleString('en-GB').substr(0, 10) %> %></td>
-                        <td><%= dogDead.deceased_cause %></td>
+                        <td data-label="Date entrée"><%if(pet.date_supported){%><%= pet.date_supported.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
+                        <td data-label="Nom"> <a href="pet/<%= pet.id %>"><%= pet.name %> <% if(pet.last_name_pet){%> (<%= pet.last_name_pet %>) <%}else{%><%}%>  </a></td>
+                        <td data-label="Identification"><%if(pet.ide){%><%= pet.ide %> <%}else{%>Inconnu<%}%></td>
+                        <td data-label="Race"><%if(pet.breed){%><%= pet.breed %> <%}else{%>Inconnu<%}%></td>
+                        <td data-label="Robe"><%if(pet.color){%><%= pet.color %> <%}else{%>Inconnu<%}%></td>
+                        <td data-label="Age"><%if(pet.age){%><%= pet.age.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
+                        <td data-label="Sexe"><%if(pet.sexe){%><%= pet.sexe %> <%}else{%>Inconnu<%}%></td>
+                        <td data-label="Date du décès"><%if(pet.deceased_date){%><%= pet.deceased_date.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
+                        <td data-label="Cause"><%if(pet.deceased_cause){%><%= pet.deceased_cause %> <%}else{%>Inconnu<%}%></td>
                     </tr>	
                     <% } %>
                 </tbody>

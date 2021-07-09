@@ -14,9 +14,6 @@ const validateQuery = (schema) => (req, res, next) => {
   
     if (validateBody.error) {
       
-      // res.status(400).render('signin', {
-      //   messageError: validateBody.error.details[0].message
-      // });
       res.status(400).json({messageError: validateBody.error.details[0].message})
     }
     else {

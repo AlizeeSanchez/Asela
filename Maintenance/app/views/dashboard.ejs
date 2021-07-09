@@ -1,1 +1,261 @@
 <%- include('partials/header') %>
+
+<div class="main-panel">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-stats">
+                    <div class="card-body" style="padding: 0;">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center">
+                                    <div class="icon-warning">
+                                        <img class="nc-icon" src="/img/chiensvg.png" alt="chiensvg">
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="col-7">
+                                <div class="numbers">
+                                    <div>
+                                        <p class="card-category">Chiens sauvées</p> 
+                                        <h4 class="card-title">150</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div> 
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-stats">
+                    <div class="card-body" style="padding: 0;">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center">
+                                    <div class="icon-warning">
+                                        <img class="nc-icon" src="/img/chatsvg.png" alt="chatsvg">
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="col-7">
+                                <div class="numbers">
+                                    <div>
+                                        <p class="card-category">Chats sauvées</p> 
+                                        <h4 class="card-title">150</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div> 
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-stats">
+                    <div class="card-body" style="padding: 0;">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center">
+                                    <div class="icon-warning">
+                                        <img class="nc-icon" src="/img/formsvg.png" alt="formsvg">
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="col-7">
+                                <div class="numbers">
+                                    <div>
+                                        <p class="card-category">Nouveaux questionnaires</p> 
+                                        <h4 class="card-title">2</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card ">
+                    <div class="card-header22">
+                        <h4 class="card-title">Type Statistique</h4>
+                        <p class="card-category">Type d'animal prit en charge 2020</p>
+                    </div>
+                    <div class="card-body-dash ">
+                        <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+                        <div class="legend">
+                            <i class="fa fa-circle text-info"></i> Chien
+                            <i class="fa fa-circle text-danger"></i> Chat
+                            <i class="fa fa-circle text-warning"></i> Autres animaux
+                        </div>     
+                    </div><hr>
+                    <div class="stats">
+                        <span class="text-secondary"><i class="fa fa-history"></i>  Bilan 2020 : + 2 % de chats et + 3 % de chiens</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card ">
+                    <div class="card-header22 ">
+                        <h4 class="card-title">Nombre de prise en charge </h4>
+                        <p class="card-category">12 mois précedents</p>
+                    </div>
+                    <div class="card-body-dash ">
+                        <div id="chartHours" class="ct-chart"></div>
+                    </div>
+                    <div class="legend">
+                        <i class="fa fa-circle text-info"></i> Abandon de chien
+                        <i class="fa fa-circle text-info2"></i> Abandon de chien (ans -1)
+                        <i class="fa fa-circle text-danger"></i> Abandon de chat
+                        <i class="fa fa-circle text-danger2"></i> Abandon de chat l'an passé (ans -1)
+                    </div>
+                    <hr>
+                    <div class="stats">
+                        <span class="text-secondary"><i class="fa fa-history"></i> En juin l'an dernier : 52 chats et 53 chiens.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card  card-tasks">
+                    <div class="card-header2 ">
+                        <h4 class="card-title">Rendez-vous Anna</h4>
+                    </div>
+                    <div class="card-body-dash ">
+                        <div class="table-full-width">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Date et Heure</th>
+                                        <th scope="col">Type de RDV</th>
+                                        <th scope="col">Animal concerné</th>
+                                        <th scope="col">Lieu</th>
+                                        <th scope="col">Identité</th>
+                                        <th scope="col">Coordonnées</th>
+                                        <th scope="col">Infos</th>
+                                        <th scope="col">Modale</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td data-label="Date et Heure">18/08/2021</td>
+                                        <td data-label="Type de RDV">Rencontre</td>
+                                        <td data-label="Animal concerné">Rubarbe</td>
+                                        <td data-label="Lieu">Chez Anna</td>
+                                        <td data-label="Identité">Marguerite Petipoid</td>
+                                        <td data-label="Coordonnées">12 rue de la peruche 34920 Le Cres - 0781025042</td>
+                                        <td data-label="Infos">Pas entierement cloturé</td>
+                                        <td data-label="Voir/Modifier">
+                                            <button>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Date et Heure">18/08/2021</td>
+                                        <td data-label="Type de RDV">Rencontre</td>
+                                        <td data-label="Animal concerné">Rubarbe</td>
+                                        <td data-label="Lieu">Chez Anna</td>
+                                        <td data-label="Identité">Marguerite Petipoid</td>
+                                        <td data-label="Coordonnées">12 rue de la peruche 34920 Le Cres - 0781025042</td>
+                                        <td data-label="Infos">Pas entierement cloturé</td>
+                                        <td data-label="Voir/Modifier">
+                                            <button>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Date et Heure">18/08/2021</td>
+                                        <td data-label="Type de RDV">Rencontre</td>
+                                        <td data-label="Animal concerné">Rubarbe</td>
+                                        <td data-label="Lieu">Chez Anna</td>
+                                        <td data-label="Identité">Marguerite Petipoid</td>
+                                        <td data-label="Coordonnées">12 rue de la peruche 34920 Le Cres - 0781025042</td>
+                                        <td data-label="Infos">Pas entierement cloturé</td>
+                                        <td data-label="Voir/Modifier">
+                                            <button>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Date et Heure">18/08/2021</td>
+                                        <td data-label="Type de RDV">Rencontre</td>
+                                        <td data-label="Animal concerné">Rubarbe</td>
+                                        <td data-label="Lieu">Chez Anna</td>
+                                        <td data-label="Identité">Marguerite Petipoid</td>
+                                        <td data-label="Coordonnées">12 rue de la peruche 34920 Le Cres - 0781025042</td>
+                                        <td data-label="Infos">Pas entierement cloturé</td>
+                                        <td data-label="Voir/Modifier">
+                                            <button>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Date et Heure">18/08/2021</td>
+                                        <td data-label="Type de RDV">Rencontre</td>
+                                        <td data-label="Animal concerné">Rubarbe</td>
+                                        <td data-label="Lieu">Chez Anna</td>
+                                        <td data-label="Identité">Marguerite Petipoid</td>
+                                        <td data-label="Coordonnées">12 rue de la peruche 34920 Le Cres - 0781025042</td>
+                                        <td data-label="Infos">Pas entierement cloturé</td>
+                                        <td data-label="Voir/Modifier">
+                                            <button>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
+
+<!--   Core JS Files   -->
+<script src="../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
+<script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="../assets/js/plugins/bootstrap-switch.js"></script>
+<!--  Google Maps Plugin    -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!--  Chartist Plugin  -->
+<script src="../assets/js/plugins/chartist.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="../assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+<script src="../assets/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
+<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+<script src="../assets/js/demo.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+// Javascript method's body can be found in assets/js/demos.js
+demo.initDashboardPageCharts();
+
+demo.showNotification();
+
+});
+</script>

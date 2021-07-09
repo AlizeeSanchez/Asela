@@ -24,10 +24,12 @@ const pet = {
         const buttonClicked = event.target;
         const modalElement = buttonClicked.closest('#modalBook');
         const modalId = modalElement.getAttribute('data-article-id');
-        const eventName = document.getElementById('bookName').value;
-        const book = JSON.stringify({ name: eventName, id: modalId});
+        const name = document.getElementById(`bookName${modalId}`).value;
+        
+        console.log('mon name', name, 'mon id', modalId);
+        const book = JSON.stringify({ name: name, id: modalId});
         try{
-            console.log(modalId);
+            
             const response = await fetch(`http://localhost:3030/v1/booked/${modalId}`, {
                 method: 'PATCH',
                 body: book,
@@ -101,23 +103,20 @@ const pet = {
 
     deletePet: async function (event){
         // event.preventDefault();
-         const buttonClicked = event.target;
-         console.log('mon bouton', buttonClicked);
-         const petElement = buttonClicked.closest('.modal-content');
-         console.log('mon element', petElement);
-         const petId = petElement.getAttribute('data-article-id');
-         console.log('id pet', petId);
-         try{
-             const response = await fetch(`http://localhost:3030/v1/pet/${petId}`, {
-                 method: 'DELETE',
- 
-              });
-         console.log(response);   
-         //document.location.reload();
-         }catch(error) {
-         console.trace(error);
-         }      
-     },
+        const buttonClicked = event.target;
+        const petElement = buttonClicked.closest('.modal-content');
+        const petId = petElement.getAttribute('data-article-id');
+        
+        try{
+            const response = await fetch(`http://localhost:3030/v1/pet/${petId}`, {
+                method: 'DELETE',
+            });
+            console.log(response);
+            document.location = "/v1/dogs";   
+        }catch(error) {
+            console.trace(error);
+        }      
+    },
 };
 
  // on accroche un écouteur d'évènement sur le document : quand le chargement est terminé, on lance app.init

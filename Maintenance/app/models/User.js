@@ -13,12 +13,12 @@ const User = {
     },
 
     signIn: async (user) => {
-        console.log('Je susi dans le model',user);
+        console.log('Je suis dans le model');
         
         try {
             const sql = `INSERT INTO volunteer ("lastname", "firstname", "number","mail", "password") VALUES ($1,$2,$3,$4,$5) RETURNING id`;
             const data = await db.query(sql, [user.lastname, user.firstname, user.number_phone, user.email, user.password]);
-            return data.rows[0];   
+            return data.rows[0], success = true ;   
         }
         catch (error) {
             console.trace(error)

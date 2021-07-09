@@ -1,13 +1,5 @@
 const blacklist = {
-    init: function () {
-		blacklist.addListenerToActions();
-
-    },
-    addListenerToActions: function () {
-
     
-    },
-
     addBlacklist: async function (event){
         event.preventDefault();
         try{
@@ -20,9 +12,8 @@ const blacklist = {
             const email = document.getElementById('addEmailBlacklist').value;    
             const adress = document.getElementById('addAdressBlacklist').value;
             const comment = document.getElementById('addCommentBlacklist').value; 
-            const date = document.getElementById('addDateBlacklist').value;
             
-            const blacklistData = JSON.stringify({number_id_passport, lastname, firstname, postal_code, number_phone, city, email, adress, comment, date });
+            const blacklistData = JSON.stringify({number_id_passport, lastname, firstname, postal_code, number_phone, city, email, adress, comment });
             
             const response = await fetch(`http://localhost:3030/v1/blacklist`, {
             method: 'POST',
@@ -41,18 +32,14 @@ const blacklist = {
     deleteBlacklist: async function (event){
        // event.preventDefault();
         const buttonClicked = event.target;
-        console.log('mon bouton', buttonClicked);
         const blacklistElement = buttonClicked.closest('.modal-content');
-        console.log('mon element', blacklistElement);
         const blacklistId = blacklistElement.getAttribute('data-article-id');
-        console.log('id blacklist', blacklistId);
         try{
             const response = await fetch(`http://localhost:3030/v1/blacklist/${blacklistId}`, {
                 method: 'DELETE',
-
              });
         console.log(response);   
-        //document.location.reload();
+        document.location.reload();
         }catch(error) {
         console.trace(error);
         }      

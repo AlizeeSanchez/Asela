@@ -1,0 +1,101 @@
+<%- include('partials/header') %>
+
+
+<div >
+  <h3 style="text-align:center;"> ASELA > Liste d'attente</h3>
+</div>
+
+<div class ="bande-top">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="waitingChien" data-toggle="tab" href="#chiens" role="tab" aria-controls="chiens" aria-selected="true">Liste d'attente des chiens</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="waitingChat" data-toggle="tab" href="#chats" role="tab" aria-controls="chats" aria-selected="false">Liste d'attente des chats</a>
+    </li>
+  </ul>
+
+  <div class="tab-content" id="myTabContent">
+    <!-------------------------------------------------Liste d'attente des chiens---------------------------------------------->
+    <div class="tab-pane fade show active" id="chiens" role="tabpanel" aria-labelledby="waitingChien">
+      <div class="card-dash">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th cope="col">Reçu le</th>
+                <th cope="col">Animal demandé</th>
+                <th cope="col">Recherche</th>
+                <th scope="col">Identité</th>
+                <th scope="col">Email</th>
+                <th scope="col">Numéro de téléphone</th>
+                <th scope="col">Code postal / Ville</th>
+                <th scope="col">Type de maison</th>
+                <th scope="col">Animaux</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(let waiting of waitingDog){ %>
+                <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= waiting.id %>"> 
+    
+                    <td data-label="Reçu le"><a href="questionnaire/<%= waiting.id %>"><%= waiting.date_sending.toLocaleString('en-GB').substr(0, 10) %></a></td>
+                    <td data-label="Nom animal"><%= waiting.name_pet %></td>
+                    <td data-label="Recherche"><% if(waiting.wait_pet === true){ %> <%= waiting.wait_pet %> <% }else{ %> - <%} %> </td>
+                    <td data-label="Identité"><%= waiting.lastname %> <%= waiting.firstname %></td>
+                    <td data-label="Email"><%= waiting.email %></td>
+                    <td data-label="Téléphone"><%= waiting.number_phone %></td>
+                    <td data-label="Ville"><%= waiting.postal_code %> <%= waiting.city %></td>
+                    <td data-label="Logement"><%= waiting.type_residence %></td>
+                    <td data-label="Animaux"><% if(waiting.pet_familly === true){ %> <%= waiting.pet_familly2 %> <% }else{ %> Non <%} %></td>
+                </tr>
+              <% } %> 
+    
+            </tbody>
+          </table>
+      </div>
+    </div>                
+    <!-----------------------------------------liste d'attente des chats----------------------------------------------->
+    <div class="tab-pane fade" id="chats" role="tabpanel" aria-labelledby="waitingChat">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th cope="col">Reçu le</th>
+                <th cope="col">Animal demandé</th>
+                <th cope="col">Recherche</th>
+                <th scope="col">Identité</th>
+                <th scope="col">Email</th>
+                <th scope="col">Numéro de téléphone</th>
+                <th scope="col">Code postal / Ville</th>
+                <th scope="col">Type de maison</th>
+                <th scope="col">Animaux</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(let waiting of waitingCat){ %>
+                <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= waiting.id %>"> 
+    
+                  <td data-label="Reçu le"><a href="questionnaire/<%= waiting.id %>"><%= waiting.date_sending.toLocaleString('en-GB').substr(0, 10) %></a></td>
+                  <td data-label="Nom animal"><%= waiting.name_pet %></td>
+                  <td data-label="Recherche"><% if(waiting.wait_pet === true){ %> <%= waiting.wait_pet %> <% }else{ %> - <%} %></td>
+                  <td data-label="Identité"><%= waiting.lastname %> <%= waiting.firstname %></td>
+                  <td data-label="Email"><%= waiting.email %></td>
+                  <td data-label="Téléphone"><%= waiting.number_phone %></td>
+                  <td data-label="Ville"><%= waiting.postal_code %> <%= waiting.city %></td>
+                  <td data-label="Logement"><%= waiting.type_residence %></td>
+                  <td data-label="Animaux"><% if(waiting.pet_familly === true){ %> <%= waiting.pet_familly2 %> <% }else{ %> Non <%} %></td>
+                </tr>
+              <% } %> 
+    
+            </tbody>
+          </table>
+    </div>
+    
+  </div>
+</div>
+
+
+
+<%- include('partials/footer') %>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

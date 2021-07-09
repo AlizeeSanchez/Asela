@@ -5,7 +5,7 @@ const HostFamily = {
     //On recupere les fa par departement du Gard
     findHostFamilyByDpt30: async () => {
         try{
-            const hostFamily30 = await db.query("SELECT * FROM host_family WHERE postal_code ~* '3[0][0-9]{3}' ORDER by firstname;");   
+            const hostFamily30 = await db.query("SELECT * FROM host_family WHERE black_list = false AND nolongercontact = false AND postal_code ~* '3[0][0-9]{3}' ORDER by firstname;");   
             return hostFamily30.rows;
         }catch (error){
             console.trace(error);
@@ -15,7 +15,7 @@ const HostFamily = {
     //On recupere les fa par departement de l'herault
     findHostFamilyByDpt34: async () => {
         try{
-            const hostFamily34 = await db.query("SELECT * FROM host_family WHERE postal_code ~* '3[4][0-9]{3}';");   
+            const hostFamily34 = await db.query("SELECT * FROM host_family WHERE black_list = false AND nolongercontact = false AND postal_code ~* '3[4][0-9]{3}' ORDER by firstname;");   
             return hostFamily34.rows;
         }catch (error){
             console.trace(error);
@@ -25,7 +25,17 @@ const HostFamily = {
     //On recupere les fa par departement du vaucluse
     findHostFamilyByDptAutre: async () => {
         try{
-            const hostFamilyAutre = await db.query("SELECT * FROM host_family WHERE postal_code ~* '[0][1-9][0-9]{3}|[1-2][0-9][0-9]{3}|[3][1-3][0-9]{3}|[3][5-9][0-9]{3}|[4-9][0-9][0-9]{3}';");   
+            const hostFamilyAutre = await db.query("SELECT * FROM host_family WHERE black_list = false AND nolongercontact = false AND postal_code ~* '[0][1-9][0-9]{3}|[1-2][0-9][0-9]{3}|[3][1-3][0-9]{3}|[3][5-9][0-9]{3}|[4-9][0-9][0-9]{3}' ORDER by firstname;");   
+            return hostFamilyAutre.rows;
+        }catch (error){
+            console.trace(error);
+        }
+    },
+
+    //On recupere les fa par departement du vaucluse
+    findHostFamilyNoContact: async () => {
+        try{
+            const hostFamilyAutre = await db.query("SELECT * FROM host_family WHERE nolongercontact = true ORDER by firstname;");   
             return hostFamilyAutre.rows;
         }catch (error){
             console.trace(error);
@@ -53,6 +63,7 @@ const HostFamily = {
 
     addHostFamily: async (hostFamily) => {
         try{
+            console.log('je rentre dans le model');
             const addHostFamily = `INSERT INTO host_family ("lastname", "firstname", "number_phone", "postal_code", "city", "adress", "email", "pet_composition", "pet_accepted", "disponibility", "pet_asela") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *;`;
             const data = await db.query(addHostFamily, [
                 hostFamily.lastname,
@@ -64,7 +75,6 @@ const HostFamily = {
                 hostFamily.email,
                 hostFamily.pet_composition,
                 hostFamily.pet_accepted, 
-                hostFamily.disponibility,
                 hostFamily.pet_asela
             ]); 
             return data.rows[0];
@@ -84,9 +94,22 @@ const HostFamily = {
     },
 
     //Modifier une famille d'acceuil
-    editHostFamily: async (hostFamily) => {
+    editHostFamily: async (body) => {
         try{
-            const editHostFamily = await db.query('UPDATE host_family SET lastname = $1, firstname = $2, number_phone = $3, postal_code = $4, city = $5, adress = $6, email = $7, pet_composition = $8, pet_accepted = $9, disponibility = $10, pet_asela = $11 WHERE id = $12;', [hostFamily.lastname, hostFamily.firstname, hostFamily.number_phone, hostFamily.postal_code, hostFamily.city, hostFamily.adress, hostFamily.email, hostFamily.pet_composition, hostFamily.pet_accepted, hostFamily.disponibility, hostFamily.pet_asela, hostFamily.id])
+            const editHostFamily = await db.query('UPDATE host_family SET number_phone = $1, postal_code = $2, city = $3, people_date_accueil = $4, adress = $5, facebook = $6, disponibility = $7, new = $8, nolongercontact = $9, pet_asela = $10, comment = $11 WHERE id = $12;', [
+                body.number_phone, 
+                body.postal_code, 
+                body.city,
+                body.people_date_accueil,
+                body.adress,
+                body.facebook, 
+                body.disponibility, 
+                body.new, 
+                body.nolongercontact, 
+                body.pet_asela, 
+                body.comment,
+                body.id
+            ])
             return editHostFamily;
         }
         catch(error){

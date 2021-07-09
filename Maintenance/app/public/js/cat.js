@@ -51,56 +51,6 @@ const cat = {
         }
     },
     
-    // Activer la modal edition
-    editCat: async function (event) {
-        // On empeche le rechargement du formaulaire
-        event.preventDefault();
-        try {
-            const buttonSave = event.target;
-            const article = buttonSave.closest('.modal-content');
-            const articleId = article.getAttribute('data-article-id');
-            const eventName = document.getElementById(`editNameCat${articleId}`).value;
-            const eventAge = document.getElementById(`editAgeCat${articleId}`).value;
-            const eventSexe = document.getElementById(`editSexeCat${articleId}`).value;
-            const eventBreed = document.getElementById(`editBreedCat${articleId}`).value;
-            const eventAmity = document.getElementById(`editAmityCat${articleId}`).value;
-            const eventColor = document.getElementById(`editColorCat${articleId}`).value;
-            const eventIde = document.getElementById(`editIdeCat${articleId}`).value;
-            const eventSterilised = document.getElementById(`editSterilisedCat${articleId}`).value;
-            const eventDescription = document.getElementById(`editDescriptionCat${articleId}`).value;
-            
-            const eventCat = JSON.stringify({ 
-                eventName: eventName,
-                eventAge: eventAge,
-                eventSexe: eventSexe,
-                eventBreed: eventBreed, 
-                eventAmity: eventAmity, 
-                eventColor: eventColor,  
-                eventIde: eventIde, 
-                eventSterilised: eventSterilised, 
-                eventDescription: eventDescription
-            });
-            
-            const response = await fetch(`http://localhost:3030/v1/pet/${articleId}`, {
-            method: 'PATCH',
-            body: eventCat,
-            headers: {
-                'Content-type': 'application/json'
-            }
-        });
-        
-        if (response.status === 200) {
-            article.remove();
-            document.location.reload();
-        } 
-        else {
-            response.json('Impossible de modifier cet animal de la page')
-        }
-        }catch(error){
-        console.log(error);
-        
-        }
-    },
 
     publishCat: async function (event){
         const buttonClicked = event.target;

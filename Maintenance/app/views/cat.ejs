@@ -7,7 +7,7 @@
 <div class ="bande-top">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="cat-tab" data-toggle="tab" href="#cat" role="tab" aria-controls="cat" aria-selected="true">A l'adoption</a>
+            <a class="nav-link active" id="pet-tab" data-toggle="tab" href="#pet" role="tab" aria-controls="pet" aria-selected="true">A l'adoption</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Nos adoptés</a>
@@ -21,49 +21,46 @@
     </ul>
     <!--------------------------------------------Section animaux disponibles--------------------------------------->
     <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="cat" role="tabpanel" aria-labelledby="cat-tab">
-            <div class="tab-pane fade show  table table-bordered table-responsive tableFixHead" id="cats" role="tabpanel" aria-labelledby="cat-tab">
+        <div class="tab-pane fade show active" id="pet" role="tabpanel" aria-labelledby="pet-tab">
                 <table class="table table-hover" >
                     <thead>
                         <tr>
                             <th>Date d'entrée</th>
-                            <th>Nom</th>
+                            <th>Nom de l'animal</th>
                             <th>Race</th>
                             <th>Age</th>
                             <th>Sexe</th>
                             <th>Robe</th>
-                            <th>Identification</th>
-                            <th>Dernier Vaccin</th>
+                            <th>Identifipetion</th>
                             <th>Publié</th>
                             <th>Reservé</th>
                         </tr>
                     </thead>
                     
-                    <% for(let cat of jason.pets) { %>
-                        <tbody>
-                            <td><%if(cat.date_supported){%><%= cat.date_supported.toLocaleString('en-GB').substr(0, 10) %><%} %></td>
-                            <td><a href="pet/<%= cat.id %>"><%= cat.name %></a></td>
-                            <td><%= cat.breed %></td>
-                            <td><%= cat.age.toLocaleString('en-GB').substr(0, 10) %></td>
-                            <td><%= cat.sexe %></td>
-                            <td><%= cat.color %></td>
-                            <td><%= cat.ide %></td>
-                            <td><%if(cat.date_vaccine){%><%= cat.date_vaccine.toLocaleString('en-GB').substr(0, 10)%><% } %> </td>  
-                            <td><% if(cat.site_publish===true){ %>
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalPublish<%= cat.id %>">OUI</button>
+                    <% for(let pet of jason.pets) { %>
+                        <tbody class="m-phone">
+                            <td data-label="Date entrée"><%if(pet.date_supported){%><%= pet.date_supported.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
+                            <td data-label="Nom"><a href="pet/<%= pet.id %>"><%= pet.name %></a></td>
+                            <td data-label="Race"><%if(pet.breed){%><%= pet.breed %> <%}else{%>Inconnu<%}%></td>
+                            <td data-label="Age"><%if(pet.age){%><%= pet.age.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
+                            <td data-label="Sexe"><%if(pet.sexe){%><%= pet.sexe %> <%}else{%>Inconnu<%}%></td>
+                            <td data-label="Robe"> <%if(pet.color){%> <%= pet.color %> <%}else{%>Inconnu<%}%></td>
+                            <td data-label="Identifipetion"> <%if(pet.ide){%><%= pet.ide %> <%}else{%>Inconnu<%}%></td>
+                            <td data-label="Publié"><% if(pet.site_publish===true){ %>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalPublish<%= pet.id %>">OUI</button>
                                 <% } else{ %>
-                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modalPublish<%= cat.id %>">NON</button>
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modalPublish<%= pet.id %>">NON</button>
                                 <% } %></td>                                  
-                            <td><% if(cat.booked===true){ %>
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalBooked<%= cat.id %>">OUI</button>
+                            <td data-label="Reservé"><% if(pet.booked===true){ %>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalBooked<%= pet.id %>">OUI</button>
                                 <% } else{ %>
-                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modalBooked<%= cat.id %>">NON</button>
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modalBooked<%= pet.id %>">NON</button>
                                  <% } %></td>
                         </tbody>
-                        <!---------Modale de publication ----------->
-                        <div class="modal fade" id="modalPublish<%= cat.id %>" tabindex="-1" role="dialog" aria-labelledby="publishModal" aria-hidden="true">
+                        <!---------Modale de publipetion ----------->
+                        <div class="modal fade" id="modalPublish<%= pet.id %>" tabindex="-1" role="dialog" aria-labelledby="publishModal" aria-hidden="true">
                             <div class="modal-dialog" role="document">
-                                <div class="modal-content" id="modalPublish" data-article-id="<%= cat.id %>">
+                                <div class="modal-content" id="modalPublish" data-article-id="<%= pet.id %>">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="publishModal">Affichage sur le site</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -71,7 +68,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <% if (cat.site_publish === true) { %>
+                                        <% if (pet.site_publish === true) { %>
                                         <p>Voulez vous dépublier cet animal ?</p>
                                         <% } else { %>
                                         <p>Voulez vous publier cet animal ?</p>
@@ -79,7 +76,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                        <% if (cat.site_publish === true) { %>
+                                        <% if (pet.site_publish === true) { %>
                                         <button type="button" class="btn btn-primary publishSite">Oui dépublier </button>
                                         <% } else { %>
                                         <button type="button" class="btn btn-primary publishSite">Oui publier </button>
@@ -89,9 +86,9 @@
                             </div>
                         </div>
                          <!---------Modale de reservation ----------->
-                        <div class="modal fade" id="modalBooked<%= cat.id %>" tabindex="-1" role="dialog" aria-labelledby="bookModal" aria-hidden="true">
+                        <div class="modal fade" id="modalBooked<%= pet.id %>" tabindex="-1" role="dialog" aria-labelledby="bookModal" aria-hidden="true">
                             <div class="modal-dialog" role="document">
-                                <div class="modal-content" id="modalBook" data-article-id="<%= cat.id %>">
+                                <div class="modal-content" id="modalBook" data-article-id="<%= pet.id %>">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="bookModal"> Reservation d'un animal</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -99,20 +96,19 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <% if (cat.booked === true) { %>
-                                        <p>Voulez vous annuler la reservation de cet animal ?</p>
-                                        <% } else { %>
-                                            <form>
+                                        <% if (pet.booked === true) { %>
+                                            <p>Voulez vous annuler la reservation de cet animal ?</p>
+                                            <input type="text" class="form-control" aria-label="Default" value="<%= pet.booked_name %>" aria-describedby="inputGroup-sizing-default" id="bookName<%= pet.id %>" disabled>
+                                            <% } else { %>
                                                 <div class="form-group">
-                                                  <label for="bookName" class="col-form-label">Nom et prénom du reservant:</label>
-                                                  <input type="text" class="form-control" id="bookName">
+                                                  <label class="col-form-label">Nom et prénom du reservant:</label>
+                                                  <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="bookName<%= pet.id %>">
                                                 </div>
-                                            </form>
-                                        <% } %>
+                                            <% } %>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                        <% if (cat.booked === true) { %>
+                                        <% if (pet.booked === true) { %>
                                         <button type="button" class="btn btn-primary bookPet"> Annuler la reservation </button>
                                         <% } else { %>
                                         <button type="button" class="btn btn-primary bookPet"> Valider la reservation </button>
@@ -123,45 +119,40 @@
                         </div>            
                     <% } %>
                 </table>
-            </div>
         </div>
         <!--------------------------------------------Section animaux adoptés--------------------------------------->
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Date d'entrée</th>
-                        <th>Nom Asela</th>
-                        <th>Nouveau nom</th>
-                        <th>Race</th>
-                        <th>Age</th>
-                        <th>Sexe</th>
-                        <th>Robe</th>
-                        <th>Identification</th>
-                        <th>Date d'adoption</th>
-                        <th>Nom adoptant</th>
-                        <th>Téléphone</th>
-                        <th>Code Postal et Ville</th>
-                        <th>Adresse</th>
+                        <th scope="col">Date d'entrée</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Race</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Sexe</th>
+                        <th scope="col">Identification</th>
+                        <th scope="col">Date d'adoption</th>
+                        <th scope="col">Nom adoptant</th>
+                        <th scope="col">Téléphone</th>
+                        <th scope="col">Code Postal et Ville</th>
+                        <th scope="col">Adresse</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% for(catAdopted of jason.petsAdopt){ %>
-                        <tbody >
-                            <td><%= catAdopted.date_supported.toLocaleString('en-GB').substr(0, 10) %></td>
-                            <td><a href="pet/<%= catAdopted.id %>"><%= catAdopted.name %></a></td>
-                            <td><%= catAdopted.last_name_pet %></td>
-                            <td><%= catAdopted.breed %></td>
-                            <td><%= catAdopted.age.toLocaleString('en-GB').substr(0, 10) %> %></td>
-                            <td><%= catAdopted.sexe %></td>
-							<td><%= catAdopted.color %></td>
-                            <td><%= catAdopted.ide %></td>
-                            <td><%= catAdopted.date_adopting %> </td>
-                            <td><%= catAdopted.lastname %> <%= catAdopted.firstname %></td>
-                            <td><%= catAdopted.number_phone %></td>
-                            <td><%= catAdopted.postal_code %> <%= catAdopted.city %></td>
-                            <td><%= catAdopted.adress %></td>
-                        </tbody>
+                    <% for(pet of jason.petsAdopt){ %>
+                        <tr>
+                            <td data-label="Date entrée"><%if(pet.date_supported){%><%= pet.date_supported.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
+                            <td data-label="Nom"> <a href="pet/<%= pet.id %>"><%= pet.name %> <% if(pet.last_name_pet){%> (<%= pet.last_name_pet %>) <%}else{%><%}%>  </a></td>
+                            <td data-label="Race"><%if(pet.breed){%><%= pet.breed %> <%}else{%>Inconnu<%}%></td>
+                            <td data-label="Age"><%if(pet.age){%><%= pet.age.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
+                            <td data-label="Sexe"><%if(pet.sexe){%><%= pet.sexe %> <%}else{%>Inconnu<%}%></td>
+                            <td data-label="Identification"><%if(pet.ide){%><%= pet.ide %> <%}else{%>Inconnu<%}%></td>
+                            <td data-label="Date d'adoption"><%if(pet.date_adopting){%><%= pet.date_adopting.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
+                            <td data-label="Nom adoptant"><%= pet.lastname %> <%= pet.firstname %></td>
+                            <td data-label="Téléphone"><%= pet.number_phone %></td>
+                            <td data-label="Code Postal et Ville"><%= pet.postal_code %> <%= pet.city %></td>
+                            <td data-label="Adresse"><%= pet.adress %></td>
+                        </tr>
                     <% } %>
                 </tbody>
             </table>
@@ -182,17 +173,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% for(catDead of jason.petsDead) { %>
-                    <tr>                        
-                        <td><%= catDead.date_supported.toLocaleString('en-GB').substr(0, 10) %></td>
-                        <td><%= catDead.name %></td>
-                        <td><%= catDead.breed %></td>
-                        <td><%= catDead.color %></td>
-                        <td><%= catDead.age.toLocaleString('en-GB').substr(0, 10) %> %></td>
-                        <td><%= catDead.sexe %></td>
-                        <td><%= catDead.deceased_date.toLocaleString('en-GB').substr(0, 10) %> %></td>
-                        <td><%= catDead.deceased_cause %></td>
-                    </tr>	
+                    <% for(pet of jason.petsDead) { %>
+                        <tr>                        
+                            <td data-label="Date entrée"><%if(pet.date_supported){%><%= pet.date_supported.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
+                            <td data-label="Nom"> <a href="pet/<%= pet.id %>"><%= pet.name %> <% if(pet.last_name_pet){%> (<%= pet.last_name_pet %>) <%}else{%><%}%>  </a></td>
+                            <td data-label="Race"><%if(pet.breed){%><%= pet.breed %> <%}else{%>Inconnu<%}%></td>
+                            <td data-label="Robe"><%if(pet.color){%><%= pet.color %> <%}else{%>Inconnu<%}%></td>
+                            <td data-label="Age"><%if(pet.age){%><%= pet.age.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
+                            <td data-label="Sexe"><%if(pet.sexe){%><%= pet.sexe %> <%}else{%>Inconnu<%}%></td>
+                            <td data-label="Date du décès"><%if(pet.deceased_date){%><%= pet.deceased_date.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
+                            <td data-label="Cause"><%if(pet.deceased_cause){%><%= pet.deceased_cause %> <%}else{%>Inconnu<%}%></td>
+                        </tr>
                     <% } %>
                 </tbody>
             </table>
@@ -279,7 +270,7 @@
                         <div class="field">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Identification</span>
+                                    <span class="input-group-text">Identifipetion</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addIdeCat">
                             </div>

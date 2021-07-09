@@ -3,8 +3,9 @@ const veterinary = {
     addNewVet: async function (event){
         event.preventDefault();
         try{
-
+            
             const userData = JSON.stringify(Array.from(document.querySelectorAll('#registrationForm input')).reduce((acc, select) => ({...acc, [select.id]: select.value}), {}));
+            console.log('userData', userData);
             const response = await fetch(`http://localhost:3030/v1/veterinary`, {
                 body: userData,
                 method: 'POST',
@@ -96,7 +97,7 @@ const veterinary = {
 
              });
              console.log(response);
-        document.location.reload();
+            document.location.reload();
         }catch(error) {
         console.trace(error);
         }      

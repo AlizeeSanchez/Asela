@@ -4,7 +4,7 @@ const Form = {
     writeFormHostFamily: async (form) => {
         try {
             console.log("model host family :",form);
-            const formHostFamily = (`INSERT INTO host_family ("lastname", "firstname", "birthday", "facebook", "postal_code", "city", "adress", "number_phone", "type_home", "area_home", "area_garden",  "fencing", "fencing_height", "job", "email", "number_adult", "number_children", "age_children", "contact_children_pet", "poeple_fur_allergic", "poeple_asthma", "pet_composition", "pet_composition_vaccined", "pet_accepted_garden", "pet_sterilised", "cat_amity", "dog_amity", "kitten_accepted", "cat_accepted", "dog_big_accepted", "dog_middle_accepted", "dog_little_accepted", "puppy_accepted", "cat_hostfamily_test", "cat_hostfamily_day_test", "family_accept_acceuil", "family_accept_15_days", "how_many_timeout_dog", "dog_timeout", "hour_absence_day", "cat_number_accepted", "cat_sexe_acceuil", "poeple_amity_cat", "dog_sexe_acceuil", "poeple_educate", "dog_accept_problem", "dog_accept_handicap", "dog_closed_room", "dog_sleep", "poeple_with_dog", "poeple_without_dog", "poeple_ask", "poeple_drive_veterinary", "poeple_car", "poeple_holidays", "poeple_counsciousness", "poeple_ready_counsciousness", "dog_hour_alone", "dog_holidays_acceuil", "poeple_motivation", "poeple_warning", "veterinary_hostfamily", "veterinary_contact_hostfamily", "price_asso_veterinary", "certificate_poeple", "approuved_poeple") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, $60, $61, $62, $63, $64, $65, $66) RETURNING *; `)
+            const formHostFamily = (`INSERT INTO host_family ("lastname", "firstname", "birthday", "facebook", "postal_code", "city", "adress", "number_phone", "type_home", "area_home", "area_garden",  "fencing", "fencing_height", "job", "email", "number_adult", "number_children", "age_children",  "pet_composition", "pet_accepted_garden", "pet_sterilised",  "kitten_accepted", "cat_accepted", "dog_big_accepted", "dog_middle_accepted", "dog_little_accepted", "puppy_accepted", "family_accept_acceuil", "hour_absence_day", "poeple_amity_cat", "dog_sexe_acceuil", "poeple_educate", "dog_accept_problem",  "dog_closed_room", "dog_sleep", "poeple_with_dog", "poeple_without_dog", "poeple_ask", "poeple_drive_veterinary", "poeple_car",  "poeple_counsciousness", "poeple_motivation", "poeple_warning", "certificate_poeple", "approuved_poeple") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45) RETURNING *; `)
 
             const dataFormHostFamily = await db.query(formHostFamily, [
                 form.lastname,
@@ -25,35 +25,21 @@ const Form = {
                 form.number_adult,
                 form.number_children,
                 form.age_children,
-                form.contact_children_pet, 
-                form.poeple_fur_allergic,
-                form.poeple_asthma,
                 form.pet_composition,
-                form.pet_composition_vaccined,
                 form.pet_accepted_garden,
                 form.pet_sterilised,
-                form.cat_amity,
-                form.dog_amity,
                 form.kitten_accepted, 
                 form.cat_accepted,
                 form.dog_big_accepted,
                 form.dog_middle_accepted,
                 form.dog_little_accepted,
                 form.puppy_accepted,
-                form.cat_hostfamily_test,
-                form.cat_hostfamily_day_test,
                 form.family_accept_acceuil,
-                form.family_accept_15_days, 
-                form.how_many_timeout_dog,
-                form.dog_timeout,
                 form.hour_absence_day,
-                form.cat_number_accepted,
-                form.cat_sexe_acceuil,
                 form.poeple_amity_cat,
                 form.dog_sexe_acceuil,
                 form.poeple_educate,
                 form.dog_accept_problem, 
-                form.dog_accept_handicap,
                 form.dog_closed_room,
                 form.dog_sleep,
                 form.poeple_with_dog,
@@ -61,16 +47,9 @@ const Form = {
                 form.poeple_ask, 
                 form.poeple_drive_veterinary,
                 form.poeple_car,
-                form.poeple_holidays,
                 form.poeple_counsciousness,
-                form.poeple_ready_counsciousness,
-                form.dog_hour_alone,
-                form.dog_holidays_acceuil,
                 form.poeple_motivation, 
                 form.poeple_warning,
-                form.veterinary_hostfamily,
-                form.veterinary_contact_hostfamily,
-                form.price_asso_veterinary,
                 form.certificate_poeple,
                 form.approuved_poeple
             ]); 

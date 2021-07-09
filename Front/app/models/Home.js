@@ -5,7 +5,7 @@ const Home = {
     //recuperation du chat disponible à l'adoption depuis le plus longtemps ( cf date de prise en charge )
     findStarCat: async() => {
         try{
-            const oldCat = await db.query(`SELECT id, name, age, amity, sexe, breed, color, description, weight, date_supported  FROM pet WHERE type = 'chat' AND adopt = false AND date_supported IS NOT NULL ORDER BY date_supported LIMIT (1);`);
+            const oldCat = await db.query(`SELECT * FROM pet WHERE type = 'chat' AND adopt = false AND date_supported IS NOT NULL ORDER BY date_supported LIMIT (1);`);
             return oldCat.rows
         }
         catch(error){
@@ -16,7 +16,7 @@ const Home = {
     //recuperation du chien disponible à l'adoption depuis le plus longtemps ( cf date de prise en charge )
     findStarDog: async() => {
         try{
-            const oldDog = await db.query(`SELECT id, name, age, amity, sexe, breed, color, description, weight, date_supported  FROM pet WHERE type = 'chien' AND adopt = false AND date_supported IS NOT NULL ORDER BY date_supported LIMIT (1);`);
+            const oldDog = await db.query(`SELECT * FROM pet WHERE type = 'chien' AND adopt = false AND date_supported IS NOT NULL ORDER BY date_supported LIMIT (1);`);
             return oldDog.rows
         }
         catch(error){

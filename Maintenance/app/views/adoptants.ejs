@@ -1,5 +1,6 @@
 <%- include('partials/header') %>
 
+
 <div >
   <h3 style="text-align:center;"> ASELA > Nos adoptants</h3>
 </div>
@@ -21,96 +22,78 @@
     <li class="nav-item">
       <a class="nav-link" id="adoptant-2021" data-toggle="tab" href="#2021" role="tab" aria-controls="2021" aria-selected="false">2021</a>
     </li>
-    <li class="nav-item">
-      <button class="nav-link btn btn-purple AddAdoptant" type="button" id="btn-createAdoptant" data-toggle="modal" data-target="#AddAdoptantModal"> Ajouter un adoptant</button>
-    </li>
   </ul>
 
   <div class="tab-content" id="myTabContent">
     <!-------------------------------------------------2017---------------------------------------------->
     <div class="tab-pane fade show active" id="2017" role="tabpanel" aria-labelledby="adoptant-2017">
+      <div class="card-dash">
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">PRENOM</th>
-            <th scope="col">NOM DE FAMILLE</th>
-            <th scope="col">PRENOM EPOUX</th>
-            <th scope="col">NOM DE FAMILLE EPOUX</th>
-            <th scope="col">TELEPHONE</th>
-            <th scope="col">VILLE</th>
-            <!--<th scope="col">VILLE</th>-->
-            <th scope="col">ADRESSE</th>
-            <th scope="col">TYPE DE MAISON</th>
-            <th scope="col">EMAIL</th>
-            <th scope="col">ANIMAL ADOPTE</th>
-            <th scope="col">DATE ANIMAL ADOPTE</th>
-            
+            <th scope="col">Adoptant</th>
+            <th scope="col">Conjoint</th>
+            <th scope="col">Téléphone</th>
+            <th scope="col">Ville</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Domicile</th>
+            <th scope="col">Email</th>
+            <th scope="col">Animal adopté</th>
+            <th scope="col">Date adoption</th>          
           </tr>
         </thead>
         <tbody>
-            
             <% for(let adoptantTab of adoptant){ %>
-               
-              <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= adoptantTab.id %>"> 
-                <% if(adoptantTab.date_adopting.toISOString().substr(0, 4) === '2017') { %> 
-                  <td><%= adoptantTab.firstname %></td>
-                  <td><a href="adoptant/<%= adoptantTab.id %>"><%= adoptantTab.lastname %></a></td>
-                  <td><%= adoptantTab.spousefirstname %></td>
-                  <td><%= adoptantTab.spouselastname %></td>
-                  <td><%= adoptantTab.number_phone %></td>
-                  <td><%= adoptantTab.postal_code %><%= adoptantTab.city %></td>
-                  <!--<td><%= adoptantTab.city %></td>-->
-                  <td><%= adoptantTab.adress %></td>
-                  <td><%= adoptantTab.type_home %></td>
-                  <td><%= adoptantTab.email %></td>
-                  <td><%= adoptantTab.name %></td>
-                  <td><%= adoptantTab.date_adopting.toLocaleString('en-GB').substr(0, 10) %></td>
+              <% if(adoptantTab.date_adopting.toISOString().substr(0, 4) === '2017') { %> 
+              <tr data-toggle="modal" style="text-transform: capitalize;" data-target=".bd-adoptant-modal-lg-profil<%= adoptantTab.id %>"> 
+                  <td data-label="Identité"><a href="adoptant/<%= adoptantTab.id %>"><%= adoptantTab.lastname %> <%= adoptantTab.firstname %></a></td>
+                  <td data-label="Epoux(se)"><% if(adoptantTab.spouselastname){ %> <%= adoptantTab.spouselastname %> <%= adoptantTab.spousefirstname %> <% }else{%> - <%} %></td>
+                  <td data-label="Téléphone"><%= adoptantTab.number_phone %></td>
+                  <td data-label="Ville"><%= adoptantTab.postal_code %><%= adoptantTab.city %></td>
+                  <td data-label="Adresse"><%= adoptantTab.adress %></td>
+                  <td data-label="Logement"><%= adoptantTab.type_home %></td>
+                  <td data-label="Email"><%= adoptantTab.email %></td>
+                  <td data-label="Animaux"><%= adoptantTab.name %></td>
+                  <td data-label="Date adoption"><%= adoptantTab.date_adopting.toLocaleString('en-GB').substr(0, 10) %></td>
                 <% } %>
-              </tr>
             <% } %>
+          </tr>
         </tbody>
       </table>
-    </div>                
+    </div>
+  </div>                
     <!-----------------------------------------2018----------------------------------------------->
     <div class="tab-pane fade" id="2018" role="tabpanel" aria-labelledby="adoptant-2018">
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">PRENOM</th>
-            <th scope="col">NOM DE FAMILLE</th>
-            <th scope="col">PRENOM EPOUX</th>
-            <th scope="col">NOM DE FAMILLE EPOUX</th>
-            <th scope="col">TELEPHONE</th>
-            <th scope="col">VILLE</th>
-            <!--<th scope="col">VILLE</th>-->
-            <th scope="col">ADRESSE</th>
-            <th scope="col">TYPE DE MAISON</th>
-            <th scope="col">EMAIL</th>
-            <th scope="col">ANIMAL ADOPTE</th>
-            <th scope="col">DATE ANIMAL ADOPTE</th>
-            
+            <th scope="col">Adoptant</th>
+            <th scope="col">Conjoint</th>
+            <th scope="col">Téléphone</th>
+            <th scope="col">Ville</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Domicile</th>
+            <th scope="col">Email</th>
+            <th scope="col">Animal adopté</th>
+            <th scope="col">Date adoption</th> 
           </tr>
         </thead>
         <tbody>
             
             <% for(let adoptantTab of adoptant){ %>
-               
-              <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= adoptantTab.id %>"> 
-              <% if(adoptantTab.date_adopting.toISOString().substr(0, 4) === '2018') { %> 
-                <td><%= adoptantTab.firstname %></td>
-                <td><a href="adoptant/<%= adoptantTab.id %>"><%= adoptantTab.lastname %></a></td>
-                <td><%= adoptantTab.spousefirstname %></td>
-                <td><%= adoptantTab.spouselastname %></td>
-                <td><%= adoptantTab.number_phone %></td>
-                <td><%= adoptantTab.postal_code %>  <%= adoptantTab.city %></td>
-                <!--<td><%= adoptantTab.city %></td>-->
-                <td><%= adoptantTab.adress %></td>
-                <td><%= adoptantTab.type_home %></td>
-                <td><%= adoptantTab.email %></td>
-                <td><%= adoptantTab.name %></td>
-                <td><%= adoptantTab.date_adopting.toLocaleString('en-GB').substr(0, 10) %></td>
+              <% if(adoptantTab.date_adopting.toISOString().substr(0, 4) === '2018') { %>
+              <tr data-toggle="modal" style="text-transform: capitalize;" data-target=".bd-adoptant-modal-lg-profil<%= adoptantTab.id %>"> 
+                  <td data-label="Identité"><a href="adoptant/<%= adoptantTab.id %>"><%= adoptantTab.lastname %> <%= adoptantTab.firstname %></a></td>
+                  <td data-label="Epoux(se)"><% if(adoptantTab.spouselastname){ %> <%= adoptantTab.spouselastname %> <%= adoptantTab.spousefirstname %> <% }else{%> - <%} %></td>
+                  <td data-label="Téléphone"><%= adoptantTab.number_phone %></td>
+                  <td data-label="Ville"><%= adoptantTab.postal_code %>  <%= adoptantTab.city %></td>
+                  <td data-label="Adresse"><%= adoptantTab.adress %></td>
+                  <td data-label="Logement"><%= adoptantTab.type_home %></td>
+                  <td data-label="Email"><%= adoptantTab.email %></td>
+                  <td data-label="Animaux"><%= adoptantTab.name %></td>
+                  <td data-label="Date adoption"><%= adoptantTab.date_adopting.toLocaleString('en-GB').substr(0, 10) %></td>
+              </tr>
               <% } %>
-            </tr>
             <% } %> 
         </tbody>
       </table>
@@ -120,41 +103,34 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">PRENOM</th>
-            <th scope="col">NOM DE FAMILLE</th>
-            <th scope="col">PRENOM EPOUX</th>
-            <th scope="col">NOM DE FAMILLE EPOUX</th>
-            <th scope="col">TELEPHONE</th>
-            <th scope="col">VILLE</th>
-            <!--<th scope="col">VILLE</th>-->
-            <th scope="col">ADRESSE</th>
-            <th scope="col">TYPE DE MAISON</th>
-            <th scope="col">EMAIL</th>
-            <th scope="col">ANIMAL ADOPTE</th>
-            <th scope="col">DATE ANIMAL ADOPTE</th> 
+            <th scope="col">Adoptant</th>
+            <th scope="col">Conjoint</th>
+            <th scope="col">Téléphone</th>
+            <th scope="col">Ville</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Domicile</th>
+            <th scope="col">Email</th>
+            <th scope="col">Animal adopté</th>
+            <th scope="col">Date adoption</th> 
           </tr>
         </thead>
         <tbody>
             
             <% for(let adoptantTab of adoptant){ %>
-               
-              <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= adoptantTab.id %>"> 
-              <% if(adoptantTab.date_adopting.toISOString().substr(0, 4) === '2019') { %> 
-                <td><%= adoptantTab.firstname %></td>
-                <td><a href="adoptant/<%= adoptantTab.id %>"><%= adoptantTab.lastname %></a></td>
-                <td><%= adoptantTab.spousefirstname %></td>
-                <td><%= adoptantTab.spouselastname %></td>
-                <td><%= adoptantTab.number_phone %></td>
-                <td><%= adoptantTab.postal_code %>  <%= adoptantTab.city %></td>
-                <!--<td><%= adoptantTab.city %></td>-->
-                <td><%= adoptantTab.adress %></td>
-                <td><%= adoptantTab.type_home %></td>
-                <td><%= adoptantTab.email %></td>
-                <td><%= adoptantTab.name %></td>
-                <td><%= adoptantTab.date_adopting.toLocaleString('en-GB').substr(0, 10) %></td>
+              <% if(adoptantTab.date_adopting.toISOString().substr(0, 4) === '2019') { %>
+              <tr data-toggle="modal" style="text-transform: capitalize;" data-target=".bd-adoptant-modal-lg-profil<%= adoptantTab.id %>"> 
+                <td data-label="Identité"><a href="adoptant/<%= adoptantTab.id %>"><%= adoptantTab.lastname %> <%= adoptantTab.firstname %></a></td>
+                <td data-label="Epoux(se)"><% if(adoptantTab.spouselastname){ %> <%= adoptantTab.spouselastname %> <%= adoptantTab.spousefirstname %> <% }else{%> - <%} %></td>
+                <td data-label="Téléphone"><%= adoptantTab.number_phone %></td>
+                <td data-label="Ville"><%= adoptantTab.postal_code %>  <%= adoptantTab.city %></td>
+                <td data-label="Adresse"><%= adoptantTab.adress %></td>
+                <td data-label="Logement"><%= adoptantTab.type_home %></td>
+                <td data-label="Email"><%= adoptantTab.email %></td>
+                <td data-label="Animaux"><%= adoptantTab.name %></td>
+                <td data-label="Date adoption"><%= adoptantTab.date_adopting.toLocaleString('en-GB').substr(0, 10) %></td>
               <% } %>
             </tr>
-            <% } %>  
+          <% } %>  
         </tbody>
       </table>
     </div>
@@ -163,331 +139,74 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">PRENOM</th>
-            <th scope="col">NOM DE FAMILLE</th>
-            <th scope="col">PRENOM EPOUX</th>
-            <th scope="col">NOM DE FAMILLE EPOUX</th>
-            <th scope="col">TELEPHONE</th>
-            <th scope="col">VILLE</th>
-            <!--<th scope="col">VILLE</th>-->
-            <th scope="col">ADRESSE</th>
-            <th scope="col">TYPE DE MAISON</th>
-            <th scope="col">EMAIL</th>
-            <th scope="col">ANIMAL ADOPTE</th>
-            <th scope="col">DATE ANIMAL ADOPTE</th> 
+            <th scope="col">Adoptant</th>
+            <th scope="col">Conjoint</th>
+            <th scope="col">Téléphone</th>
+            <th scope="col">Ville</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Domicile</th>
+            <th scope="col">Email</th>
+            <th scope="col">Animal adopté</th>
+            <th scope="col">Date adoption</th> 
           </tr>
         </thead>
         <tbody>
-            
             <% for(let adoptantTab of adoptant){ %>
-             
-              <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= adoptantTab.id %>"> 
               <% if(adoptantTab.date_adopting.toISOString().substr(0, 4) === '2020') { %> 
-                <td><%= adoptantTab.firstname %></td>
-                <td><a href="adoptant/<%= adoptantTab.id %>"><%= adoptantTab.lastname %></a></td>
-                <td><%= adoptantTab.spousefirstname %></td>
-                <td><%= adoptantTab.spouselastname %></td>
-                <td><%= adoptantTab.number_phone %></td>
-                <td><%= adoptantTab.postal_code %>  <%= adoptantTab.city %></td>
-                <!--<td><%= adoptantTab.city %></td>-->
-                <td><%= adoptantTab.adress %></td>
-                <td><%= adoptantTab.type_home %></td>
-                <td><%= adoptantTab.email %></td>
-                <td><%= adoptantTab.name %></td>
-                <td><%= adoptantTab.date_adopting.toLocaleString('en-GB').substr(0, 10) %></td>
+              <tr data-toggle="modal" style="text-transform: capitalize;" data-target=".bd-adoptant-modal-lg-profil<%= adoptantTab.id %>"> 
+                <td data-label="Identité"><a href="adoptant/<%= adoptantTab.id %>"><%= adoptantTab.lastname %> <%= adoptantTab.firstname %></a></td>
+                <td data-label="Epoux(se)"><% if(adoptantTab.spouselastname){ %> <%= adoptantTab.spouselastname %> <%= adoptantTab.spousefirstname %> <% }else{%> - <%} %></td>
+                <td data-label="Téléphone"><%= adoptantTab.number_phone %></td>
+                <td data-label="Ville"><%= adoptantTab.postal_code %>  <%= adoptantTab.city %></td>
+                <td data-label="Adresse"><%= adoptantTab.adress %></td>
+                <td data-label="Logement"><%= adoptantTab.type_home %></td>
+                <td data-label="Email"><%= adoptantTab.email %></td>
+                <td data-label="Animaux"><%= adoptantTab.name %></td>
+                <td data-label="Date adoption"><%= adoptantTab.date_adopting.toLocaleString('en-GB').substr(0, 10) %></td>
+              </tr>
               <% } %>
-            </tr>
             <% } %> 
         </tbody>
       </table>
     </div>
     <!--------------------------------------2021-------------------------------------------->
-    <div class="tab-pane fade" id="2021" role="tabpanel" aria-labelledby="adoptant-2021">
+    <div class="tab-pane fade show" id="2021" role="tabpanel" aria-labelledby="adoptant-2021">
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">PRENOM</th>
-            <th scope="col">NOM DE FAMILLE</th>
-            <th scope="col">PRENOM EPOUX</th>
-            <th scope="col">NOM DE FAMILLE EPOUX</th>
-            <th scope="col">TELEPHONE</th>
-            <th scope="col">VILLE</th>
-            <!--<th scope="col">VILLE</th>-->
-            <th scope="col">ADRESSE</th>
-            <th scope="col">TYPE DE MAISON</th>
-            <th scope="col">EMAIL</th>
-            <th scope="col">ANIMAL ADOPTE</th>
-            <th scope="col">DATE ANIMAL ADOPTE</th>
-            
+            <th scope="col">Adoptant</th>
+            <th scope="col">Conjoint</th>
+            <th scope="col">Téléphone</th>
+            <th scope="col">Ville</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Domicile</th>
+            <th scope="col">Email</th>
+            <th scope="col">Animal adopté</th>
+            <th scope="col">Date adoption</th> 
           </tr>
         </thead>
         <tbody>
-            
-            <% for(let adoptantTab of adoptant){ %>
-               
-              <tr data-toggle="modal" data-target=".bd-adoptant-modal-lg-profil<%= adoptantTab.id %>"> 
-              <% if(adoptantTab.date_adopting.toISOString().substr(0, 4) === '2021') { %> 
-                <td><%= adoptantTab.firstname %></td>
-                <td><a href="adoptant/<%= adoptantTab.id %>"><%= adoptantTab.lastname %></a></td>
-                <td><%= adoptantTab.spousefirstname %></td>
-                <td><%= adoptantTab.spouselastname %></td>
-                <td><%= adoptantTab.number_phone %></td>
-                <td><%= adoptantTab.postal_code %>  <%= adoptantTab.city %></td>
-                <!--<td><%= adoptantTab.city %></td>-->app
-                <td><%= adoptantTab.adress %></td>
-                <td><%= adoptantTab.type_home %></td>
-                <td><%= adoptantTab.email %></td>
-                <td><%= adoptantTab.name %></td>
-                <td><%= adoptantTab.date_adopting.toLocaleString('en-GB').substr(0, 10) %></td>
-              <% } %>
+          <% for(let adoptantTab of adoptant){ %>
+            <% if(adoptantTab.date_adopting.toISOString().substr(0, 4) === '2021') { %>
+              <tr data-toggle="modal" style="text-transform: capitalize;" data-target=".bd-adoptant-modal-lg-profil<%= adoptantTab.id %>"> 
+                <% console.log(adoptantTab.id) %> 
+                <td data-label="Identité"> <a href="adoptant/<%= adoptantTab.id %>"><%= adoptantTab.lastname %> <%= adoptantTab.firstname %></a></td>
+                <td data-label="Epoux(se)"><% if(adoptantTab.spouselastname){ %> <%= adoptantTab.spouselastname %> <%= adoptantTab.spousefirstname %> <% }else{%> - <%} %></td>
+                <td data-label="Téléphone"><%= adoptantTab.number_phone %></td>
+                <td data-label="Ville"><%= adoptantTab.postal_code %>  <%= adoptantTab.city %></td>
+                <td data-label="Adresse"><%= adoptantTab.adress %></td>
+                <td data-label="Logement"><%= adoptantTab.type_home %></td>
+                <td data-label="Email"><%= adoptantTab.email %></td>
+                <td data-label="Animaux"><%= adoptantTab.name %></td>
+                <td data-label="Date adoption"><%= adoptantTab.date_adopting.toLocaleString('en-GB').substr(0, 10) %></td>
               </tr>
             <% } %>
+          <% } %>
         </tbody>
       </table>
     </div>
   </div>
-</div>
 
-<!--------------------------------------------Modale AJOUT adoptant--------------------------------------->
-
-<div class="modal fade" id="AddAdoptantModal" tabindex="-1" role="dialog" aria-labelledby="Ajouter-un-adoptant" aria-hidden="false">
-  <div class="modal-dialog" role="document">
-      <div class="modal-content" data-article-id="addAdoptant">
-          <div class="modal-header">
-              <h5 class="modal-title" id="Ajouter_adoptant"> Creer la fiche d'un adoptant</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body">
-              <form action="" method="POST">
-                  <header class="modal-card-head">
-                      <div class="alert alert-info" role="alert">
-                          Attention certaines données sont directement connectées au site web, attention à l'orthographe!
-                      </div>
-                      <button class="delete close" type="button" aria-label="close"></button>
-                  </header>
-                  <section class="modal-card-body">
-                      
-                      <div class="field">
-                          <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                  <span class="input-group-text">Numéro de passport</span>
-                              </div>
-                              <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addNumberIdPassport">
-                          </div>
-                      </div>
-                      <div class="field">
-                          <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                  <span class="input-group-text">Nom</span>
-                              </div>
-                              <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addLastname">
-                          </div>
-                      </div>
-                      <div class="field">
-                          <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                  <span class="input-group-text">Prénom</span>
-                              </div>
-                              <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addFirstname">
-                          </div> 
-                      </div>   
-                      <div class="field">
-                          <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                  <span class="input-group-text">Date de naissance</span>
-                              </div>
-                              <input type="date" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addBirthday">
-                          </div>  
-                      </div> 
-                      <div class="field">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Mêtier</span>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addJob">
-                        </div>  
-                      </div>
-                    <div class="field">
-                      <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                              <span class="input-group-text">Nom de l'époux(se)</span>
-                          </div>
-                          <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addSpouseLastname">
-                      </div>  
-                    </div> 
-                  <div class="field">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Prénom de l'époux(se)</span>
-                        </div>
-                        <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addSpouseFirstname">
-                    </div>  
-                  </div> 
-                <div class="field">
-                  <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                          <span class="input-group-text">Date de naissance de l'époux(se)</span>
-                      </div>
-                      <input type="date" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addSpouseBirthday">
-                  </div>  
-                </div> 
-                <div class="field">
-                  <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">Mêtier de l'époux(se)</span>
-                      </div>
-                      <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addSpouseJob">
-                  </div>  
-                </div> 
-                <div class="field">
-                  <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                          <span class="input-group-text">Code postal</span>
-                      </div>
-                      <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addPostalCode">
-                  </div>  
-                </div>
-                <div class="field">
-                  <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                          <span class="input-group-text">Numéro de téléphone</span>
-                      </div>
-                      <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addNumberPhone">
-                </div>  
-                </div>
-                <div class="field">
-                  <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                          <span class="input-group-text">Numéro de téléphone 2</span>
-                      </div>
-                      <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addNumberPhone2">
-                  </div>  
-                </div> 
-                <div class="field">
-                  <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                          <span class="input-group-text">Ville</span>
-                      </div>
-                      <input type="text" class="form-control" aria-label="Default" value=""  aria-describedby="inputGroup-sizing-default" id="addCity">
-                  </div>  
-                </div>                              
-                <div class="field">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Email</span>
-                        </div>
-                        <input type="email" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addEmail">
-                    </div>
-                </div>                            
-                <div class="field">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Adresse</span>
-                        </div>
-                        <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="AddAdress">
-                    </div>
-                </div>                                
-                <div class="field">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Type de maison</span>
-                        </div>
-                        <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addType_home">
-                    </div>
-                </div>                               
-                <div class="field">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Pseudo Facebook</span>
-                        </div>
-                        <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addFbPseudo">
-                    </div>
-                </div>           
-                <div class="field">
-                  <div class="input-group mb-3">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Nombre d'adulte</span>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addNumberAdultHome">
-                        </div>
-                    </div>
-                </div>
-                <div class="field">
-                  <div class="input-group mb-3">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Nombre d'enfant</span>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addNumberChlidHome">
-                        </div>
-                    </div>
-                </div>
-                <div class="field">
-                  <div class="input-group mb-3">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Animaux actuel</span>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addPetComposition">
-                        </div>
-                    </div>
-                </div>
-                <div class="field">
-                  <div class="input-group mb-3">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">BlackListe</span>
-                            </div>
-                            <select class="custom-select" id="addBlacklist">
-                              <option>Choisir</option>
-                              <option value="true" >Oui</option>
-                              <option value="false">Non</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="field">
-                  <div class="input-group mb-3">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Animal Adopté</span>
-                            </div>
-                             <h5 class="modal-title" id="addPetAdopted">Selectionner un chien disponible a l'adoption</h5>
-                        </div>
-                      <div class="modal-body">
-                        <select class="custom-select" id="SelectHostFamily">                
-                          <option> Choisir* </option> 
-                           <% for(let adoptantTab of adoptant){ %> 
-                          <option value="<%= adoptantTab.id%>"><%= adoptantTab.name %></option> 
-                          <% } %>  
-                        </select>
-                      </div> 
-                  </div>
-                </div>
-                <div class="field">
-                  <div class="input-group mb-3">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Date d'adoption'</span>
-                            </div>
-                            <input type="date" class="form-control" aria-label="Default" value="" aria-describedby="inputGroup-sizing-default" id="addDatePetAdopted">
-                        </div>
-                    </div>
-                </div>
-
-              </section>
-              </form>
-          </div>
-          <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulé</button>
-          <button type="button" class="btn btn-primary saveNewAdoptant">Ajouter</button>
-          </div>
-      </div>
-  </div>
-</div>
 
 <%- include('partials/footer') %>
 <script src="/js/adoptants.js"></script>

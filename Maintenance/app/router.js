@@ -11,6 +11,7 @@ const eventController = require('./controllers/eventController');
 const dashboardController = require('./controllers/dashboardController');
 const userController = require('./controllers/userController');
 const blacklistController = require('./controllers/blacklistController');
+const waitinglistController = require('./controllers/waitinglistController');
 
 //Partie Joi validation des données
 const volunteerSchema = require('./schema/asela_validate');
@@ -18,7 +19,7 @@ const { validateBody } = require('./services/validator');
 
 
 const path = require('path');
-const multer  = require('./middlewares/upload');
+//const uploads  = require('./middlewares/upload');
 const { upload } = require('multer');
 
 const router = Router();
@@ -31,7 +32,6 @@ router.post('/signin', validateBody(volunteerSchema), userController.createUser)
 
 //---------------------------------------Dashboard------------------------------
 router.get('/dashboard', dashboardController.home)
-
 
 //----------------------------------Routes chiens----------------------------
 
@@ -73,20 +73,19 @@ router.delete('/pet/comment/:id', petController.deleteCommentPet)
 router.patch('/petsdead/:id', petController.declarationDead)
 //Attribué une FA a un animal
 router.patch('/affectfa/:id', petController.affectFamilyHost)
-// modifier le status de publication sur secondechance d'un animal
-router.patch('/secondechance/:id', petController.petStatePublishSC)
-// modifier le status de publication sur fb d'un animal
-router.patch('/facebook/:id', petController.petStatePublishFB)
 // modifier le status de publication d'un animal sur le site officiel
 router.patch('/publish/:id', petController.petSitePublish)
 // modifier le status de reservation d'un animal
 router.patch('/booked/:id', petController.petBooked)
-// Ajouter une photo a l'animal
-router.post('/uploadpet/:id', multer, petController.uploadPhotoPet)
 // Route pour attribuer une famille d'acceuil à un animal
 router.patch('/putHostFamilyToPet/:id', petController.putHostFamilyPet)
 //Route pour supprimer un animal
-router.delete('pet/:id', petController.suppPet)
+router.delete('/pet/:id', petController.suppPet)
+//Route pour supprimer une photo
+router.delete('/pet/deletemypicturepet/:id', petController.suppPhoto)
+//Route pour supprimer un commentaire
+router.delete('/pet/deletemycommentpet/:id', petController.suppComment)
+
 
 //----------------------------------Routes famille d'acceuil----------------------------
 // Route pour trier FA par departements
@@ -113,14 +112,11 @@ router.delete('/veterinary/:id', veterinaryController.deleteVeterinary)
 // Route pour modifier un vétérinaire
 router.patch('/veterinary', veterinaryController.editVeterinary)
 
-//-------------------------------Route questionnaire--------------------------------
-router.post('/questionnaire', questionnaireAdoptController.responseQuest)
-
 //-------------------------------Route evenement--------------------------------
 //Route pour lister tous les évènements
 router.get('/events', eventController.allEvent)
 //Route pour télécharger une image de l'évènement
-router.post('/upload', eventController.uploadevent)
+//router.post('/upload', eventController.uploadevent)
 router.post('/events', eventController.uploadevent, eventController.addEvent)
 
 //-------------------------------Route questionnaire BACK OFFICE--------------------------------
@@ -129,14 +125,15 @@ router.get('/questionnaire/:id',  questionnaireAdoptController.findOneQuestAdopt
 
 router.delete('/questionnaire/:id', questionnaireAdoptController.suppQuest)
 router.patch('/questionnaire/:id', questionnaireAdoptController.attributeQuest)
-router.post('/questionnaireAdoptant/:id', questionnaireAdoptController.passQuestToAdoptant)
 router.post('/questionnaireAdoptantToBlacklist/:id', questionnaireAdoptController.passAdoptantToBlacklist)
+
 
 //-----------------------------Route Adoptant---------------------------------------------------
 router.get('/adoptants', adoptantController.findAllAdoptant)
 router.post('/adoptants', adoptantController.addAdoptant)
 router.get('/adoptant/:id',  adoptantController.findAllPetAdoptant)
 router.post('/addCommentAdoptant/:id', adoptantController.commentAdoptant)
+router.patch('/editCommentAdoptant/:id', adoptantController.editComment)
 router.delete('/deleteCommentAdoptant/:id', adoptantController.deleteCommentAdoptant)
 
 
@@ -144,39 +141,26 @@ router.delete('/deleteCommentAdoptant/:id', adoptantController.deleteCommentAdop
 //Route pour lister les conditions d'adoption
 router.get('/reglages', conditionController.findCondition)
 router.patch('/tarif-chien', conditionController.editPriceDog)
-
-
-//---------------------------Routes Conditions d'adoption--------------------
-
-//Route pour lister les conditions d'adoption
-//router.get('/conditions', conditionController.findCondition)
-//Route pour voir une seule condition
-////router.get('/condition/:id', conditionController.findOneCondition)
-//Route pour ajouter une condition d'adoption
-//router.post('/addNewCondition', conditionController.addNewCondition)
-//Route pour modifier une condition d'adoption
-//router.patch('/editCondition/:id', conditionController.editCondition)
-//Route pour supprimer une condition d'adoption
-//router.delete('/suppCondition/:id', conditionController.suppCondition)
-
-//----------------------------Route Prix d'Adoption------------------------
-//Route pour lister les prix d'adoption
-//router.get('/price', priceController.findPriceAdopt)
-//Route pour voir un seul prix
-//router.get('/OnePrice/:id', priceController.findOnePriceAdopt)
-//Route pour ajouter un prix
-//router.post('/addPrice', priceController.addNewPrice)
-//Route pour supprimer un prix 
-//router.delete('/suppPrice/:id', priceController.suppPrice)
+router.patch('/tarif-chat', conditionController.editPriceCat)
+router.patch('/breed-pet', conditionController.breedPet)
+router.post('/condition', conditionController.addNewCondition)
+router.patch('/condition', conditionController.editCondition)
+router.delete('/condition/:id', conditionController.suppCondition)
 
 /*--------------------------Route pour blacklister---------------------------*/
 //Route pour afficher tous les blacklister
 router.get('/blacklist', blacklistController.findAllBlacklist)
+//Route pour afficher tous les blacklister
+router.post('/blacklist', blacklistController.addBlacklister)
 //Route pour trouver une personne en blacklist
 router.get('/blacklist/:id', blacklistController.findOneBlacklist)
-//Route pour ajouter une personne en blacklist
-router.post('/blacklist', blacklistController.addBlacklister)
+//Route pour ajouter une FA en blacklist
+router.post('/blacklistHostFamilly/:id', blacklistController.addBlacklisterFA)
 //Route pour supprimer une personne en blacklist
-router.delete('/blacklist', blacklistController.suppBlacklister)
+router.delete('/blacklist/:id', blacklistController.suppBlacklister)
+
+/*------------------------------Route liste d'attente--------------------------*/
+//Route pour lister nos liste d'attente
+router.get('/waitinglist', waitinglistController.findAllWaitinglist)
 
 module.exports = router;

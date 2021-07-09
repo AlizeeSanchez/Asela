@@ -46,6 +46,16 @@ const Event = {
             console.trace(error);
         }
         
+    },
+
+    findOneEvent: async (id) => {
+        try{
+            const event = await db.query('select * from event where id = $1;', [id])
+            return event.rows[0];
+        }
+        catch (error) {
+            console.trace(error);
+        }
     }
 
 }

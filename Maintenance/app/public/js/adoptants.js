@@ -48,7 +48,7 @@ const adoptant = {
               'Content-Type' : 'application/json'
           }
       });
-      console.log(response);
+    
       document.location.reload();
       }catch(error) {
           console.trace(error);
@@ -63,7 +63,7 @@ const adoptant = {
       const article = buttonSave.closest('.comment');
       const articleId = article.getAttribute('data-article-id');
       const commentAdoptant = document.getElementById('commentAdoptant').value;
-        const adoptantComment = JSON.stringify({commentAdoptant});
+      const adoptantComment = JSON.stringify({commentAdoptant});
 
         const response = await fetch(`http://localhost:3030/v1/addCommentAdoptant/${articleId}`, {
         method: 'POST',
@@ -71,13 +71,88 @@ const adoptant = {
         headers:{
             'Content-Type' : 'application/json'
         }
+      });
+    document.location.reload();
+    }catch(error) {
+        console.trace(error);
+    }
+
+  },
+
+  treatmentQuest: async function (event){
+    event.preventDefault();
+    const elementClicked = event.target;
+    const element = elementClicked.closest('.quest');
+    const articleId = element.getAttribute('data-article-id');
+    try{
+      const dataQuestPet = document.getElementById('questPet').value;
+      const dataQuestNamePet = document.getElementById('questPet').value;
+      const dataQuestStatus = document.getElementById('questStatus').value;
+      const dataQuestComment = document.getElementById('questComment').value;
+      const dataQuestMeet = document.getElementById('questMeet').value;
+      
+      const treatmentValidate = JSON.stringify({
+        articleId, 
+        dataQuestPet, 
+        dataQuestStatus,
+        dataQuestComment, 
+        dataQuestMeet 
+      });
+        
+        const response = await fetch(`http://localhost:3030/v1/questionnaire/${articleId}`, {
+        method: 'PATCH',
+        body: treatmentValidate,
+        headers:{
+            'Content-Type' : 'application/json'
+        },
+        success: window.location.href = 'http://localhost:3030/v1/questionnaire'
     });
     document.location.reload();
     }catch(error) {
         console.trace(error);
     }
 
-  }
+  },
+
+  editComment: async function (event){
+    const buttonSave = event.target;
+    const modale = buttonSave.closest('.modal-content');
+    const modaleId = modale.getAttribute('data-article-id');
+    const commentaire = document.getElementById(`commentaireEDITION${modaleId}`).value;
+
+    const data = JSON.stringify({
+        id: modaleId,
+        commentaire: commentaire,
+    });
+    
+    try{
+        const response = await fetch(`http://localhost:3030/v1/editCommentAdoptant/${modaleId}`, {
+            method: 'PATCH',
+            body: data,
+            headers:{
+                'Content-Type' : 'application/json'
+            }
+        });
+        document.location.reload();     
+    }catch(error) {
+        console.trace(error);
+    }
+  },
+
+suppComment: async function (event){
+    const buttonSave = event.target;
+    const modale = buttonSave.closest('.modal-content');
+    const modaleId = modale.getAttribute('data-article-id');
+
+    try{
+        const response = await fetch(`http://localhost:3030/v1/deleteCommentAdoptant/${modaleId}`, {
+            method: 'DELETE', 
+        });
+        document.location.reload();
+    }catch(error) {
+        console.trace(error);
+    }
+}  
 
 };
 // on accroche un écouteur d'évènement sur le document : quand le chargement est terminé, on lance app.init

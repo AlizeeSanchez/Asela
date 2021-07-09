@@ -2,12 +2,13 @@ const db = require("../database");
 
 const Pet = {
 
+    
     //On recupere les chiens a l'adoption
     findDogNotAdopted: async (date) => {
         try{
             const pets = await db.query(
-                "SELECT * FROM pet WHERE adopt = false AND deceased = false AND type = 'chien' AND site_publish = true AND age <= $1 ORDER BY id;", [date]
-            );
+            "SELECT * FROM pet WHERE adopt = false AND deceased = false AND type = 'chien' AND site_publish = true AND age <= $1;", [date]
+           );
             return pets.rows;
         }catch (error){
             console.trace(error);
@@ -55,6 +56,17 @@ const Pet = {
         try{
             const pets = await db.query(
                 "SELECT * FROM pet WHERE id = $1 AND site_publish = true and adopt = false;", [id]
+            );
+            return pets.rows;
+        }catch (error){
+            console.trace(error);
+        }
+    },
+
+    findImgPet: async (id) => {
+        try{
+            const pets = await db.query(
+                "SELECT * FROM picture_pet WHERE pet_id = $1;", [id]
             );
             return pets.rows;
         }catch (error){
