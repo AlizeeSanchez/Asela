@@ -37,6 +37,8 @@ const questionnaireAdoptController = {
                 const allPet = await Pet.findAllPet();
                 const correspondance = await QuestionnaireAdopt.correspondanceSearch(questAdopt[0]);
                 const searchBlackList = await QuestionnaireAdopt.blackListSearch(questAdopt[0]);
+                const session = request.session.user;
+
                 if(searchBlackList.length >= 1){
                     blackList = true;
                 }else{
@@ -48,7 +50,8 @@ const questionnaireAdoptController = {
                         allPet,
                         correspondance,
                         blackList,
-                        searchBlackList
+                        searchBlackList,
+                        session
                     });
                 } else {
                     response.status(404).json(`Ce questionnaire n'existe pas.`);
@@ -127,6 +130,8 @@ const questionnaireAdoptController = {
                 const refused = await QuestionnaireAdopt.findAllQuestAdoptRefused(); //Refusé
                 const discontinued = await QuestionnaireAdopt.findAllQuestAdoptDiscontinued(); //Sans suite
                 const adopted = await QuestionnaireAdopt.findAllQuestAdopted(); //Adopté
+                const session = request.session.user;
+
                 if (waiting||processed||refused||discontinued||adopted/*|waintingList*/) {
                     response.render('questionnaireAdopt', {
                         waiting,
@@ -134,6 +139,7 @@ const questionnaireAdoptController = {
                         refused,
                         discontinued,
                         adopted,
+                        session
                     });
                 } else {
                     response.status(404).json(`Aucun questionnaire existant.`);

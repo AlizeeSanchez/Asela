@@ -10,10 +10,12 @@ const conditionController = {
             const priceOfAdopt = await Price.findPriceAdopt();
             const condition = await Condition.findCondition();
             const purebred_pet = await Condition.purebred_pet();
+            const session = request.session.user;
                 response.render('reglages', {
                     priceOfAdopt,
                     condition,
-                    purebred_pet
+                    purebred_pet,
+                    session
                 });
         }catch(error){
             console.trace(error);

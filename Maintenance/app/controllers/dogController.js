@@ -46,6 +46,7 @@ const dogController = {
         try{
             if (request.session.user) {
                 const petsDead = await Dog.findAllPetDeceaded();  
+                const session = request.session.user;
                 if (petsDead) {
                     const jason = {
                         pets: response.pets,
@@ -53,7 +54,7 @@ const dogController = {
                         petsDead
                     }
                     response.render('dog', {
-                        jason
+                        jason, session
                     });
                 } else {
                     response.status(404).json(`Il n'y a aucun chien qui a été adopté en bdd.`);

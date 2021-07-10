@@ -26,7 +26,7 @@
                     Il sera choyé par une famille d'accueil, ce qui permet de retrouver un équilibre quand ils ont un vécu difficile et surtout cela nous permet de connaitre un maximum les petites habitudes de chaque loulou, nous pouvons donc les confier à des familles qui leur correspondent au mieux ! 
                 </p>
             </div>
-            <div class="col-md-10" style="display: inline-flex; margin: 2rem;"> 
+            <div class="col-md-10 card-alignement" style="margin: 2rem;"> 
                 <% if(pets[0]) {%> 
                     <% for(let pet of pets) { %>
                         <a href="/V1/fiche/<%= pet.id %>" style="color: black" target="_blank" >
@@ -39,8 +39,7 @@
                                 </div>    
                             </div>
                         </a>
-                    <% } %>
-                </div>
+                    <% } %>          
                 <% }else{ %> 
                     <div class="alert alert-info" role="alert">
                         Il n'y a pas de chien à l'adoption en ce moment !

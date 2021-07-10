@@ -252,8 +252,7 @@ const app = {
           // on cible le bouton inscription dans la page signin
         const signin = document.querySelector('.validateUser');
         if(signin){
-            signin.addEventListener('click', user.saveUser);
-        console.log(signin);   
+            signin.addEventListener('click', user.saveUser);  
         }
 
         // on cible le bouton se connecter dans la page login
@@ -262,6 +261,27 @@ const app = {
             login.addEventListener('click', user.loginUser); 
      
         }
+
+        //On cible le bouton autorisé l'acces a un nouveau bénévole
+        const authorizedBtn = document.querySelectorAll('.authorizedBtn');
+        if(authorizedBtn){         
+            authorizedBtn.forEach((btn) => {
+                btn.addEventListener('click', user.authorizedBtn);
+            });   
+        }
+
+        // on cible le bouton modifier le profil dans la page profil
+        const editProfil = document.querySelector('.editProfil');
+        if(editProfil){
+            editProfil.addEventListener('click', user.editUser); 
+        }
+
+        // on cible le bouton modifier le mot de passe dans la page profil
+        const editPassword = document.querySelector('.editMDP');
+        if(editPassword){
+            editPassword.addEventListener('click', user.editMDP); 
+        }
+
     }
 };
 // on accroche un écouteur d'évènement sur le document : quand le chargement est terminé, on lance app.init

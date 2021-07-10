@@ -20,7 +20,7 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">Carte d'identité</th>
+          <th scope="col">Date</th>
           <th scope="col">Nom de famille</th>
           <th scope="col">Prénom </th>
           <th scope="col">Code postal</th>
@@ -29,7 +29,7 @@
           <th scope="col">ADRESSE</th>
           <th scope="col">EMAIL</th>
           <th scope="col">Commentaire</th>
-          <th scope="col">Date</th>
+          <th scope="col">Carte d'identité</th>
           
         </tr>
       </thead>
@@ -38,7 +38,7 @@
           <% for(let blacklist of blacklists){ %>
              
             <tr data-toggle="modal" data-target="#blacklistModal<%= blacklist.id %>">  
-                <td data-label="Passeport"><%= blacklist.number_id_passport %></td>
+                <td data-label="Date liste noire"><%= blacklist.date.toLocaleString('en-GB').substr(0, 10) %></td>
                 <td data-label="Nom"><%= blacklist.lastname %></a></td>
                 <td data-label="Prénom"><%= blacklist.firstname %></td>
                 <td data-label="Code postal"><%= blacklist.postal_code %></td>
@@ -47,7 +47,7 @@
                 <td data-label="Email"><%= blacklist.email %></td>
                 <td data-label="Adresse"><%= blacklist.adress %></td>
                 <td data-label="Commentaire"><%= blacklist.comment %></td>
-                <td data-label="Date liste noire"><%= blacklist.date.toLocaleString('en-GB').substr(0, 10) %></td>
+                <td data-label="Passeport"><%= blacklist.number_id_passport %></td>
             </tr>
           <!-------------------------------------------------MODAL supp Blacklist------------------------------------>
           <div class="modal fade bd-blacklist-modal-lg" id="blacklistModal<%= blacklist.id %>" tabindex="-1" role="dialog" aria-labelledby="blacklistModal<%= blacklist.id %>Label" aria-hidden="true">

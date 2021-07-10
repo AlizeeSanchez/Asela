@@ -332,6 +332,9 @@ body {
 	    width: auto;
 	}
 }
+
+
+
 @media screen and (max-width: 575px) {
 	.form-v4-content .form-detail .form-group {
 		flex-direction: column;
@@ -421,7 +424,6 @@ p{
 	text-align: center;
 }
 .error {
-	font-size: 180px;
 	font-weight: 100;
 }
 

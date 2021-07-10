@@ -35,6 +35,17 @@ const Other = {
             console.trace(error);
         }
     },
+
+    allConditions: async () => {
+        try{
+            const events = await db.query(
+                "SELECT * FROM condition_adopt;"
+         );
+            return events.rows;
+        }catch (error){
+            console.trace(error);
+        }
+    },
     
 }
 

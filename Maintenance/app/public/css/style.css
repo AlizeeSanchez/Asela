@@ -15,6 +15,24 @@
   margin-left: 4rem;
 }
 
+h5.identity {
+  color: #585e63;
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem;
+}
+
+.heart {
+  display: inline-flex;
+  justify-content: space-evenly;
+  color: cadetblue;
+}
+
+p.proverbe {
+  font-family: 'Caveat', cursive;
+  color: #6e777f;
+  font-size: 1.3rem;
+}
+
 .navbar {
   border: 0;
   font-size: 16px;
@@ -555,6 +573,7 @@ svg {
   visibility: visible;
   opacity: 1;
 }
+
 
 @media screen and (min-width: 768px) {
 

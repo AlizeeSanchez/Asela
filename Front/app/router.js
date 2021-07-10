@@ -45,11 +45,11 @@ router.post('/devenir-famille-accueil', formController.AddNewFormHostFamilly)
 
 // Toutes les démarches
 router.get('/nos-demarches', otherController.tearmAdopt)
+router.get('/nos-conditions', otherController.conditionAdopt)
 
 // Formulaire d'adoption
 router.get('/formulaire_adoption', formController.formAdopt)
 router.post('/formulaire_adoption', formController.AddNewFormAdopt)
-
 
 // Contact
 router.get('/contact', otherController.contact)

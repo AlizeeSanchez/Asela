@@ -2,11 +2,10 @@ const pet = {
     
     publishPet: async function (event){
         
-        const buttonClicked = event.target;
-        const modalElement = buttonClicked.closest('#modalPublish');
-        const modalId = modalElement.getAttribute('data-article-id');
         try{
-            console.log(modalId);
+            const buttonClicked = event.target;
+            const modalElement = buttonClicked.closest('#modalPublish');
+            const modalId = modalElement.getAttribute('data-article-id');    
             const response = await fetch(`http://localhost:3030/v1/publish/${modalId}`, {
                 method: 'PATCH',
                 body: modalId

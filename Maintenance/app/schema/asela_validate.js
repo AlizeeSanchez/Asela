@@ -37,6 +37,29 @@ const volunteerSchema = Joi.object({
             "string.pattern.base":`La valeur du numero de téléphone n'est pas valide`,
         }
         ),
+    userAdress: Joi.string()
+        .messages({
+            "string.empty": "La valeur de l'adresse doit être rempli",
+        }
+        ),
+
+    userPostal_code: Joi.string()
+        .regex(new RegExp('^(([0-8][0-9])|(9[0-5]))[0-9]{3}$')).required()
+        .min(5)
+        .max(5)
+        .messages({
+            "string.empty": "La valeur du code postal doit être rempli",
+            "string.min": "La valeur du code postal doit contenir 5 numéro",
+            "string.max": "La valeur du code postal doit contenir 5 numéro",
+            "string.pattern.base":`La valeur du code postal n'est pas valide`,
+        }
+        ),
+
+    userCity: Joi.string()
+        .messages({
+            "string.empty": "La valeur de la ville doit être rempli",
+        }
+        ),
 
     userEmail: Joi.string()
         .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'fr'] } }).required()

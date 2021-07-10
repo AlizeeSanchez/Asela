@@ -8,8 +8,9 @@ const blacklistController = {
             if (request.session.user) {
                 const blacklists = await Blacklist.findAllBlacklist();
                 if(blacklists){
+                    const session = request.session.user;
                     response.render('blacklist', {
-                        blacklists
+                        blacklists, session
                     });  
                 }else {
                     response.status(404).json(`Il n'y a aucun blacklister`);

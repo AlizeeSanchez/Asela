@@ -1,0 +1,305 @@
+<%- include('partials/header') %>
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3">
+  <div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+    <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+      <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0">
+      </div>
+    </div>
+    <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+      <div style="position:absolute;width:200%;height:200%;left:0; top:0">
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom px-4">
+      <h2 class="titlePage">Nos Conditions et frais d'adoptions</h2>
+    </div>
+    <div class="row2">
+      <!-- Pricing Table-->
+      <div class="col-lg-11 mb-12 mb-lg-0">
+        <div class="bg-white p-5 rounded-lg shadow">
+          <h1 class="h6 font-weight-bold mb-4">Les conditions suivantes devront être respectées, tous nos animaux méritent le meilleur, en tant qu'association de protection animale, notre objectif est d'assurer la paix et la sérénité à nos pensionnaires. <br>
+            Vous signerez ce réglement lors de l'adoption, toutes ses clauses apparaissent dans le contrat, nous liant.</h1>
+         
+          <hr>
+          <ul class="list-unstyled my-5 text-small text-left">
+            <% for(let condition of conditions) { %>   
+            <li class="mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+              </svg>
+              <%= condition.description%>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+      <!-- END -->
+        <div class="col-md-10 card-alignement" style="margin: 2rem;">
+          <div class="row text-center align-items-end">
+            <!-- Pricing Table-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+              <div class="bg-white p-5 rounded-lg shadow">
+                <h1 class="h6 text-uppercase font-weight-bold mb-4">Chien femelle</h1>
+                <!---<h2 class="h1 font-weight-bold">Femelle<span class="text-small font-weight-normal ml-2">/ month</span></h2>---->
+                
+                <div class="custom-separator my-4 mx-auto bg-primary"></div>
+                
+                <ul class="list-unstyled my-5 text-small text-left">
+                  <li class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg> 
+                    Stérilisation
+                  </li>
+                  <li class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg> 
+                    Primo Vaccin
+                  </li>
+                  <li class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg> 
+                    Identification
+                  </li>
+                  <li class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg> 
+                    Carnet de santé
+                  </li>
+                  <li class="mb-3 text-muted">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    <del>Rappel vaccin</del>
+                  </li>
+                  <li class="mb-3 text-muted">
+                    Un supplement sera demandé si le rappel vaccin à été fait et/ou si chien de race et/ou si chien catégorisé.                  
+                  </li>
+                </ul>
+                <p class="p-2 shadow rounded-pill green">280 €</p>
+              </div>
+            </div>
+            <!-- END -->
+            
+            
+            <!-- Pricing Table-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+              <div class="bg-white p-5 rounded-lg shadow">
+                <h1 class="h6 text-uppercase font-weight-bold mb-4">Chien Mâle</h1>
+                <!---<h2 class="h1 font-weight-bold">Femelle<span class="text-small font-weight-normal ml-2">/ month</span></h2>---->
+                
+                <div class="custom-separator my-4 mx-auto bg-primary"></div>
+                
+                <ul class="list-unstyled my-5 text-small text-left">
+                  <li class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg> 
+                    Stérilisation
+                  </li>
+                  <li class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg> 
+                    Primo Vaccin
+                  </li>
+                  <li class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg> 
+                    Identification
+                  </li>
+                  <li class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg> 
+                    Carnet de santé
+                  </li>
+                  <li class="mb-3 text-muted">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    <del>Rappel vaccin</del>
+                  </li>
+                  <li class="mb-3 text-muted">
+                    Un supplement sera demandé si le rappel vaccin à été fait et/ou si chien de race et/ou si chien catégorisé.
+                  </li>
+                </ul>
+                <p class="p-2 shadow rounded-pill green">240 €</p>
+              </div>
+            </div>
+            <!-- END -->
+            
+            
+            <!-- Pricing Table-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+              <div class="bg-white p-5 rounded-lg shadow">
+                <h1 class="h6 text-uppercase font-weight-bold mb-4">Chiot (-1 ans)</h1>
+                <!---<h2 class="h1 font-weight-bold">Femelle<span class="text-small font-weight-normal ml-2">/ month</span></h2>---->
+                
+                <div class="custom-separator my-4 mx-auto bg-primary"></div>
+                
+                <ul class="list-unstyled my-5 text-small text-left">
+                  <li class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg> 
+                    Primo Vaccin
+                  </li>
+                  <li class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg> 
+                    Identification
+                  </li>
+                  <li class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg> 
+                    Carnet de santé
+                  </li>
+                  <li class="mb-3 text-muted">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    <del>Rappel vaccin</del>
+                  </li>
+                  <li class="mb-3 text-muted">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    <del>Stérilisation/castration</del>
+                  </li>
+                  <li class="mb-3 text-muted">
+                    Un supplement sera demandé si le rappel vaccin ou/et la stérilisation/castration ont été faite ou si chien de race.
+                  </li>
+                </ul>
+                <p class="p-2 shadow rounded-pill green">250 €</p>
+              </div>
+            </div>
+            <!-- END -->           
+          </div>
+          
+        </div>
+        <div class="col-md-10 card-alignement" style="margin: 2rem;">
+          <div class="row text-center align-items-end">
+            <!-- Pricing Table-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+              <div class="bg-white p-5 rounded-lg shadow">
+                <h1 class="h6 text-uppercase font-weight-bold mb-4">Chat femelle</h1>
+               
+                <div class="custom-separator my-4 mx-auto bg-primary"></div>
+                
+                <ul class="list-unstyled my-5 text-small text-left">
+                  <li class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg> 
+                    Stérilisation
+                  </li>
+                  <li class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg> 
+                    Identification
+                  </li>
+                  <li class="mb-3 text-muted">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    <del>Vaccin</del>
+                  </li>
+                  <li class="mb-3 text-muted">
+                    Un supplement sera demandé si le vaccin à été fait.                  
+                  </li>
+                </ul>
+                <p class="p-2 shadow rounded-pill green">140 €</p>
+              </div>
+            </div>
+            <!-- END -->
+            
+            
+            <!-- Pricing Table-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+              <div class="bg-white p-5 rounded-lg shadow">
+                <h1 class="h6 text-uppercase font-weight-bold mb-4">Chat mâle</h1>
+               
+                <div class="custom-separator my-4 mx-auto bg-primary"></div>
+                
+                <ul class="list-unstyled my-5 text-small text-left">
+                  <li class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg> 
+                    Castration
+                  </li>
+                  <li class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg> 
+                    Identification
+                  </li>
+                  <li class="mb-3 text-muted">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    <del>Vaccin</del>
+                  </li>
+                  <li class="mb-3 text-muted">
+                    Un supplement sera demandé si le vaccin à été fait.                  
+                  </li>
+                </ul>
+                <p class="p-2 shadow rounded-pill green">105 €</p>
+              </div>
+            </div>
+            <!-- END -->
+            
+            
+            <!-- Pricing Table-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+              <div class="bg-white p-5 rounded-lg shadow">
+                <h1 class="h6 text-uppercase font-weight-bold mb-4">Chaton</h1>
+               
+                <div class="custom-separator my-4 mx-auto bg-primary"></div>
+                
+                <ul class="list-unstyled my-5 text-small text-left">
+                  <li class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg> 
+                    Identification
+                  </li>
+                  <li class="mb-3 text-muted">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    <del>Vaccin</del>
+                  </li>
+                  <li class="mb-3 text-muted">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    <del>Castration/Stérilisation</del>
+                  </li>
+                  <li class="mb-3 text-muted">
+                    Un supplement sera demandé si le vaccin à été fait.                  
+                  </li>
+                </ul>
+                <p class="p-2 shadow rounded-pill green">75 €</p>
+              </div>
+            </div>
+            <!-- END -->         
+          </div>
+          
+        </div> 
+      </div>
+    </div>
+</main>
+    
+    <%- include('partials/footer') %>

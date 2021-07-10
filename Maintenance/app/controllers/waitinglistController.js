@@ -9,9 +9,11 @@ const waitinglistController = {
             if (request.session.user) {
                 const waitingCat = await Waitinglist.findAllWaitingCat();
                 const waitingDog = await Waitinglist.findAllWaitingDog();
+                const session = request.session.user;
                 response.render('waitinglist', {
                     waitingCat,
-                    waitingDog
+                    waitingDog,
+                    session
                 });
             }else{
                 response.render('500');

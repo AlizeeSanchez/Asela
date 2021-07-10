@@ -4,7 +4,10 @@ const dashboardController = {
     home: async (request, response) => {
         try{
             if (request.session.user) {
-                response.render('dashboard');
+                const session = request.session.user;
+                response.render('dashboard', {
+                    session
+                });
             }else{
                 response.render('500');
             }

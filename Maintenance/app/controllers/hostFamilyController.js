@@ -12,6 +12,8 @@ const hostFamilyController = {
                 const hostFamilyHerault = await HostFamily.findHostFamilyByDpt34();
                 const hostFamilyAutre = await HostFamily.findHostFamilyByDptAutre();
                 const noLongerContact = await HostFamily.findHostFamilyNoContact();
+                const session = request.session.user;
+
                 if(hostFamilyAll){
                     const allHostFamilly = {
                         all: hostFamilyAll,
@@ -21,7 +23,7 @@ const hostFamilyController = {
                         ancienne: noLongerContact
                     }
                     response.render('hostFamily',{
-                        allHostFamilly
+                        allHostFamilly, session
                     });
                 }else {
                     response.status(404).json('Il n\'y a aucune famille d\'acceuil dans ces departements')

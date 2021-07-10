@@ -25,8 +25,8 @@
                 <table class="table table-hover" >
                     <thead>
                         <tr>
-                            <th>Date d'entrée</th>
                             <th>Nom de l'animal</th>
+                            <th>Date d'entrée</th>
                             <th>Race</th>
                             <th>Age</th>
                             <th>Sexe</th>
@@ -39,8 +39,8 @@
                     
                     <% for(let pet of jason.pets) { %>
                         <tbody class="m-phone">
-                            <td data-label="Date entrée"><%if(pet.date_supported){%><%= pet.date_supported.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
                             <td data-label="Nom"><a href="pet/<%= pet.id %>"><%= pet.name %></a></td>
+                            <td data-label="Date entrée"><%if(pet.date_supported){%><%= pet.date_supported.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
                             <td data-label="Race"><%if(pet.breed){%><%= pet.breed %> <%}else{%>Inconnu<%}%></td>
                             <td data-label="Age"><%if(pet.age){%><%= pet.age.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
                             <td data-label="Sexe"><%if(pet.sexe){%><%= pet.sexe %> <%}else{%>Inconnu<%}%></td>
@@ -125,8 +125,8 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Date d'entrée</th>
                         <th scope="col">Nom</th>
+                        <th scope="col">Date d'entrée</th>
                         <th scope="col">Race</th>
                         <th scope="col">Age</th>
                         <th scope="col">Sexe</th>
@@ -141,8 +141,8 @@
                 <tbody>
                     <% for(pet of jason.petsAdopt){ %>
                         <tr>
-                            <td data-label="Date entrée"><%if(pet.date_supported){%><%= pet.date_supported.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
                             <td data-label="Nom"> <a href="pet/<%= pet.id %>"><%= pet.name %> <% if(pet.last_name_pet){%> (<%= pet.last_name_pet %>) <%}else{%><%}%>  </a></td>
+                            <td data-label="Date entrée"><%if(pet.date_supported){%><%= pet.date_supported.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
                             <td data-label="Race"><%if(pet.breed){%><%= pet.breed %> <%}else{%>Inconnu<%}%></td>
                             <td data-label="Age"><%if(pet.age){%><%= pet.age.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
                             <td data-label="Sexe"><%if(pet.sexe){%><%= pet.sexe %> <%}else{%>Inconnu<%}%></td>
@@ -162,8 +162,8 @@
             <table class="table table-hover">
                 <thead class="TitleTab">
                     <tr>
-                        <th scope="col">Date d'entrée</th>
                         <th scope="col">Nom de l'animal</th>
+                        <th scope="col">Date d'entrée</th>
                         <th scope="col">Race</th>
                         <th scope="col">Robe</th>
                         <th scope="col">Date naissance</th>
@@ -174,9 +174,9 @@
                 </thead>
                 <tbody>
                     <% for(pet of jason.petsDead) { %>
-                        <tr>                        
+                        <tr>
+                            <td data-label="Nom"> <a href="pet/<%= pet.id %>"><%= pet.name %> <% if(pet.last_name_pet){%> (<%= pet.last_name_pet %>) <%}else{%><%}%>  </a></td>                    
                             <td data-label="Date entrée"><%if(pet.date_supported){%><%= pet.date_supported.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>
-                            <td data-label="Nom"> <a href="pet/<%= pet.id %>"><%= pet.name %> <% if(pet.last_name_pet){%> (<%= pet.last_name_pet %>) <%}else{%><%}%>  </a></td>
                             <td data-label="Race"><%if(pet.breed){%><%= pet.breed %> <%}else{%>Inconnu<%}%></td>
                             <td data-label="Robe"><%if(pet.color){%><%= pet.color %> <%}else{%>Inconnu<%}%></td>
                             <td data-label="Age"><%if(pet.age){%><%= pet.age.toLocaleString('en-GB').substr(0, 10) %> <%}else{%>Inconnu<%}%> </td>

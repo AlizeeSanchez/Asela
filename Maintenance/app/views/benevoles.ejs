@@ -1,0 +1,81 @@
+<%- include('partials/header') %>
+
+<div >
+    <h3 style="text-align:center;"> ASELA > Gestion de l'acces aux bénévoles.</h3>
+</div>
+
+<div class ="bande-top">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="benevole-tab" data-toggle="tab" href="#benevole" role="tab" aria-controls="benevole" aria-selected="true">Bénévoles</a>
+        </li>
+    </ul>
+    <!--------------------------------------------Section Bénévoles--------------------------------------->
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="benevole" role="tabpanel" aria-labelledby="benevole-tab">
+                <table class="table table-hover" >
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Email</th>
+                            <th>Téléphone</th>
+                            <th>Admin</th>
+                        </tr>
+                    </thead>
+                    <% for(let benevole of benevoles) { %>
+                        <tbody class="m-phone">
+                            <td data-label="Nom"><%= benevole.firstname %></td>
+                            <td data-label="Prénom"><%= benevole.lastname %></td>
+                            <td data-label="Email"><%= benevole.mail %></td>
+                            <td data-label="Téléphone"><%= benevole.number%> </td>
+                            <td data-label="Admin"><% if(benevole.admin === true){ %>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#adminModale<%= benevole.id %>">OUI</button>
+                                <% } else{ %>
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#adminModale<%= benevole.id %>">NON</button>
+                                <% } %>
+                            </td>                                  
+                        </tbody>
+                        <!---------Modale de publibenevoleion ----------->
+                        <div class="modal fade" id="adminModale<%= benevole.id %>" tabindex="-1" role="dialog" aria-labelledby="publishModal" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content" id="adminModale" data-article-id="<%= benevole.id %>">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="publishModal">Bénévole Autorisé</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <% if (benevole.admin === true) { %>
+                                            <p>Voulez vous supprimer ce bénévole ?</p>
+                                        <% } else { %>
+                                            <p>Voulez vous autorisé ce bénévole à acceder à ce site de gestion de l'association ? </p>
+                                        <% } %>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                            <% if (benevole.admin === true) { %>
+                                        <button type="button" class="btn btn-primary authorizedBtn">Oui supprimer</button>
+                                        <% } else { %>
+                                            <button type="button" class="btn btn-primary authorizedBtn">Oui autorisé </button>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>         
+                    <% } %>
+                </table>
+        </div>
+    </div>
+</div>
+        
+                  
+                
+<%- include('partials/footer') %>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/js/app.js"></script>
+<script src="/js/user.js"></script>

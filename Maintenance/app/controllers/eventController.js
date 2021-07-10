@@ -7,11 +7,14 @@ const eventController = {
     //On recupere les evenements
     allEvent: async (request, response) => {
         try{
-            if (request.session.user) {
+
+
+            if (request.session.user) {            
+                const session = request.session.user;
                 const events = await Event.allEvent();
                 if (events) {
                     response.render('event', {
-                        events
+                        events, session
                     });
                 } else {
                      response.status(404).json(`Il n'y a aucun evenement en BDD.`);

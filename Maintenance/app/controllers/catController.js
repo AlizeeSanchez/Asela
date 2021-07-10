@@ -47,13 +47,14 @@ const catController = {
             if (request.session.user) {
                 const petsDead = await Cat.findAllCatDeceaded();  
                 if (petsDead) {
+                    const session = request.session.user;
                     const jason = {
                         pets: response.pets,
                         petsAdopt: response.petsAdopt,
                         petsDead
                     }
                     response.render('cat', {
-                        jason
+                        jason, session
                     });   
                 } else {
                     response.status(404).json(`Il n'y a aucun chat qui a été adopté en bdd.`);

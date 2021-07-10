@@ -8,6 +8,9 @@ const user= {
             const userLastname = document.getElementById('userLastname').value;
             const userFirstname = document.getElementById('userFirstname').value;
             const userNumber_phone = document.getElementById('userNumber_phone').value;
+            const userAdress = document.getElementById('userAdress').value;
+            const userPostal_code = document.getElementById('userPostal_code').value;
+            const userCity = document.getElementById('userCity').value;
             const userEmail = document.getElementById('userEmail').value;
             const userPassword = document.getElementById('userPassword').value;
             const userValidate_password = document.getElementById('userValidate_password').value;
@@ -16,11 +19,14 @@ const user= {
                 userLastname: userLastname,
                 userFirstname: userFirstname,
                 userNumber_phone: userNumber_phone,
+                userAdress: userAdress,
+                userPostal_code: userPostal_code,
+                userCity: userCity,
                 userEmail: userEmail,
                 userPassword: userPassword,
                 userValidate_password: userValidate_password
             });
-            
+            console.log(dataUser);
             const response = await fetch(`http://localhost:3030/v1/signin`, {
                 method: 'POST',
                 body: dataUser,
@@ -75,7 +81,90 @@ const user= {
         }catch(error){
             console.trace(error);
         }
-    }
+    },
+
+    authorizedBtn: async function (event) {
+        try{
+            const buttonClicked = event.target;
+            const modalElement = buttonClicked.closest('#adminModale');
+            const modalId = modalElement.getAttribute('data-article-id'); 
+            console.log(modalId);   
+            const response = await fetch(`http://localhost:3030/v1/admin-authorized/${modalId}`, {
+                method: 'PATCH',
+            });
+            document.location.reload();
+            console.log(response);
+        }catch(error) {
+            console.trace(error);
+        }
+    },
+
+    editUser: async function (event) {
+        try{
+            const buttonClicked = event.target;
+            const modalElement = buttonClicked.closest('.register-modif');
+            const modalId = modalElement.getAttribute('data-article-id');
+            const userNumber = document.getElementById('userNumber_phone').value;
+            const userEmail = document.getElementById('userEmail').value;
+            const userAdress = document.getElementById('userAdress').value;
+            const userCity = document.getElementById('userCity').value; 
+            const userPostal_code = document.getElementById('userPc').value;
+
+            console.log('mon id', modalId);
+
+            const dataUser = JSON.stringify({
+                id: modalId,
+                number: userNumber,
+                mail: userEmail,
+                adress: userAdress,
+                city: userCity,
+                postal_code: userPostal_code
+            });
+            
+            const response = await fetch(`http://localhost:3030/v1/my-profile/${modalId}`, {
+                method: 'PATCH',
+                body: dataUser,
+                headers:{
+                    'Content-Type' : 'application/json'
+                },
+            });
+            document.location.reload();
+            console.log(response);
+        }catch(error) {
+            console.trace(error);
+        }
+    },
+
+    editMDP: async function (event) {
+        try{
+            const buttonClicked = event.target;
+            const modalElement = buttonClicked.closest('.register-modif');
+            const modalId = modalElement.getAttribute('data-article-id');
+            const userPassword = document.getElementById('userPassword').value;
+            const userNew_password = document.getElementById('userNew_password').value;
+            console.log('mon id', modalId);
+
+            const data = JSON.stringify({
+                id: modalId,
+                oldpassword : userPassword,
+                password: userNew_password
+            });
+
+            console.log(data);
+
+            const response = await fetch(`http://localhost:3030/v1/update-my-password/${modalId}`, {
+                method: 'PATCH',
+                body: data,
+                headers:{
+                    'Content-Type' : 'application/json'
+                },
+            });
+            //document.location.reload();
+            console.log(response);
+        }catch(error) {
+            console.trace(error);
+        }
+    },
     
 };
 // on accroche un écouteur d'évènement sur le document : quand le chargement est terminé, on lance user.init

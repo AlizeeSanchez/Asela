@@ -10,6 +10,8 @@ const veterinaryController = {
                 const veterinaryGard = await Veterinary.findVeterinaryByDpt30();
                 const veterinaryHerault = await Veterinary.findVeterinaryByDpt34();
                 const veterinaryAutre = await Veterinary.findVeterinaryByDptAutre();
+                const session = request.session.user;
+
                 if(veterinary){
                     const allveterinary = {
                         gard: veterinaryGard,
@@ -17,7 +19,8 @@ const veterinaryController = {
                         autre: veterinaryAutre
                     }
                     response.render('veterinary', {
-                        allveterinary
+                        allveterinary,
+                        session
                     });
                 }
                 else {

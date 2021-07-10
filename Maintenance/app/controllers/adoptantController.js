@@ -5,10 +5,11 @@ const Adoptant = require("../models/Adoptant");
         findAllAdoptant: async (request, response) => {
             try {
                 if (request.session.user) {
+                    const session = request.session.user;
                     const adoptant = await Adoptant.findAllAdoptant();
                     if(adoptant){
                         response.render('adoptants', {
-                            adoptant
+                            adoptant, session
                         });        
                     }else{
                         response.status(404).json(`Il n'y a aucun adoptant`);
@@ -26,6 +27,7 @@ const Adoptant = require("../models/Adoptant");
         findAllPetAdoptant: async (request, response) => {
             try {
                 if (request.session.user) {
+                    const session = request.session.user;
                     const id = parseInt(request.params.id);
                     const adoptant = await Adoptant.findOneAdoptant(id);
                     const petAdopt = await Adoptant.findAllPetToAdoptant(id);
@@ -33,7 +35,7 @@ const Adoptant = require("../models/Adoptant");
                     const correspondance = await Adoptant.correspondanceSearch(adoptant);
                     if(adoptant){          
                         response.render('oneAdoptant', {
-                            petAdopt, commentAdoptant, adoptant, correspondance
+                            petAdopt, commentAdoptant, adoptant, correspondance, session
                         }); 
                     }else {
                     response.status(404).json(`Il n'y a aucun adoptant`);

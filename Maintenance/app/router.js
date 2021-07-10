@@ -29,6 +29,12 @@ router.get('/login', userController.loginPage)
 router.post('/login', userController.login)
 router.get('/signin', userController.signInPage)
 router.post('/signin', validateBody(volunteerSchema), userController.createUser)
+router.get('/admin-authorized', userController.adminPage)
+router.patch('/admin-authorized/:id', userController.adminAuthorized)
+router.get('/my-profile/:id', userController.findOneProfil)
+router.patch('/my-profile/:id', userController.editProfil)
+router.patch('/update-my-password/:id', userController.editPassword)
+router.get('/deconnexion', userController.logout)
 
 //---------------------------------------Dashboard------------------------------
 router.get('/dashboard', dashboardController.home)

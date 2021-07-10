@@ -16,9 +16,11 @@ const petController = {
                 const imgPet = await Pet.findImgPet(petId);
                 const comments = await Pet.findAllCommentPet(petId);
                 const questionnaire = await QuestionnaireAdopt.findOneQuestAdoptByPetID(petId);
+                const session = request.session.user;
+
                 if (pet) {                
                     response.render('onePet', {
-                        pet, hostFamilly, allHostFamilly, adoptant, imgPet, comments, questionnaire
+                        pet, hostFamilly, allHostFamilly, adoptant, imgPet, comments, questionnaire, session
                     });
                 }else{
                     response.render('500');

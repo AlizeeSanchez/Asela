@@ -53,7 +53,7 @@ app.use(
 	session({
 		secret: 'les petits chats sont mignons',
 		resave: false,
-		saveUninitialized: false,
+		saveUninitialized: true,
 		cookie: {maxAge: 24 * 60 * 60 * 1000},
 		//logged: true
 	})

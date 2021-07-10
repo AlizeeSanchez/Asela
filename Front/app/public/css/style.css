@@ -15,11 +15,47 @@ p{
 img.img-fluid, h2  {
     margin-bottom: -0.3rem;
 }
+
+h1.asso-name {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
 /*----------------------questionnaires */
 h5{
     margin-bottom: 1rem !important;
     font-size: 1.3rem !important;
     text-decoration: underline;
+}
+
+.important-form {
+    text-decoration: underline;
+    color: #2196F3;
+    font-weight: bold;
+}
+
+/*---------------conditions et frais --*/
+
+ul.reglement {
+    list-style: unset;
+    font-size: 1.1rem !important;
+    font-style: italic;
+}
+
+ul.reglement li {
+    margin-bottom: 1rem;
+}
+
+a.img-a {
+    display: flex;
+    place-content: center;
+}
+
+p.p-2.shadow.rounded-pill.green {
+    text-align: center;
+    background-color: #64b941;
+    color: white;
+    font-weight: bolder;
 }
 
 /*----------------------home page */
@@ -305,9 +341,7 @@ h2.titlePage {
     }
 }
 
-.profile-header {
-    transform: translateY(5rem);
-}
+
 
 .profilSize{
     font-size: 1.5rem !important;
@@ -427,7 +461,7 @@ select#children_numberFA {
     top: 0;
     left: -15em;
     overflow: hidden;
-    transition: all .3s ease-in;
+
     width: 15em;
     height: 100%;
     background-image: url(/img/nav.png);
@@ -473,33 +507,18 @@ select#children_numberFA {
     position: absolute;
     top: 50%;
     left: 4em;
-    transform: translateY(-50%);
+   
  }
  
- .s-sidebar__nav-link:hover {
-    background: #4d6276;
- }
- 
- .s-sidebar__nav-link > i {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: inline-block;
-    width: 4em;
-    height: 4em;
- }
- 
- .s-sidebar__nav-link > i::before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
- }
  
  /* Mobile First */
  @media (min-width: 42em) {
     .s-layout__content {
        margin-left: 4em;
+    }
+
+    .col-md-10.card-alignement {
+        display: inline-flex !important;
     }
     
     /* Sidebar */
