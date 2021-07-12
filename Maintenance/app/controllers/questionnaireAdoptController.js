@@ -105,10 +105,10 @@ const questionnaireAdoptController = {
                                 await Adoptant.AdoptantToPet(data_pet);
                             } 
                         }
-                        response.redirect('http://localhost:3030/v1/questionnaire');
+                        response.redirect('http://ec2-3-219-56-196.compute-1.amazonaws.com:3030/v1/questionnaire');
                     }else if(jason.status === `Liste d'attente`){
                         await QuestionnaireAdopt.waitList(jason);
-                        response.redirect('http://localhost:3030/v1/questionnaire');
+                        response.redirect('http://ec2-3-219-56-196.compute-1.amazonaws.com:3030/v1/questionnaire');
                     }
                 }else {
                     response.status(404).json(`Ce questionnaire n'existe pas.`);

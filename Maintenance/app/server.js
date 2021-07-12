@@ -31,7 +31,7 @@ app.post('/photos/upload/:id', upload.array('files[]'), async (req, res) => {
 				id : petId
 			}
 			const newImg = await Pet.uploadImgPet(obj);
-			res.redirect(`http://localhost:3030/v1/pet/${petId}`)
+			res.redirect(`http://ec2-3-219-56-196.compute-1.amazonaws.com:3030/v1/pet/${petId}`)
 			}
 	}catch(error){
 		console.trace(error);
