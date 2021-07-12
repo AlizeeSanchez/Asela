@@ -41,7 +41,7 @@ const adoptant = {
           const adoptantData = JSON.stringify({number_id_passport, lastname, firstname, birthday, job, spouseLastname, spouseFirstname, spouseBirthday, spouseJob, postal_code, number_phone, number_phone2, city, email, adress, type_home, fbPseudo, numberAdultHome, numberChlidHome, petComposition, black_list/*, pet_adopt, datePetAdopt*/});
           console.log('mes données adoptant', adoptantData);
 
-          const response = await fetch(`http://localhost:3030/v1/adoptants`, {
+          const response = await fetch(`/v1/adoptants`, {
           method: 'POST',
           body: adoptantData,
           headers:{
@@ -65,7 +65,7 @@ const adoptant = {
       const commentAdoptant = document.getElementById('commentAdoptant').value;
       const adoptantComment = JSON.stringify({commentAdoptant});
 
-        const response = await fetch(`http://localhost:3030/v1/addCommentAdoptant/${articleId}`, {
+        const response = await fetch(`/v1/addCommentAdoptant/${articleId}`, {
         method: 'POST',
         body: adoptantComment,
         headers:{
@@ -99,13 +99,13 @@ const adoptant = {
         dataQuestMeet 
       });
         
-        const response = await fetch(`http://localhost:3030/v1/questionnaire/${articleId}`, {
+        const response = await fetch(`/v1/questionnaire/${articleId}`, {
         method: 'PATCH',
         body: treatmentValidate,
         headers:{
             'Content-Type' : 'application/json'
         },
-        success: window.location.href = 'http://localhost:3030/v1/questionnaire'
+        success: window.location.href = '/v1/questionnaire'
     });
     document.location.reload();
     }catch(error) {
@@ -126,7 +126,7 @@ const adoptant = {
     });
     
     try{
-        const response = await fetch(`http://localhost:3030/v1/editCommentAdoptant/${modaleId}`, {
+        const response = await fetch(`/v1/editCommentAdoptant/${modaleId}`, {
             method: 'PATCH',
             body: data,
             headers:{
@@ -145,7 +145,7 @@ suppComment: async function (event){
     const modaleId = modale.getAttribute('data-article-id');
 
     try{
-        const response = await fetch(`http://localhost:3030/v1/deleteCommentAdoptant/${modaleId}`, {
+        const response = await fetch(`/v1/deleteCommentAdoptant/${modaleId}`, {
             method: 'DELETE', 
         });
         document.location.reload();

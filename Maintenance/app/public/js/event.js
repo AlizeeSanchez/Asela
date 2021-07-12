@@ -37,7 +37,7 @@ const events= {
         console.log(event);
         
         
-        const response = await fetch(`http://localhost:3030/v1/events`, {
+        const response = await fetch(`/v1/events`, {
             method: 'POST',
             body: event,
             headers:{
@@ -59,7 +59,7 @@ const events= {
 
         event.preventDefault();
         try{
-        const response = await fetch(`http://localhost:3030/v1/upload`, {
+        const response = await fetch(`/v1/upload`, {
             method: 'POST',
             headers:{
                 'Content-Type' : 'application/json'

@@ -41,7 +41,7 @@ const cat = {
             const articleElement = buttonClicked.closest('.article');
             const articleId = articleElement.getAttribute('data-article-id');
             
-            const response = await fetch(`http://localhost:3030/v1/pet/${articleId}`, {
+            const response = await fetch(`/v1/pet/${articleId}`, {
             method: 'GET',
         });
         console.log(response);
@@ -58,7 +58,7 @@ const cat = {
         const modalId = modalElement.getAttribute('data-article-id');
         
         try{
-            const response = await fetch(`http://localhost:3030/v1/site/${modalId}`, {
+            const response = await fetch(`/v1/site/${modalId}`, {
             method: 'PATCH',
             body: modalId
         });
@@ -75,7 +75,7 @@ const cat = {
         console.log(articleId);
         try{
 
-            const response = await fetch(`http://localhost:3030/v1/cats/${articleId}`, {
+            const response = await fetch(`/v1/cats/${articleId}`, {
             method: 'DELETE'
         });
         document.location.reload();
@@ -99,7 +99,7 @@ addNewCat: async function (event){
         const event = JSON.stringify({ eventName: eventName, eventAge: eventAge, eventSexe: eventSexe, eventRace: eventRace, eventAmity: eventAmity, eventColor: eventColor, eventIde: eventIde, eventSterilised: eventSterilised, eventDescription: eventDescription});
         console.log(event);
         
-        const response = await fetch(`http://localhost:3030/v1/cats`, {
+        const response = await fetch(`/v1/cats`, {
         method: 'POST',
         body: event, 
         headers:{

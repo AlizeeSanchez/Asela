@@ -16,7 +16,7 @@ const hostfamily = {
             
             const hostfamily = JSON.stringify({ firstname, lastname, numberPhone, postalCode, city, adress, email, composition, acceptedPet, petAsela});
         
-            const response = await fetch(`http://localhost:3030/v1/addHostFamily`, {
+            const response = await fetch(`/v1/addHostFamily`, {
                 method: 'POST',
                 body: hostfamily,
                 headers:{
@@ -65,7 +65,7 @@ editHostFamilly: async function (event){
             comment: comment
         });
         
-        const response = await fetch(`http://localhost:3030/v1/editHostFamily/${articleId}`, {
+        const response = await fetch(`/v1/editHostFamily/${articleId}`, {
         method: 'PATCH',
         body: data,
         headers: {
@@ -95,7 +95,7 @@ addCommentHostfamilly: async function (event){
         console.log('mon commentaire a envoye: ',commentHostfamilly);
         
         const hostfamillyComment = JSON.stringify({commentHostfamilly});
-        const response = await fetch(`http://localhost:3030/v1/addCommentHostfamily/${articleId}`, {
+        const response = await fetch(`/v1/addCommentHostfamily/${articleId}`, {
         method: 'PATCH',
         body: hostfamillyComment,
         headers:{
@@ -116,7 +116,7 @@ blacklistHostFamilly: async function (event){
     const articleId = articleElement.getAttribute('data-article-id');
     try{
         
-        const response = await fetch(`http://localhost:3030/v1/blacklistHostFamilly/${articleId}`, {
+        const response = await fetch(`/v1/blacklistHostFamilly/${articleId}`, {
         method: 'POST',
         headers:{
             'Content-Type' : 'application/json'

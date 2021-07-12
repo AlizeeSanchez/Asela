@@ -29,7 +29,7 @@ const app = {
 
             console.log('mon formulaire',userData);
 
-            const response = await fetch(`http://localhost:4040/v1/devenir-famille-accueil`, {
+            const response = await fetch(`/v1/devenir-famille-accueil`, {
                 body: userData,
                 method: 'POST',
                 headers:{
@@ -52,7 +52,7 @@ const app = {
 
             console.log('mon formulaire',userData);
 
-            const response = await fetch(`http://localhost:4040/v1/formulaire_adoption`, {
+            const response = await fetch(`/v1/formulaire_adoption`, {
                 body: userData,
                 method: 'POST',
                 headers:{

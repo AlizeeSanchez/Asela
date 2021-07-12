@@ -6,7 +6,7 @@ const pet = {
             const buttonClicked = event.target;
             const modalElement = buttonClicked.closest('#modalPublish');
             const modalId = modalElement.getAttribute('data-article-id');    
-            const response = await fetch(`http://localhost:3030/v1/publish/${modalId}`, {
+            const response = await fetch(`/v1/publish/${modalId}`, {
                 method: 'PATCH',
                 body: modalId
             });
@@ -29,7 +29,7 @@ const pet = {
         const book = JSON.stringify({ name: name, id: modalId});
         try{
             
-            const response = await fetch(`http://localhost:3030/v1/booked/${modalId}`, {
+            const response = await fetch(`/v1/booked/${modalId}`, {
                 method: 'PATCH',
                 body: book,
                 headers:{
@@ -57,7 +57,7 @@ const pet = {
         const eventDescription = document.getElementById('descriptionAddDog').value;
         const event = JSON.stringify({ eventName: eventName, eventAge: eventAge, eventSexe: eventSexe, eventRace: eventRace, eventAmity: eventAmity, eventColor: eventColor, eventWeight: eventWeight, eventIde: eventIde, eventSterilised: eventSterilised, eventDescription: eventDescription});
         
-        const response = await fetch(`http://localhost:3030/v1/dogs`, {
+        const response = await fetch(`/v1/dogs`, {
             method: 'POST',
             body: event,
             headers:{
@@ -84,7 +84,7 @@ const pet = {
         const eventDescription = document.getElementById('descriptionAddCat').value;
         const event = JSON.stringify({ eventName: eventName, eventAge: eventAge, eventSexe: eventSexe, eventRace: eventRace, eventAmity: eventAmity, eventColor: eventColor, eventIde: eventIde, eventSterilised: eventSterilised, eventDescription: eventDescription});
         
-        const response = await fetch(`http://localhost:3030/v1/cats`, {
+        const response = await fetch(`/v1/cats`, {
            method: 'POST',
             body: event, 
             headers:{
@@ -107,7 +107,7 @@ const pet = {
         const petId = petElement.getAttribute('data-article-id');
         
         try{
-            const response = await fetch(`http://localhost:3030/v1/pet/${petId}`, {
+            const response = await fetch(`/v1/pet/${petId}`, {
                 method: 'DELETE',
             });
             console.log(response);

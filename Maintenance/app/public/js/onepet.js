@@ -34,7 +34,7 @@ const onePet = {
                 eventAvatar: eventAvatar
             });
             
-            const response = await fetch(`http://localhost:3030/v1/pet/${articleId}`, {
+            const response = await fetch(`/v1/pet/${articleId}`, {
             method: 'PATCH',
             body: dataPet,
             headers: {
@@ -63,7 +63,7 @@ const onePet = {
             const articleId = article.getAttribute('data-article-id');
             const dateSupported = document.getElementById('valideSupportedPet').value;
             const dateChangeSupported = JSON.stringify({ dateSupported: dateSupported });
-            const response = await fetch(`http://localhost:3030/v1/pet/datesupported/${articleId}`, {
+            const response = await fetch(`/v1/pet/datesupported/${articleId}`, {
             method: 'PATCH',
             body: dateChangeSupported,
             headers:{
@@ -87,7 +87,7 @@ const onePet = {
             const articleId = article.getAttribute('data-article-id');
             const dateVaccine = document.getElementById('ValideDateVaccine').value;
             const dateChangeVaccine = JSON.stringify({ dateVaccine: dateVaccine });
-            const response = await fetch(`http://localhost:3030/v1/pet/datevaccine/${articleId}`, {
+            const response = await fetch(`/v1/pet/datevaccine/${articleId}`, {
                  method: 'PATCH',
                  body: dateChangeVaccine,
                  headers:{
@@ -113,7 +113,7 @@ const onePet = {
                 hostFamilyId: hostFamilyId
              })
              
-             const response = await fetch(`http://localhost:3030/v1/putHostFamilyToPet/${articleId}`, {
+             const response = await fetch(`/v1/putHostFamilyToPet/${articleId}`, {
                  method: 'PATCH',
                  body: dataHostFamily,
                  headers: {
@@ -145,7 +145,7 @@ const onePet = {
         
           const petComment = JSON.stringify({commentPet});
     
-            const response = await fetch(`http://localhost:3030/v1/pet/comment/${articleId}`, {
+            const response = await fetch(`/v1/pet/comment/${articleId}`, {
             method: 'POST',
             body: petComment,
             headers:{
@@ -168,7 +168,7 @@ const onePet = {
           const article = buttonSave.closest('.modal-image');
           const articleId = article.getAttribute('data-article-id');
   
-            const response = await fetch(`http://localhost:3030/v1/pet/deletemypicturepet/${articleId}`, {
+            const response = await fetch(`/v1/pet/deletemypicturepet/${articleId}`, {
             method: 'DELETE',
             headers:{
                 'Content-Type' : 'application/json'
@@ -188,7 +188,7 @@ const onePet = {
           const article = buttonSave.closest('.modal-comment');
           const articleId = article.getAttribute('data-article-id');
   
-            const response = await fetch(`http://localhost:3030/v1/pet/deletemycommentpet/${articleId}`, {
+            const response = await fetch(`/v1/pet/deletemycommentpet/${articleId}`, {
             method: 'DELETE',
             headers:{
                 'Content-Type' : 'application/json'

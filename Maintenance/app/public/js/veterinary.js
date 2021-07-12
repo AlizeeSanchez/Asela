@@ -6,7 +6,7 @@ const veterinary = {
             
             const userData = JSON.stringify(Array.from(document.querySelectorAll('#registrationForm input')).reduce((acc, select) => ({...acc, [select.id]: select.value}), {}));
             console.log('userData', userData);
-            const response = await fetch(`http://localhost:3030/v1/veterinary`, {
+            const response = await fetch(`/v1/veterinary`, {
                 body: userData,
                 method: 'POST',
                 headers:{
@@ -71,7 +71,7 @@ const veterinary = {
                 cat_ide:cat_ide,
             });
 
-           const response = await fetch(`http://localhost:3030/v1/veterinary`, {
+           const response = await fetch(`/v1/veterinary`, {
                body: userData,
                method: 'PATCH',
                headers:{
@@ -92,7 +92,7 @@ const veterinary = {
         const articleId = articleElement.getAttribute('data-article-id');
         console.log(articleId);
         try{
-            const response = await fetch(`http://localhost:3030/v1/veterinary/${articleId}`, {
+            const response = await fetch(`/v1/veterinary/${articleId}`, {
                 method: 'DELETE',
 
              });

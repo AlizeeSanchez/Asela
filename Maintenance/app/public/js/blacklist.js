@@ -15,7 +15,7 @@ const blacklist = {
             
             const blacklistData = JSON.stringify({number_id_passport, lastname, firstname, postal_code, number_phone, city, email, adress, comment });
             
-            const response = await fetch(`http://localhost:3030/v1/blacklist`, {
+            const response = await fetch(`/v1/blacklist`, {
             method: 'POST',
             body: blacklistData,
             headers:{
@@ -35,7 +35,7 @@ const blacklist = {
         const blacklistElement = buttonClicked.closest('.modal-content');
         const blacklistId = blacklistElement.getAttribute('data-article-id');
         try{
-            const response = await fetch(`http://localhost:3030/v1/blacklist/${blacklistId}`, {
+            const response = await fetch(`/v1/blacklist/${blacklistId}`, {
                 method: 'DELETE',
              });
         console.log(response);   

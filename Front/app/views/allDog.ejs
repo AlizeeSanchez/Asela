@@ -31,7 +31,7 @@
                     <% for(let pet of pets) { %>
                         <a href="/V1/fiche/<%= pet.id %>" style="color: black" target="_blank" >
                             <div class="card">
-                                <div class="card-avatar" style="background-image: url(http://localhost:3030/uploads/<%= pet.avatar %>)">
+                                <div class="card-avatar" style="background-image: url(http://ec2-3-219-56-196.compute-1.amazonaws.com:3030/uploads/<%= pet.avatar %>)">
                                 </div>    
                                 <div class="card-body">
                                     <h4 class="mb-0 mt-0"><%= pet.name %></h4>

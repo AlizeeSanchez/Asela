@@ -18,7 +18,7 @@ const params = {
             caution_puppy: caution_puppy, 
         });
         try{
-            const response = await fetch(`http://localhost:3030/v1/tarif-chien/`, {
+            const response = await fetch(`/v1/tarif-chien/`, {
                 method: 'PATCH',
                 body: data,
                 headers:{
@@ -50,7 +50,7 @@ const params = {
             caution_kitten: caution_kitten, 
         });
         try{
-            const response = await fetch(`http://localhost:3030/v1/tarif-chat/`, {
+            const response = await fetch(`/v1/tarif-chat/`, {
                 method: 'PATCH',
                 body: data,
                 headers:{
@@ -78,7 +78,7 @@ const params = {
         });
         
         try{
-            const response = await fetch(`http://localhost:3030/v1/breed-pet`, {
+            const response = await fetch(`/v1/breed-pet`, {
                 method: 'PATCH',
                 body: data,
                 headers:{
@@ -97,7 +97,7 @@ const params = {
             const description = document.getElementById('newTermAdopt').value;
             const data = JSON.stringify({ description });
             
-            const response = await fetch(`http://localhost:3030/v1/condition`, {
+            const response = await fetch(`/v1/condition`, {
             method: 'POST',
             body: data, 
             headers:{
@@ -122,7 +122,7 @@ const params = {
         });
         
         try{
-            const response = await fetch(`http://localhost:3030/v1/condition`, {
+            const response = await fetch(`/v1/condition`, {
                 method: 'PATCH',
                 body: data,
                 headers:{
@@ -141,7 +141,7 @@ const params = {
         const articleId = article.getAttribute('data-article-id');
     
         try{
-            const response = await fetch(`http://localhost:3030/v1/condition/${articleId}`, {
+            const response = await fetch(`/v1/condition/${articleId}`, {
                 method: 'DELETE', 
             });
             document.location.reload();

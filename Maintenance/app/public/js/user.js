@@ -41,7 +41,7 @@ const user= {
         
             //if(response.success === true){
             //    console.log('youpi pas d\'erreur');
-            //    response.send('Bravo vous etes enregistrez')//.success('http://localhost:3030/v1/login')
+            //    response.send('Bravo vous etes enregistrez')//.success('/v1/login')
             //}   
             if(error) {
                 document.getElementById('errorname').textContent= error.messageError;
