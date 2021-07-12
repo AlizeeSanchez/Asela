@@ -37,31 +37,6 @@
                 <h3 class="h4">Nos loulous qui attendent depuis trop longtemp</h3>                    
             </div>
             <div class="card-deck">
-<<<<<<< HEAD
-		<% if(starsDog){ %>		
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-			<% if(starsDog.avatar){ %>
-                            <div class="flip-card-front-1" style="background-image: url(/uploads/<%=starsDog.avatar%>);">
-                        <%}%>                        
-                    </div>
-                    <div class="flip-card-back" >
-                    <p class="card-text">
-                        <%= starsDog.name%> attend une famille depuis le <%= starsDog.date_supported.toLocaleString('en-GB').substr(0, 10)%>. <br>
-                                Chaque Animal mérite d'avoir un foyer aimant, les animaux adultes sont moins demandé, voir invisible... <br>
-                                Regarder sa fiche, peut être que vous êtes la famille qu'elle attend depuis si longtemps...
-                    </p>
-                   <div class="footer" >
-                                <a class="clickMe" style="margin-top: 1rem; color: white;" href="/V1/fiche/<%= starsDog.id %>">
-                                   Cliquez ici pour <% if(starsDog.sexe === 'Mâle'){ %> le <%}else{%> la <%}%> découvrir.
-				</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-		<%}%>
-		<%if(starsCat){%>
-=======
                 <%if(starsDog){%>
                     <% console.log('starsDog', starsDog) %>
                     <div class="flip-card">
@@ -86,7 +61,6 @@
                     </div>
                 <%}%>
                 <%if(starsCat){%>
->>>>>>> 64f0d019c8c81d10adec707a22f04ab68b4c68bc
                 <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front-2" style="background-image: url(http://localhost:3030/uploads/<%=starsCat.avatar%>);" >
@@ -105,11 +79,7 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
-		<%}%>
-=======
                 <%}%>
->>>>>>> 64f0d019c8c81d10adec707a22f04ab68b4c68bc
             </div>
         </div>
         <%}%>
@@ -151,3 +121,4 @@
 </main>
 
 <%- include('partials/footer') %>
+
