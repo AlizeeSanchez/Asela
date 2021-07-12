@@ -31,29 +31,36 @@
                 </div>
             </div>
         </div>
+        <%if(starsDog || starsCat){%>
         <div class="section">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                 <h3 class="h4">Nos loulous qui attendent depuis trop longtemp</h3>                    
             </div>
             <div class="card-deck">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front-1" style="background-image: url(http://localhost:3030/uploads/<%=starsDog.avatar%>);" >
-                        </div>
-                        <div class="flip-card-back" >
-                            <p class="card-text">
-                                <%= starsDog.name%> attend une famille depuis le <%= starsDog.date_supported.toLocaleString('en-GB').substr(0, 10)%>. <br>
-                                Chaque Animal mérite d'avoir un foyer aimant, les animaux adultes sont moins demandé, voir invisible... <br>
-                                Regarder sa fiche, peut être que vous êtes la famille qu'elle attend depuis si longtemps...
-                            </p>
-                            <div class="footer" >
-                                <a class="clickMe" style="margin-top: 1rem; color: white;" href="/V1/fiche/<%= starsDog.id %>">
-                                    Cliquez ici pour <% if(starsDog.sexe === 'Mâle'){ %> le <%}else{%> la <%}%> découvrir.
-                                </a>
+                <%if(starsDog){%>
+                    <% console.log('starsDog', starsDog) %>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <% if(starsDog.avatar){ %>
+                            <div class="flip-card-front-1" style="background-image: url(http://localhost:3030/uploads/<%=starsDog.avatar%>);">
+                            <%}%>
+                            </div>
+                            <div class="flip-card-back" >
+                                <p class="card-text">
+                                    <%= starsDog.name%> attend une famille depuis le <%= starsDog.date_supported.toLocaleString('en-GB').substr(0, 10)%>. <br>
+                                    Chaque Animal mérite d'avoir un foyer aimant, les animaux adultes sont moins demandé, voir invisible... <br>
+                                    Regarder sa fiche, peut être que vous êtes la famille qu'elle attend depuis si longtemps...
+                                </p>
+                                <div class="footer" >
+                                    <a class="clickMe" style="margin-top: 1rem; color: white;" href="/V1/fiche/<%= starsDog.id %>">
+                                        Cliquez ici pour <% if(starsDog.sexe === 'Mâle'){ %> le <%}else{%> la <%}%> découvrir.
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                <%}%>
+                <%if(starsCat){%>
                 <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front-2" style="background-image: url(http://localhost:3030/uploads/<%=starsCat.avatar%>);" >
@@ -72,8 +79,10 @@
                         </div>
                     </div>
                 </div>
+                <%}%>
             </div>
         </div>
+        <%}%>
         <div class="section">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                 <h3 class="h4">Asela en chiffre</h3>                    

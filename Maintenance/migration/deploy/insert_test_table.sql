@@ -3,7 +3,7 @@
 BEGIN;
 
 INSERT INTO "volunteer" ("lastname","firstname","postal_code","number","mail","adress","city", "password") 
-VALUES ('alizee','sanchez','34170','0781025042','alizee.sanchez0882@hotmail.fr', '18 rue des genets', 'Castelnau-le-lez', 'cocola34');
+VALUES ('alizee','sanchez','34170','0781025042','alizee.sanchez0882@hotmail.fr', '18 rue des genets', 'Castelnau-le-lez', '$2b$10$V01Uvm.OGZbZs15ebw.4CuYyy6NYdlWAIwN46g3chTpIHHaGKNNxG');
 
 
 ------------------- Tarif -----------------------
@@ -29,3 +29,5 @@ VALUES ('Ne pas lui infliger de mauvais traitements et lui fournir l''attention 
        ('Si une des conditions d’adoption n’est pas respectée, l’Association Sauve Et Les Animaux peut à tout moment reprendre l’animal.');
 
 COMMIT;
+
+------------------- Pet-----------------------
