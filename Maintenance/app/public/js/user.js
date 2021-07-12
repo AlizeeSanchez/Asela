@@ -27,7 +27,7 @@ const user= {
                 userValidate_password: userValidate_password
             });
             console.log(dataUser);
-            const response = await fetch(`http://localhost:3030/v1/signin`, {
+            const response = await fetch(`/v1/signin`, {
                 method: 'POST',
                 body: dataUser,
                 headers:{
@@ -88,7 +88,7 @@ const user= {
             const modalElement = buttonClicked.closest('#adminModale');
             const modalId = modalElement.getAttribute('data-article-id'); 
             console.log(modalId);   
-            const response = await fetch(`http://localhost:3030/v1/admin-authorized/${modalId}`, {
+            const response = await fetch(`/v1/admin-authorized/${modalId}`, {
                 method: 'PATCH',
             });
             document.location.reload();
@@ -120,7 +120,7 @@ const user= {
                 postal_code: userPostal_code
             });
             
-            const response = await fetch(`http://localhost:3030/v1/my-profile/${modalId}`, {
+            const response = await fetch(`/v1/my-profile/${modalId}`, {
                 method: 'PATCH',
                 body: dataUser,
                 headers:{
@@ -151,7 +151,7 @@ const user= {
 
             console.log(data);
 
-            const response = await fetch(`http://localhost:3030/v1/update-my-password/${modalId}`, {
+            const response = await fetch(`/v1/update-my-password/${modalId}`, {
                 method: 'PATCH',
                 body: data,
                 headers:{
