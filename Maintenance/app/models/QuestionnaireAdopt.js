@@ -48,7 +48,7 @@ const QuestionnaireAdopt = {
     //Ajouter un questionnaire
     responseQuest: async (questionnaire) => {
         try{
-        const addQuest = `INSERT INTO questionnaire_adopt ("email", "type_pet", "name_pet", "lastname","firstname", "date_birth", "occupation",    "lastname_firstname_spouse", "date_birth_spouse", "occupation_spouse", "number_phone", "postal_code", "city", "adress", "shifting",    "type_residence", "height_fence", "proprietor", "number_adult", "number_children", "age_children", "allergy", "adopt_assos", "adopt_assos2",   "abandoned_assos", "abandoned_assos2", "pet_familly", "pet_familly2", "pet_familly_deceased", "veterinary", "veterinary2", "veterinary3",     "disponibility", "disponibility2", "holiday", "holiday2", "awareness", "education", "informed", "adopt", "adopt2", "tomove", "sterilization",   "forbearance","cleanliness", "amity", "garden", "bed", "waiting", "motivation", "declawing", "race_pet", "petstatus", "responsability",   "education2", "cage", "cage2", "absent", "present", "activity", "activity2", "educator", "educator2", "educator3", "facebook_pseudo",  "advertisement", "free") VALUES ( $1, $2, $3, $4, $5, $6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27,$28,  $29,$30,$31,$32,$33,$34,$35,$36,$37,$38,$39,$40,$41,$42,$43,$44,$45,$46,$47,$48,$49,$50,$51,$52,$53,$54,$55,$56,$57,$58,$59,$60,$61,$62,$63,$64,$65,$66,$67) RETURNING *;`;
+        const addQuest = `INSERT INTO questionnaire_adopt ("email", "type_pet", "name_pet", "lastname","firstname", "date_birth", "occupation", "spousefirstname", "spouselastname", "date_birth_spouse", "occupation_spouse", "number_phone", "postal_code", "city", "adress", "shifting",    "type_residence", "height_fence", "proprietor", "number_adult", "number_children", "age_children", "allergy", "adopt_assos", "adopt_assos2",   "abandoned_assos", "abandoned_assos2", "pet_familly", "pet_familly2", "pet_familly_deceased", "veterinary", "veterinary2", "veterinary3",     "disponibility", "disponibility2", "holiday", "holiday2", "awareness", "education", "informed", "adopt", "adopt2", "tomove", "sterilization",   "forbearance","cleanliness", "amity", "garden", "bed", "waiting", "motivation", "declawing", "race_pet", "petstatus", "responsability",   "education2", "cage", "cage2", "absent", "present", "activity", "activity2", "educator", "educator2", "educator3", "facebook_pseudo",  "advertisement", "free") VALUES ( $1, $2, $3, $4, $5, $6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27,$28, $29,$30,$31,$32,$33,$34,$35,$36,$37,$38,$39,$40,$41,$42,$43,$44,$45,$46,$47,$48,$49,$50,$51,$52,$53,$54,$55,$56,$57,$58,$59,$60,$61,$62,$63,$64,$65,$66,$67,$68) RETURNING *;`;
         const data = await db.query(addQuest, [
             questionnaire.email,
             questionnaire.type_pet,
@@ -57,7 +57,8 @@ const QuestionnaireAdopt = {
             questionnaire.firstname,
             questionnaire.date_birth,
             questionnaire.occupation,
-            questionnaire.lastname_firstname_spouse,
+            questionnaire.spousefirstname,
+            questionnaire.spouselastname,
             questionnaire.date_birth_spouse,
             questionnaire.occupation_spouse,
             questionnaire.number_phone,
