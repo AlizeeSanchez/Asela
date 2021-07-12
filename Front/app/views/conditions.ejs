@@ -78,11 +78,17 @@
                     </svg>
                     <del>Rappel vaccin</del>
                   </li>
-                  <li class="mb-3 text-muted">
-                    Un supplement sera demandé si le rappel vaccin à été fait et/ou si chien de race et/ou si chien catégorisé.                  
-                  </li>
+                  <% if(breed.extra){ %> 
+                    <li class="mb-3 text-muted">
+                      Un supplement sera demandé si le rappel vaccin ou/et la stérilisation/castration ont été faite ou si chien de race.
+                    </li>
+                    <% }else{ %>
+                      <li class="mb-3 text-muted">
+                        Un supplement sera demandé si le rappel vaccin ou/et la stérilisation/castration ont été faite.
+                      </li>
+                    <% } %>
                 </ul>
-                <p class="p-2 shadow rounded-pill green">280 €</p>
+                <p class="p-2 shadow rounded-pill green"><%= tarifs.dog_female %> €</p>
               </div>
             </div>
             <!-- END -->
@@ -127,11 +133,17 @@
                     </svg>
                     <del>Rappel vaccin</del>
                   </li>
-                  <li class="mb-3 text-muted">
-                    Un supplement sera demandé si le rappel vaccin à été fait et/ou si chien de race et/ou si chien catégorisé.
-                  </li>
+                  <% if(breed.extra){ %> 
+                    <li class="mb-3 text-muted">
+                      Un supplement sera demandé si le rappel vaccin ou/et la stérilisation/castration ont été faite ou si chien de race.
+                    </li>
+                    <% }else{ %>
+                      <li class="mb-3 text-muted">
+                        Un supplement sera demandé si le rappel vaccin ou/et la stérilisation/castration ont été faite.
+                      </li>
+                    <% } %>
                 </ul>
-                <p class="p-2 shadow rounded-pill green">240 €</p>
+                <p class="p-2 shadow rounded-pill green"><%= tarifs.dog_male %> €</p>
               </div>
             </div>
             <!-- END -->
@@ -176,11 +188,17 @@
                     </svg>
                     <del>Stérilisation/castration</del>
                   </li>
+                  <% if(breed.extra){ %> 
                   <li class="mb-3 text-muted">
                     Un supplement sera demandé si le rappel vaccin ou/et la stérilisation/castration ont été faite ou si chien de race.
                   </li>
+                  <% }else{ %>
+                    <li class="mb-3 text-muted">
+                      Un supplement sera demandé si le rappel vaccin ou/et la stérilisation/castration ont été faite.
+                    </li>
+                  <% } %>
                 </ul>
-                <p class="p-2 shadow rounded-pill green">250 €</p>
+                <p class="p-2 shadow rounded-pill green"><%= tarifs.puppy %> €</p>
               </div>
             </div>
             <!-- END -->           
@@ -219,7 +237,7 @@
                     Un supplement sera demandé si le vaccin à été fait.                  
                   </li>
                 </ul>
-                <p class="p-2 shadow rounded-pill green">140 €</p>
+                <p class="p-2 shadow rounded-pill green"><%= tarifs.cat_female %> €</p>
               </div>
             </div>
             <!-- END -->
@@ -255,7 +273,7 @@
                     Un supplement sera demandé si le vaccin à été fait.                  
                   </li>
                 </ul>
-                <p class="p-2 shadow rounded-pill green">105 €</p>
+                <p class="p-2 shadow rounded-pill green"><%= tarifs.cat_male %> €</p>
               </div>
             </div>
             <!-- END -->
@@ -291,7 +309,7 @@
                     Un supplement sera demandé si le vaccin à été fait.                  
                   </li>
                 </ul>
-                <p class="p-2 shadow rounded-pill green">75 €</p>
+                <p class="p-2 shadow rounded-pill green"><%= tarifs.kitten %> €</p>
               </div>
             </div>
             <!-- END -->         
