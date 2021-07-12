@@ -69,13 +69,12 @@ const user= {
                 userPassword: userPassword,
             });
             console.log(dataUser);
-            const response = await fetch(`http://localhost:3030/v1/login`, {
+            const response = await fetch(`/v1/login`, {
                     method: 'POST',
                     body: dataUser,
                     headers:{
                         'Content-Type' : 'application/json'
                     },
-                    //success: window.location.href = 'http://localhost:3030/v1/dashboard'
             });
             document.location.reload();
         }catch(error){
