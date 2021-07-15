@@ -7,7 +7,7 @@ const mainController = {
             const starsCat = (await Home.findStarCat())[0]
             const starsDog = (await Home.findStarDog())[0]
             //const starsCat = (await Home.findStarCat())[0]
-            console.log(starsCat);
+            //console.log(starsCat);
 
             const dateDogSupport = await Home.findNumberDogSupport();
             const dateCatSupport = await Home.findNumberCatSupport();

@@ -17,7 +17,7 @@
                             <div class="col-7">
                                 <div class="numbers">
                                     <div>
-                                        <p class="card-category">Chiens sauvées</p> 
+                                        <p class="card-category">Chiens sauvés</p> 
                                         <h4 class="card-title">150</h4>
                                     </div>
                                 </div>
@@ -40,7 +40,7 @@
                             <div class="col-7">
                                 <div class="numbers">
                                     <div>
-                                        <p class="card-category">Chats sauvées</p> 
+                                        <p class="card-category">Chats sauvés</p> 
                                         <h4 class="card-title">150</h4>
                                     </div>
                                 </div>
@@ -70,6 +70,34 @@
                             </div>
                         </div> 
                     </div> 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card ">
+                    <div class="card-header22">
+                        <h4 class="card-title">Type Statistique</h4>
+                        <p class="card-category">Type d'animal pris en charge 2020</p>
+                    </div>
+                    <div class="card-body-dash ">
+                        <canvas id="myChart1">
+                
+                        </canvas>   
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card ">
+                    <div class="card-header22 ">
+                        <h4 class="card-title">Nombre de prise en charge </h4>
+                        <p class="card-category">2020 - 2021</p>
+                    </div>
+                    <div class="card-body-dash ">
+                        <canvas id="myChart">
+                
+                        </canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -189,6 +217,7 @@
                                                 </svg>
                                             </button>
                                         </td>
+                                        
                                     </tr>
                                 </tbody>
                             </table>
@@ -202,28 +231,150 @@
 
 <%- include('partials/footer') %>
 
-<!--   Core JS Files   -->
-<script src="../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
-<script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-<script src="../assets/js/plugins/bootstrap-switch.js"></script>
-<!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-<!--  Chartist Plugin  -->
-<script src="../assets/js/plugins/chartist.min.js"></script>
-<!--  Notifications Plugin    -->
-<script src="../assets/js/plugins/bootstrap-notify.js"></script>
-<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-<script src="../assets/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
-<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
-<script src="../assets/js/demo.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        // Javascript method's body can be found in assets/js/demos.js
-        demo.initDashboardPageCharts();
-        
-        demo.showNotification();
-        
-    });
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre','Octobre','Novembre','Decembre'],
+        datasets: [{
+      label: "Chien",
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: "white",
+      borderColor: "#c15369", // The main line color
+      borderCapStyle: 'butt',
+      borderDash: [], // try [5, 15] for instance
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: "#5c1321",
+      pointBackgroundColor: "white",
+      pointBorderWidth: 1,
+      pointHoverRadius: 8,
+      pointHoverBackgroundColor: "white",
+      pointHoverBorderColor: "#5c1321",
+      pointHoverBorderWidth: 2,
+      pointRadius: 4,
+      pointHitRadius: 10,
+      // notice the gap in the data and the spanGaps: true
+      data: [<%= dogStatThisYear.January %>, <%= dogStatThisYear.February %>, <%= dogStatThisYear.March %>, <%= dogStatThisYear.April %>, <%= dogStatThisYear.May %>, <%= dogStatThisYear.June %>, <%= dogStatThisYear.July %>, <%= dogStatThisYear.August %>, <%= dogStatThisYear.September %>, <%= dogStatThisYear.October %>, <%= dogStatThisYear.November %>, <%= dogStatThisYear.December %>],
+      
+      spanGaps: true,
+    }, {
+      label: "Chien (ans -1)",
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: "white",
+      borderColor: "#ffe0e6", // The main line color
+      borderCapStyle: 'round',
+      borderDash: [], // try [5, 15] for instance
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: "#ff6384",
+      pointBackgroundColor: "white",
+      pointBorderWidth: 1,
+      pointHoverRadius: 8,
+      pointHoverBackgroundColor: "white",
+      pointHoverBorderColor: "#ff6384",
+      pointHoverBorderWidth: 2,
+      pointRadius: 4,
+      pointHitRadius: 10,
+      // notice the gap in the data and the spanGaps: true
+      data: [<%=dogStatLastYear.January%>, <%=dogStatLastYear.February%>, <%=dogStatLastYear.March%>, <%=dogStatLastYear.April%>, <%=dogStatLastYear.May%>, <%=dogStatLastYear.June%>, <%=dogStatLastYear.July%>, <%=dogStatLastYear.August%>, <%=dogStatLastYear.September%>, <%=dogStatLastYear.October%>, <%=dogStatLastYear.November%>, <%=dogStatLastYear.December%>],
+      spanGaps: true,
+    }, {
+      label: "Chat",
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: "white",
+      borderColor: "#70a3c7", // The main line color
+      borderCapStyle: 'square',
+      borderDash: [], // try [5, 15] for instance
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: "#084977",
+      pointBackgroundColor: "white",
+      pointBorderWidth: 1,
+      pointHoverRadius: 8,
+      pointHoverBackgroundColor: "white",
+      pointHoverBorderColor: "#084977",
+      pointHoverBorderWidth: 2,
+      pointRadius: 4,
+      pointHitRadius: 10,
+      // notice the gap in the data and the spanGaps: true
+      data: [<%=catStatThisYear.January%>, <%=catStatThisYear.February%>, <%=catStatThisYear.March%>, <%=catStatThisYear.April%>, <%=catStatThisYear.May%>, <%=catStatThisYear.June%>, <%=catStatThisYear.July%>, <%=catStatThisYear.August%>, <%=catStatThisYear.September%>, <%=catStatThisYear.October%>, <%=catStatThisYear.November%>, <%=catStatThisYear.December%>],
+      spanGaps: true,
+    }, {
+      label: "Chat (ans-1)",
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: "white",
+      borderColor: "#d6ecfb", // The main line color
+      borderCapStyle: 'square',
+      borderDash: [], // try [5, 15] for instance
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: "#36a2eb",
+      pointBackgroundColor: "white",
+      pointBorderWidth: 1,
+      pointHoverRadius: 8,
+      pointHoverBackgroundColor: "white",
+      pointHoverBorderColor: "#36a2eb",
+      pointHoverBorderWidth: 2,
+      pointRadius: 4,
+      pointHitRadius: 10,
+      // notice the gap in the data and the spanGaps: true
+      data: [<%=catStatLastYear.January%>, <%=catStatLastYear.February%>, <%=catStatLastYear.March%>, <%=catStatLastYear.April%>, <%=catStatLastYear.May%>, <%=catStatLastYear.June%>, <%=catStatLastYear.July%>, <%=catStatLastYear.August%>, <%=catStatLastYear.September%>, <%=catStatLastYear.October%>, <%=catStatLastYear.November%>, <%=catStatLastYear.December%>],
+      spanGaps: true,
+    }
+  ]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+<script>
+var ctx = document.getElementById('myChart1').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ['Chien', 'Chat'],
+        datasets: [{
+            label: '# of Votes',
+            data: [<%= dogsNumberLastYear %>, <%= catsNumberLastYear %>],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
 </script>

@@ -92,12 +92,12 @@
                     <div class=" collapse navbar-collapse justify-content-end" id="navigation">
                         <ul class="nav navbar-nav mr-auto">
                             <li class="nav-item">                              
-                                    <span class="d-lg-block">Hello <%= session.firstname %> !</span>                              
+                                    <span class="d-lg-block">Hello <%# session.firstname %> !</span>                              
                             </li>
                         </ul>
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="/v1/my-profile/<%= session.id %> " >
+                                <a class="nav-link" href="/v1/my-profile/<%# session.id %> " >
                                     <span class="no-icon">Mon Profil</span>
                                 </a>
                             </li>

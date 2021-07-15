@@ -114,7 +114,6 @@ const Pet = {
     //Rechercher les animaux par leurs nom ou par son IDE
     findresearch: async (research) => {
         try{
-            console.log('Le console log de ma recherche coté model',research)
         const pets = await db.query("SELECT * FROM pet WHERE name = $1 OR ide = $1;", [research]);
         return pets.rows[0];
         }catch (error){          
