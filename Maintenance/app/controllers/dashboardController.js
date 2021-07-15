@@ -5,11 +5,15 @@ const dashboardController = {
     //On récupere la dashboard
     home: async (request, response) => {
         try{
-            //if (request.session.user) {
+            if (request.session.user) {
                 const session = request.session.user;
                 const date = new Date();
                 const thisYear = date.getFullYear(); 
                 const lastYear = thisYear-1; 
+
+                const catRescue = (await Dashboard.catRescue()).length;
+                const dogRescue = (await Dashboard.dogRescue()).length;
+                const newQuest = (await Dashboard.newQuest()).length;
 
                 //Tout les animaux pris en charge ( type + date )
                 const catSupport = await Dashboard.findNumberCatSupport();
@@ -78,14 +82,13 @@ const dashboardController = {
                     November : catSupport.filter(el => el.date_supported.toLocaleString('en-GB').substr(3,7) === '11/'+lastYear).length,
                     December : catSupport.filter(el => el.date_supported.toLocaleString('en-GB').substr(3,7) === '12/'+lastYear).length,
                 }
-
-                   
+       
                 response.render('dashboard', {
-                    session, dogsNumberLastYear, catsNumberLastYear, dogStatThisYear, dogStatLastYear, catStatThisYear, catStatLastYear
+                    session, dogsNumberLastYear, catsNumberLastYear, dogStatThisYear, dogStatLastYear, catStatThisYear, catStatLastYear, catRescue, dogRescue, newQuest
                 });
-            //}else{
-            //    response.render('500');
-            //}
+            }else{
+                response.render('500');
+            }
         }catch(error){
             console.trace(error)
             return response.status(500).json(error.toString());
